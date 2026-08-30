@@ -212,3 +212,10 @@
 - **JSON-LD 구조화 데이터**: `src/lib/seo.ts`에 `webApplicationJsonLd()` 추가(schema.org `WebApplication` 타입, 이름/URL/설명/카테고리/무료 여부 포함). ExifLens와 동일한 패턴. `src/app/[locale]/layout.tsx`의 `<body>` 최상단에 `application/ld+json` 스크립트로 삽입해 각 locale 페이지마다 렌더링.
 - **OG 공유 이미지**: `src/app/[locale]/opengraph-image.tsx` 신규 추가. Next.js 파일 기반 메타데이터 컨벤션(`next/og`의 `ImageResponse`)을 사용해 1200x630 PNG를 요청마다 동적으로 생성 — 별도 정적 이미지 파일 없이 브랜드 컬러(#1E8E5A/#F5A623)와 "FIRE Calculator" 타이틀로 카카오톡/X/페이스북 공유 미리보기가 표시됨. 별도 `openGraph.images` metadata 수정 없이 Next.js가 자동으로 인식.
 - **검증**: `npx tsc --noEmit`, `npx eslint` 통과 확인. (참고: 이 컨테이너 환경은 SWC 네이티브 바이너리 다운로드가 네트워크 제한으로 실패해 `next build` 자체는 로컬에서 끝까지 돌리지 못했으나, 코드 변경분 자체는 타입/린트 검증 완료 — 실제 프로덕션 빌드는 push 후 Vercel에서 정상 진행됨.)
+
+## 2026-08-31 (추가22) — publish-guide.command 타입 검사 오탐 수정 (tsconfig exclude 추가)
+
+- **증상**: 가이드 자동 발행 스크립트(`publish-guide.command`)가 콘텐츠를 `automation/*.ts` → `src/content/guides/*.ts`로 복사한 뒤 실행하는 `npx tsc --noEmit` 검증 단계에서, 복사 후 `automation/` 폴더에 남아있는 원본 스테이징 파일들까지 타입 검사 대상에 포함되어 "Cannot find module './types'" 오류가 발생(스테이징 파일 옆에는 `types.ts`가 없고, 실제 앱이 쓰는 `src/content/guides/`에만 있음). 실제 서비스 코드에는 문제가 없는 오탐이었음.
+- **원인**: `tsconfig.json`의 `exclude`가 `node_modules`만 지정돼 있어 `automation/`, `_backups/`, `_to_delete/` 폴더의 스테이징/백업 `.ts` 파일까지 타입 검사에 포함됨.
+- **수정**: `tsconfig.json`의 `exclude`에 `automation`, `_backups`, `_to_delete` 추가. `src/` 어디에서도 `automation/`을 참조하지 않는 것을 확인(grep)한 뒤 반영 — 앱 빌드/타입 검사에 영향 없음.
+- **검증**: `npx tsc --noEmit`, `npx eslint` 모두 통과 확인. 이제 `publish-guide.command`를 다시 실행해도 이 오탐이 재발하지 않음.
