@@ -49,3 +49,4 @@ next-env.d.ts
 /_deprecated/
 /_to_delete/
 /_backups/
+/firelic-push.command
