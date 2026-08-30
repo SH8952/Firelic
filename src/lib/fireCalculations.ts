@@ -25,7 +25,10 @@ export type FireResult = {
 };
 
 const MAX_HORIZON_YEARS = 60;
-const LEAN_FIRE_EXPENSE_THRESHOLD = 25000; // heuristic default reference, USD-equivalent scale
+// Fallback Lean FIRE threshold when no currency-specific threshold is passed in
+// (see src/lib/currencyRanges.ts, which the UI always supplies based on the
+// selected currency — this constant only matters for callers that don't).
+const LEAN_FIRE_EXPENSE_THRESHOLD = 25000;
 
 /**
  * FIRE Number: annual expenses grossed up for the effective tax rate on withdrawals,
@@ -36,7 +39,7 @@ export function calcFireNumber(annualExpenses: number, withdrawalRatePct: number
   return grossedUpExpenses / (withdrawalRatePct / 100);
 }
 
-export function simulateFire(inputs: FireInputs): FireResult {
+export function simulateFire(inputs: FireInputs, leanFireThreshold: number = LEAN_FIRE_EXPENSE_THRESHOLD): FireResult {
   const {
     currentAge,
     targetAge,
@@ -94,7 +97,7 @@ export function simulateFire(inputs: FireInputs): FireResult {
   const coastProjection = currentPortfolio * Math.pow(1 + realReturnPct / 100, yearsToTarget);
   const isCoastFire = coastProjection >= fireNumber;
 
-  const isLeanFire = annualExpenses <= LEAN_FIRE_EXPENSE_THRESHOLD;
+  const isLeanFire = annualExpenses <= leanFireThreshold;
 
   return { fireNumber, fireAge, yearsToFire, isCoastFire, isLeanFire, series };
 }

@@ -14,6 +14,7 @@ import { ComparisonTable } from "@/components/ComparisonTable";
 import { AdSlot } from "@/components/AdSlot";
 import { AffiliateBanner } from "@/components/AffiliateBanner";
 import { simulateFire, type FireInputs } from "@/lib/fireCalculations";
+import { currencyRangeFor } from "@/lib/currencyRanges";
 import { trackEvent } from "@/lib/analytics";
 
 const DEFAULT_INPUTS: FireInputs = {
@@ -50,8 +51,15 @@ export function FireCalculator() {
   const [currency, setCurrency] = useState("USD");
 
   const inputs = scenarios[activeScenario];
-  const resultA = useMemo(() => simulateFire(scenarios.A), [scenarios.A]);
-  const resultB = useMemo(() => simulateFire(scenarios.B), [scenarios.B]);
+  const range = useMemo(() => currencyRangeFor(currency), [currency]);
+  const resultA = useMemo(
+    () => simulateFire(scenarios.A, range.leanFireThreshold),
+    [scenarios.A, range.leanFireThreshold],
+  );
+  const resultB = useMemo(
+    () => simulateFire(scenarios.B, range.leanFireThreshold),
+    [scenarios.B, range.leanFireThreshold],
+  );
   const activeResult = activeScenario === "A" ? resultA : resultB;
 
   useEffect(() => {
@@ -68,6 +76,35 @@ export function FireCalculator() {
       [activeScenario]: { ...prev[activeScenario], [key]: value },
     }));
     trackEvent("slider_adjust", { param_name: key, value });
+  }
+
+  type CurrencyScaledField = "currentPortfolio" | "monthlyContribution" | "annualExpenses";
+
+  // Switching currency only changes a display symbol under the hood unless we
+  // also rescale these three fields — otherwise e.g. a $50,000 portfolio stays
+  // literally "50,000" after switching to KRW, which reads as a trivial amount
+  // and the slider's USD-scale max blocks entering a realistic won figure.
+  // Rescale proportionally (relative to each currency's default) so a value the
+  // user already customized keeps its relative size in the new currency, rather
+  // than being reset outright.
+  function handleCurrencyChange(nextCode: string) {
+    const prevRange = range;
+    const nextRange = currencyRangeFor(nextCode);
+    const rescale = (value: number, field: CurrencyScaledField) => {
+      const prevDefault = prevRange[field].default;
+      const nextDefault = nextRange[field].default;
+      const scaled = prevDefault > 0 ? Math.round((value / prevDefault) * nextDefault) : nextDefault;
+      return Math.min(nextRange[field].max, Math.max(nextRange[field].min, scaled));
+    };
+    const rescaleInputs = (target: FireInputs): FireInputs => ({
+      ...target,
+      currentPortfolio: rescale(target.currentPortfolio, "currentPortfolio"),
+      monthlyContribution: rescale(target.monthlyContribution, "monthlyContribution"),
+      annualExpenses: rescale(target.annualExpenses, "annualExpenses"),
+    });
+    setScenarios((prev) => ({ A: rescaleInputs(prev.A), B: rescaleInputs(prev.B) }));
+    setCurrency(nextCode);
+    trackEvent("currency_change", { currency: nextCode });
   }
 
   const chartDatasets: ChartDataset[] = compareMode
@@ -116,40 +153,33 @@ export function FireCalculator() {
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr]">
         <section className="flex flex-col gap-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:sticky lg:top-6 lg:h-fit">
-          <CurrencySelector
-            value={currency}
-            onChange={(c) => {
-              setCurrency(c);
-              trackEvent("currency_change", { currency: c });
-            }}
-            label={t("currency")}
-          />
+          <CurrencySelector value={currency} onChange={handleCurrencyChange} label={t("currency")} />
           <Slider label={t("currentAge")} value={inputs.currentAge} min={18} max={80} onChange={(v) => update("currentAge", v)} />
           <Slider label={t("targetAge")} value={inputs.targetAge} min={inputs.currentAge + 1} max={90} onChange={(v) => update("targetAge", v)} />
           <Slider
             label={t("currentPortfolio")}
             value={inputs.currentPortfolio}
-            min={0}
-            max={2000000}
-            step={1000}
+            min={range.currentPortfolio.min}
+            max={range.currentPortfolio.max}
+            step={range.currentPortfolio.step}
             onChange={(v) => update("currentPortfolio", v)}
             formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
           <Slider
             label={t("monthlyContribution")}
             value={inputs.monthlyContribution}
-            min={0}
-            max={20000}
-            step={50}
+            min={range.monthlyContribution.min}
+            max={range.monthlyContribution.max}
+            step={range.monthlyContribution.step}
             onChange={(v) => update("monthlyContribution", v)}
             formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
           <Slider
             label={t("annualExpenses")}
             value={inputs.annualExpenses}
-            min={5000}
-            max={300000}
-            step={500}
+            min={range.annualExpenses.min}
+            max={range.annualExpenses.max}
+            step={range.annualExpenses.step}
             onChange={(v) => update("annualExpenses", v)}
             formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
