@@ -149,3 +149,12 @@
   - `firelic-github-setup.command`: GitHub 저장소 최초 연결(1회성) 스크립트. **사용자가 github.com에서 빈 Public 저장소(`SH8952/firelic`)를 먼저 만든 뒤 이 스크립트를 1회 실행해야 함 — 아직 미완료 상태.**
 - **예약 작업(Routine) 등록**: "FIRE Calculator 가이드 자동 발행 (매일 06:00 KST)" — cron `0 21 * * *`(UTC 21:00 = KST 06:00). ExifLens/FlyDroneMap과 동일하게 KST 날짜 계산 규칙(`TZ=Asia/Seoul date +%Y-%m-%d`)과 E-E-A-T 콘텐츠 품질 기준을 반영. 국가별 세금/연금 제도를 다루는 주제가 많아, 확인되지 않은 국가별 세법 정보를 단정적으로 서술하지 않도록 별도 주의사항 추가.
 - **남은 작업(사용자)**: (1) github.com에서 `SH8952/firelic` 빈 Public 저장소 생성, (2) `firelic-github-setup.command` 더블클릭 실행 — 이 두 가지가 끝나야 다음 날 06:00 KST 예약 발행이 정상 동작함.
+
+## 2026-08-31 (추가14) — Vercel 프로젝트 연결 및 첫 배포 완료 (도메인 구매 전)
+
+- **확인**: 도메인 구매와 Vercel 프로젝트 연결은 무관한 별개 작업이라는 점을 안내드리고, 사용자가 "도메인 구매 전에 Vercel 연결 진행"을 요청 — GitHub 연결에 이어 Vercel도 먼저 연결하기로 함.
+- **진행 중 이슈**: Vercel MCP 도구로 GitHub 저장소 연결 프로젝트 생성 시도 시 "git 연결 확인 실패(404)" 오류가 반복 발생. 원인은 도구 응답의 지연/캐시 문제로 추정되며, 실제로는 Moneypick 팀 안에 정상적으로 프로젝트가 생성되고 있었음(개인 계정에 중복 생성된 것을 사용자가 확인 후 삭제하기도 함). 최종적으로 `SH8952/Firelic` 저장소가 Vercel 프로젝트 `firelic`에 정상 연결됨을 대시보드에서 확인.
+- **첫 배포 트리거**: 저장소 연결 이후에는 새 push가 있어야 첫 배포가 시작되는 구조라, 빈 커밋(`ddbeb2f`)을 만들어 push를 요청. device_bash 브릿지는 GitHub 인증정보가 없어 push는 사용자가 직접 맥 터미널에서 진행(참고: 한글 폴더명 유니코드 정규화 문제로 경로 직접 입력이 실패해, Tab 자동완성으로 우회).
+- **결과**: 배포 성공(41초 소요), `https://firelic.vercel.app` 정상 서비스 확인(한국어 페이지 스크린샷으로 결과 카드 단위 표기까지 정상 렌더링 확인).
+- **참고**: GitHub 쪽에서 저장소가 `SH8952/firelic` → `SH8952/Firelic`(대문자 F)로 표시되나, git은 대소문자 구분 없이 리다이렉트되어 정상 동작. 필요 시 로컬 `git remote set-url origin https://github.com/SH8952/Firelic.git`로 정리 가능(선택 사항, 기능상 문제 없음).
+- **남은 것**: 커스텀 도메인(`firelic.com`)은 이후 구매 시 Vercel Domains 설정에서 연결 예정. 그 전까지는 `firelic.vercel.app` 임시 주소로 계속 이용 가능.
