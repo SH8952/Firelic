@@ -88,3 +88,13 @@
 - **요구 권한**: 이 기능이 동작하려면 기존 Chrome 탭 감지에 필요한 "Apple Events의 JavaScript 허용" 권한 외에, **Terminal.app에 대한 자동화(Automation) 권한**도 macOS가 요청할 수 있음(시스템 설정 > 개인정보 보호 및 보안 > 자동화에서 터미널 항목 허용). 권한이 없으면 조용히 실패하며(창은 안 닫히지만 dev 서버는 정상 종료됨), 에러가 나거나 앱이 멈추지는 않음.
 - iTerm2, VS Code 통합 터미널 등 Terminal.app이 아닌 곳에서 `npm run dev`를 실행한 경우에는 이 기능이 자동으로 조용히 무시됨(Terminal.app을 대상으로 한 AppleScript이므로).
 - `eslint`, `node --check` 모두 통과 확인.
+
+## 2026-08-30 (추가7) — 언어 자동 감지가 항상 영어로 고정되던 근본 원인 해결
+
+- **증상**: dev-open.mjs의 `/en` 하드코딩을 제거한 뒤에도(추가5 참고), Chrome은 물론 Safari에서도 여전히 항상 영어로 열림.
+- **진짜 원인 발견**: 프로젝트가 `src/app` 구조(App Router가 `src/` 안에 있음)를 쓰는데, `middleware.ts`가 프로젝트 진짜 루트(`src/` 바깥)에 있었음. Next.js는 `app` 디렉터리가 `src/` 안에 있으면 미들웨어도 반드시 `src/middleware.ts`에 있어야 인식함 — 바깥에 있으면 **조용히 무시**되고 에러도 나지 않음. 실제로 `.next/dev/server/middleware/middleware-manifest.json`을 확인해보니 `"sorted_middleware": []`로, 미들웨어가 아예 등록되지 않았음이 확인됨.
+- 미들웨어가 한 번도 실행되지 않았기 때문에, `next-intl`의 `Accept-Language` 기반 자동 감지 로직 자체가 전혀 동작하지 않고 있었고, 대신 `src/app/page.tsx`(루트 경로 "/"를 처리하는 하드코딩된 예비 페이지, `redirect('/en')`)만 항상 실행되어 브라우저 언어와 무관하게 매번 영어로 고정되었던 것.
+- ExifLens/FlyDroneMap과 비교한 결과, 두 프로젝트는 애초에 `src/proxy.ts`(미들웨어와 동일 역할)를 `src/` 안에 올바르게 배치했고, 루트 `page.tsx`도 아예 존재하지 않아 이 문제가 없었음.
+- **수정**: `middleware.ts`를 `src/middleware.ts`로 이동(import 경로도 상대 경로에 맞게 수정), 더 이상 필요 없는 `src/app/page.tsx`(하드코딩된 `/en` 리다이렉트) 삭제. 이제 `next-intl` 미들웨어가 "/" 요청을 온전히 처리하며, 브라우저 언어(Accept-Language)에 따라 자동으로 `/ko`, `/ja`, `/es`, `/en`으로 리다이렉트됨.
+- `tsc --noEmit`, `eslint` 모두 오류 0건 확인(이전 `.next` 캐시가 삭제된 `page.tsx`를 계속 참조해 발생한 임시 타입 오류는 캐시 삭제 후 해결 확인됨 — 실제 코드 문제 아니었음).
+- 삭제된 구 파일들은 참고용으로 `_deprecated/`에 보관(`.gitignore`에 추가, git에는 커밋되지 않음).
