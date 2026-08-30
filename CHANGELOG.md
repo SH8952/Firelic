@@ -189,3 +189,12 @@
 - **확인**: firelic-push.command를 상시 설치해두는 방식 대신, 앞으로는 로컬에 push가 필요한 커밋이 쌓일 때마다 Claude가 요청 없이도 새 원클릭 push 스크립트를 자동으로 만들어 전달하고, 사용자가 실행하면 커밋+push+완료 메시지+3초 후 터미널 종료에 이어 **스크립트 자기 자신도 삭제**되는 방식으로 전환하기로 확인.
 - **수정**: 상시 설치돼 있던 `firelic-push.command`는 git에서 제거(더 이상 유지하지 않음).
 - **적용 시점**: 이번 대화 이후 로컬 커밋이 push되지 않은 상태로 남을 때마다 자동 적용.
+
+## 2026-08-31 (추가19) — firelic.com 도메인 실제 연결 + SEO/GA4 환경변수 반영
+
+- **도메인 구매 완료**: `firelic.com`을 Namecheap에서 구매 완료.
+- **Vercel 도메인 연결**: Vercel firelic 프로젝트 Domains에 `firelic.com`, `www.firelic.com` 추가. Vercel이 안내한 DNS 레코드(A `@` → `216.198.79.1`, CNAME `www` → `f867d9fc41dfe8fa.vercel-dns-017.com.`)를 Namecheap Advanced DNS에 등록, 두 도메인 모두 Valid Configuration 확인. `firelic.com`(apex) 접속 시 `www.firelic.com`으로 308 리다이렉트되며 실제 서비스는 www에서 제공됨. SSL 인증서는 Vercel이 자동 발급.
+- **GA4 데이터 스트림 신규 생성**: ExifLens/FlyDroneMap과 동일하게 공용 GA4 속성("경제적 자유를 찾아 떠나자", 계정 skysmoga)에 firelic 전용 웹 스트림 "FIRE Calculator"(URL: `https://www.firelic.com`)를 추가하고 측정 ID(`G-TX5XJZ7QDJ`) 확인.
+- **환경변수 반영**: Vercel firelic 프로젝트 Environment Variables(Production + Preview)에 `NEXT_PUBLIC_SITE_URL=https://www.firelic.com`, `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TX5XJZ7QDJ` 등록. `.env.example`도 동일하게 갱신(캐노니컬/사이트맵 기준 도메인을 apex가 아닌 실제 서빙 도메인인 www로 명시).
+- **재배포 및 검증**: 환경변수는 재배포해야 반영되므로 최신 프로덕션 배포를 Redeploy. 배포 완료 후 `https://www.firelic.com/robots.txt`의 sitemap 경로, `<link rel="canonical">`, GA4 gtag 스크립트(`G-TX5XJZ7QDJ`) 로드까지 브라우저에서 직접 확인 완료.
+- **남은 수동 작업**: 애드센스 신청 시 사이트 URL을 `https://www.firelic.com`으로 등록(사용자 직접 진행).
