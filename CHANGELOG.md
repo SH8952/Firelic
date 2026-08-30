@@ -219,3 +219,8 @@
 - **원인**: `tsconfig.json`의 `exclude`가 `node_modules`만 지정돼 있어 `automation/`, `_backups/`, `_to_delete/` 폴더의 스테이징/백업 `.ts` 파일까지 타입 검사에 포함됨.
 - **수정**: `tsconfig.json`의 `exclude`에 `automation`, `_backups`, `_to_delete` 추가. `src/` 어디에서도 `automation/`을 참조하지 않는 것을 확인(grep)한 뒤 반영 — 앱 빌드/타입 검사에 영향 없음.
 - **검증**: `npx tsc --noEmit`, `npx eslint` 모두 통과 확인. 이제 `publish-guide.command`를 다시 실행해도 이 오탐이 재발하지 않음.
+
+## 2026-08-31 (추가23) — 자동 발행 정리: automation/ 임시 스테이징 파일 정리
+
+- `publish-guide.command`가 실행되던 중 `npx tsc --noEmit` 검증이 자기 자신을 방해하는 상황(추가22 참고)에서, 발행이 실제로는 정상 처리(콘텐츠 → `src/content/guides/`에 반영, `guide-topics-queue.json` 갱신)되었으나 스크립트의 최종 `git add`(지정 경로만 add)가 클라우드 쪽에서 이미 커밋해둔 것과 겹쳐 "반영할 변경사항 없음"으로 안내되었음. 정상 동작이며 콘텐츠 유실 없음.
+- 그 과정에서 `automation/` 폴더에 남아있던 원본 스테이징 사본(en.ts/ko.ts/ja.ts/es.ts/new-queue.json/changelog-snippet.txt)이 실수로 git에 함께 커밋됐던 것을 확인 후 별도 커밋으로 정리(삭제) 완료 — 실제 서비스 콘텐츠는 `src/content/guides/`에 그대로 유지됨.
