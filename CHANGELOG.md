@@ -49,3 +49,18 @@
 - 정책 페이지 법률 검토(변호사 확인 권장)
 - 제휴 프로그램 실제 가입 및 링크 활성화
 - 가이드 아티클 다국어 번역(트래픽 확인 후)
+
+## 2026-08-30 (추가3) — Chrome 종료 연동, 정식 브랜드/로고, 가이드 10개×4언어 확장
+
+디렉터의 추가 요청 3가지를 모두 반영했습니다.
+
+- **Chrome 탭 종료 시 dev 서버 자동 종료 (macOS)**: `scripts/dev-open.mjs`에 `watchChromeTab()` 추가. AppleScript(`osascript`)로 4초 간격으로 Chrome 실행 상태와 열린 탭의 URL(`localhost:<port>`)을 폴링하여, 열려 있던 탭이 사라지거나 Chrome 프로세스 자체가 종료되면 `next dev` 자식 프로세스에 SIGTERM을 보내 dev 서버를 함께 종료함. 디렉터 선택대로 "해당 탭/창만 닫아도 종료 시도"하는 방식으로 구현(전체 앱 종료보다 덜 안정적일 수 있음 — Chrome의 "Apple Events의 JavaScript 허용" 권한이 필요할 수 있고, 권한이 없으면 감지 실패 시 서버가 계속 켜져 있는 것으로 안전하게 저하됨).
+- **정식 브랜드/로고**: 서비스명을 **"FIRE Calculator"**로 확정하고 전 영역("Global FIRE Calculator" 표기)을 이 이름으로 통일(레이아웃 메타데이터, 정책 페이지, README). 코드 기반 SVG 로고를 신규 제작(`src/components/Logo.tsx`, `public/logo-icon.svg`, `public/logo-wordmark.svg`, `src/app/icon.svg`) — 그린 원형 배지 + 상승 화살표(자산 성장) + 오렌지 스파크(FIRE) 아이콘, 헤더에 워드마크와 함께 적용, `icon.svg`는 Next.js 자동 파비콘으로 연결됨. 계획 도메인 `firelic.com`(아직 미구매)을 `.env.example` 주석에 명시.
+- **가이드 아티클 10개 × 4개 카테고리 × 4개 언어(총 40개)**: ExifLens/FlyDroneMap의 카테고리+발행일 프론트매터 방식을 참고하여 4개 카테고리(FIRE 기초와 핵심 개념 3편 / 저축과 투자 전략 3편 / 국가별 은퇴·세제 가이드 2편 / 은퇴 후 생활과 인출 전략 2편) 체계를 확정하고, en/ko/ja/es 4개 언어로 동시에 전체 번역 완료(`src/content/guides/{types,en,ko,ja,es,index}.ts`). MDX 대신 순수 TypeScript 배열로 구현하여 신규 npm 의존성 추가(및 그에 따른 위험한 재설치)를 피함. 모든 아티클의 `publishedAt`은 KST(한국 시간) 기준 `2026-08-30`으로 통일. `/guides` 목록 페이지가 카테고리별로 그룹핑되어 표시되고, `sitemap.ts`는 코드 수정 없이 40개 URL을 자동 포함함. 애드센스 신청 요건(게시글 10개 이상)을 충족.
+- `tsc --noEmit`, `eslint` 모두 오류 0건 확인. README.md 갱신(신규 브랜드명/도메인 계획/로고/가이드 구조/Chrome 자동종료 동작 반영).
+
+### 남은 작업
+- (도메인 구매 이후) web-backend: `firelic.com` 구매 → Vercel 프로젝트 연결, 환경변수(`NEXT_PUBLIC_SITE_URL` 등) 등록, 애드센스 신청
+- 로고는 코드 기반 1차 버전 — 필요 시 전문 디자인 검수/교체
+- Chrome 탭 종료 감지는 macOS 전용·베스트에포트(권한 미허용 시 감지 실패 가능) — 로컬 터미널에서 실사용 확인 권장
+- 정책 페이지 법률 검토(변호사 확인 권장), 제휴 프로그램 실제 가입, GA4 `affiliate_link_click` 연동(링크 활성화 시)
