@@ -173,3 +173,13 @@
 - **배경**: 매번 터미널에 `git push origin main` 등을 직접 입력해야 했던 불편함을 없애기 위해, 더블클릭 한 번으로 커밋+push까지 끝나는 스크립트를 요청받음.
 - **추가**: `firelic-push.command` — 더블클릭 시 터미널이 열려 (1) 변경사항 전체를 `git add -A` 후 타임스탬프 포함 커밋, (2) `git push origin main`, (3) 완료/실패 메시지 출력, (4) 성공 시 3초 후 터미널 창 자동 종료(publish-guide.command와 동일한 AppleScript 방식). 커밋할 변경사항이 없으면 커밋은 건너뛰고 push만 진행. push 실패 시에는 자동으로 닫지 않고 사용자가 확인할 수 있도록 유지.
 - 실행 권한 부여 및 macOS 격리 속성(xattr) 해제 완료 — Gatekeeper 경고 없이 바로 실행 가능.
+
+## 2026-08-31 (추가17) — 로컬 정리: 불필요 파일 제거 + 백업 위치를 firelic 하위로 통일
+
+- **정리 요청**: 작업 폴더 안 불필요한 파일 정리, 그리고 백업 폴더가 firelic 상위 폴더(`애드센스 제휴 마케팅/`)에 생성되고 있던 것을 앞으로는 firelic 폴더 하위에 생성하도록 변경 요청받음.
+- **삭제(정리 대상, `_to_delete/`로 이동됨 — Finder에서 최종 삭제는 사용자가 직접)**: 오래된 `.next` 빌드 캐시 잔재(`.next_stale3_*`, `.next_stale4_*`), `.DS_Store`, `tsconfig.tsbuildinfo`(모두 재생성되는 파일), 더 이상 쓰지 않는 `firelic-github-setup.command`(GitHub 최초 연결 완료로 목적 달성, git에서도 제거).
+  - 참고: 이 device_bash 브릿지는 `rm`이 기본적으로 막혀 있고, `device_request_delete_permission`도 한글 폴더명의 유니코드 정규화(NFC/NFD) 불일치로 인해 사용할 수 없었음(원인 재확인, 기존 알려진 이슈와 동일). 대신 `mv`로 `_to_delete/` 폴더에 모아뒀으니 Finder에서 이 폴더를 통째로 휴지통으로 옮기면 정리 완료.
+- **백업 위치 이동**: 상위 폴더에 있던 백업 2개(`firelic_backup_20260830_192533`, `firelic_backup_20260831_011823`)를 `firelic/_backups/`로 이동.
+- **자동화 스크립트 수정**: `automation/publish-guide.command`의 `BACKUP_DIR`을 `${REPO}_backup_...`(상위 폴더)에서 `$REPO/_backups/backup_...`(firelic 하위)로 변경, rsync 시 `_backups`/`_to_delete` 자기 자신은 백업 대상에서 제외하도록 수정(무한 재귀 방지).
+- `.gitignore`에 `/_to_delete/`, `/_backups/` 추가(둘 다 git 추적 대상 아님).
+- 앞으로 세션에서 만드는 모든 백업(`firelic_backup_*` 등)도 firelic 폴더 하위(`_backups/`)에 생성하도록 통일.

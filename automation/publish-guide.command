@@ -71,10 +71,11 @@ ls -la "$CONTENT_DIR" | grep -E "en\.ts|ko\.ts|ja\.ts|es\.ts|new-queue|changelog
 echo ""
 
 # --- 3. 작업 전 백업 ---
-BACKUP_DIR="${REPO}_backup_$(date +%Y%m%d_%H%M%S)"
+BACKUP_DIR="$REPO/_backups/backup_$(date +%Y%m%d_%H%M%S)"
 echo "백업 생성 중: $BACKUP_DIR"
+mkdir -p "$REPO/_backups"
 if command -v rsync >/dev/null 2>&1; then
-  rsync -a --exclude 'node_modules' --exclude '.next' --exclude '.git' "$REPO/" "$BACKUP_DIR/"
+  rsync -a --exclude 'node_modules' --exclude '.next' --exclude '.git' --exclude '_backups' --exclude '_to_delete' "$REPO/" "$BACKUP_DIR/"
 else
   cp -r "$REPO" "$BACKUP_DIR"
 fi
