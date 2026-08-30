@@ -158,3 +158,12 @@
 - **결과**: 배포 성공(41초 소요), `https://firelic.vercel.app` 정상 서비스 확인(한국어 페이지 스크린샷으로 결과 카드 단위 표기까지 정상 렌더링 확인).
 - **참고**: GitHub 쪽에서 저장소가 `SH8952/firelic` → `SH8952/Firelic`(대문자 F)로 표시되나, git은 대소문자 구분 없이 리다이렉트되어 정상 동작. 필요 시 로컬 `git remote set-url origin https://github.com/SH8952/Firelic.git`로 정리 가능(선택 사항, 기능상 문제 없음).
 - **남은 것**: 커스텀 도메인(`firelic.com`)은 이후 구매 시 Vercel Domains 설정에서 연결 예정. 그 전까지는 `firelic.vercel.app` 임시 주소로 계속 이용 가능.
+
+## 2026-08-31 (추가15) — 제휴 링크 후보 교체: Webull → Wise
+
+- **배경**: Webull은 신생 사이트에 대한 제휴 승인이 까다롭다는 점을 확인. 현금성 수수료 + 비교적 신청 문턱이 낮은 제휴처를 조사한 뒤 사용자와 확인.
+- **조사 결과 공유**: 대형 브로커의 자체 직접 신청보다 Impact/CJ/ShareASale/Awin/Rakuten 같은 제휴 네트워크를 통한 신청이 신생 사이트에 유리하다는 점, 증권사/브로커 제휴는 대부분 포인트가 아닌 현금(CPA/레브셰어)으로 지급된다는 점을 안내.
+- **확인**: 사용자는 현재 어떤 제휴 네트워크에도 가입되어 있지 않음(신규 가입 필요) — Webull 대체 후보로 **Wise**(해외송금, Partnerize 네트워크를 통해 신청, CPA 방식 현금 지급)를 선택.
+- **수정**: `src/components/FireCalculator.tsx`의 `AFFILIATE_PARTNERS` 배열에서 "Webull"을 "Wise"로 교체(Interactive Brokers/eToro는 유지). 실제 제휴 링크는 아직 미승인 상태라 `href`는 계속 placeholder("#") 유지.
+- **남은 작업(사용자)**: Wise 제휴 프로그램은 https://join.partnerize.com/wise/en 에서 직접 신청 필요(계정 생성/신청 대행 불가). 승인 후 실제 트래킹 링크를 받으면 `AFFILIATE_PARTNERS`의 `href`를 실제 링크로 교체 예정. Interactive Brokers/eToro도 아직 미신청 상태이므로 함께 신청 필요.
+- `tsc --noEmit`, `eslint` 모두 오류 0건 확인.

@@ -37,7 +37,7 @@ const DEFAULT_INPUTS_B: FireInputs = {
 const AFFILIATE_PARTNERS = [
   { name: "Interactive Brokers", href: "#" },
   { name: "eToro", href: "#" },
-  { name: "Webull", href: "#" },
+  { name: "Wise", href: "#" },
 ];
 
 export function FireCalculator() {
