@@ -17,10 +17,14 @@ npm run dev:plain  # 자동 오픈 없이 next dev만 실행
 
 또는 `FIRE Calculator 실행.command`를 더블클릭해서 실행할 수 있습니다(ExifLens/FlyDroneMap과 동일 패턴).
 
-**Chrome 탭 종료 시 서버 자동 종료 (macOS)**: `npm run dev`로 열린 탭/창을 닫으면 몇 초 안에 dev 서버가 자동으로 종료됩니다.
-AppleScript로 Chrome 탭 목록을 주기적으로 확인하는 방식이라 완벽하지는 않습니다 — 감지가 안 되면 Chrome의
+**Chrome 탭 종료 시 서버 + 터미널 창 자동 종료 (macOS)**: `npm run dev`로 열린 탭/창을 닫으면 몇 초 안에 dev 서버가
+자동으로 종료되고, 이 스크립트가 실행 중인 Terminal.app 창까지 함께 닫힙니다(수동으로 Ctrl+C를 눌러 종료할 때는
+터미널 창이 닫히지 않습니다 — Chrome 탭 종료로 감지된 경우에만 창을 닫습니다). AppleScript로 Chrome 탭 목록을
+주기적으로 확인하는 방식이라 완벽하지는 않습니다 — 감지가 안 되면 Chrome의
 `보기(View) → 개발자(Developer) → Apple Events의 JavaScript 허용(Allow JavaScript from Apple Events)`이
-켜져 있는지 확인해 주세요. 감지에 실패해도 서버가 계속 켜져 있을 뿐 다른 문제는 없습니다(그럴 땐 터미널에서 Ctrl+C).
+켜져 있는지 확인해 주세요. 터미널 창을 닫으려면 여기에 더해 **Terminal.app에 대한 자동화(Automation) 권한**도
+필요할 수 있습니다(시스템 설정 → 개인정보 보호 및 보안 → 자동화). 두 권한 중 무엇이 없어도 에러 없이 조용히 실패할
+뿐이며, 그럴 땐 dev 서버만 종료되고 터미널 창은 수동으로 닫아 주시면 됩니다(Cmd+W 또는 터미널에서 Ctrl+C).
 
 ## 빌드
 
