@@ -183,3 +183,9 @@
 - **자동화 스크립트 수정**: `automation/publish-guide.command`의 `BACKUP_DIR`을 `${REPO}_backup_...`(상위 폴더)에서 `$REPO/_backups/backup_...`(firelic 하위)로 변경, rsync 시 `_backups`/`_to_delete` 자기 자신은 백업 대상에서 제외하도록 수정(무한 재귀 방지).
 - `.gitignore`에 `/_to_delete/`, `/_backups/` 추가(둘 다 git 추적 대상 아님).
 - 앞으로 세션에서 만드는 모든 백업(`firelic_backup_*` 등)도 firelic 폴더 하위(`_backups/`)에 생성하도록 통일.
+
+## 2026-08-31 (추가18) — push 스크립트를 "상시 설치형"에서 "필요할 때마다 자동 생성 + 1회용"으로 전환
+
+- **확인**: firelic-push.command를 상시 설치해두는 방식 대신, 앞으로는 로컬에 push가 필요한 커밋이 쌓일 때마다 Claude가 요청 없이도 새 원클릭 push 스크립트를 자동으로 만들어 전달하고, 사용자가 실행하면 커밋+push+완료 메시지+3초 후 터미널 종료에 이어 **스크립트 자기 자신도 삭제**되는 방식으로 전환하기로 확인.
+- **수정**: 상시 설치돼 있던 `firelic-push.command`는 git에서 제거(더 이상 유지하지 않음).
+- **적용 시점**: 이번 대화 이후 로컬 커밋이 push되지 않은 상태로 남을 때마다 자동 적용.
