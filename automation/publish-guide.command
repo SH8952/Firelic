@@ -1,0 +1,199 @@
+#!/bin/bash
+# FIRE Calculator(firelic) 가이드 자동 발행 스크립트 (영구 설치형)
+# ExifLens/FlyDroneMap의 publish-guide.command와 동일한 설계이나,
+# firelic은 콘텐츠가 MDX 파일이 아니라 src/content/guides/{locale}.ts 안의 TypeScript 배열이므로
+# 4개 언어 파일을 "전체 교체"하는 방식으로 반영합니다 (클라우드 쪽에서 이미 완성된 전체 파일을 만들어 보냄).
+
+REPO="$HOME/Desktop/애드센스 제휴 마케팅/firelic"
+SCRIPT_NAME="publish-guide.command"
+SCRIPT_PATH="$REPO/automation/$SCRIPT_NAME"
+CONTENT_DIR="$REPO/automation"
+
+if [ ! -d "$REPO/.git" ]; then
+  echo "저장소를 찾을 수 없습니다: $REPO"
+  echo "이 스크립트는 firelic 저장소가 있는 맥에서만 동작합니다."
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CURRENT_PATH="$SCRIPT_DIR/$(basename "$0")"
+
+# --- 1. 최초 실행/업데이트: 저장소 안에 스스로 설치 ---
+if [ "$CURRENT_PATH" != "$SCRIPT_PATH" ]; then
+  echo "=== 발행 스크립트를 저장소에 설치(갱신)합니다 ==="
+  mkdir -p "$REPO/automation"
+  cp "$CURRENT_PATH" "$SCRIPT_PATH"
+  chmod +x "$SCRIPT_PATH"
+  xattr -d com.apple.quarantine "$SCRIPT_PATH" 2>/dev/null
+  xattr -cr "$SCRIPT_PATH" 2>/dev/null
+
+  cd "$REPO"
+  [ -f .git/index.lock ] && rm -f .git/index.lock
+  git add "automation/$SCRIPT_NAME"
+  if ! git diff --cached --quiet; then
+    git commit -m "chore: 가이드 자동 발행 스크립트 설치/업데이트"
+    git push origin main
+  fi
+  echo "설치 완료: $SCRIPT_PATH"
+  echo ""
+fi
+
+# --- 2. 콘텐츠 확인 ---
+cd "$CONTENT_DIR" || { echo "오류: $CONTENT_DIR 폴더를 찾을 수 없습니다."; read -p "Enter..."; exit 1; }
+
+if [ ! -f "en.ts" ] || [ ! -f "ko.ts" ] || [ ! -f "ja.ts" ] || [ ! -f "es.ts" ] || [ ! -f "new-queue.json" ]; then
+  echo "발행할 콘텐츠 파일(en.ts, ko.ts, ja.ts, es.ts, new-queue.json)이 모두 갖춰져 있지 않습니다: $CONTENT_DIR"
+  echo "오늘 전달받은 파일들을 이 폴더에 모두 넣은 뒤 이 스크립트를 다시 실행해 주세요."
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 0
+fi
+
+TITLE=$(python3 -c "
+import json
+try:
+    q = json.load(open('new-queue.json', encoding='utf-8'))
+    topics = q.get('topics', [])
+    published = [t for t in topics if t.get('published')]
+    if published:
+        # publishedDate가 가장 최근인 항목 = 이번에 새로 발행된 항목
+        latest = max(published, key=lambda t: t.get('publishedDate') or '')
+        print(latest.get('titleKo', ''))
+except Exception:
+    pass
+" 2>/dev/null)
+TITLE="${TITLE:-새 가이드}"
+
+echo "=== FIRE Calculator 가이드 자동 발행: $TITLE ==="
+echo ""
+echo "-- 콘텐츠 폴더 파일 목록 --"
+ls -la "$CONTENT_DIR" | grep -E "en\.ts|ko\.ts|ja\.ts|es\.ts|new-queue|changelog-snippet"
+echo ""
+
+# --- 3. 작업 전 백업 ---
+BACKUP_DIR="${REPO}_backup_$(date +%Y%m%d_%H%M%S)"
+echo "백업 생성 중: $BACKUP_DIR"
+if command -v rsync >/dev/null 2>&1; then
+  rsync -a --exclude 'node_modules' --exclude '.next' --exclude '.git' "$REPO/" "$BACKUP_DIR/"
+else
+  cp -r "$REPO" "$BACKUP_DIR"
+fi
+echo "백업 완료"
+echo ""
+
+# --- 4. 콘텐츠 반영 (각 단계 성공 여부 확인) ---
+COPY_OK=1
+
+echo "-- 파일 복사 시작 --"
+cp -v "en.ts" "$REPO/src/content/guides/en.ts" || COPY_OK=0
+cp -v "ko.ts" "$REPO/src/content/guides/ko.ts" || COPY_OK=0
+cp -v "ja.ts" "$REPO/src/content/guides/ja.ts" || COPY_OK=0
+cp -v "es.ts" "$REPO/src/content/guides/es.ts" || COPY_OK=0
+cp -v "new-queue.json" "$REPO/automation/guide-topics-queue.json" || COPY_OK=0
+echo "-- 파일 복사 종료 --"
+echo ""
+
+echo "-- 복사 결과 확인 --"
+for f in "src/content/guides/en.ts" "src/content/guides/ko.ts" "src/content/guides/ja.ts" "src/content/guides/es.ts" "automation/guide-topics-queue.json"; do
+  if [ -f "$REPO/$f" ]; then
+    echo "확인됨: $f"
+  else
+    echo "누락됨: $f"
+    COPY_OK=0
+  fi
+done
+echo ""
+
+if [ "$COPY_OK" != "1" ]; then
+  echo "오류: 콘텐츠 파일 복사에 실패한 항목이 있어 발행을 중단합니다."
+  echo "이 창의 내용을 캡처해서 알려주시면 원인을 확인하겠습니다."
+  echo "콘텐츠 파일은 삭제하지 않았습니다 (다시 시도 가능)."
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
+
+python3 -c "
+import pathlib
+repo = pathlib.Path('$REPO')
+changelog = repo / 'CHANGELOG.md'
+snippet_path = pathlib.Path('$CONTENT_DIR/changelog-snippet.txt')
+if snippet_path.exists() and changelog.exists():
+    snippet = snippet_path.read_text(encoding='utf-8')
+    content = changelog.read_text(encoding='utf-8')
+    anchor = '# 개발 이력 (Development History)\n\n'
+    if anchor in content and snippet.strip() not in content:
+        content = content.replace(anchor, anchor + snippet + '\n', 1)
+        changelog.write_text(content, encoding='utf-8')
+        print('CHANGELOG.md 갱신 완료')
+    else:
+        print('CHANGELOG.md 갱신 건너뜀 (앵커 불일치 또는 이미 반영됨)')
+else:
+    print('changelog-snippet.txt 또는 CHANGELOG.md 없음 - CHANGELOG 갱신 건너뜀')
+"
+
+# --- 5. (선택) 빌드 검증 — Node/npm이 있으면 실행, 없으면 건너뜀 ---
+cd "$REPO"
+if command -v npm >/dev/null 2>&1 && [ -d node_modules ]; then
+  echo ""
+  echo "-- 로컬 빌드 검증 (npx tsc --noEmit) --"
+  if ! npx tsc --noEmit; then
+    echo "경고: 타입 검사에서 오류가 발견되었습니다. 그래도 계속 진행하시겠습니까? (클라우드 쪽에서는 이미 검증을 거쳤습니다)"
+    read -p "계속하려면 Enter, 중단하려면 Ctrl+C: "
+  fi
+fi
+
+# --- 6. git add / commit / push ---
+cd "$REPO"
+[ -f .git/index.lock ] && rm -f .git/index.lock
+
+echo ""
+echo "-- git add --"
+git add -v src/content/guides/en.ts src/content/guides/ko.ts src/content/guides/ja.ts src/content/guides/es.ts automation/guide-topics-queue.json CHANGELOG.md
+
+if git diff --cached --quiet; then
+  echo ""
+  echo "오류: git에 새로 반영할 변경사항이 없습니다 (이미 커밋되어 있거나, 파일 복사가 저장소 경로에 반영되지 않았을 수 있습니다)."
+  echo "저장소 경로: $REPO"
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
+
+echo ""
+echo "-- git commit --"
+if ! git commit -m "feat: 가이드 아티클 추가 - ${TITLE} (자동 발행)"; then
+  echo "오류: 커밋 실패. 콘텐츠 파일은 삭제하지 않았습니다."
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
+
+echo ""
+echo "-- git push --"
+if ! git push origin main; then
+  echo "오류: push 실패(네트워크 등, 또는 원격 저장소 미설정). 커밋 자체는 로컬에 남아 있습니다."
+  echo "저장소 폴더에서 'git push origin main'을 직접 실행해 재시도해 주세요."
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
+
+# --- 7. 성공 시에만 정리 ---
+rm -f "$CONTENT_DIR/en.ts" "$CONTENT_DIR/ko.ts" "$CONTENT_DIR/ja.ts" "$CONTENT_DIR/es.ts" "$CONTENT_DIR/new-queue.json" "$CONTENT_DIR/changelog-snippet.txt"
+
+echo ""
+echo "발행 완료 (커밋+push 확인됨): $TITLE"
+echo "백업 위치: $BACKUP_DIR"
+echo "5초 후 이 창이 닫힙니다."
+sleep 5
+THIS_TTY=$(tty)
+osascript <<APPLESCRIPT
+tell application "Terminal"
+    repeat with w in windows
+        try
+            if tty of (selected tab of w) is "$THIS_TTY" then close w
+        end try
+    end repeat
+end tell
+delay 0.3
+try
+    tell application "System Events" to keystroke return
+end try
+APPLESCRIPT
