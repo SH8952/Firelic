@@ -133,3 +133,19 @@
   - "FIRE 목표 자산" 값에 통화 단위어를 숫자와 한 칸 띄워서 추가(예: ₩1,010,638,298 원, $50,000 dollars, ¥6,000,000 円, €45,000 euros, £40,000 pounds). `messages/*.json`에 `calculator.currencyUnits`(통화 코드별 단위어, 언어별 번역) 신규 추가.
   - "FIRE 달성 나이"/"FIRE까지 남은 기간" 단위 표기도 숫자와 단위어 사이에 공백을 넣도록 통일(예: `48.9세` → `48.9 세`, `18.9년` → `18.9 년`, 영어 `18.9yrs` → `18.9 yrs`) — 4개 언어 모두 동일한 방식 적용.
 - `tsc --noEmit`, `eslint` 모두 오류 0건 확인.
+
+## 2026-08-31 (추가13) — 가이드 아티클 매일 자동 발행(예약 작업) 파이프라인 구축
+
+- **배경**: ExifLens/FlyDroneMap은 매일 한국시간(KST) 오전 6시에 가이드 아티클을 1개씩 자동 발행하는 예약 작업이 이미 있음. firelic에도 동일 기능을 요청받아, 두 프로젝트의 기존 예약 작업 설정을 먼저 조사한 뒤 진행 방식을 사용자에게 확인.
+- **확인 사항** (사용자 재확인 완료):
+  - firelic은 GitHub 원격 저장소가 없어 기존 두 프로젝트와 동일한 "공개 저장소 clone → 콘텐츠 생성 → 로컬에서 커밋/push" 방식을 그대로 쓸 수 없었음. 도메인 구매와 GitHub 저장소 생성은 무관한 별개 작업이라는 점을 안내한 뒤, 사용자가 "지금 GitHub 저장소 생성"을 선택 — ExifLens/FlyDroneMap과 동일한 검증된 클라우드 예약 발행 방식을 재사용하기로 결정.
+  - 콘텐츠 자동 커밋 여부, 콘텐츠 구조 유지 여부는 "권장안 그대로 진행"으로 확인 — 로컬 git 커밋까지 자동화, 기존 TypeScript 배열 구조(`src/content/guides/{locale}.ts`) 유지.
+  - 발행 대기 주제 큐는 "Claude가 제안"으로 확인 — 기존 4개 카테고리(FIRE Basics & Concepts / Saving & Investing Strategy / Country & Tax Considerations / Retirement Life & Withdrawal Strategy)에 각 6개씩, 총 24개 주제를 신규 제안.
+- **작업 시작 전 백업**: `firelic_backup_20260831_011823` 생성 (기존 정책과 동일하게 node_modules/.next/.git 제외).
+- **구조적 차이 반영**: ExifLens/FlyDroneMap은 콘텐츠가 MDX 파일이라 새 파일만 추가하면 되지만, firelic은 4개 언어 각각 하나의 TS 배열 파일이므로 "클라우드 세션이 새 항목이 반영된 완성본 4개 파일 전체를 만들어 전달 → 로컬 스크립트는 파일 통째로 교체" 방식으로 설계(부분 텍스트 삽입보다 안전).
+- **신규 파일**:
+  - `automation/guide-topics-queue.json`: 24개 예정 주제 큐(카테고리/한국어·영어 제목/발행 여부) 추가.
+  - `automation/publish-guide.command`: 로컬 발행 스크립트 최초 설치(실행 권한 부여, macOS 격리 속성 해제 완료). ExifLens/FlyDroneMap의 스크립트를 기반으로, 콘텐츠 반영 단계만 "MDX 파일 복사"에서 "TS 배열 파일 4개 전체 교체"로 수정.
+  - `firelic-github-setup.command`: GitHub 저장소 최초 연결(1회성) 스크립트. **사용자가 github.com에서 빈 Public 저장소(`SH8952/firelic`)를 먼저 만든 뒤 이 스크립트를 1회 실행해야 함 — 아직 미완료 상태.**
+- **예약 작업(Routine) 등록**: "FIRE Calculator 가이드 자동 발행 (매일 06:00 KST)" — cron `0 21 * * *`(UTC 21:00 = KST 06:00). ExifLens/FlyDroneMap과 동일하게 KST 날짜 계산 규칙(`TZ=Asia/Seoul date +%Y-%m-%d`)과 E-E-A-T 콘텐츠 품질 기준을 반영. 국가별 세금/연금 제도를 다루는 주제가 많아, 확인되지 않은 국가별 세법 정보를 단정적으로 서술하지 않도록 별도 주의사항 추가.
+- **남은 작업(사용자)**: (1) github.com에서 `SH8952/firelic` 빈 Public 저장소 생성, (2) `firelic-github-setup.command` 더블클릭 실행 — 이 두 가지가 끝나야 다음 날 06:00 KST 예약 발행이 정상 동작함.
