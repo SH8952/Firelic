@@ -2,10 +2,10 @@ import type { PolicyContent } from "./types";
 
 export const es: PolicyContent = {
   about: {
-    title: "Acerca de Global FIRE Calculator",
+    title: "Acerca de FIRE Calculator",
     updated: "2026-08-30",
     paragraphs: [
-      "Global FIRE Calculator es una herramienta gratuita basada en el navegador que te ayuda a visualizar tu camino hacia la Independencia Financiera y el Retiro Anticipado (FIRE). Ajusta tu edad, tasa de ahorro, rentabilidad esperada y tasa de retiro para ver una estimación de tu número FIRE, edad objetivo de retiro y años restantes.",
+      "FIRE Calculator es una herramienta gratuita basada en el navegador que te ayuda a visualizar tu camino hacia la Independencia Financiera y el Retiro Anticipado (FIRE). Ajusta tu edad, tasa de ahorro, rentabilidad esperada y tasa de retiro para ver una estimación de tu número FIRE, edad objetivo de retiro y años restantes.",
       "Todos los cálculos se ejecutan íntegramente en tu navegador — no recopilamos ni almacenamos las cifras financieras que introduces. La herramienta está diseñada para ser simple, rápida y usable desde cualquier parte del mundo.",
       "Este sitio se mantiene mediante publicidad y, cuando esté disponible, asociaciones de afiliados con servicios financieros. Consulta nuestra Divulgación de Afiliados para más detalles.",
     ],
@@ -24,7 +24,7 @@ export const es: PolicyContent = {
     title: "Términos de Servicio",
     updated: "2026-08-30",
     paragraphs: [
-      "Al utilizar Global FIRE Calculator, aceptas estos términos. La herramienta se proporciona únicamente con fines educativos e informativos y no constituye asesoramiento financiero, de inversión, fiscal o legal.",
+      "Al utilizar FIRE Calculator, aceptas estos términos. La herramienta se proporciona únicamente con fines educativos e informativos y no constituye asesoramiento financiero, de inversión, fiscal o legal.",
       "Los resultados de los cálculos son estimaciones basadas en los datos que proporcionas y en supuestos simplificados (como una rentabilidad real constante). No tienen en cuenta la volatilidad del mercado, el riesgo de secuencia de rendimientos, los impuestos específicos de tu jurisdicción u otros factores del mundo real, y no garantizan ningún resultado futuro.",
       "Debes consultar a un asesor financiero autorizado, un profesional fiscal u otro experto cualificado antes de tomar decisiones financieras basadas en la información de este sitio.",
       "Proporcionamos este servicio \"tal cual\", sin garantías de ningún tipo, y no somos responsables de las pérdidas derivadas de su uso.",

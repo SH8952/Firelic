@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Global FIRE Calculator — Early Retirement Simulator",
+    title: "FIRE Calculator — Early Retirement Simulator",
     description:
       "Interactively simulate your path to Financial Independence, Retire Early (FIRE). Adjust your savings, returns and withdrawal rate to see your FIRE number and target age.",
     alternates: {
@@ -36,7 +36,7 @@ export async function generateMetadata({
       languages,
     },
     openGraph: {
-      title: "Global FIRE Calculator",
+      title: "FIRE Calculator",
       description: "Simulate your path to Financial Independence, Retire Early.",
       url: `${SITE_URL}/${locale}`,
       locale,

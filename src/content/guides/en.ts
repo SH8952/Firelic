@@ -11,7 +11,7 @@ export const guidesEn: GuideArticle[] = [
       "The core idea rests on the 4% rule (also called the safe withdrawal rate): if you withdraw roughly 4% of your portfolio's value per year, historical market data suggests your portfolio has a high probability of lasting 30+ years, adjusted for inflation. Working backward, your \"FIRE number\" is typically about 25 times your expected annual expenses in retirement.",
       "Reaching FIRE usually combines three levers: increasing your savings rate (the percentage of income you invest rather than spend), reducing recurring expenses, and choosing an investment strategy with a reasonable expected long-term return, most commonly a diversified low-cost index fund portfolio.",
       "FIRE isn't one-size-fits-all — variations like Lean FIRE (a minimal-expense lifestyle), Fat FIRE (a higher-expense, higher-number target), and Coast FIRE (having enough invested early that compound growth alone reaches your number by a target age, without further contributions) let people tailor the approach to their own goals and risk tolerance.",
-      "Use the Global FIRE Calculator above to plug in your own numbers — current age, savings, expected return, and withdrawal rate — and see an estimate of your FIRE number and how many years remain.",
+      "Use the FIRE Calculator above to plug in your own numbers — current age, savings, expected return, and withdrawal rate — and see an estimate of your FIRE number and how many years remain.",
     ],
   },
   {

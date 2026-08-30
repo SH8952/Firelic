@@ -2,10 +2,10 @@ import type { PolicyContent } from "./types";
 
 export const en: PolicyContent = {
   about: {
-    title: "About Global FIRE Calculator",
+    title: "About FIRE Calculator",
     updated: "2026-08-30",
     paragraphs: [
-      "Global FIRE Calculator is a free, browser-based tool that helps you visualize your path to Financial Independence, Retire Early (FIRE). Adjust your age, savings rate, expected returns and withdrawal rate to see an estimated FIRE number, target retirement age, and years remaining.",
+      "FIRE Calculator is a free, browser-based tool that helps you visualize your path to Financial Independence, Retire Early (FIRE). Adjust your age, savings rate, expected returns and withdrawal rate to see an estimated FIRE number, target retirement age, and years remaining.",
       "All calculations run entirely in your browser — we don't collect or store the financial figures you enter. The tool is built to be simple, fast, and usable from anywhere in the world.",
       "This site is supported by advertising and, where available, affiliate partnerships with financial services. See our Affiliate Disclosure for details.",
     ],
@@ -24,7 +24,7 @@ export const en: PolicyContent = {
     title: "Terms of Service",
     updated: "2026-08-30",
     paragraphs: [
-      "By using Global FIRE Calculator, you agree to these terms. The tool is provided for educational and informational purposes only and does not constitute financial, investment, tax, or legal advice.",
+      "By using FIRE Calculator, you agree to these terms. The tool is provided for educational and informational purposes only and does not constitute financial, investment, tax, or legal advice.",
       "Calculation results are estimates based on the inputs you provide and simplified assumptions (such as constant real returns). They do not account for market volatility, sequence-of-returns risk, taxes specific to your jurisdiction, or other real-world factors, and do not guarantee any future outcome.",
       "You should consult a licensed financial advisor, tax professional, or other qualified expert before making financial decisions based on information from this site.",
       "We provide this service \"as is\" without warranties of any kind, and are not liable for any losses arising from its use.",

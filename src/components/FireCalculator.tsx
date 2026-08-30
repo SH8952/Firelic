@@ -8,6 +8,7 @@ import { FireChart, type ChartDataset } from "@/components/FireChart";
 import { CurrencySelector, currencySymbolFor } from "@/components/CurrencySelector";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Logo } from "@/components/Logo";
 import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { AdSlot } from "@/components/AdSlot";
@@ -85,8 +86,8 @@ export function FireCalculator() {
     <div className="mx-auto max-w-6xl px-4 py-8">
       <header className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
-          <p className="mt-1 text-[var(--color-text-secondary)]">{t("subtitle")}</p>
+          <Logo />
+          <p className="mt-2 text-[var(--color-text-secondary)]">{t("subtitle")}</p>
         </div>
         <ThemeToggle />
       </header>
