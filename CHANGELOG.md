@@ -80,3 +80,11 @@
 - **원인**: `scripts/dev-open.mjs`가 감지된 `next dev` URL에 `/en`을 하드코딩으로 덧붙여 Chrome을 열고 있었음(폴백 URL도 `.../en`으로 고정). 이 때문에 next-intl 미들웨어의 `Accept-Language` 기반 자동 로케일 감지·리다이렉트가 애초에 동작할 기회가 없었음. ExifLens/FlyDroneMap의 동일 스크립트를 비교 확인한 결과, 두 프로젝트는 로케일 없이 `http://localhost:<port>`만 열어 미들웨어가 정상적으로 자동 감지하도록 하고 있었음(라우팅/미들웨어 설정 자체는 3개 프로젝트 모두 동일함 — 문제는 오직 이 스크립트에만 있었음).
 - **수정**: `scripts/dev-open.mjs`에서 `/en` 하드코딩 제거, ExifLens/FlyDroneMap과 동일하게 로케일 없는 URL을 열도록 변경. `eslint` 통과 확인.
 - **참고**: 브라우저에 `NEXT_LOCALE` 쿠키가 이미 저장되어 있다면(과거에 언어 선택기로 수동 전환한 이력이 있는 경우) 쿠키가 우선 적용되어 자동 감지보다 먼저 그 언어로 열릴 수 있음 — 이는 next-intl의 정상적인 의도된 동작(사용자가 명시적으로 고른 언어를 기억)이며, 필요 시 해당 사이트의 쿠키를 지우면 다시 브라우저 언어 기준으로 감지됨.
+
+## 2026-08-30 (추가6) — Chrome 탭 종료 시 터미널 창까지 완전히 닫히도록 수정
+
+- **문제**: Chrome 탭을 닫으면 dev 서버(next dev) 프로세스는 정상적으로 종료되었지만("🛑 Chrome tab/window closed — shutting down dev server." 로그와 셸의 "[프로세스 완료됨]" 메시지까지는 정상 출력됨), Terminal.app 창 자체는 닫히지 않고 남아있었음(macOS Terminal의 기본 동작 — 프로세스가 끝나도 창을 자동으로 닫지는 않음).
+- **수정**: `scripts/dev-open.mjs`의 `shutdown()`에 `closeTerminal` 옵션을 추가하고, Chrome 탭 종료가 감지된 경우에만(수동 Ctrl+C 종료 시에는 적용 안 함) `osascript`로 Terminal.app에 "이 스크립트가 실행 중인 tty를 가진 창을 닫아라"는 명령을 보내도록 구현(`closeTerminalWindow()`). 셸이 완전히 정리될 시간을 주기 위해 0.8초 지연 후 닫음.
+- **요구 권한**: 이 기능이 동작하려면 기존 Chrome 탭 감지에 필요한 "Apple Events의 JavaScript 허용" 권한 외에, **Terminal.app에 대한 자동화(Automation) 권한**도 macOS가 요청할 수 있음(시스템 설정 > 개인정보 보호 및 보안 > 자동화에서 터미널 항목 허용). 권한이 없으면 조용히 실패하며(창은 안 닫히지만 dev 서버는 정상 종료됨), 에러가 나거나 앱이 멈추지는 않음.
+- iTerm2, VS Code 통합 터미널 등 Terminal.app이 아닌 곳에서 `npm run dev`를 실행한 경우에는 이 기능이 자동으로 조용히 무시됨(Terminal.app을 대상으로 한 AppleScript이므로).
+- `eslint`, `node --check` 모두 통과 확인.
