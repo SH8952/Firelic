@@ -11,7 +11,7 @@ export const guidesEs: GuideArticle[] = [
     title: "¿Qué es FIRE? Guía para principiantes sobre la Independencia Financiera y el Retiro Anticipado",
     description: "Una introducción al movimiento FIRE — qué significa alcanzar la independencia financiera, cómo se calcula el número FIRE y cómo empezar.",
     category: CATEGORY_BASICS_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-21",
     paragraphs: [
       "FIRE son las siglas de Financial Independence, Retire Early (Independencia Financiera, Retiro Anticipado). Describe un enfoque de finanzas personales centrado en ahorrar e invertir de forma agresiva para que, en algún momento, tu cartera de inversión pueda cubrir tus gastos de vida indefinidamente, liberándote de la necesidad de trabajar por un ingreso.",
       "La idea central se basa en la regla del 4% (también llamada tasa de retiro segura): si retiras aproximadamente el 4% del valor de tu cartera cada año, los datos históricos del mercado sugieren que tu cartera tiene una alta probabilidad de durar 30 años o más, ajustada por inflación. Calculando hacia atrás, tu \"número FIRE\" suele ser unas 25 veces tus gastos anuales esperados en el retiro.",
@@ -24,7 +24,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Coast FIRE vs Lean FIRE vs Fat FIRE: ¿Cuál es la Diferencia?",
     description: "Un desglose de las principales variantes de FIRE — Coast FIRE, Lean FIRE y Fat FIRE — y cómo saber en qué camino estás.",
     category: CATEGORY_BASICS_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-23",
     paragraphs: [
       "No todo camino hacia FIRE se ve igual. Una vez que entiendes las matemáticas básicas de la regla del 4%, ayuda conocer las variantes comunes que la gente usa para describir su situación específica.",
       "Lean FIRE describe alcanzar la independencia financiera con un presupuesto anual relativamente modesto. Requiere un número FIRE más pequeño, pero exige frugalidad sostenida, tanto antes como después de retirarse.",
@@ -38,7 +38,7 @@ export const guidesEs: GuideArticle[] = [
     title: "La Regla del 4%: Cómo Funcionan Realmente las Tasas de Retiro Seguras",
     description: "De dónde viene la regla del 4%, qué supuestos maneja, y por qué algunas personas eligen una tasa de retiro más conservadora.",
     category: CATEGORY_BASICS_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-25",
     paragraphs: [
       "La \"regla del 4%\" se remonta a investigaciones de la década de 1990 (notablemente el Estudio Trinity) que probaron los rendimientos históricos del mercado estadounidense para ver qué tasa de retiro podía sostener una cartera de jubilación durante 30 años sin agotarse.",
       "Una tasa de retiro inicial del 4% se mantuvo en la gran mayoría de los períodos históricos de 30 años estudiados. En términos monetarios, esto equivale a decir que tu número FIRE es aproximadamente 25 veces tus gastos anuales (ya que 1 ÷ 0.04 = 25).",
@@ -51,7 +51,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Cómo Calcular tu Tasa de Ahorro (y Por Qué Importa Más que tu Salario)",
     description: "Tu tasa de ahorro — no tu ingreso — es la palanca más importante en qué tan rápido alcanzas FIRE. Aquí te explicamos cómo calcularla correctamente.",
     category: CATEGORY_SAVING_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-22",
     paragraphs: [
       "Tu tasa de ahorro es el porcentaje de tu ingreso después de impuestos que inviertes en lugar de gastar. Se calcula como (ingreso − gastos) ÷ ingreso, expresado como porcentaje.",
       "La tasa de ahorro importa más que el salario porque afecta tu cronograma de dos maneras a la vez: una tasa de ahorro más alta significa que estás invirtiendo más cada mes, y significa que tus gastos objetivo (y por lo tanto tu número FIRE) son menores. Alguien que gana 60,000 y ahorra 50% a menudo puede alcanzar FIRE más rápido que alguien que gana 150,000 y ahorra 10%.",
@@ -64,7 +64,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Invertir en Fondos Indexados para FIRE: Un Punto de Partida Simple",
     description: "Por qué la mayoría de las personas que persiguen FIRE optan por fondos indexados diversificados de bajo costo en lugar de elegir acciones individuales.",
     category: CATEGORY_SAVING_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-24",
     paragraphs: [
       "Un fondo indexado es un fondo que contiene una amplia cesta de acciones (o bonos) diseñada para replicar un índice de mercado — como el S&P 500 — en lugar de intentar superarlo eligiendo ganadores individuales. Esto te da diversificación instantánea entre cientos o miles de empresas.",
       "Los fondos indexados son populares en la comunidad FIRE por dos razones principales: comisiones bajas (a menudo 0.03%–0.10% al año, frente al 1% o más de muchos fondos de gestión activa) y evidencia histórica de que la mayoría de los fondos de gestión activa no logran superar a su índice de referencia en períodos largos, después de comisiones.",
@@ -77,7 +77,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Crea un Fondo de Emergencia Antes de Empezar a Ahorrar Agresivamente para FIRE",
     description: "Por qué la mayoría de los planificadores de FIRE recomiendan crear primero un colchón de efectivo, y cómo protege tu plan de inversión a largo plazo de shocks a corto plazo.",
     category: CATEGORY_SAVING_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-26",
     paragraphs: [
       "Un fondo de emergencia es efectivo reservado — generalmente en una cuenta de ahorro de alto rendimiento en lugar de invertido en el mercado — para cubrir gastos inesperados como la pérdida de un empleo, una factura médica o una reparación importante del auto, sin tener que vender inversiones en un mal momento.",
       "Un objetivo inicial común es de 3 a 6 meses de gastos de vida esenciales, aunque el número correcto depende de la estabilidad de tu empleo, tu salud, tus dependientes y otras fuentes de ingresos.",
@@ -90,7 +90,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Cuentas de Retiro en EE. UU. 101: 401(k) vs Roth IRA para Jubilados Anticipados",
     description: "Una visión general de cómo funcionan los 401(k) y las Roth IRA en Estados Unidos, y la pregunta del acceso antes de los 59½ años que más importa para los jubilados anticipados.",
     category: CATEGORY_COUNTRY_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-27",
     paragraphs: [
       "Un 401(k) tradicional es una cuenta patrocinada por el empleador financiada con dólares antes de impuestos; las aportaciones reducen tu ingreso imponible ahora, y los retiros en la jubilación se gravan como ingreso ordinario. Una Roth IRA se financia con dólares después de impuestos; los retiros calificados en la jubilación están libres de impuestos.",
       "Para alguien que planea una jubilación tradicional alrededor de los 65 años, la elección entre tradicional y Roth es principalmente comparar tu tramo impositivo actual con tu tramo impositivo esperado en la jubilación. Para los jubilados anticipados, hay una complicación adicional: ambos tipos de cuenta generalmente restringen los retiros sin penalización hasta los 59½ años.",
@@ -103,7 +103,7 @@ export const guidesEs: GuideArticle[] = [
     title: "FIRE en el Reino Unido: ISAs, SIPPs y la Brecha de Edad de la Pensión Estatal",
     description: "Cómo las cuentas específicas del Reino Unido (ISAs y SIPPs) y la edad de la Pensión Estatal interactúan con un plan de retiro anticipado.",
     category: CATEGORY_COUNTRY_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-28",
     paragraphs: [
       "En el Reino Unido, dos tipos de cuentas son fundamentales para la mayoría de los planes FIRE: la Stocks & Shares ISA, que protege el crecimiento de la inversión y los retiros de impuestos sin edad mínima de acceso, y el SIPP (Pensión Personal Autoinvertida), que ofrece desgravación fiscal en las aportaciones pero generalmente no se puede acceder hasta una edad mínima de pensión (57 años, aumentando hacia 58 en los próximos años).",
       "Debido a que los fondos del SIPP están bloqueados hasta esa edad mínima de pensión, muchas personas que planean jubilarse antes de esa edad construyen un \"puente\" usando los ahorros de la ISA para cubrir los gastos de vida en los años entre el retiro anticipado y cuando el SIPP (y más tarde, la Pensión Estatal) se vuelven accesibles.",
@@ -116,7 +116,7 @@ export const guidesEs: GuideArticle[] = [
     title: "Riesgo de Secuencia de Rendimientos: Por Qué los Primeros Años de Retiro Importan Más",
     description: "Por qué el orden en que ocurren los rendimientos de inversión — no solo su promedio — puede determinar el éxito o fracaso de un plan de retiro anticipado.",
     category: CATEGORY_RETIREMENT_ES,
-    publishedAt: "2026-08-30",
+    publishedAt: "2026-08-29",
     paragraphs: [
       "Dos jubilados pueden experimentar exactamente el mismo rendimiento anual promedio durante 30 años y terminar con resultados muy diferentes, únicamente debido al orden en que ocurrieron esos rendimientos. Esto se llama riesgo de secuencia de rendimientos, y es más importante cuando estás retirando dinero de una cartera simultáneamente.",
       "Si ocurre una caída del mercado en los primeros años de la jubilación, te ves obligado a vender más acciones a precios deprimidos para cubrir la misma cantidad de retiro, reduciendo permanentemente el número de acciones que quedan para beneficiarse de la eventual recuperación.",

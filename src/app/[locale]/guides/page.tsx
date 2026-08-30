@@ -9,7 +9,7 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
   const categories = getGuidesByCategory(locale);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="mx-auto max-w-5xl px-4 py-12">
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
 
       {categories.length === 0 ? (
@@ -19,7 +19,7 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
           {categories.map(({ category, guides }) => (
             <section key={category}>
               <h2 className="text-lg font-semibold text-[var(--color-primary)]">{category}</h2>
-              <ul className="mt-4 flex flex-col gap-4">
+              <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {guides.map((g) => (
                   <li key={g.slug} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
                     <Link
