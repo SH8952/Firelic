@@ -206,3 +206,9 @@
 - **환경변수**: `.env.example`에 `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=pub-0042120343274941` 반영, Vercel firelic 프로젝트 Environment Variables(Production + Preview)에도 동일하게 등록 후 재배포.
 - **참고**: 실제 광고 유닛(`<ins class="adsbygoogle">`)은 아직 붙이지 않음 — `AdSlot`은 애드센스 승인 및 실제 광고 유닛 슬롯 ID 발급 후에 실제 광고로 교체 예정. 이번 작업은 애드센스 신청/크롤러 검증을 위한 준비 단계.
 - `npx tsc --noEmit`, `npx eslint` 통과 확인.
+
+## 2026-08-31 (추가21) — 소셜 공유 미리보기 이미지(OG image) + JSON-LD 구조화 데이터 추가
+
+- **JSON-LD 구조화 데이터**: `src/lib/seo.ts`에 `webApplicationJsonLd()` 추가(schema.org `WebApplication` 타입, 이름/URL/설명/카테고리/무료 여부 포함). ExifLens와 동일한 패턴. `src/app/[locale]/layout.tsx`의 `<body>` 최상단에 `application/ld+json` 스크립트로 삽입해 각 locale 페이지마다 렌더링.
+- **OG 공유 이미지**: `src/app/[locale]/opengraph-image.tsx` 신규 추가. Next.js 파일 기반 메타데이터 컨벤션(`next/og`의 `ImageResponse`)을 사용해 1200x630 PNG를 요청마다 동적으로 생성 — 별도 정적 이미지 파일 없이 브랜드 컬러(#1E8E5A/#F5A623)와 "FIRE Calculator" 타이틀로 카카오톡/X/페이스북 공유 미리보기가 표시됨. 별도 `openGraph.images` metadata 수정 없이 Next.js가 자동으로 인식.
+- **검증**: `npx tsc --noEmit`, `npx eslint` 통과 확인. (참고: 이 컨테이너 환경은 SWC 네이티브 바이너리 다운로드가 네트워크 제한으로 실패해 `next build` 자체는 로컬에서 끝까지 돌리지 못했으나, 코드 변경분 자체는 타입/린트 검증 완료 — 실제 프로덕션 빌드는 push 후 Vercel에서 정상 진행됨.)
