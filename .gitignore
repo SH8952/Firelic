@@ -44,3 +44,6 @@ next-env.d.ts
 .next_stale*
 *.bak
 .next_stale3*
+
+# local backups of removed/moved files kept for reference only
+/_deprecated/
