@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { AdSenseScript } from "@/components/AdSenseScript";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
@@ -63,6 +64,7 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
         <GoogleAnalytics />
+        <AdSenseScript />
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             <div className="flex justify-end px-4 pt-3">

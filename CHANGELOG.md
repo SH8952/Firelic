@@ -198,3 +198,11 @@
 - **환경변수 반영**: Vercel firelic 프로젝트 Environment Variables(Production + Preview)에 `NEXT_PUBLIC_SITE_URL=https://www.firelic.com`, `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-TX5XJZ7QDJ` 등록. `.env.example`도 동일하게 갱신(캐노니컬/사이트맵 기준 도메인을 apex가 아닌 실제 서빙 도메인인 www로 명시).
 - **재배포 및 검증**: 환경변수는 재배포해야 반영되므로 최신 프로덕션 배포를 Redeploy. 배포 완료 후 `https://www.firelic.com/robots.txt`의 sitemap 경로, `<link rel="canonical">`, GA4 gtag 스크립트(`G-TX5XJZ7QDJ`) 로드까지 브라우저에서 직접 확인 완료.
 - **남은 수동 작업**: 애드센스 신청 시 사이트 URL을 `https://www.firelic.com`으로 등록(사용자 직접 진행).
+
+## 2026-08-31 (추가20) — 애드센스 준비: ads.txt 등록 + 검증 스크립트 연결
+
+- **`public/ads.txt` 생성**: `google.com, pub-0042120343274941, DIRECT, f08c47fec0942fa0` — ExifLens/FlyDroneMap과 동일한 애드센스 계정.
+- **`src/components/AdSenseScript.tsx` 신규 추가**: `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID` 환경변수가 설정된 경우에만 AdSense 검증/오토애즈 스크립트(`adsbygoogle.js`)를 로드. `pub-`/`ca-pub-` 접두어 모두 지원(ExifLens/FlyDroneMap과 동일 패턴). `src/app/[locale]/layout.tsx`에 `<GoogleAnalytics />` 옆에 연결.
+- **환경변수**: `.env.example`에 `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=pub-0042120343274941` 반영, Vercel firelic 프로젝트 Environment Variables(Production + Preview)에도 동일하게 등록 후 재배포.
+- **참고**: 실제 광고 유닛(`<ins class="adsbygoogle">`)은 아직 붙이지 않음 — `AdSlot`은 애드센스 승인 및 실제 광고 유닛 슬롯 ID 발급 후에 실제 광고로 교체 예정. 이번 작업은 애드센스 신청/크롤러 검증을 위한 준비 단계.
+- `npx tsc --noEmit`, `npx eslint` 통과 확인.
