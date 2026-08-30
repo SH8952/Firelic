@@ -15,45 +15,46 @@ import type { YearPoint } from "@/lib/fireCalculations";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler);
 
-type FireChartProps = {
+export type ChartDataset = {
+  label: string;
   series: YearPoint[];
-  currencySymbol: string;
-  accumulationLabel: string;
-  withdrawalLabel: string;
+  color: string;
+  dashed?: boolean;
 };
 
-export function FireChart({ series, currencySymbol, accumulationLabel, withdrawalLabel }: FireChartProps) {
-  const labels = series.map((p) => p.age);
-  const accumulationData = series.map((p) => (p.phase === "accumulation" ? p.balance : null));
-  const withdrawalData = series.map((p) => (p.phase === "withdrawal" ? p.balance : null));
+type FireChartProps = {
+  datasets: ChartDataset[];
+  currencySymbol: string;
+  showLegend?: boolean;
+};
+
+export function FireChart({ datasets, currencySymbol, showLegend = false }: FireChartProps) {
+  // Union of all ages across datasets, sorted, used as shared x-axis labels.
+  const allAges = Array.from(
+    new Set(datasets.flatMap((d) => d.series.map((p) => p.age)))
+  ).sort((a, b) => a - b);
+
+  const balanceByAge = (series: YearPoint[]) => {
+    const map = new Map(series.map((p) => [p.age, p.balance] as const));
+    return allAges.map((age) => (map.has(age) ? map.get(age)! : null));
+  };
 
   return (
     <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
       <Line
         data={{
-          labels,
-          datasets: [
-            {
-              label: accumulationLabel,
-              data: accumulationData,
-              borderColor: "var(--color-chart-accumulation)",
-              backgroundColor: "color-mix(in srgb, var(--color-chart-accumulation) 20%, transparent)",
-              fill: true,
-              tension: 0.25,
-              spanGaps: false,
-              pointRadius: 0,
-            },
-            {
-              label: withdrawalLabel,
-              data: withdrawalData,
-              borderColor: "var(--color-chart-withdrawal)",
-              backgroundColor: "color-mix(in srgb, var(--color-chart-withdrawal) 20%, transparent)",
-              fill: true,
-              tension: 0.25,
-              spanGaps: false,
-              pointRadius: 0,
-            },
-          ],
+          labels: allAges,
+          datasets: datasets.map((d) => ({
+            label: d.label,
+            data: balanceByAge(d.series),
+            borderColor: d.color,
+            backgroundColor: `color-mix(in srgb, ${d.color} 20%, transparent)`,
+            borderDash: d.dashed ? [6, 4] : undefined,
+            fill: !d.dashed,
+            tension: 0.25,
+            spanGaps: false,
+            pointRadius: 0,
+          })),
         }}
         options={{
           responsive: true,
@@ -68,9 +69,11 @@ export function FireChart({ series, currencySymbol, accumulationLabel, withdrawa
             },
           },
           plugins: {
+            legend: { display: showLegend },
             tooltip: {
               callbacks: {
-                label: (ctx) => `${ctx.dataset.label}: ${currencySymbol}${Number(ctx.parsed.y).toLocaleString()}`,
+                label: (ctx) =>
+                  `${ctx.dataset.label}: ${currencySymbol}${Number(ctx.parsed.y).toLocaleString()}`,
               },
             },
           },

@@ -19,6 +19,27 @@
     "leanFire": "Lean FIRE",
     "accumulationPhase": "Acumulación",
     "withdrawalPhase": "Retiro",
-    "disclaimer": "Esta herramienta es un simulador educativo, no asesoramiento financiero ni de inversión. Los resultados son estimaciones y no garantizan resultados de inversión reales. Consulte a un asesor financiero autorizado para decisiones específicas a su país y situación."
+    "disclaimer": "Esta herramienta es un simulador educativo, no asesoramiento financiero ni de inversión. Los resultados son estimaciones y no garantizan resultados de inversión reales. Consulte a un asesor financiero autorizado para decisiones específicas a su país y situación.",
+    "scenarioA": "Escenario A",
+    "scenarioB": "Escenario B",
+    "compareScenarios": "Comparar A vs B",
+    "metric": "Métrica",
+    "adDisplay": "Publicidad",
+    "adNative": "Patrocinado",
+    "affiliateTitle": "¿Listo para invertir? Compara las principales correduras",
+    "affiliateDisclosure": "Enlaces de afiliados: podemos ganar una comisión sin costo adicional para ti. Los enlaces se activarán cuando se aprueben los programas de socios."
+  },
+  "nav": {
+    "home": "Inicio",
+    "guides": "Guías",
+    "about": "Acerca de",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "affiliateDisclosure": "Divulgación de Afiliados"
+  },
+  "guides": {
+    "title": "Guías",
+    "empty": "Las guías están disponibles actualmente solo en inglés. Más idiomas próximamente.",
+    "readMore": "Leer más"
   }
 }

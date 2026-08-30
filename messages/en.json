@@ -19,6 +19,27 @@
     "leanFire": "Lean FIRE",
     "accumulationPhase": "Accumulation",
     "withdrawalPhase": "Withdrawal",
-    "disclaimer": "This tool is an educational simulator, not financial or investment advice. Results are estimates and do not guarantee actual investment outcomes. Please consult a licensed financial advisor for decisions specific to your country and situation."
+    "disclaimer": "This tool is an educational simulator, not financial or investment advice. Results are estimates and do not guarantee actual investment outcomes. Please consult a licensed financial advisor for decisions specific to your country and situation.",
+    "scenarioA": "Scenario A",
+    "scenarioB": "Scenario B",
+    "compareScenarios": "Compare A vs B",
+    "metric": "Metric",
+    "adDisplay": "Advertisement",
+    "adNative": "Sponsored",
+    "affiliateTitle": "Ready to invest? Compare top brokerages",
+    "affiliateDisclosure": "Affiliate links — we may earn a commission at no extra cost to you. Links will activate once partner programs are approved."
+  },
+  "nav": {
+    "home": "Home",
+    "guides": "Guides",
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "affiliateDisclosure": "Affiliate Disclosure"
+  },
+  "guides": {
+    "title": "Guides",
+    "empty": "Guides are currently available in English only. More languages coming soon.",
+    "readMore": "Read more"
   }
 }

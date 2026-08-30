@@ -19,6 +19,27 @@
     "leanFire": "Lean FIRE",
     "accumulationPhase": "자산 축적기",
     "withdrawalPhase": "자산 인출기",
-    "disclaimer": "본 도구는 투자 자문이 아닌 교육·참고용 시뮬레이터이며, 계산 결과는 실제 투자 성과를 보장하지 않습니다. 실제 재정 결정은 반드시 국가별 상황에 맞는 공인 재무 전문가와 상담하시기 바랍니다."
+    "disclaimer": "본 도구는 투자 자문이 아닌 교육·참고용 시뮬레이터이며, 계산 결과는 실제 투자 성과를 보장하지 않습니다. 실제 재정 결정은 반드시 국가별 상황에 맞는 공인 재무 전문가와 상담하시기 바랍니다.",
+    "scenarioA": "시나리오 A",
+    "scenarioB": "시나리오 B",
+    "compareScenarios": "A vs B 비교",
+    "metric": "지표",
+    "adDisplay": "광고",
+    "adNative": "협찬",
+    "affiliateTitle": "투자를 시작할 준비가 되셨나요? 주요 증권사 비교",
+    "affiliateDisclosure": "제휴 링크 — 클릭 시 추가 비용 없이 저희가 수수료를 받을 수 있습니다. 파트너사 승인 후 실제 링크가 활성화됩니다."
+  },
+  "nav": {
+    "home": "홈",
+    "guides": "가이드",
+    "about": "소개",
+    "privacy": "개인정보처리방침",
+    "terms": "이용약관",
+    "affiliateDisclosure": "제휴 마케팅 고지"
+  },
+  "guides": {
+    "title": "가이드",
+    "empty": "가이드는 현재 영어로만 제공됩니다. 다국어 지원은 추후 추가될 예정입니다.",
+    "readMore": "더 읽기"
   }
 }
