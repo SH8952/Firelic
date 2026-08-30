@@ -42,3 +42,4 @@ next-env.d.ts
 
 # stale build cache from device-bridge FUSE workaround
 .next_stale*
+*.bak
