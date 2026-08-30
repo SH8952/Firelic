@@ -1,0 +1,24 @@
+{
+  "calculator": {
+    "title": "グローバルFIREシミュレーター",
+    "subtitle": "経済的自立・早期リタイア（FIRE）への道をシミュレーションします。",
+    "currency": "通貨",
+    "currentAge": "現在の年齢",
+    "targetAge": "目標リタイア年齢",
+    "currentPortfolio": "現在の資産",
+    "monthlyContribution": "毎月の積立額",
+    "annualExpenses": "リタイア後の年間生活費",
+    "realReturn": "期待実質リターン",
+    "withdrawalRate": "安全引き出し率",
+    "effectiveTaxRate": "実効税率",
+    "fireNumber": "FIRE目標資産額",
+    "fireAge": "FIRE達成年齢",
+    "yearsToFire": "FIREまでの年数",
+    "notReached": "60年以内に到達不可",
+    "coastFire": "コーストFIRE",
+    "leanFire": "リーンFIRE",
+    "accumulationPhase": "資産形成期",
+    "withdrawalPhase": "資産取り崩し期",
+    "disclaimer": "本ツールは投資助言ではなく教育・参考用のシミュレーターです。計算結果は実際の投資成果を保証するものではありません。実際の資産形成に関する意思決定は、各国の状況に精通した資格を持つファイナンシャルアドバイザーにご相談ください。"
+  }
+}

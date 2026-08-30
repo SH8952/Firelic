@@ -1,0 +1,24 @@
+{
+  "calculator": {
+    "title": "Calculadora Global FIRE",
+    "subtitle": "Simula tu camino hacia la Independencia Financiera y el Retiro Anticipado (FIRE).",
+    "currency": "Moneda",
+    "currentAge": "Edad Actual",
+    "targetAge": "Edad Objetivo de Retiro",
+    "currentPortfolio": "Cartera Actual",
+    "monthlyContribution": "Aporte Mensual",
+    "annualExpenses": "Gastos Anuales en FIRE",
+    "realReturn": "Rentabilidad Real Esperada",
+    "withdrawalRate": "Tasa de Retiro Segura",
+    "effectiveTaxRate": "Tasa Impositiva Efectiva",
+    "fireNumber": "Número FIRE",
+    "fireAge": "Edad FIRE",
+    "yearsToFire": "Años para FIRE",
+    "notReached": "No alcanzado (horizonte de 60 años)",
+    "coastFire": "Coast FIRE",
+    "leanFire": "Lean FIRE",
+    "accumulationPhase": "Acumulación",
+    "withdrawalPhase": "Retiro",
+    "disclaimer": "Esta herramienta es un simulador educativo, no asesoramiento financiero ni de inversión. Los resultados son estimaciones y no garantizan resultados de inversión reales. Consulte a un asesor financiero autorizado para decisiones específicas a su país y situación."
+  }
+}

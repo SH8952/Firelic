@@ -1,0 +1,24 @@
+{
+  "calculator": {
+    "title": "Global FIRE Calculator",
+    "subtitle": "Simulate your path to Financial Independence, Retire Early.",
+    "currency": "Currency",
+    "currentAge": "Current Age",
+    "targetAge": "Target Retirement Age",
+    "currentPortfolio": "Current Portfolio",
+    "monthlyContribution": "Monthly Contribution",
+    "annualExpenses": "Annual Expenses in FIRE",
+    "realReturn": "Expected Real Return",
+    "withdrawalRate": "Safe Withdrawal Rate",
+    "effectiveTaxRate": "Effective Tax Rate",
+    "fireNumber": "FIRE Number",
+    "fireAge": "FIRE Age",
+    "yearsToFire": "Years to FIRE",
+    "notReached": "Not reached (60y horizon)",
+    "coastFire": "Coast FIRE",
+    "leanFire": "Lean FIRE",
+    "accumulationPhase": "Accumulation",
+    "withdrawalPhase": "Withdrawal",
+    "disclaimer": "This tool is an educational simulator, not financial or investment advice. Results are estimates and do not guarantee actual investment outcomes. Please consult a licensed financial advisor for decisions specific to your country and situation."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "calculator": {
+    "title": "글로벌 FIRE 계산기",
+    "subtitle": "조기 은퇴(FIRE)까지의 경로를 시뮬레이션해보세요.",
+    "currency": "통화",
+    "currentAge": "현재 나이",
+    "targetAge": "목표 은퇴 나이",
+    "currentPortfolio": "현재 투자 자산",
+    "monthlyContribution": "월 저축·투자 금액",
+    "annualExpenses": "은퇴 후 연간 생활비",
+    "realReturn": "예상 연 실질 수익률",
+    "withdrawalRate": "안전 인출률",
+    "effectiveTaxRate": "실효 세율",
+    "fireNumber": "FIRE 목표 자산",
+    "fireAge": "FIRE 달성 나이",
+    "yearsToFire": "FIRE까지 남은 기간",
+    "notReached": "60년 내 도달 불가",
+    "coastFire": "Coast FIRE",
+    "leanFire": "Lean FIRE",
+    "accumulationPhase": "자산 축적기",
+    "withdrawalPhase": "자산 인출기",
+    "disclaimer": "본 도구는 투자 자문이 아닌 교육·참고용 시뮬레이터이며, 계산 결과는 실제 투자 성과를 보장하지 않습니다. 실제 재정 결정은 반드시 국가별 상황에 맞는 공인 재무 전문가와 상담하시기 바랍니다."
+  }
+}
