@@ -205,7 +205,9 @@ export function FireCalculator() {
         </section>
       </div>
 
-      <AdSlot variant="display" label={t("adDisplay")} />
+      <div className="mt-6">
+        <AdSlot variant="display" label={t("adDisplay")} />
+      </div>
 
       <DisclaimerFooter text={t("disclaimer")} />
     </div>
