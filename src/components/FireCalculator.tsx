@@ -69,6 +69,7 @@ export function FireCalculator() {
     });
   }, [activeResult.fireAge, activeResult.yearsToFire]);
   const currencySymbol = currencySymbolFor(currency);
+  const currencyUnit = t(`currencyUnits.${currency}`);
 
   function update<K extends keyof FireInputs>(key: K, value: FireInputs[K]) {
     setScenarios((prev) => ({
@@ -194,6 +195,7 @@ export function FireCalculator() {
               resultA={resultA}
               resultB={resultB}
               currencySymbol={currencySymbol}
+              currencyUnit={currencyUnit}
               labels={{
                 metric: t("metric"),
                 scenarioA: t("scenarioA"),
@@ -212,6 +214,7 @@ export function FireCalculator() {
               fireAge={activeResult.fireAge}
               yearsToFire={activeResult.yearsToFire}
               currencySymbol={currencySymbol}
+              currencyUnit={currencyUnit}
               isCoastFire={activeResult.isCoastFire}
               isLeanFire={activeResult.isLeanFire}
               labels={{

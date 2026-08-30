@@ -16,6 +16,13 @@
     "yearsToFire": "FIREまでの年数",
     "fireAgeUnit": "歳",
     "yearsToFireUnit": "年",
+    "currencyUnits": {
+      "USD": "ドル",
+      "EUR": "ユーロ",
+      "GBP": "ポンド",
+      "KRW": "ウォン",
+      "JPY": "円"
+    },
     "notReached": "60年以内に到達不可",
     "coastFire": "コーストFIRE",
     "leanFire": "リーンFIRE",

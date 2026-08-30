@@ -16,6 +16,13 @@
     "yearsToFire": "FIRE까지 남은 기간",
     "fireAgeUnit": "세",
     "yearsToFireUnit": "년",
+    "currencyUnits": {
+      "USD": "달러",
+      "EUR": "유로",
+      "GBP": "파운드",
+      "KRW": "원",
+      "JPY": "엔"
+    },
     "notReached": "60년 내 도달 불가",
     "coastFire": "Coast FIRE",
     "leanFire": "Lean FIRE",

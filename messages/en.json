@@ -15,7 +15,14 @@
     "fireAge": "FIRE Age",
     "yearsToFire": "Years to FIRE",
     "fireAgeUnit": "",
-    "yearsToFireUnit": " yrs",
+    "yearsToFireUnit": "yrs",
+    "currencyUnits": {
+      "USD": "dollars",
+      "EUR": "euros",
+      "GBP": "pounds",
+      "KRW": "won",
+      "JPY": "yen"
+    },
     "notReached": "Not reached (60y horizon)",
     "coastFire": "Coast FIRE",
     "leanFire": "Lean FIRE",

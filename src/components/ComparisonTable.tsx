@@ -6,6 +6,7 @@ type ComparisonTableProps = {
   resultA: FireResult;
   resultB: FireResult;
   currencySymbol: string;
+  currencyUnit: string;
   labels: {
     metric: string;
     scenarioA: string;
@@ -19,26 +20,32 @@ type ComparisonTableProps = {
   };
 };
 
-function fmt(v: number, symbol: string) {
-  return `${symbol}${Math.round(v).toLocaleString()}`;
+/** Appends a unit word after a value, separated by a single space — and
+ * omits the space entirely when the unit is empty. */
+function withUnit(value: string | number, unit: string): string {
+  return unit ? `${value} ${unit}` : String(value);
 }
 
-export function ComparisonTable({ resultA, resultB, currencySymbol, labels }: ComparisonTableProps) {
+function fmt(v: number, symbol: string, unit: string) {
+  return withUnit(`${symbol}${Math.round(v).toLocaleString()}`, unit);
+}
+
+export function ComparisonTable({ resultA, resultB, currencySymbol, currencyUnit, labels }: ComparisonTableProps) {
   const rows = [
     {
       label: labels.fireNumber,
-      a: fmt(resultA.fireNumber, currencySymbol),
-      b: fmt(resultB.fireNumber, currencySymbol),
+      a: fmt(resultA.fireNumber, currencySymbol, currencyUnit),
+      b: fmt(resultB.fireNumber, currencySymbol, currencyUnit),
     },
     {
       label: labels.fireAge,
-      a: resultA.fireAge !== null ? `${resultA.fireAge}${labels.ageUnit}` : labels.notReached,
-      b: resultB.fireAge !== null ? `${resultB.fireAge}${labels.ageUnit}` : labels.notReached,
+      a: resultA.fireAge !== null ? withUnit(resultA.fireAge, labels.ageUnit) : labels.notReached,
+      b: resultB.fireAge !== null ? withUnit(resultB.fireAge, labels.ageUnit) : labels.notReached,
     },
     {
       label: labels.yearsToFire,
-      a: resultA.yearsToFire !== null ? `${resultA.yearsToFire}${labels.yearsUnit}` : labels.notReached,
-      b: resultB.yearsToFire !== null ? `${resultB.yearsToFire}${labels.yearsUnit}` : labels.notReached,
+      a: resultA.yearsToFire !== null ? withUnit(resultA.yearsToFire, labels.yearsUnit) : labels.notReached,
+      b: resultB.yearsToFire !== null ? withUnit(resultB.yearsToFire, labels.yearsUnit) : labels.notReached,
     },
   ];
 
