@@ -14,6 +14,8 @@
     "fireNumber": "FIRE目標資産額",
     "fireAge": "FIRE達成年齢",
     "yearsToFire": "FIREまでの年数",
+    "fireAgeUnit": "歳",
+    "yearsToFireUnit": "年",
     "notReached": "60年以内に到達不可",
     "coastFire": "コーストFIRE",
     "leanFire": "リーンFIRE",

@@ -202,6 +202,8 @@ export function FireCalculator() {
                 fireAge: t("fireAge"),
                 yearsToFire: t("yearsToFire"),
                 notReached: t("notReached"),
+                ageUnit: t("fireAgeUnit"),
+                yearsUnit: t("yearsToFireUnit"),
               }}
             />
           ) : (
@@ -219,6 +221,8 @@ export function FireCalculator() {
                 notReached: t("notReached"),
                 coastFire: t("coastFire"),
                 leanFire: t("leanFire"),
+                ageUnit: t("fireAgeUnit"),
+                yearsUnit: t("yearsToFireUnit"),
               }}
             />
           )}

@@ -14,6 +14,8 @@
     "fireNumber": "FIRE 목표 자산",
     "fireAge": "FIRE 달성 나이",
     "yearsToFire": "FIRE까지 남은 기간",
+    "fireAgeUnit": "세",
+    "yearsToFireUnit": "년",
     "notReached": "60년 내 도달 불가",
     "coastFire": "Coast FIRE",
     "leanFire": "Lean FIRE",

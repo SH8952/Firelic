@@ -14,6 +14,8 @@ type ComparisonTableProps = {
     fireAge: string;
     yearsToFire: string;
     notReached: string;
+    ageUnit: string;
+    yearsUnit: string;
   };
 };
 
@@ -30,13 +32,13 @@ export function ComparisonTable({ resultA, resultB, currencySymbol, labels }: Co
     },
     {
       label: labels.fireAge,
-      a: resultA.fireAge !== null ? String(resultA.fireAge) : labels.notReached,
-      b: resultB.fireAge !== null ? String(resultB.fireAge) : labels.notReached,
+      a: resultA.fireAge !== null ? `${resultA.fireAge}${labels.ageUnit}` : labels.notReached,
+      b: resultB.fireAge !== null ? `${resultB.fireAge}${labels.ageUnit}` : labels.notReached,
     },
     {
       label: labels.yearsToFire,
-      a: resultA.yearsToFire !== null ? String(resultA.yearsToFire) : labels.notReached,
-      b: resultB.yearsToFire !== null ? String(resultB.yearsToFire) : labels.notReached,
+      a: resultA.yearsToFire !== null ? `${resultA.yearsToFire}${labels.yearsUnit}` : labels.notReached,
+      b: resultB.yearsToFire !== null ? `${resultB.yearsToFire}${labels.yearsUnit}` : labels.notReached,
     },
   ];
 
