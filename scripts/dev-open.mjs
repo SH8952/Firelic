@@ -15,7 +15,7 @@
 import { spawn, execFile } from "node:child_process";
 
 const URL_REGEX = /(https?:\/\/localhost:\d+)/;
-const FALLBACK_URL = "http://localhost:3000/en";
+const FALLBACK_URL = "http://localhost:3000";
 const FALLBACK_DELAY_MS = 8000;
 const TAB_POLL_INTERVAL_MS = 4000;
 
@@ -34,7 +34,7 @@ child.stdout.on("data", (chunk) => {
     const match = text.match(URL_REGEX);
     if (match) {
       opened = true;
-      openInChrome(`${match[1]}/en`);
+      openInChrome(match[1]);
     }
   }
 });
