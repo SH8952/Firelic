@@ -167,3 +167,9 @@
 - **수정**: `src/components/FireCalculator.tsx`의 `AFFILIATE_PARTNERS` 배열에서 "Webull"을 "Wise"로 교체(Interactive Brokers/eToro는 유지). 실제 제휴 링크는 아직 미승인 상태라 `href`는 계속 placeholder("#") 유지.
 - **남은 작업(사용자)**: Wise 제휴 프로그램은 https://join.partnerize.com/wise/en 에서 직접 신청 필요(계정 생성/신청 대행 불가). 승인 후 실제 트래킹 링크를 받으면 `AFFILIATE_PARTNERS`의 `href`를 실제 링크로 교체 예정. Interactive Brokers/eToro도 아직 미신청 상태이므로 함께 신청 필요.
 - `tsc --noEmit`, `eslint` 모두 오류 0건 확인.
+
+## 2026-08-31 (추가16) — 원클릭 git 커밋+push 스크립트 추가
+
+- **배경**: 매번 터미널에 `git push origin main` 등을 직접 입력해야 했던 불편함을 없애기 위해, 더블클릭 한 번으로 커밋+push까지 끝나는 스크립트를 요청받음.
+- **추가**: `firelic-push.command` — 더블클릭 시 터미널이 열려 (1) 변경사항 전체를 `git add -A` 후 타임스탬프 포함 커밋, (2) `git push origin main`, (3) 완료/실패 메시지 출력, (4) 성공 시 3초 후 터미널 창 자동 종료(publish-guide.command와 동일한 AppleScript 방식). 커밋할 변경사항이 없으면 커밋은 건너뛰고 push만 진행. push 실패 시에는 자동으로 닫지 않고 사용자가 확인할 수 있도록 유지.
+- 실행 권한 부여 및 macOS 격리 속성(xattr) 해제 완료 — Gatekeeper 경고 없이 바로 실행 가능.
