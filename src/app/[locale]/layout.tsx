@@ -13,6 +13,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+// Naver Search Advisor (웹마스터 도구) site-ownership verification meta tag.
+// Optional — only rendered once the code is issued and set as an env var.
+const NAVER_SITE_VERIFICATION = process.env.NAVER_SITE_VERIFICATION;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -44,6 +47,13 @@ export async function generateMetadata({
       locale,
       type: "website",
     },
+    ...(NAVER_SITE_VERIFICATION && {
+      verification: {
+        other: {
+          "naver-site-verification": NAVER_SITE_VERIFICATION,
+        },
+      },
+    }),
   };
 }
 

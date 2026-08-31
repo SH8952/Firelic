@@ -233,3 +233,10 @@
 - **③ 레거시 자바스크립트 정리(14KiB)**: `package.json`에 `browserslist` 필드 추가(최신 Chrome/Firefox/Safari/Edge 2개 버전 + `not dead`/`not IE 11`/`not op_mini all`) — 구형 브라우저 호환 변환 코드 축소.
 - **④ 렌더링 차단/네트워크 종속 체인**: 별도 변경 없음 — ①의 효과로 초기 로드 체인이 짧아지며 함께 개선될 것으로 예상.
 - **검증**: `npx tsc --noEmit`, `npx eslint` 모두 통과. 실제 라이트하우스 재측정은 배포 후 사용자가 PageSpeed Insights에서 재실행해 확인 필요(디바이스 브릿지 환경에서는 `next build` 완주가 안 되어 로컬 라이트하우스 실측 불가 — 5장 참고).
+
+## 2026-08-31 (추가25) — 네이버 서치어드바이저(웹마스터 도구) 사이트 소유확인 연결
+
+- **배경**: 사용자가 네이버 서치어드바이저에서 `https://firelic.com` 사이트 소유확인을 "HTML 태그" 방식으로 진행 중이었고, 발급된 메타 태그(`naver-site-verification`)를 코드에 반영해달라고 요청.
+- **`src/app/[locale]/layout.tsx`**: `NAVER_SITE_VERIFICATION` 환경변수가 설정된 경우에만 `generateMetadata()`의 `verification.other`에 `naver-site-verification` 메타 태그를 추가하도록 구현(값이 없으면 렌더링 안 됨 — GA/애드센스와 동일한 옵트인 패턴).
+- **환경변수**: `.env.example`에 `NAVER_SITE_VERIFICATION=c72111442439bd4f815bd5febc60faefb3c0386c` 추가, Vercel firelic 프로젝트 Environment Variables(Production+Preview, Config 타입)에도 동일하게 등록.
+- **검증**: `npx tsc --noEmit`, `npx eslint` 통과. 배포 후 페이지 소스에서 `<meta name="naver-site-verification" ...>` 태그 렌더링 확인 필요 — 확인되면 네이버 서치어드바이저에서 "소유확인" 버튼 클릭.
