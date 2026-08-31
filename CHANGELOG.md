@@ -240,3 +240,13 @@
 - **`src/app/[locale]/layout.tsx`**: `NAVER_SITE_VERIFICATION` 환경변수가 설정된 경우에만 `generateMetadata()`의 `verification.other`에 `naver-site-verification` 메타 태그를 추가하도록 구현(값이 없으면 렌더링 안 됨 — GA/애드센스와 동일한 옵트인 패턴).
 - **환경변수**: `.env.example`에 `NAVER_SITE_VERIFICATION=c72111442439bd4f815bd5febc60faefb3c0386c` 추가, Vercel firelic 프로젝트 Environment Variables(Production+Preview, Config 타입)에도 동일하게 등록.
 - **검증**: `npx tsc --noEmit`, `npx eslint` 통과. 배포 후 페이지 소스에서 `<meta name="naver-site-verification" ...>` 태그 렌더링 확인 필요 — 확인되면 네이버 서치어드바이저에서 "소유확인" 버튼 클릭.
+
+## 2026-08-31 (추가26) — 네이버 서치어드바이저 URL 검사 경고 대응 (제목/설명 길이 단축)
+
+- **배경**: 사용자가 네이버 서치어드바이저 "URL 검사"에서 `https://firelic.com` 기준으로 확인한 결과, 3가지 주황색 경고를 확인해 공유(스크린샷). 점검 결과:
+  1. `robots.txt가 존재하지 않습니다` — 실제로는 `firelic.com`/`www.firelic.com` 모두 robots.txt가 정상 응답함(직접 확인 완료). 실제 서비스 도메인은 www인데 네이버에는 apex(firelic.com)가 사이트로 등록돼 있어, 네이버 로봇이 apex→www 리다이렉트를 따라가지 않아 발생한 것으로 추정. **코드 문제 아님** — 해결책은 네이버 서치어드바이저에 `https://www.firelic.com`을 사이트로 추가 등록하는 것(사용자 안내, 5장 참고: Claude in Chrome/내장 브라우저 둘 다 정책상 네이버 서치어드바이저 접속이 차단되어 자동화 불가, 사용자가 직접 진행 필요).
+  2. `페이지 제목 40자 초과`: "FIRE Calculator — Early Retirement Simulator" → **"FIRE Calculator — Retire Early Planner"(38자)로 단축**.
+  3. `페이지 설명 80자 초과`: 기존 문장 → **"Simulate your path to Financial Independence, Retire Early (FIRE) instantly."(76자)로 단축**.
+- **수정 파일**: `src/app/[locale]/layout.tsx`의 `generateMetadata()` title/description (모든 로케일 공통 적용, OpenGraph 타이틀/설명은 기존 값 유지).
+- **검증**: `npx tsc --noEmit`, `npx eslint src` 모두 통과. (`npx eslint .`로 전체 실행 시 `_backups/` 안의 예전 `.next` 빌드 잔재 때문에 무관한 대량 오류가 나오는 것을 확인 — 실제 서비스 코드와 무관, 추후 정리 필요 메모만 남김.)
+- **남은 절차(사용자 진행)**: 네이버 서치어드바이저에서 `https://www.firelic.com`을 신규 사이트로 추가하고 HTML 태그 방식으로 소유확인 진행 필요.

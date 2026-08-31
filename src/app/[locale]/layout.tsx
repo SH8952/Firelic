@@ -33,9 +33,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: "FIRE Calculator — Early Retirement Simulator",
+    title: "FIRE Calculator — Retire Early Planner",
     description:
-      "Interactively simulate your path to Financial Independence, Retire Early (FIRE). Adjust your savings, returns and withdrawal rate to see your FIRE number and target age.",
+      "Simulate your path to Financial Independence, Retire Early (FIRE) instantly.",
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
       languages,
