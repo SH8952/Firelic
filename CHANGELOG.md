@@ -250,3 +250,7 @@
 - **수정 파일**: `src/app/[locale]/layout.tsx`의 `generateMetadata()` title/description (모든 로케일 공통 적용, OpenGraph 타이틀/설명은 기존 값 유지).
 - **검증**: `npx tsc --noEmit`, `npx eslint src` 모두 통과. (`npx eslint .`로 전체 실행 시 `_backups/` 안의 예전 `.next` 빌드 잔재 때문에 무관한 대량 오류가 나오는 것을 확인 — 실제 서비스 코드와 무관, 추후 정리 필요 메모만 남김.)
 - **남은 절차(사용자 진행)**: 네이버 서치어드바이저에서 `https://www.firelic.com`을 신규 사이트로 추가하고 HTML 태그 방식으로 소유확인 진행 필요.
+
+## 2026-08-31 (추가27) — 네이버 서치어드바이저 URL 검사 경고 해소 확인
+
+- 추가26에서 진행한 제목/설명 길이 단축(커밋 `26dcea8`) 및 `https://www.firelic.com` 사이트 추가 등록 이후, 사용자가 네이버 서치어드바이저 URL 검사를 재실행해 **robots.txt / 페이지 제목 / 페이지 설명 경고 3건이 모두 정상(✅)으로 전환된 것을 확인**함. 해당 건 완료 처리.
