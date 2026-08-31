@@ -224,3 +224,12 @@
 
 - `publish-guide.command`가 실행되던 중 `npx tsc --noEmit` 검증이 자기 자신을 방해하는 상황(추가22 참고)에서, 발행이 실제로는 정상 처리(콘텐츠 → `src/content/guides/`에 반영, `guide-topics-queue.json` 갱신)되었으나 스크립트의 최종 `git add`(지정 경로만 add)가 클라우드 쪽에서 이미 커밋해둔 것과 겹쳐 "반영할 변경사항 없음"으로 안내되었음. 정상 동작이며 콘텐츠 유실 없음.
 - 그 과정에서 `automation/` 폴더에 남아있던 원본 스테이징 사본(en.ts/ko.ts/ja.ts/es.ts/new-queue.json/changelog-snippet.txt)이 실수로 git에 함께 커밋됐던 것을 확인 후 별도 커밋으로 정리(삭제) 완료 — 실제 서비스 콘텐츠는 `src/content/guides/`에 그대로 유지됨.
+
+## 2026-08-31 (추가24) — PageSpeed Insights 모바일 성능 개선 (62점 → 개선 작업)
+
+- **배경**: 사용자가 Google Search Console에서 PageSpeed Insights 모바일 리포트를 확인해 요청. 성능 62점(접근성 95/권장사항 100/SEO 100)이었고, FCP 4.9초·LCP 7.3초로 느린 편(TBT 30ms, CLS 0은 양호) — 애드센스 심사에는 영향 없는 순수 성능 항목임을 확인 후 진행.
+- **① 차트 지연 로딩(가장 큰 항목, 293KiB "사용하지 않는 자바스크립트")**: `src/components/FireCalculator.tsx`에서 `FireChart`(Chart.js + react-chartjs-2)를 정적 import 대신 `next/dynamic(..., { ssr: false })`로 전환. 계산기 입력/결과 UI가 먼저 렌더링되고, 차트 라이브러리는 별도 청크로 분리되어 그 이후에 로드됨. 레이아웃 밀림 방지용 스켈레톤(고정 높이 placeholder) 추가.
+- **② 정적 자산 캐시 수명(16KiB)**: `next.config.ts`의 `headers()`에 `public/`의 브랜드/아이콘 SVG(file/globe/logo-icon/logo-wordmark/next/vercel/window.svg) 전용 규칙 추가 — `Cache-Control: public, max-age=31536000, immutable`. `ads.txt`/`sitemap.xml`/`robots.txt`는 이 규칙에서 제외해 최신 상태 유지.
+- **③ 레거시 자바스크립트 정리(14KiB)**: `package.json`에 `browserslist` 필드 추가(최신 Chrome/Firefox/Safari/Edge 2개 버전 + `not dead`/`not IE 11`/`not op_mini all`) — 구형 브라우저 호환 변환 코드 축소.
+- **④ 렌더링 차단/네트워크 종속 체인**: 별도 변경 없음 — ①의 효과로 초기 로드 체인이 짧아지며 함께 개선될 것으로 예상.
+- **검증**: `npx tsc --noEmit`, `npx eslint` 모두 통과. 실제 라이트하우스 재측정은 배포 후 사용자가 PageSpeed Insights에서 재실행해 확인 필요(디바이스 브릿지 환경에서는 `next build` 완주가 안 되어 로컬 라이트하우스 실측 불가 — 5장 참고).

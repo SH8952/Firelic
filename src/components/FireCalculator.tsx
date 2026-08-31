@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Slider } from "@/components/Slider";
 import { ResultCards } from "@/components/ResultCards";
-import { FireChart, type ChartDataset } from "@/components/FireChart";
+import type { ChartDataset } from "@/components/FireChart";
 import { CurrencySelector, currencySymbolFor } from "@/components/CurrencySelector";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -16,6 +17,21 @@ import { AffiliateBanner } from "@/components/AffiliateBanner";
 import { simulateFire, type FireInputs } from "@/lib/fireCalculations";
 import { currencyRangeFor } from "@/lib/currencyRanges";
 import { trackEvent } from "@/lib/analytics";
+
+// Chart.js + react-chartjs-2 are a sizeable chunk of client JS that isn't
+// needed to paint the calculator's inputs/results. Loading it via
+// next/dynamic (ssr:false) splits it into its own chunk fetched after the
+// initial page JS, instead of blocking first paint/hydration on it.
+// A fixed-height skeleton avoids layout shift while it loads.
+const FireChart = dynamic(
+  () => import("@/components/FireChart").then((mod) => mod.FireChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[300px] animate-pulse rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]" />
+    ),
+  }
+);
 
 const DEFAULT_INPUTS: FireInputs = {
   currentAge: 30,

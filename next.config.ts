@@ -17,6 +17,19 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      {
+        // Static brand/icon SVGs under public/ rarely change once shipped,
+        // so let browsers cache them for a year instead of re-fetching on
+        // every visit. Deliberately excludes ads.txt (must stay fresh for
+        // AdSense/crawlers) and sitemap.xml/robots.txt (generated per-build).
+        source: "/:file(file|globe|logo-icon|logo-wordmark|next|vercel|window).svg",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };
