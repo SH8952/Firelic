@@ -254,3 +254,18 @@
 ## 2026-08-31 (추가27) — 네이버 서치어드바이저 URL 검사 경고 해소 확인
 
 - 추가26에서 진행한 제목/설명 길이 단축(커밋 `26dcea8`) 및 `https://www.firelic.com` 사이트 추가 등록 이후, 사용자가 네이버 서치어드바이저 URL 검사를 재실행해 **robots.txt / 페이지 제목 / 페이지 설명 경고 3건이 모두 정상(✅)으로 전환된 것을 확인**함. 해당 건 완료 처리.
+
+## 2026-09-01 (추가28) — 가이드 콘텐츠 저장 형식을 ExifLens/FlyDroneMap과 동일한 개별 MDX 파일 구조로 전면 전환
+
+- **배경**: 사용자가 예약 발행 스크립트(publish-guide.command) 실행 중 `.git/HEAD.lock` 충돌로 커밋이 실패한 것을 계기로, firelic만 push되는 파일 형식이 ExifLens/FlyDroneMap과 다르다는 점을 지적함. 확인 결과:
+  - ExifLens/FlyDroneMap: 가이드 1건마다 `content/guides/<locale>/<slug>.mdx` 개별 파일이 새로 추가되는 구조.
+  - firelic(기존): `src/content/guides/{en,ko,ja,es}.ts`라는 큰 TypeScript 배열 파일 자체를 매번 통째로 덮어쓰는 구조.
+  - `.git/HEAD.lock` 충돌의 실제 원인은 클라우드 세션과 로컬 터미널의 동시 git 실행(8-7장)이지만, 다른 두 프로젝트와 동일한 구조로 통일하면 매번 건드리는 파일 범위가 작아져 충돌 위험도 줄어든다고 판단해 전면 리팩토링 진행.
+- **패키지 추가**: `@mdx-js/mdx`, `gray-matter`, `remark-gfm`, `rehype-slug`, `rehype-autolink-headings`, `@tailwindcss/typography` (ExifLens와 동일 버전) — `npm install`로 정상 설치 확인.
+- **콘텐츠 마이그레이션**: 기존 `src/content/guides/{en,ko,ja,es}.ts`에 있던 가이드 12건(초기 10건 + 자동발행 2건, 언어별 총 48개 .mdx)을 Node(`--experimental-strip-types`)로 직접 읽어와 frontmatter(title/description/publishedAt/category)가 포함된 `content/guides/<locale>/<slug>.mdx` 개별 파일로 변환. 내용 유실 없이 전량 이관 확인(변환 전후 guide 개수 en/ko/ja/es 각 12건 일치).
+- **`src/lib/guides.ts` 신규**: ExifLens의 `src/lib/guides.ts`를 기반으로 구현 — `getGuideSlugs`/`getGuideMeta`/`getAllGuidesMeta`/`getGuidesByCategory`/`compileGuide`. 카테고리 표시 순서는 firelic의 4개 카테고리(FIRE Basics & Concepts / Saving & Investing Strategy / Country & Tax Considerations / Retirement Life & Withdrawal Strategy) 고정 순서를 유지.
+- **소비 코드 수정**: `src/app/[locale]/guides/page.tsx`, `src/app/[locale]/guides/[slug]/page.tsx`(MDX를 `compileGuide`로 컴파일해 렌더링하도록 변경), `src/app/sitemap.ts`가 `@/content/guides` 대신 `@/lib/guides`를 사용하도록 수정. `globals.css`에 `@plugin "@tailwindcss/typography";` 추가, 가이드 본문에 `prose prose-neutral dark:prose-invert` 클래스 적용.
+- **기존 구조 제거**: `src/content/guides/{index,types,en,ko,ja,es}.ts`를 저장소에서 삭제(git rm), 로컬에는 `_to_delete/old_src_content_guides/`로 보관(사용자가 Finder에서 최종 삭제 가능).
+- **`automation/publish-guide.command` 재작성**: ExifLens/FlyDroneMap과 동일한 방식으로 전환 — 매일 전달받는 파일이 `guide-<slug>-{en,ja,ko,es}.mdx` 개별 파일 4개 + `new-queue.json`이 되며, 각각 `content/guides/<locale>/<slug>.mdx`로 복사하고 해당 4개 파일 + 큐 + CHANGELOG만 `git add`한다. 기존에 자동 발행이 실패하며 `automation/` 폴더에 남아있던 구버전 스테이징 파일(en.ts/ko.ts/ja.ts/es.ts/new-queue.json/changelog-snippet.txt)은 `_to_delete/`로 정리.
+- **검증**: `npx tsc --noEmit`, `npx eslint src` 모두 통과. **`npm run build`(Turbopack) 로컬 실행 결과 78개 페이지 전부 정상 생성 확인** — MDX 컴파일 포함 전체 빌드 파이프라인이 정상 동작함을 확인함(마지막 `.next` 캐시 정리 단계에서만 브릿지 특유의 EPERM 권한 오류가 발생했으나 실제 빌드 산출물과는 무관, 8-7장에 이미 기록된 환경 제약과 동일 유형).
+- **참고**: 이후 매일 예약 발행 시 클라우드 세션은 ExifLens/FlyDroneMap과 동일하게 `guide-<slug>-{en,ja,ko,es}.mdx` 4개 파일 + `new-queue.json` + `changelog-snippet.txt`를 만들어 전달하는 방식으로 전환됨.
