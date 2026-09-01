@@ -170,8 +170,8 @@ export function FireCalculator() {
             min={range.currentPortfolio.min}
             max={range.currentPortfolio.max}
             step={range.currentPortfolio.step}
+            suffix={currencySymbol}
             onChange={(v) => update("currentPortfolio", v)}
-            formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
           <Slider
             label={t("monthlyContribution")}
@@ -179,8 +179,8 @@ export function FireCalculator() {
             min={range.monthlyContribution.min}
             max={range.monthlyContribution.max}
             step={range.monthlyContribution.step}
+            suffix={currencySymbol}
             onChange={(v) => update("monthlyContribution", v)}
-            formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
           <Slider
             label={t("annualExpenses")}
@@ -188,8 +188,8 @@ export function FireCalculator() {
             min={range.annualExpenses.min}
             max={range.annualExpenses.max}
             step={range.annualExpenses.step}
+            suffix={currencySymbol}
             onChange={(v) => update("annualExpenses", v)}
-            formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}
           />
           <Slider label={t("realReturn")} value={inputs.realReturnPct} min={0} max={15} step={0.1} suffix="%" onChange={(v) => update("realReturnPct", v)} />
           <Slider label={t("withdrawalRate")} value={inputs.withdrawalRatePct} min={2} max={6} step={0.1} suffix="%" onChange={(v) => update("withdrawalRatePct", v)} />

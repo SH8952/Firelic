@@ -309,3 +309,12 @@
 - **배경**: 사용자가 8-14장에서 추가된 "세"/"%" 단위 표시를 확인한 뒤, 예시로 보여준 스크린샷은 눈에 띄게 하려고 일부러 크게 그린 것이었을 뿐 실제로는 다른 텍스트(입력값, 라벨)와 동일한 크기로 맞춰달라고 요청.
 - **`src/components/Slider.tsx`**: 단위 표시 `<span>`의 클래스를 `text-lg font-bold` → `text-sm`(굵기 제거)으로 변경해 입력창 텍스트(`text-sm`)와 동일한 크기가 되도록 수정.
 - **검증**: 작업 전 `_backups/backup_20260901_075913/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 모두 통과.
+
+## 2026-09-01 (추가33) — 투자 자산/저축·금액/생활비 슬라이더에 통화 기호 표시 추가
+
+- **배경**: 사용자가 스크린샷을 첨부해, 현재 투자 자산·월 저축·투자 금액·은퇴 후 연간 생활비 3개 슬라이더의 입력칸 우측에 통화 기호($, €, £, ₩, ¥)가 표시되지 않아 나이/퍼센트 슬라이더와 달리 입력칸 정렬이 들쭉날쭉해 보인다고 지적. 선택된 통화에 따라 기호가 바뀌도록 요청.
+- **원인**: `FireCalculator.tsx`가 세 슬라이더에 `formatValue={(v) => `${currencySymbol}${v.toLocaleString()}`}`를 전달하고 있었지만, `Slider.tsx`의 `formatValue`는 스크린리더 전용(sr-only) 텍스트 생성에만 쓰이고 화면에 보이는 입력창 텍스트에는 반영되지 않아 통화 기호가 실제로는 전혀 보이지 않았음(8-14에서 발견한 `suffix` 미사용 버그와 동일한 유형의 "죽은 prop" 문제).
+- **`src/components/FireCalculator.tsx`**: 세 슬라이더(`currentPortfolio`, `monthlyContribution`, `annualExpenses`)의 `formatValue` prop을 제거하고 `suffix={currencySymbol}`로 교체. 이미 나이("세")·퍼센트("%") 슬라이더가 사용 중인 우측 suffix 배지 방식을 그대로 재사용해, 통화를 바꾸면($/€/£/₩/¥) 표시 기호도 즉시 함께 바뀜.
+- **`.gitignore`**: 빌드 검증 중 macOS 브리지 환경에서 발생한 `.next` 캐시 EPERM 문제를 우회하기 위해 임시로 `.next`를 리네임한 잔여 폴더(`.next_old_*`)가 git에 추적되지 않도록 패턴 추가.
+- **검증**: 작업 전 `_backups/backup_20260901_081058/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 통과. `npm run build`도 82/82 정적 페이지 생성 성공(마지막 `.next/export-detail.json` 삭제 시 EPERM은 기존에도 발생하던 브리지 환경의 무해한 캐시 정리 오류).
+
