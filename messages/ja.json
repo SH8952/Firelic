@@ -45,7 +45,9 @@
     "privacy": "プライバシーポリシー",
     "terms": "利用規約",
     "affiliateDisclosure": "アフィリエイト開示",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
   },
   "guides": {
     "title": "ガイド",

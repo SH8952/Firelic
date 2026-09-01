@@ -5,10 +5,12 @@ import { useParams } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { trackEvent } from "@/lib/analytics";
 
+// Two-letter abbreviations, matching ExifLens's language switcher
+// (src/i18n/routing.ts localeLabels) instead of native-script names.
 const LOCALE_LABELS: Record<string, string> = {
   en: "EN",
-  ko: "한국어",
-  ja: "日本語",
+  ko: "KO",
+  ja: "JA",
   es: "ES",
 };
 

@@ -8,7 +8,6 @@ import { ResultCards } from "@/components/ResultCards";
 import type { ChartDataset } from "@/components/FireChart";
 import { CurrencySelector, currencySymbolFor } from "@/components/CurrencySelector";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
-import { Logo } from "@/components/Logo";
 import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { AdSlot } from "@/components/AdSlot";
@@ -136,12 +135,7 @@ export function FireCalculator() {
       ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      <header className="mb-6">
-        <Logo />
-        <p className="mt-2 text-[var(--color-text-secondary)]">{t("subtitle")}</p>
-      </header>
-
+    <div className="mx-auto max-w-6xl px-4 py-10">
       <AdSlot variant="display" label={t("adDisplay")} />
 
       <div className="mt-6 mb-6">

@@ -282,3 +282,13 @@
 - **`src/app/sitemap.ts`**: `STATIC_PATHS`에 `/faq` 추가.
 - **검증**: `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인(기존 78 → FAQ 페이지 4개 로케일 추가로 82). 최종 `.next` 캐시 정리 단계의 `EPERM: unlink '.../export-detail.json'` 오류는 기존에도 확인된 device_bash 브리지 FUSE 권한 관련 무해한 오류로 코드 정확성과 무관.
 - **참고**: ExifLens는 헤더에 별도 테마 토글이 없어 "동일한 방식"은 FAQ 페이지의 UI/구조 패턴(아코디언 + JSON-LD)에 한정해 적용했고, 헤더의 테마 토글·언어 선택 배치는 firelic 자체 요구사항에 맞춰 새로 설계함. 커밋 전 `firelic/_backups/backup_20260901_065724/`에 전체 백업 생성 완료(표준 백업 규칙 준수).
+
+## 2026-09-01 (추가30) — 헤더에 로고/제목/부연설명 통합 + 모바일 햄버거 메뉴 + 언어 표시 단축
+
+- **배경**: 사용자가 스크린샷으로 현재 화면을 보여주며 다음을 요청: (1) 계산기 페이지 안에 있던 로고+"FIRE Calculator" 제목+부연설명을 최상단 헤더 좌측(기존 아이콘만 있던 위치)으로 이동, (2) 이동한 텍스트의 폰트 크기를 ExifLens 헤더 스타일(제목 text-lg, 부연설명 text-xs)에 맞춰 축소, (3) 헤더에 있던 기존 아이콘 전용 로고는 중복이므로 삭제, (4) 페이지 안의 기존 헤더 블록(로고+부연설명)은 완전히 제거, (5) 모바일에서는 소개/가이드/FAQ 링크가 줄바꿈되지 않도록 ExifLens와 동일하게 햄버거 버튼(☰) 뒤로 숨기고 테마 토글·언어 선택은 계속 노출, (6) 헤더~광고 사이 간격을 다른 프로젝트 기준으로 재조정, (7) 언어 선택 드롭다운 표시를 ExifLens와 동일하게 "한국어/日本語" 대신 "EN/KO/JA/ES" 2자리 약어로 변경. AskUserQuestion으로 7가지 항목 및 햄버거 아이콘 구현 방식(lucide-react 설치 여부)을 확인받은 뒤 진행.
+- **`lucide-react` 패키지 추가**: ExifLens와 동일한 Menu/X 아이콘 사용(버전 `^1.38.0`, ExifLens의 `^1.34.0`과 같은 메이저 범위).
+- **`src/components/SiteHeader.tsx` 재작성**: 좌측에 로고 아이콘 + "FIRE Calculator"(`text-lg font-bold`) + 부연설명(`calculator.subtitle` 재사용, `text-xs`, `hidden sm:block`)을 함께 배치(계산기 페이지에서 이동). 데스크톱(`sm:` 이상)에서는 소개·가이드·FAQ 링크 + 테마 토글 + 언어 선택이 한 줄로 노출되고, 모바일에서는 테마 토글·언어 선택만 노출하고 나머지 링크는 햄버거 버튼(`lucide-react`의 `Menu`/`X`) 뒤에 숨겼다가 클릭 시 헤더 아래로 펼쳐지는 드롭다운 내비게이션으로 표시(ExifLens의 `site-header.tsx`와 동일한 구조).
+- **`src/components/FireCalculator.tsx`**: 페이지 안의 기존 로컬 헤더 블록(로고 + 부연설명)을 완전히 제거. 최상단 컨테이너 여백을 `py-8` → `py-10`으로 조정해 헤더~광고 사이 간격을 ExifLens 등 다른 프로젝트의 헤더~본문 간격 기준에 맞춤. 이제 사용하지 않는 `Logo` import 제거.
+- **`src/components/LocaleSwitcher.tsx`**: 표시 라벨을 `LOCALE_LABELS`에서 "한국어"/"日本語" 같은 현지어 표기 대신 ExifLens의 `src/i18n/routing.ts`(`localeLabels`)와 동일한 "EN"/"KO"/"JA"/"ES" 2자리 약어로 변경.
+- **`messages/{en,ko,ja,es}.json`**: `nav.openMenu`/`nav.closeMenu`(햄버거 버튼 aria-label) 4개 언어 추가. 이동된 부연설명은 새 문구를 만들지 않고 기존 `calculator.subtitle` 번역을 그대로 재사용(문구 일관성 유지).
+- **검증**: 작업 전 `_backups/backup_20260901_071512/`로 백업 생성. `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인. 최종 `.next` 캐시 정리 단계의 `EPERM: unlink '.../export-detail.json'` 오류는 기존에도 확인된 device_bash 브리지 FUSE 권한 관련 무해한 오류로 코드 정확성과 무관. `npm install lucide-react`는 브릿지의 `node_modules/@unrs/.resolver-binding-wasm32-wasi-*` 잔재 폴더로 인해 처음엔 `ENOTEMPTY`로 실패했으나, 해당 잔재 폴더를 정리한 뒤 재시도해 정상 설치됨(5장에 참고용으로만 기록, 반복 발생 시 참고).

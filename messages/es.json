@@ -45,7 +45,9 @@
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "affiliateDisclosure": "Divulgación de Afiliados",
-    "faq": "Preguntas Frecuentes"
+    "faq": "Preguntas Frecuentes",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "guides": {
     "title": "Guías",

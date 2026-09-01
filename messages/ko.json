@@ -45,7 +45,9 @@
     "privacy": "개인정보처리방침",
     "terms": "이용약관",
     "affiliateDisclosure": "제휴 마케팅 고지",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
   },
   "guides": {
     "title": "가이드",
