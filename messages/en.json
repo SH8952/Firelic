@@ -36,7 +36,14 @@
     "adDisplay": "Advertisement",
     "adNative": "Sponsored",
     "affiliateTitle": "Ready to invest? Compare top brokerages",
-    "affiliateDisclosure": "Affiliate links — we may earn a commission at no extra cost to you. Links will activate once partner programs are approved."
+    "affiliateDisclosure": "Affiliate links — we may earn a commission at no extra cost to you. Links will activate once partner programs are approved.",
+    "usageTitle": "How to Use FIRE Calculator",
+    "usageSteps": [
+      "Adjust the sliders on the left to enter your age, savings, contributions, expenses, and expected return. You can switch the currency to any of the five supported units.",
+      "Your FIRE number, FIRE age, and years remaining update instantly in the result cards and chart on the right.",
+      "Turn on \"Scenario A / B Compare\" to line up two different savings strategies side by side and see how each path changes your FIRE date.",
+      "Every calculation runs entirely in your browser — nothing you enter is saved or sent to a server."
+    ]
   },
   "nav": {
     "home": "Home",

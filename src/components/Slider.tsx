@@ -65,16 +65,23 @@ export function Slider({
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <label className="text-sm text-[var(--color-text-secondary)]">{label}</label>
-        <input
-          type="text"
-          inputMode="decimal"
-          value={text}
-          onFocus={() => setDraft(formatWithCommas(value))}
-          onBlur={() => setDraft(null)}
-          onChange={(e) => handleTextChange(e.target.value)}
-          className="tabular-nums w-36 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-right text-sm text-[var(--color-text-primary)]"
-          aria-label={`${label} 직접 입력`}
-        />
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            inputMode="decimal"
+            value={text}
+            onFocus={() => setDraft(formatWithCommas(value))}
+            onBlur={() => setDraft(null)}
+            onChange={(e) => handleTextChange(e.target.value)}
+            className="tabular-nums w-36 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-right text-sm text-[var(--color-text-primary)]"
+            aria-label={`${label} 직접 입력`}
+          />
+          {suffix ? (
+            <span aria-hidden="true" className="text-lg font-bold text-[var(--color-text-primary)]">
+              {suffix}
+            </span>
+          ) : null}
+        </div>
       </div>
       <input
         type="range"

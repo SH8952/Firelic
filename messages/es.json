@@ -36,7 +36,14 @@
     "adDisplay": "Publicidad",
     "adNative": "Patrocinado",
     "affiliateTitle": "¿Listo para invertir? Compara las principales correduras",
-    "affiliateDisclosure": "Enlaces de afiliados: podemos ganar una comisión sin costo adicional para ti. Los enlaces se activarán cuando se aprueben los programas de socios."
+    "affiliateDisclosure": "Enlaces de afiliados: podemos ganar una comisión sin costo adicional para ti. Los enlaces se activarán cuando se aprueben los programas de socios.",
+    "usageTitle": "Cómo usar la FIRE Calculator",
+    "usageSteps": [
+      "Ajusta los controles deslizantes de la izquierda para introducir tu edad, ahorros, aportaciones, gastos y rendimiento esperado. Puedes cambiar la moneda entre las cinco unidades disponibles.",
+      "Tu número FIRE, tu edad FIRE y los años restantes se actualizan al instante en las tarjetas de resultados y el gráfico de la derecha.",
+      "Activa el modo \"Comparar Escenario A/B\" para poner en paralelo dos estrategias de ahorro distintas y ver cómo cada camino cambia tu fecha FIRE.",
+      "Todos los cálculos se realizan enteramente en tu navegador: nada de lo que introduzcas se guarda ni se envía a un servidor."
+    ]
   },
   "nav": {
     "home": "Inicio",

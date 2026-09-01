@@ -292,3 +292,14 @@
 - **`src/components/LocaleSwitcher.tsx`**: 표시 라벨을 `LOCALE_LABELS`에서 "한국어"/"日本語" 같은 현지어 표기 대신 ExifLens의 `src/i18n/routing.ts`(`localeLabels`)와 동일한 "EN"/"KO"/"JA"/"ES" 2자리 약어로 변경.
 - **`messages/{en,ko,ja,es}.json`**: `nav.openMenu`/`nav.closeMenu`(햄버거 버튼 aria-label) 4개 언어 추가. 이동된 부연설명은 새 문구를 만들지 않고 기존 `calculator.subtitle` 번역을 그대로 재사용(문구 일관성 유지).
 - **검증**: 작업 전 `_backups/backup_20260901_071512/`로 백업 생성. `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인. 최종 `.next` 캐시 정리 단계의 `EPERM: unlink '.../export-detail.json'` 오류는 기존에도 확인된 device_bash 브리지 FUSE 권한 관련 무해한 오류로 코드 정확성과 무관. `npm install lucide-react`는 브릿지의 `node_modules/@unrs/.resolver-binding-wasm32-wasi-*` 잔재 폴더로 인해 처음엔 `ENOTEMPTY`로 실패했으나, 해당 잔재 폴더를 정리한 뒤 재시도해 정상 설치됨(5장에 참고용으로만 기록, 반복 발생 시 참고).
+
+## 2026-09-01 (추가31) — 메인 페이지 하단에 "이용 방법" 섹션 추가 + 슬라이더 입력칸 단위(세/%) 표시 버그 수정
+
+- **배경**: 사용자가 ExifLens의 "ExifLens 사용법" 섹션(제목 + 원형 번호 1~4 + 설명) 스크린샷과, 슬라이더 입력칸 우측에 큰 글씨로 "세"/"%" 단위가 표시된 예시 스크린샷을 첨부하며 두 가지를 요청: (1) 동일한 구조의 "이용 방법" 섹션을 메인 페이지 최하단 광고(DisclaimerFooter 바로 위 마지막 AdSlot) 바로 위에 추가, (2) 슬라이더 입력칸 우측에 나이는 "세", 비율 입력은 "%" 단위를 표시.
+- **버그 발견**: `src/components/Slider.tsx`에 `suffix` prop이 이미 존재하고 `realReturnPct`/`withdrawalRatePct`/`effectiveTaxRatePct` 슬라이더에는 `suffix="%"`가 전달되고 있었으나, 실제로는 접근성용 `sr-only` 텍스트에만 쓰이고 화면에는 전혀 렌더링되지 않고 있던 것을 확인. `currentAge`/`targetAge` 슬라이더에는 애초에 suffix가 전달되지도 않았음.
+- **`src/components/Slider.tsx` 수정**: 입력창 우측에 `suffix`가 있으면 굵은 글씨(`text-lg font-bold`)로 실제로 보이도록 렌더링하는 `<span aria-hidden="true">`를 추가.
+- **`src/components/FireCalculator.tsx`**: `currentAge`/`targetAge` 슬라이더에 `suffix={t("fireAgeUnit")}`를 추가(결과 카드에서 이미 쓰이던 로케일별 나이 단위를 재사용 — ko/ja는 "세"/"歳", en/es는 빈 문자열). `realReturnPct`/`withdrawalRatePct`/`effectiveTaxRatePct`는 기존 `suffix="%"` 그대로 유지 — 이번 버그 수정으로 이제 실제로 화면에 표시됨.
+- **`src/components/UsageGuideSection.tsx` (신규)**: ExifLens의 `home-usage-section.tsx`(제목 + 원형 번호 아코디언 목록)를 참고해 구현. ExifLens의 원본은 `next-intl/server`의 `getTranslations`를 쓰는 비동기 서버 컴포넌트지만, firelic의 계산기 페이지(`FireCalculator.tsx`)는 이미 `"use client"` 클라이언트 컴포넌트라 서버 컴포넌트를 직접 자식으로 import해 인스턴스화할 수 없으므로, 클라이언트용 `useTranslations` 훅을 쓰는 클라이언트 컴포넌트로 작성. `calculator.usageTitle`/`calculator.usageSteps[]`(4단계) 4개 언어 신규 작성.
+- **배치**: `FireCalculator.tsx`의 최하단 `AdSlot`(display) 바로 위, `AffiliateBanner`가 있는 우측 컬럼과 그리드가 끝난 다음 줄에 `<UsageGuideSection />` 삽입.
+- **`messages/{en,ko,ja,es}.json`**: `calculator.usageTitle`, `calculator.usageSteps[]`(4개 항목) 4개 언어 모두 신규 추가.
+- **검증**: 작업 전 `_backups/backup_20260901_073507/`로 백업 생성. `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인. 최종 `.next` 캐시 정리 단계의 `EPERM` 오류는 기존에도 확인된 무해한 브릿지 오류.

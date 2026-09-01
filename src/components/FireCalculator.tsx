@@ -12,6 +12,7 @@ import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { AdSlot } from "@/components/AdSlot";
 import { AffiliateBanner } from "@/components/AffiliateBanner";
+import { UsageGuideSection } from "@/components/UsageGuideSection";
 import { simulateFire, type FireInputs } from "@/lib/fireCalculations";
 import { currencyRangeFor } from "@/lib/currencyRanges";
 import { trackEvent } from "@/lib/analytics";
@@ -161,8 +162,8 @@ export function FireCalculator() {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr]">
         <section className="flex flex-col gap-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:sticky lg:top-6 lg:h-fit">
           <CurrencySelector value={currency} onChange={handleCurrencyChange} label={t("currency")} />
-          <Slider label={t("currentAge")} value={inputs.currentAge} min={18} max={80} onChange={(v) => update("currentAge", v)} />
-          <Slider label={t("targetAge")} value={inputs.targetAge} min={inputs.currentAge + 1} max={90} onChange={(v) => update("targetAge", v)} />
+          <Slider label={t("currentAge")} value={inputs.currentAge} min={18} max={80} suffix={t("fireAgeUnit")} onChange={(v) => update("currentAge", v)} />
+          <Slider label={t("targetAge")} value={inputs.targetAge} min={inputs.currentAge + 1} max={90} suffix={t("fireAgeUnit")} onChange={(v) => update("targetAge", v)} />
           <Slider
             label={t("currentPortfolio")}
             value={inputs.currentPortfolio}
@@ -246,6 +247,10 @@ export function FireCalculator() {
             partners={AFFILIATE_PARTNERS}
           />
         </section>
+      </div>
+
+      <div className="mt-10">
+        <UsageGuideSection />
       </div>
 
       <div className="mt-6">
