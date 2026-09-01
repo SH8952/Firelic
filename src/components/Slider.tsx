@@ -77,7 +77,7 @@ export function Slider({
             aria-label={`${label} 직접 입력`}
           />
           {suffix ? (
-            <span aria-hidden="true" className="text-lg font-bold text-[var(--color-text-primary)]">
+            <span aria-hidden="true" className="text-sm text-[var(--color-text-primary)]">
               {suffix}
             </span>
           ) : null}

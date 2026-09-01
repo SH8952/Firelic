@@ -303,3 +303,9 @@
 - **배치**: `FireCalculator.tsx`의 최하단 `AdSlot`(display) 바로 위, `AffiliateBanner`가 있는 우측 컬럼과 그리드가 끝난 다음 줄에 `<UsageGuideSection />` 삽입.
 - **`messages/{en,ko,ja,es}.json`**: `calculator.usageTitle`, `calculator.usageSteps[]`(4개 항목) 4개 언어 모두 신규 추가.
 - **검증**: 작업 전 `_backups/backup_20260901_073507/`로 백업 생성. `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인. 최종 `.next` 캐시 정리 단계의 `EPERM` 오류는 기존에도 확인된 무해한 브릿지 오류.
+
+## 2026-09-01 (추가32) — 슬라이더 단위(세/%) 폰트 크기 축소
+
+- **배경**: 사용자가 8-14장에서 추가된 "세"/"%" 단위 표시를 확인한 뒤, 예시로 보여준 스크린샷은 눈에 띄게 하려고 일부러 크게 그린 것이었을 뿐 실제로는 다른 텍스트(입력값, 라벨)와 동일한 크기로 맞춰달라고 요청.
+- **`src/components/Slider.tsx`**: 단위 표시 `<span>`의 클래스를 `text-lg font-bold` → `text-sm`(굵기 제거)으로 변경해 입력창 텍스트(`text-sm`)와 동일한 크기가 되도록 수정.
+- **검증**: 작업 전 `_backups/backup_20260901_075913/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 모두 통과.
