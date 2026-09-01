@@ -4,7 +4,7 @@ import { getGuides } from "@/lib/guides";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
-const STATIC_PATHS = ["", "/about", "/privacy-policy", "/terms", "/affiliate-disclosure", "/guides"];
+const STATIC_PATHS = ["", "/about", "/privacy-policy", "/terms", "/affiliate-disclosure", "/guides", "/faq"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];

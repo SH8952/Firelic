@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { AdSenseScript } from "@/components/AdSenseScript";
 import { webApplicationJsonLd } from "@/lib/seo";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
 
@@ -84,9 +84,7 @@ export default async function LocaleLayout({
         <AdSenseScript />
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
-            <div className="flex justify-end px-4 pt-3">
-              <LocaleSwitcher />
-            </div>
+            <SiteHeader />
             {children}
             <SiteFooter />
           </NextIntlClientProvider>

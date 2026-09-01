@@ -269,3 +269,16 @@
 - **`automation/publish-guide.command` 재작성**: ExifLens/FlyDroneMap과 동일한 방식으로 전환 — 매일 전달받는 파일이 `guide-<slug>-{en,ja,ko,es}.mdx` 개별 파일 4개 + `new-queue.json`이 되며, 각각 `content/guides/<locale>/<slug>.mdx`로 복사하고 해당 4개 파일 + 큐 + CHANGELOG만 `git add`한다. 기존에 자동 발행이 실패하며 `automation/` 폴더에 남아있던 구버전 스테이징 파일(en.ts/ko.ts/ja.ts/es.ts/new-queue.json/changelog-snippet.txt)은 `_to_delete/`로 정리.
 - **검증**: `npx tsc --noEmit`, `npx eslint src` 모두 통과. **`npm run build`(Turbopack) 로컬 실행 결과 78개 페이지 전부 정상 생성 확인** — MDX 컴파일 포함 전체 빌드 파이프라인이 정상 동작함을 확인함(마지막 `.next` 캐시 정리 단계에서만 브릿지 특유의 EPERM 권한 오류가 발생했으나 실제 빌드 산출물과는 무관, 8-7장에 이미 기록된 환경 제약과 동일 유형).
 - **참고**: 이후 매일 예약 발행 시 클라우드 세션은 ExifLens/FlyDroneMap과 동일하게 `guide-<slug>-{en,ja,ko,es}.mdx` 4개 파일 + `new-queue.json` + `changelog-snippet.txt`를 만들어 전달하는 방식으로 전환됨.
+
+## 2026-09-01 (추가29) — FAQ 페이지 신설 및 상단 공통 헤더(SiteHeader) 도입
+
+- **배경**: 사용자 요청: (1) 사이트에 없던 "자주 묻는 질문(FAQ)" 페이지를 ExifLens와 동일한 방식(아코디언 UI + FAQPage JSON-LD)으로 신설, (2) 하단 푸터에 있던 "소개(About)"·"가이드(Guides)" 링크를 최상단 우측, 라이트/다크 테마 버튼 왼쪽으로 이동, (3) 언어 선택 드롭다운을 테마 버튼 오른쪽으로 이동, (4) 상단 헤더 간격을 ExifLens 헤더 스타일(h-16, max-w-6xl)에 맞게 조정. 작업 전 확인 결과 firelic은 사이트 전체에 적용되는 별도 헤더 컴포넌트가 없었고(로케일 스위처만 우측 상단에 단독 배치), 테마 토글 버튼은 메인 계산기 페이지(FireCalculator.tsx) 안에만 있어 `/about`, `/guides` 페이지에는 테마 버튼도, 홈으로 돌아가는 링크도 없는 상태였음을 사용자에게 알리고, 공통 헤더 신설 및 헤더 좌측 로고+홈 링크 추가에 대해 확인받은 뒤 진행함.
+- **`src/components/SiteHeader.tsx` (신규)**: 모든 로케일 페이지 상단에 공통 적용되는 헤더. 좌측 로고(홈 링크), 우측에 소개·가이드·FAQ 내비게이션 링크 → 테마 토글 → 언어 선택 드롭다운 순서로 배치. `h-16` 높이, `max-w-6xl` 컨테이너, `px-4` 패딩, 하단 보더로 ExifLens 헤더 스타일에 맞춤.
+- **`src/app/[locale]/layout.tsx`**: 기존 로케일 스위처 단독 배치(`flex justify-end px-4 pt-3`)를 제거하고 `<SiteHeader />`로 교체.
+- **`src/components/SiteFooter.tsx`**: "소개"·"가이드" 링크 제거(헤더로 이동 완료). 개인정보처리방침·이용약관·제휴 마케팅 고지 링크만 유지.
+- **`src/components/FireCalculator.tsx`**: 페이지 내부 로컬 헤더에서 `ThemeToggle` 제거(전역 SiteHeader로 이동해 중복이므로). 로고+부제목만 유지.
+- **`src/app/[locale]/faq/page.tsx` (신규)**: ExifLens의 `/faq` 페이지와 동일한 방식(`<details>/<summary>` 아코디언, `FAQPage` schema.org JSON-LD)으로 신설. 콘텐츠는 FIRE Calculator에 맞게 새로 작성한 8개 질문/답변(FIRE 정의, FIRE 넘버 계산법, 4% 규칙의 한계, 회원가입 불필요, 시나리오 비교, 지원 통화, 금융 자문 아님 고지, 무료 이용).
+- **`messages/{en,ko,ja,es}.json`**: `nav.faq` 내비게이션 라벨 추가, `Faq.title`/`Faq.subtitle`/`Faq.items[]`(질문/답변 8쌍) 4개 언어 모두 추가.
+- **`src/app/sitemap.ts`**: `STATIC_PATHS`에 `/faq` 추가.
+- **검증**: `npx tsc --noEmit` 통과, `npx eslint src` 통과(0 errors), `npm run build`(Turbopack) 82/82 페이지 정상 생성 확인(기존 78 → FAQ 페이지 4개 로케일 추가로 82). 최종 `.next` 캐시 정리 단계의 `EPERM: unlink '.../export-detail.json'` 오류는 기존에도 확인된 device_bash 브리지 FUSE 권한 관련 무해한 오류로 코드 정확성과 무관.
+- **참고**: ExifLens는 헤더에 별도 테마 토글이 없어 "동일한 방식"은 FAQ 페이지의 UI/구조 패턴(아코디언 + JSON-LD)에 한정해 적용했고, 헤더의 테마 토글·언어 선택 배치는 firelic 자체 요구사항에 맞춰 새로 설계함. 커밋 전 `firelic/_backups/backup_20260901_065724/`에 전체 백업 생성 완료(표준 백업 규칙 준수).

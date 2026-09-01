@@ -44,11 +44,50 @@
     "about": "Acerca de",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
-    "affiliateDisclosure": "Divulgación de Afiliados"
+    "affiliateDisclosure": "Divulgación de Afiliados",
+    "faq": "Preguntas Frecuentes"
   },
   "guides": {
     "title": "Guías",
     "empty": "Las guías están disponibles actualmente solo en inglés. Más idiomas próximamente.",
     "readMore": "Leer más"
+  },
+  "Faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Respuestas a las preguntas más comunes sobre la FIRE Calculator.",
+    "items": [
+      {
+        "question": "¿Qué es FIRE?",
+        "answer": "FIRE significa Independencia Financiera, Retiro Anticipado (Financial Independence, Retire Early). Consiste en ahorrar e invertir de forma agresiva para que tu patrimonio pueda cubrir tus gastos mucho antes de la edad de jubilación tradicional."
+      },
+      {
+        "question": "¿Cómo se calcula mi número FIRE?",
+        "answer": "Tu número FIRE es tu gasto anual dividido entre la tasa de retiro elegida (habitualmente 4%, es decir, multiplicado por 25). La calculadora proyecta el crecimiento de tus ahorros año a año hasta alcanzar esa cifra."
+      },
+      {
+        "question": "¿La tasa de retiro del 4% es siempre segura?",
+        "answer": "La regla del 4% es una guía histórica ampliamente utilizada, no una garantía. Los rendimientos del mercado, la inflación y tu horizonte temporal afectan cuán segura es realmente una tasa de retiro determinada, así que considera el resultado como una estimación orientativa."
+      },
+      {
+        "question": "¿Necesito crear una cuenta para usar esta calculadora?",
+        "answer": "No. La FIRE Calculator funciona completamente en tu navegador sin necesidad de registro; tus datos no se guardan ni se envían a ningún servidor."
+      },
+      {
+        "question": "¿Puedo comparar dos escenarios de ahorro diferentes?",
+        "answer": "Sí. Usa el modo de comparación Escenario A/B para ajustar la tasa de ahorro, los rendimientos o los gastos en paralelo y ver cómo afecta cada camino a tu fecha FIRE."
+      },
+      {
+        "question": "¿Qué monedas son compatibles?",
+        "answer": "Puedes cambiar la moneda desde el selector en la parte superior de la calculadora; los rangos de entrada se reajustan automáticamente según la moneda elegida."
+      },
+      {
+        "question": "¿Esto es asesoramiento financiero?",
+        "answer": "No. Esta herramienta tiene fines educativos e ilustrativos únicamente y no constituye asesoramiento financiero, fiscal o de inversión. Consulta a un profesional licenciado para recibir asesoramiento específico a tu situación."
+      },
+      {
+        "question": "¿La FIRE Calculator es gratuita?",
+        "answer": "Sí, es completamente gratuita y sin límite en la cantidad de escenarios que puedes calcular."
+      }
+    ]
   }
 }

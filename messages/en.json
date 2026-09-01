@@ -44,11 +44,50 @@
     "about": "About",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "affiliateDisclosure": "Affiliate Disclosure"
+    "affiliateDisclosure": "Affiliate Disclosure",
+    "faq": "FAQ"
   },
   "guides": {
     "title": "Guides",
     "empty": "Guides are currently available in English only. More languages coming soon.",
     "readMore": "Read more"
+  },
+  "Faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to common questions about the FIRE Calculator.",
+    "items": [
+      {
+        "question": "What is FIRE?",
+        "answer": "FIRE stands for Financial Independence, Retire Early. It's the practice of aggressively saving and investing so your portfolio can cover your living expenses well before traditional retirement age."
+      },
+      {
+        "question": "How is my FIRE number calculated?",
+        "answer": "Your FIRE number is your annual expenses divided by your chosen withdrawal rate (commonly 4%, i.e. multiplied by 25). The calculator projects your savings growth year by year until that number is reached."
+      },
+      {
+        "question": "Is the 4% withdrawal rate always safe?",
+        "answer": "The 4% rule is a widely used historical guideline, not a guarantee. Market returns, inflation, and your time horizon all affect how safe a given withdrawal rate really is, so treat the result as a planning estimate rather than a promise."
+      },
+      {
+        "question": "Do I need to create an account to use this calculator?",
+        "answer": "No. The FIRE Calculator works entirely in your browser without sign-up — your inputs are not saved or sent to a server."
+      },
+      {
+        "question": "Can I compare two different savings scenarios?",
+        "answer": "Yes. Use the Scenario A / B compare mode to adjust savings rate, returns, or expenses side by side and see how each path affects your FIRE date."
+      },
+      {
+        "question": "Which currencies are supported?",
+        "answer": "You can switch the currency from the selector at the top of the calculator; the input ranges automatically rescale to match the selected currency."
+      },
+      {
+        "question": "Is this financial advice?",
+        "answer": "No. This tool is for educational and illustrative purposes only and does not constitute financial, tax, or investment advice. Please consult a licensed professional for advice specific to your situation."
+      },
+      {
+        "question": "Is the FIRE Calculator free to use?",
+        "answer": "Yes, it's completely free with no limits on how many scenarios you can run."
+      }
+    ]
   }
 }

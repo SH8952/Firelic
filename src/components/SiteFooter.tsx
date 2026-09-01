@@ -3,9 +3,9 @@ import { Link } from "@/i18n/navigation";
 
 export function SiteFooter() {
   const t = useTranslations("nav");
+  // "About"/"Guides" moved to SiteHeader (top nav) on 2026-09-01; the
+  // footer now only carries the legal/policy links.
   const links: Array<{ href: string; label: string }> = [
-    { href: "/guides", label: t("guides") },
-    { href: "/about", label: t("about") },
     { href: "/privacy-policy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
     { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },
