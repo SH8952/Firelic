@@ -329,3 +329,19 @@
 - **`.gitignore`**: 빌드 검증 중 macOS 브리지 환경에서 발생한 `.next` 캐시 EPERM 문제를 우회하기 위해 임시로 `.next`를 리네임한 잔여 폴더(`.next_old_*`)가 git에 추적되지 않도록 패턴 추가.
 - **검증**: 작업 전 `_backups/backup_20260901_081058/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 통과. `npm run build`도 82/82 정적 페이지 생성 성공(마지막 `.next/export-detail.json` 삭제 시 EPERM은 기존에도 발생하던 브리지 환경의 무해한 캐시 정리 오류).
 
+## 2026-09-03 (추가34) — 구글 디스커버 대응(대표 이미지 자동 첨부) + 개발자 전용 가이드 이미지 관리 도구 이식
+
+- **배경**: ExifLens에서 이미 구현·배포한 두 가지 기능(구글 디스커버 노출 대비 대표 이미지 자동 첨부 파이프라인, 로컬 개발 서버 전용 이미지 교체 도구)을 firelic에도 이식해 달라는 요청. Unsplash 검색어 소스는 "각 가이드에 tags 직접 입력", API 키는 "FlyDroneMap 키 재사용"(최근 설정, ExifLens 키와 실제 값이 다름을 확인 후 선택)으로 사용자 확인 후 진행.
+- **`src/app/[locale]/layout.tsx`**: 루트 `generateMetadata`에 `robots: { googleBot: { "max-image-preview": "large" } }` 추가(구글 디스커버 노출 필수 조건).
+- **`src/lib/guides.ts`**: `GuideFrontmatter` 타입에 `image`/`imageCredit`/`imageCreditUrl` 선택 필드 추가.
+- **`content/guides/en/*.mdx` (14개 전부)**: 각 가이드 주제에 맞는 영문 `tags`(2개씩)를 새로 채워 넣음. 자동 첨부 스크립트가 검색어로 사용.
+- **`automation/attach-guide-image.py` (신규)**: ExifLens 버전을 이식(저작자 표기 UTM을 `utm_source=FIRECalculator`로 변경). 발행 시 영문 tags로 Unsplash에서 가로 1600px webp 이미지를 검색·다운로드해 `public/guides/images/{slug}.webp`에 저장하고, 4개 언어 mdx frontmatter에 `image`/`imageCredit`/`imageCreditUrl`을 삽입. 실패(네트워크/키 없음/검색 결과 없음)해도 예외 없이 조용히 건너뛰고 텍스트만으로 발행 계속.
+- **`automation/backfill-guide-images.py` (신규)**: 이미지가 없는 기존 가이드를 순회하며 위 로직을 일괄 적용하는 1회성 백필 스크립트. git add/commit/push는 하지 않음(호출부가 한 번에 처리).
+- **`automation/publish-guide.command`**: 4개 언어 mdx 반영 직후 `attach-guide-image.py` 호출 지점 추가, 이미지 파일이 생성됐을 때만 `git add`에 포함하도록 수정.
+- **`automation/.env`, `.env.local` (신규)**: `UNSPLASH_ACCESS_KEY`(FlyDroneMap과 공유하는 키) 등록. 둘 다 `.gitignore`의 `.env*` 패턴으로 이미 추적 제외됨.
+- **개발자 전용 가이드 이미지 관리 도구 (신규)**: `src/lib/dev/guide-image-tool.ts`(검색/적용/업로드 서버 로직), `src/app/api/dev/guide-image-{search,apply,upload}/route.ts`(API 라우트 3개, `NODE_ENV !== "development"`면 즉시 403), `src/components/dev/guide-image-dev-panel.tsx`(가이드 상세 페이지 우측 하단 플로팅 패널). ExifLens는 shadcn/ui(Button/Input)를 쓰지만 firelic에는 해당 컴포넌트가 없어, 다른 firelic 컴포넌트와 동일하게 순수 HTML 엘리먼트 + `var(--color-...)` Tailwind 클래스로 재작성.
+- **`src/app/[locale]/guides/[slug]/page.tsx`**: 대표 이미지 렌더링(`next/image`, `aspect-[16/9]`, `priority`) + "Photo by X on Unsplash" 저작자 표기(둘 다 있을 때만) 추가. 기존에 없던 `generateMetadata`를 새로 추가해 `openGraph.images`/`twitter.images`에 대표 이미지 연결. 로컬 개발 서버에서만 `<GuideImageDevPanel>` 렌더링.
+- **네트워크 제약 확인**: 이 클라우드 세션(device_bash 브릿지 및 클라우드 컨테이너 모두)은 조직 이그레스 허용목록에 `api.unsplash.com`이 없어 `blocked-by-allowlist`로 직접 호출이 불가능함을 확인(`npm`/`github` 등은 정상 접속됨). 따라서 14개 기존 가이드에 대한 실제 이미지 백필은 이 세션에서 실행하지 못했고, 사용자가 실제 맥에서 `firelic-backfill-images.command`를 더블클릭해 직접 실행해야 함. **같은 이유로, 매일 자동 발행되는 신규 가이드의 이미지 자동 첨부도 발행 파이프라인이 실행되는 환경에 따라 실패(이미지 없이 발행)할 수 있음** — 실패해도 발행 자체는 막히지 않도록 설계되어 있으므로 이 경우 개발자 도구나 백필 스크립트로 나중에 보완 가능.
+- **검증**: 작업 전 `_backups/backup_20260903_193820/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 모두 통과. `npm run build`(Turbopack) 97/97 페이지 정상 생성 확인(마지막 `.next` 캐시 정리 단계의 `EPERM`은 기존에도 확인된 무해한 브릿지 오류). 프로덕션 빌드 산출물(`.next/server/app/**/guides/*.html` 등)에 개발자 패널 문자열("이미지 관리")이 전혀 포함되지 않음을 직접 확인해 `NODE_ENV` 조건부 렌더링이 실제로 동작함을 검증.
+- **남은 절차(사용자 진행)**: (1) `firelic-backfill-images.command` 더블클릭 → 기존 14개 가이드 이미지 백필 + 커밋/push, (2) `firelic-push.command`로 이번 코드 변경사항 커밋/push, (3) 로컬 `npm run dev`로 개발 서버를 띄워 가이드 상세 페이지 우측 하단에 "🛠 이미지 관리 (DEV)" 패널이 뜨는지, 검색·적용·업로드가 정상 동작하는지 확인 권장.
+

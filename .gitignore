@@ -52,3 +52,5 @@ next-env.d.ts
 /firelic-push.command
 *.command
 .next_old_*
+__pycache__/
+*.pyc

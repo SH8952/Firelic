@@ -31,6 +31,12 @@ export type GuideFrontmatter = {
   updatedAt?: string;
   category: string;
   tags?: string[];
+  /** Public path to the guide's representative image (e.g. "/guides/images/{slug}.webp"). */
+  image?: string;
+  /** Unsplash photographer name, shown as "Photo by X on Unsplash" under the image. */
+  imageCredit?: string;
+  /** Unsplash photographer profile URL (with UTM tracking params). */
+  imageCreditUrl?: string;
 };
 
 export type GuideMeta = GuideFrontmatter & {

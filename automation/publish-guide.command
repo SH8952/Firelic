@@ -101,6 +101,10 @@ cp "guide-${SLUG}-ko.mdx" "$REPO/content/guides/ko/${SLUG}.mdx"
 cp "guide-${SLUG}-es.mdx" "$REPO/content/guides/es/${SLUG}.mdx"
 cp "new-queue.json" "$REPO/automation/guide-topics-queue.json"
 
+# --- 4-1. Unsplash에서 대표 이미지 자동 첨부 (실패해도 발행은 계속 진행) ---
+python3 "$REPO/automation/attach-guide-image.py" "$REPO" "$SLUG"
+IMAGE_PATH="public/guides/images/${SLUG}.webp"
+
 python3 -c "
 import pathlib
 repo = pathlib.Path('$REPO')
@@ -135,6 +139,7 @@ cd "$REPO"
 [ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
 
 git add "content/guides/en/${SLUG}.mdx" "content/guides/ja/${SLUG}.mdx" "content/guides/ko/${SLUG}.mdx" "content/guides/es/${SLUG}.mdx" automation/guide-topics-queue.json CHANGELOG.md
+[ -f "$IMAGE_PATH" ] && git add "$IMAGE_PATH"
 
 if git diff --cached --quiet; then
   echo ""

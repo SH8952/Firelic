@@ -47,6 +47,15 @@ export async function generateMetadata({
       locale,
       type: "website",
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+      },
+    },
     ...(NAVER_SITE_VERIFICATION && {
       verification: {
         other: {
