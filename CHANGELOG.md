@@ -1,3 +1,14 @@
+## 2026-09-03 (추가35) — 가이드 게시글 구조화 및 분량 확대 (ExifLens 스타일 이식) + 이미지 백필 커밋 포함
+
+- 배경: 사용자가 기존 14개 가이드 게시글이 ExifLens(exifnd.com) 가이드 게시글과 구조가 다르고 분량도 짧다고 지적. 실제 내용 확인 결과 firelic 게시글은 H2 3~4개, 400~700단어 수준이었고, ExifLens 게시글은 H2 4~5개, 약 700~900단어의 "타이틀 없는 도입부 + H2 섹션 + 자연스러운 산문(문자 그대로의 불릿/번호 목록 없이 굵은 글씨로 하위 포인트 표현) + 자연스러운 마무리" 구조였음
+- 사용자 확인 사항(AskUserQuestion): (1) 목표 구조/분량 — "더 길게 (H2 5~7개, 1000단어 이상)" (ExifLens보다도 더 길게), (2) 범위 — 기존 14개 영문 가이드 전부 재작성, (3) 번역 — en/ko/ja/es 4개 언어 전부 동시 재작성, (4) 향후 자동 발행되는 나머지 22개 주제에도 동일 기준 적용
+- 재작성 대상 14개 주제 × 4개 언어 = 56개 `content/guides/{en,ko,ja,es}/*.mdx` 파일 전체 — 각 영문 기준 H2 7~8개, 800~1040단어(파일 전체 기준, 프런트매터 포함), ko/ja/es는 동일 구조로 전문 번역:
+  - `what-is-fire`, `fire-number-25x-rule-explained`, `coast-lean-fat-fire-explained`, `4-percent-rule-safe-withdrawal-rate`, `how-to-calculate-your-savings-rate`, `index-fund-investing-for-fire`, `build-emergency-fund-before-fire`, `us-401k-vs-roth-ira-early-retirees`, `uk-isa-sipp-state-pension-fire`, `sequence-of-returns-risk`, `increase-savings-rate-practical-tips`, `korea-irp-pension-account-fire`, `healthcare-costs-in-early-retirement`, `barista-fire-part-time-work`
+- 프런트매터(title/description/image 등)는 그대로 유지하고 본문(body)만 교체 — 기존에 이미 첨부되어 있던 대표 이미지(Unsplash) 연결은 영향 없음
+- 함께 커밋: 이전 세션에서 실행되었으나 커밋되지 않은 상태로 남아 있던 대표 이미지 백필 결과(`public/guides/images/*.webp` 14개 신규 + 해당 mdx 프런트매터의 image/imageCredit/imageCreditUrl 반영분)를 이번 커밋에 함께 포함 — 별도의 백필 커밋을 따로 만들지 않고 한 번의 push로 정리
+- 검증: `npx tsc --noEmit` 통과(오류 0건), `npx eslint src` 통과(오류 0건), `npm run build` Compiled successfully, 정적 페이지 97/97 생성 확인(최종 `.next` 정리 단계에서 device_bash 브릿지 특유의 EPERM 발생 — 기존에 문서화된 FUSE 마운트 한계이며 빌드 자체는 정상)
+- TODO(다음 세션 또는 사용자 직접 실행): 매일 자동 발행 Routine(`trig_019Qtn3nfb5UzbustuAT86et`)의 프롬프트가 여전히 마이그레이션 이전(TS 배열 콘텐츠, 마크다운 금지) 기준으로 되어 있어 이번에 합의된 H2 5~7개/1000단어 이상 기준으로 업데이트 필요 — 이번 세션에서 `update_trigger`로 반영 예정
+
 ## 2026-09-03 — Contact(문의) 페이지 신규 추가 (애드센스 사전 대비)
 
 - 배경: 같은 시리즈의 ExifLens(exifnd.com)가 애드센스 심사에서 "가치가 별로 없는 콘텐츠"로 반려되었고, 실제 원인 점검 과정에서 Contact 페이지 부재가 실질적 개선 여지로 확인됨. FIRE Calculator도 저장소를 점검해보니 About/Privacy/Terms/Affiliate Disclosure는 있었지만 Contact 페이지가 없어 동일한 문제를 겪기 전에 선제적으로 추가
