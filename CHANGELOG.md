@@ -8,6 +8,7 @@
 - 함께 커밋: 이전 세션에서 실행되었으나 커밋되지 않은 상태로 남아 있던 대표 이미지 백필 결과(`public/guides/images/*.webp` 14개 신규 + 해당 mdx 프런트매터의 image/imageCredit/imageCreditUrl 반영분)를 이번 커밋에 함께 포함 — 별도의 백필 커밋을 따로 만들지 않고 한 번의 push로 정리
 - 검증: `npx tsc --noEmit` 통과(오류 0건), `npx eslint src` 통과(오류 0건), `npm run build` Compiled successfully, 정적 페이지 97/97 생성 확인(최종 `.next` 정리 단계에서 device_bash 브릿지 특유의 EPERM 발생 — 기존에 문서화된 FUSE 마운트 한계이며 빌드 자체는 정상)
 - TODO(다음 세션 또는 사용자 직접 실행): 매일 자동 발행 Routine(`trig_019Qtn3nfb5UzbustuAT86et`)의 프롬프트가 여전히 마이그레이션 이전(TS 배열 콘텐츠, 마크다운 금지) 기준으로 되어 있어 이번에 합의된 H2 5~7개/1000단어 이상 기준으로 업데이트 필요 — 이번 세션에서 `update_trigger`로 반영 예정
+- 후속 완료(2026-09-03): 자동 발행 Routine 프롬프트를 `update_trigger`로 갱신 완료(현재 MDX 구조 + H2 5~7개/1000단어 이상 기준 반영). `firelic-push.command`를 사용자가 직접 실행해 `3cc42a9`, `88f0e6c` 두 커밋 모두 origin/main에 정상 push 완료 확인.
 
 ## 2026-09-03 — Contact(문의) 페이지 신규 추가 (애드센스 사전 대비)
 
