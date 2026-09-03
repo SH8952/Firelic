@@ -9,4 +9,5 @@ export type PolicyContent = {
   privacy: PolicyPage;
   terms: PolicyPage;
   affiliateDisclosure: PolicyPage;
+  contact: PolicyPage;
 };

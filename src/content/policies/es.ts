@@ -39,4 +39,13 @@ export const es: PolicyContent = {
       "A la fecha, las asociaciones de afiliados están pendientes de aprobación; los nombres de socios mostrados en el sitio son marcadores de posición y aún no son enlaces activos.",
     ],
   },
+  contact: {
+    title: "Contacta con FIRE Calculator",
+    updated: "2026-09-03",
+    paragraphs: [
+      "La forma más rápida de contactarnos es por correo electrónico: skysmoga@gmail.com. Leemos todos los mensajes e intentamos responder en unos pocos días hábiles.",
+      "¿Encontraste algo que no funciona bien o tienes una idea para una función que deberíamos añadir? Cuéntanos los detalles (qué ocurrió, tu navegador/dispositivo y los pasos para reproducirlo si es un error) y lo revisaremos.",
+      "Para consultas de publicidad, colaboración o prensa, escríbenos a la misma dirección de correo indicada arriba.",
+    ],
+  },
 };

@@ -39,4 +39,13 @@ export const en: PolicyContent = {
       "As of this writing, affiliate partnerships are pending approval; placeholder partner names shown on the site are not yet active links.",
     ],
   },
+  contact: {
+    title: "Contact FIRE Calculator",
+    updated: "2026-09-03",
+    paragraphs: [
+      "The fastest way to reach us is by email: skysmoga@gmail.com. We read every message and try to reply within a few business days.",
+      "Found something broken, or have an idea for a feature we should add? Send us the details (what happened, your browser/device, and steps to reproduce if it's a bug) and we'll look into it.",
+      "For advertising, partnership, or press inquiries, please reach out to the same email address above.",
+    ],
+  },
 };

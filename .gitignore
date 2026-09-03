@@ -50,4 +50,5 @@ next-env.d.ts
 /_to_delete/
 /_backups/
 /firelic-push.command
+*.command
 .next_old_*

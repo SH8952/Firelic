@@ -9,6 +9,7 @@ export function SiteFooter() {
     { href: "/privacy-policy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
     { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },
+    { href: "/contact", label: t("contact") },
   ];
 
   return (

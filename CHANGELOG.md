@@ -1,3 +1,14 @@
+## 2026-09-03 — Contact(문의) 페이지 신규 추가 (애드센스 사전 대비)
+
+- 배경: 같은 시리즈의 ExifLens(exifnd.com)가 애드센스 심사에서 "가치가 별로 없는 콘텐츠"로 반려되었고, 실제 원인 점검 과정에서 Contact 페이지 부재가 실질적 개선 여지로 확인됨. FIRE Calculator도 저장소를 점검해보니 About/Privacy/Terms/Affiliate Disclosure는 있었지만 Contact 페이지가 없어 동일한 문제를 겪기 전에 선제적으로 추가
+- 신규 파일: `src/app/[locale]/contact/page.tsx` — 기존 About/Privacy 페이지와 동일하게 `PolicyPageView` 컴포넌트 + `getPolicyContent(locale).contact`를 사용하는 4개 언어(en/ko/ja/es) 지원 페이지
+- 수정: `src/content/policies/types.ts` — `PolicyContent` 타입에 `contact: PolicyPage` 필드 추가
+- 수정: `src/content/policies/{en,ko,ja,es}.ts` — 각 언어별 `contact` 콘텐츠(이메일 문의처 skysmoga@gmail.com, 버그 제보/기능 제안, 비즈니스·제휴 문의) 추가
+- 수정: `messages/{en,ko,ja,es}.json` — `nav.contact` 라벨 추가
+- 수정: `src/components/SiteFooter.tsx` — 푸터 내비게이션에 Contact 링크 추가
+- 수정: `src/app/sitemap.ts` — `STATIC_PATHS`에 `/contact` 추가
+- 검증: 대상 파일 `npx eslint`, `npx tsc --noEmit` 통과. `npm run build` 정상 완료(90 → 94개 정적 페이지로 +4, en/ko/ja/es 4개 언어의 `/contact.html`이 모두 생성된 것을 직접 확인)
+
 # CHANGELOG
 
 ## 2026-08-30 — 프로젝트 초기 스캐폴딩 (web-pm/web-design/web-frontend 오케스트레이션)
