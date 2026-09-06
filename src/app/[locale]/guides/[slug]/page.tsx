@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { compileGuide, getGuideMeta, getGuideSlugs } from "@/lib/guides";
 import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -57,9 +58,19 @@ export default async function GuideDetailPage({
     notFound();
   }
   const { Content, meta } = compiled;
+  const t = await getTranslations({ locale, namespace: "guides" });
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "Home", url: `${SITE_URL}/${locale}` },
+    { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
+    { name: meta.title, url: `${SITE_URL}/${locale}/guides/${slug}` },
+  ]);
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       <GuideViewTracker slug={slug} locale={locale} />
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
       <h1 className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">{meta.title}</h1>

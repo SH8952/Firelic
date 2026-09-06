@@ -1,15 +1,26 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getGuidesByCategory } from "@/lib/guides";
+import { breadcrumbJsonLd } from "@/lib/seo";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
 export default async function GuidesIndexPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("guides");
   const categories = getGuidesByCategory(locale);
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "Home", url: `${SITE_URL}/${locale}` },
+    { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
+  ]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
 
       {categories.length === 0 ? (

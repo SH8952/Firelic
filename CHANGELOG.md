@@ -1,3 +1,13 @@
+## 2026-09-06 — SEO 개선 자동 진행 1일차: BreadcrumbList 구조화 데이터 추가
+
+- 배경: ExifLens에서 먼저 검증된 SEO 자동화(GSC 대신 저장소 직접 점검 → 비어 있는 항목만 하루 하나씩 진행)를 firelic에도 확장 적용하기로 사용자 승인(2026-09-06). 저장소를 직접 확인한 결과 `src/lib/seo.ts`에 breadcrumb 헬퍼가 없고 가이드 관련 페이지 어디에도 BreadcrumbList 구조화 데이터가 없었음
+- 신규: `src/lib/seo.ts`에 `breadcrumbJsonLd(items)` 헬퍼 함수 추가(schema.org BreadcrumbList 생성)
+- 수정: `src/app/[locale]/guides/[slug]/page.tsx` — `<article>` 최상단에 Home → Guides(`guides.title` 번역 키) → 현재 글 3단계 breadcrumb JSON-LD `<script>` 추가
+- 수정: `src/app/[locale]/guides/page.tsx` — Home → Guides 2단계 breadcrumb JSON-LD `<script>` 추가
+- 새 번역 키/새 npm 의존성 없음(기존 `guides.title` 재사용). 광고 코드(GA4/AdSense) 미변경
+- 검증: `npx tsc --noEmit`(오류 0건), `npx eslint`(대상 파일, 오류 0건), `npm run build`(정적 페이지 109/109 생성 정상), `npm run start` + Playwright(헤드리스 크로미움)로 `/en/guides`, `/en/guides/[slug]`, `/ko/guides` 실제 렌더링 후 `<script type="application/ld+json">`에 BreadcrumbList가 올바른 이름/URL로 삽입됨을 직접 확인(한국어 "가이드" 번역 및 줄바꿈도 정상)
+- 이 항목은 클라우드 세션에서 구현·검증만 완료된 상태이며, 실제 커밋/push는 사용자 맥에서 `apply-seo-task.command` 실행 시 이루어짐(SEO_TASKS.md 1일차 완료 표시)
+
 ## 2026-09-03 (추가35) — 가이드 게시글 구조화 및 분량 확대 (ExifLens 스타일 이식) + 이미지 백필 커밋 포함
 
 - 배경: 사용자가 기존 14개 가이드 게시글이 ExifLens(exifnd.com) 가이드 게시글과 구조가 다르고 분량도 짧다고 지적. 실제 내용 확인 결과 firelic 게시글은 H2 3~4개, 400~700단어 수준이었고, ExifLens 게시글은 H2 4~5개, 약 700~900단어의 "타이틀 없는 도입부 + H2 섹션 + 자연스러운 산문(문자 그대로의 불릿/번호 목록 없이 굵은 글씨로 하위 포인트 표현) + 자연스러운 마무리" 구조였음
