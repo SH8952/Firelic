@@ -1,3 +1,12 @@
+## 2026-09-07 — SEO 개선 자동 진행 2일차: 가이드 상세 페이지에 Article JSON-LD 추가
+
+- 배경: ExifLens/FlyDroneMap 가이드 상세 페이지에는 이미 Article JSON-LD가 있으나, firelic의 `src/app/[locale]/guides/[slug]/page.tsx`에는 구조화 데이터가 전혀 없었음(저장소 직접 확인, 2026-09-06). 가장 근본적인 공백이라 2일차로 우선 처리
+- 수정: `src/app/[locale]/guides/[slug]/page.tsx` — `GuideDetailPage` 컴포넌트 안에서 `articleJsonLd` 객체(headline/description/datePublished/dateModified/author/publisher/mainEntityOfPage/inLanguage)를 구성해 `<article>` 최상단에 `<script type="application/ld+json">`으로 추가(기존 BreadcrumbList `<script>`와 나란히 배치)
+- `dateModified`는 `GuideFrontmatter`에 이미 존재하는 선택적 `updatedAt` 필드를 사용, 없으면 `publishedAt`으로 대체(타입에 없는 필드를 새로 만들지 않음)
+- 새 번역 키/새 npm 의존성 없음. 광고 코드(GA4/AdSense) 미변경
+- 검증: `npx tsc --noEmit`(오류 0건), `npx eslint`(대상 파일, 오류 0건), `npm run build`(정적 페이지 정상 생성), `npm run start` + Playwright(헤드리스 크로미움)로 `/en/guides/what-is-fire`, `/ko/guides/what-is-fire` 실제 렌더링 후 `<script type="application/ld+json">`에 Article 타입이 headline/description/datePublished 등과 함께 올바르게 삽입됨을 직접 확인
+- 이 항목은 클라우드 세션에서 구현·검증만 완료된 상태이며, 실제 커밋/push는 사용자 맥에서 `apply-seo-task.command` 실행 시 이루어짐(SEO_TASKS.md 2일차 완료 표시)
+
 ## 2026-09-06 — SEO 개선 자동 진행 1일차: BreadcrumbList 구조화 데이터 추가
 
 - 배경: ExifLens에서 먼저 검증된 SEO 자동화(GSC 대신 저장소 직접 점검 → 비어 있는 항목만 하루 하나씩 진행)를 firelic에도 확장 적용하기로 사용자 승인(2026-09-06). 저장소를 직접 확인한 결과 `src/lib/seo.ts`에 breadcrumb 헬퍼가 없고 가이드 관련 페이지 어디에도 BreadcrumbList 구조화 데이터가 없었음

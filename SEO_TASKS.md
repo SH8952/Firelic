@@ -96,7 +96,7 @@ Calculator의 "가이드 자동 발행" 예약 작업과 동일한 패턴입니�
 
 ## 2일차 — 가이드 상세 페이지에 Article JSON-LD 추가
 
-- [ ] 미완료
+- [x] 완료 (2026-09-07)
 
 **배경**: ExifLens/FlyDroneMap 가이드 상세 페이지에는 이미 Article JSON-LD가 있지만, firelic의
 `src/app/[locale]/guides/[slug]/page.tsx`에는 구조화 데이터가 전혀 없음(직접 확인, 2026-09-06).

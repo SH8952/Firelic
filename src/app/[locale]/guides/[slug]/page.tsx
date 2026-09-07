@@ -64,12 +64,28 @@ export default async function GuideDetailPage({
     { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
     { name: meta.title, url: `${SITE_URL}/${locale}/guides/${slug}` },
   ]);
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: meta.title,
+    description: meta.description,
+    datePublished: meta.publishedAt,
+    dateModified: meta.updatedAt ?? meta.publishedAt,
+    author: { "@type": "Organization", name: "FIRE Calculator" },
+    publisher: { "@type": "Organization", name: "FIRE Calculator" },
+    mainEntityOfPage: `${SITE_URL}/${locale}/guides/${slug}`,
+    inLanguage: locale,
+  };
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <GuideViewTracker slug={slug} locale={locale} />
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
