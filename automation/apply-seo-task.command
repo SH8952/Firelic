@@ -135,19 +135,25 @@ rm -f "$SCRIPT_DIR/$PAYLOAD_ZIP"
 echo ""
 echo "SEO 작업 적용 완료"
 echo "백업 위치: $BACKUP_DIR"
-echo "3초 후 이 창이 닫힙니다."
+echo "3초 후 이 창이 자동으로 닫힙니다..."
+
+TTY_PATH="$(tty)"
+nohup bash -c "
 sleep 3
-THIS_TTY=$(tty)
 osascript <<APPLESCRIPT
-tell application "Terminal"
+tell application \"Terminal\"
     repeat with w in windows
         try
-            if tty of (selected tab of w) is "$THIS_TTY" then close w
+            if tty of (selected tab of w) is \"$TTY_PATH\" then close w
         end try
     end repeat
 end tell
 delay 0.3
 try
-    tell application "System Events" to keystroke return
+    tell application \"System Events\" to keystroke return
 end try
 APPLESCRIPT
+" >/dev/null 2>&1 &
+disown
+
+exit 0
