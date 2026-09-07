@@ -1,3 +1,9 @@
+## 2026-09-08 — SEO 자동화 스크립트 git add -A 위험 제거 (FlyDroneMap 사례 예방 적용)
+
+- 배경: FlyDroneMap 프로젝트에서 `automation/apply-seo-task.command`의 `git add -A`(전체 스테이징) 방식이 실제로 다른 미커밋 변경사항을 함께 커밋시켜 기능 코드 일부가 유실된 사고가 있었음(2026-09-07). firelic의 동일 스크립트도 아직 이 위험한 방식을 그대로 쓰고 있었고, 실제로 SEO 작업 payload zip(`automation/seo-task-payload.zip`) 자체가 이 방식 때문에 실수로 git에 커밋되어 있던 것이 발견됨.
+- 조치: FlyDroneMap에 적용했던 것과 동일한 안전장치 2건을 firelic에도 적용 — (A) 실행 전 워킹트리가 깨끗하지 않으면 즉시 중단, (B) `git add -A` 대신 payload에 실제 포함된 파일만 정확히 골라서 add. 잘못 추적되어 있던 `automation/seo-task-payload.zip`은 `git rm --cached`로 추적 해제하고, `.gitignore`에 `automation/*.zip` 규칙을 추가해 재발을 방지함.
+- 검증: `bash -n` 문법 검증 통과, `npx tsc --noEmit` 통과(코드 변경 없음, 스크립트/설정 파일만 수정).
+
 ## 2026-09-08 (SEO 자동화 3일차) — WebApplication JSON-LD 범위를 홈(계산기) 페이지로 한정
 
 - 배경: SEO 개선 예약 작업(SEO_TASKS.md) 3일차 항목. `webApplicationJsonLd`가 `src/app/[locale]/layout.tsx`의 `<head>`에서 전체 페이지(privacy-policy/terms/about/affiliate-disclosure/contact/guides 포함)에 동일하게 삽입되고 있었음. firelic의 실제 도구(계산기)는 홈(`/`) 한 곳뿐이므로 홈페이지에만 적용되도록 범위를 좁힘.
