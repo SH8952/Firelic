@@ -1,3 +1,10 @@
+## 2026-09-08 (추가3) — 푸터에 저작권 표기 추가 및 ExifLens/FlyDroneMap과 레이아웃 완전 통일
+
+- 배경: 사용자가 ExifLens/FlyDroneMap과 firelic.com 푸터 스크린샷을 비교해서 전달 — firelic에는 "© 2026 FIRE Calculator. All rights reserved." 저작권 표기 자체가 없어 다른 두 사이트와 레이아웃이 다르다는 점을 확인.
+- 수정: `messages/{en,ja,ko,es}.json`의 `nav` 네임스페이스에 `rights` 키 추가(ExifLens의 `Footer.rights`와 동일한 번역: en/ja/ko "All rights reserved.", es "Todos los derechos reservados.").
+- 수정: `src/components/SiteFooter.tsx` — `<footer>` 최상위 래퍼를 추가하고, 내부를 ExifLens/FlyDroneMap과 동일한 3분할 flex 행(저작권 문구 / 방문자 카운터 / 정책 링크 nav)으로 재구성. 색상은 firelic 고유의 CSS 변수(`--color-border`, `--color-text-secondary`, `--color-primary`)를 그대로 사용해 기존 디자인 톤 유지.
+- 검증: `npx tsc --noEmit`, `npx eslint`, `npm run build`(전체 빌드, SSG 유지 확인) 모두 통과.
+
 ## 2026-09-08 (추가2) — 방문자 카운터 위치를 ExifLens/FlyDroneMap과 동일하게 정리
 
 - 배경: firelic.com 배포 후 확인 결과, 방문자 카운터(당일/누적) 배지가 ExifLens/FlyDroneMap과 다른 위치에 표시됨을 발견. 원인은 firelic의 `SiteFooter.tsx`가 원래 정책 링크(`<nav>`) 하나로만 구성돼 있어, 카운터를 그 `<nav>` 안에 링크와 함께 넣었던 것 — 다른 두 사이트는 카운터가 별도의 flex 항목으로 nav 바깥에 위치.
