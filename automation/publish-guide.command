@@ -3,6 +3,8 @@
 # ExifLens/FlyDroneMap의 publish-guide.command와 동일한 설계.
 # 콘텐츠는 개별 .mdx 파일(guide-<slug>-<locale>.mdx)로 전달되며,
 # content/guides/<locale>/<slug>.mdx 로 그대로 복사해 반영합니다.
+# 2026-09-07: 예약 작업이 결과물 6개 파일을 zip 1개로 묶어 전달하도록 변경됨에 따라,
+# 이 폴더에 zip 파일이 있으면 먼저 자동으로 압축을 풀고 진행하도록 수정.
 
 REPO="$HOME/Desktop/애드센스 제휴 마케팅/firelic"
 SCRIPT_NAME="publish-guide.command"
@@ -32,15 +34,32 @@ if [ "$CURRENT_PATH" != "$SCRIPT_PATH" ]; then
   [ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
   git add "automation/$SCRIPT_NAME"
   if ! git diff --cached --quiet; then
-    git commit -m "chore: 가이드 자동 발행 스크립트 설치/업데이트 (mdx 개별 파일 방식으로 전환)"
+    git commit -m "chore: 가이드 자동 발행 스크립트 설치/업데이트 (zip 패키지 자동 압축 해제 지원)"
     git push origin main
   fi
   echo "설치 완료: $SCRIPT_PATH"
   echo ""
 fi
 
-# --- 2. 발행할 콘텐츠가 있는지 확인 (스크립트와 같은 폴더에서 탐색) ---
+# --- 2. 발행 패키지가 zip으로 전달된 경우 자동 압축 해제 ---
 cd "$SCRIPT_DIR"
+ZIP_COUNT=$(ls -1 *.zip 2>/dev/null | wc -l | tr -d ' ')
+if [ "$ZIP_COUNT" -gt 0 ]; then
+  echo "=== 발행 패키지 zip 파일을 발견해 압축을 해제합니다 ==="
+  for ZIP_FILE in *.zip; do
+    echo "압축 해제 중: $ZIP_FILE"
+    if unzip -o "$ZIP_FILE" -d . >/dev/null; then
+      rm -f "$ZIP_FILE"
+    else
+      echo "오류: $ZIP_FILE 압축 해제 실패."
+      read -p "Enter를 누르면 창이 닫힙니다..."
+      exit 1
+    fi
+  done
+  echo ""
+fi
+
+# --- 3. 발행할 콘텐츠가 있는지 확인 (스크립트와 같은 폴더에서 탐색) ---
 EN_FILE=$(ls guide-*-en.mdx 2>/dev/null | head -n1)
 
 if [ -z "$EN_FILE" ]; then
@@ -48,7 +67,7 @@ if [ -z "$EN_FILE" ]; then
     echo "오늘은 발행할 콘텐츠 파일이 없어 설치만 진행했습니다."
   else
     echo "발행할 콘텐츠 파일(guide-*-en.mdx 등)을 찾을 수 없습니다."
-    echo "오늘 전달받은 파일들을 이 폴더에 넣은 뒤 다시 실행해 주세요:"
+    echo "오늘 전달받은 zip(또는 개별 파일)을 이 폴더에 넣은 뒤 다시 실행해 주세요:"
     echo "  $SCRIPT_DIR"
   fi
   read -p "Enter를 누르면 창이 닫힙니다..."
@@ -83,7 +102,7 @@ for loc in en ja ko es; do
   fi
 done
 
-# --- 3. 작업 전 백업 (always-backup-before-work 규칙) ---
+# --- 4. 작업 전 백업 (always-backup-before-work 규칙) ---
 BACKUP_DIR="$REPO/_backups/backup_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$REPO/_backups"
 echo "백업 생성 중: $BACKUP_DIR"
@@ -93,7 +112,7 @@ else
   cp -r "$REPO" "$BACKUP_DIR"
 fi
 
-# --- 4. 콘텐츠 반영 ---
+# --- 5. 콘텐츠 반영 ---
 mkdir -p "$REPO/content/guides/en" "$REPO/content/guides/ja" "$REPO/content/guides/ko" "$REPO/content/guides/es"
 cp "guide-${SLUG}-en.mdx" "$REPO/content/guides/en/${SLUG}.mdx"
 cp "guide-${SLUG}-ja.mdx" "$REPO/content/guides/ja/${SLUG}.mdx"
@@ -101,7 +120,7 @@ cp "guide-${SLUG}-ko.mdx" "$REPO/content/guides/ko/${SLUG}.mdx"
 cp "guide-${SLUG}-es.mdx" "$REPO/content/guides/es/${SLUG}.mdx"
 cp "new-queue.json" "$REPO/automation/guide-topics-queue.json"
 
-# --- 4-1. Unsplash에서 대표 이미지 자동 첨부 (실패해도 발행은 계속 진행) ---
+# --- 5-1. Unsplash에서 대표 이미지 자동 첨부 (실패해도 발행은 계속 진행) ---
 python3 "$REPO/automation/attach-guide-image.py" "$REPO" "$SLUG"
 IMAGE_PATH="public/guides/images/${SLUG}.webp"
 
@@ -122,7 +141,7 @@ if snippet_path.exists() and changelog.exists():
         print('CHANGELOG.md 갱신 건너뜀 (앵커 불일치 또는 이미 반영됨)')
 "
 
-# --- 5. (선택) 빌드 검증 — Node/npm이 있으면 실행, 없으면 건너뜀 ---
+# --- 6. (선택) 빌드 검증 — Node/npm이 있으면 실행, 없으면 건너뜀 ---
 cd "$REPO"
 if command -v npm >/dev/null 2>&1 && [ -d node_modules ]; then
   echo ""
@@ -133,7 +152,7 @@ if command -v npm >/dev/null 2>&1 && [ -d node_modules ]; then
   fi
 fi
 
-# --- 6. git add / commit / push ---
+# --- 7. git add / commit / push ---
 cd "$REPO"
 [ -f .git/index.lock ] && rm -f .git/index.lock
 [ -f .git/HEAD.lock ] && rm -f .git/HEAD.lock
@@ -165,7 +184,7 @@ if ! git push origin main; then
   exit 1
 fi
 
-# --- 7. 성공 시에만 정리 ---
+# --- 8. 성공 시에만 정리 ---
 rm -f "$SCRIPT_DIR/guide-${SLUG}-en.mdx" "$SCRIPT_DIR/guide-${SLUG}-ja.mdx" "$SCRIPT_DIR/guide-${SLUG}-ko.mdx" "$SCRIPT_DIR/guide-${SLUG}-es.mdx" "$SCRIPT_DIR/new-queue.json" "$SCRIPT_DIR/changelog-snippet.txt"
 
 echo ""
