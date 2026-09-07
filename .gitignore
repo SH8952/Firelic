@@ -53,6 +53,8 @@ next-env.d.ts
 *.command
 !automation/apply-seo-task.command
 !automation/publish-guide.command
+automation/*.zip
+
 .next_old_*
 __pycache__/
 *.pyc
