@@ -130,7 +130,7 @@ Calculator의 "가이드 자동 발행" 예약 작업과 동일한 패턴입니�
 
 ## 3일차 — WebApplication JSON-LD 범위를 홈(계산기) 페이지로 한정
 
-- [ ] 미완료
+- [x] 완료 (2026-09-08)
 
 **배경**: 현재 `webApplicationJsonLd`가 `src/app/[locale]/layout.tsx`의 `<head>`에서 전체 페이지
 (privacy-policy/terms/about/affiliate-disclosure/contact/guides 포함)에 동일하게 삽입되고

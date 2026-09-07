@@ -1,3 +1,11 @@
+## 2026-09-08 (SEO 자동화 3일차) — WebApplication JSON-LD 범위를 홈(계산기) 페이지로 한정
+
+- 배경: SEO 개선 예약 작업(SEO_TASKS.md) 3일차 항목. `webApplicationJsonLd`가 `src/app/[locale]/layout.tsx`의 `<head>`에서 전체 페이지(privacy-policy/terms/about/affiliate-disclosure/contact/guides 포함)에 동일하게 삽입되고 있었음. firelic의 실제 도구(계산기)는 홈(`/`) 한 곳뿐이므로 홈페이지에만 적용되도록 범위를 좁힘.
+- 수정: `src/app/[locale]/layout.tsx` — `webApplicationJsonLd` import 및 `<body>` 내 전역 `<script>` 삽입 코드 제거.
+- 수정: `src/app/[locale]/page.tsx`(홈, `FireCalculator` 렌더링 페이지) — 반환 JSX 최상단에 `webApplicationJsonLd(locale)` `<script>`를 직접 추가.
+- 다른 페이지(privacy-policy/terms/about/affiliate-disclosure/contact/guides/faq)는 변경하지 않음.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build`(전체 빌드, 기존 SSG 유지 확인) 모두 통과. `npm run start` + curl로 홈(`/en`)에는 `WebApplication` JSON-LD가 존재하고 `/en/about`에는 존재하지 않음을 확인, 가이드 페이지의 `BreadcrumbList`는 그대로 유지됨을 확인.
+
 ## 2026-09-08 (추가3) — 푸터에 저작권 표기 추가 및 ExifLens/FlyDroneMap과 레이아웃 완전 통일
 
 - 배경: 사용자가 ExifLens/FlyDroneMap과 firelic.com 푸터 스크린샷을 비교해서 전달 — firelic에는 "© 2026 FIRE Calculator. All rights reserved." 저작권 표기 자체가 없어 다른 두 사이트와 레이아웃이 다르다는 점을 확인.

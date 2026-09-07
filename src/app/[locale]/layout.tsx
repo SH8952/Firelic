@@ -7,7 +7,6 @@ import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { AdSenseScript } from "@/components/AdSenseScript";
-import { webApplicationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
@@ -83,12 +82,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(webApplicationJsonLd(locale)),
-          }}
-        />
         <GoogleAnalytics />
         <AdSenseScript />
         <ThemeProvider>
