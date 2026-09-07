@@ -1,3 +1,13 @@
+## 2026-09-07 (추가36) — 가이드 자동 발행 결과물 전달 방식을 개별 파일 → zip 1개로 변경
+
+- 배경: 매일 자동 발행 예약 작업이 결과물 6개 파일(guide-<slug>-en/ja/ko/es.mdx, new-queue.json, changelog-snippet.txt)을 개별 파일로 따로따로 전달하고 있어, 사용자가 매번 6개를 일일이 automation 폴더에 옮겨야 하는 번거로움을 지적. 앞으로는 zip 1개로 묶어서 전달하도록 요청
+- 수정: `automation/publish-guide.command` — 스크립트가 자신과 같은 폴더에서 zip 파일을 발견하면 기존 로직 실행 전에 자동으로 압축을 해제하도록(unzip 후 원본 zip 삭제) 단계 추가. 개별 파일로 전달되는 경우(과거 방식)도 그대로 호환됨
+- Claude Code Remote 예약 작업(`trig_019Qtn3nfb5UzbustuAT86et`) 프롬프트 갱신: 발행 패키지 첨부 단계를 "6개 파일을 `firelic-guide-<SLUG>.zip` 1개로 압축해 SendUserFile로 첨부"하도록 수정, 개별 파일 첨부 금지를 주의사항에 명시
+- 함께 개선: firelic-push.command의 자동 커밋 방식을 `git add -A`에서 `git add -u`(이미 추적 중인 파일의 수정/삭제만 자동 포함)로 변경 — 무관한 새 파일이 실수로 함께 커밋되는 것을 방지하기 위한 안전장치
+- 검증: 맥에 `unzip` 명령 설치 확인, 수정된 스크립트에 실행 권한/격리 속성 해제 적용
+- 작업 전 `_backups/backup_20260907_071852/`로 백업 생성
+- 커밋: `c61cb91` ("feat: publish-guide.command에 zip 발행 패키지 자동 압축 해제 지원 추가")
+
 ## 2026-09-07 — SEO 개선 자동 진행 2일차: 가이드 상세 페이지에 Article JSON-LD 추가
 
 - 배경: ExifLens/FlyDroneMap 가이드 상세 페이지에는 이미 Article JSON-LD가 있으나, firelic의 `src/app/[locale]/guides/[slug]/page.tsx`에는 구조화 데이터가 전혀 없었음(저장소 직접 확인, 2026-09-06). 가장 근본적인 공백이라 2일차로 우선 처리
