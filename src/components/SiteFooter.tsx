@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { VisitorCounter } from "@/components/VisitorCounter";
 
 export function SiteFooter() {
   const t = useTranslations("nav");
@@ -19,6 +20,7 @@ export function SiteFooter() {
           {l.label}
         </Link>
       ))}
+      <VisitorCounter />
     </nav>
   );
 }
