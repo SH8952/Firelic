@@ -14,13 +14,15 @@ export function SiteFooter() {
   ];
 
   return (
-    <nav className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-6 gap-y-2 px-4 py-4 text-sm text-[var(--color-text-secondary)]">
-      {links.map((l) => (
-        <Link key={l.href} href={l.href} className="hover:text-[var(--color-primary)]">
-          {l.label}
-        </Link>
-      ))}
+    <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-4 text-sm text-[var(--color-text-secondary)] sm:flex-row">
+      <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        {links.map((l) => (
+          <Link key={l.href} href={l.href} className="hover:text-[var(--color-primary)]">
+            {l.label}
+          </Link>
+        ))}
+      </nav>
       <VisitorCounter />
-    </nav>
+    </div>
   );
 }
