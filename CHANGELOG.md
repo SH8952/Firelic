@@ -1,3 +1,12 @@
+## 2026-09-08 (추가37) — apply-seo-task.command unzip 경로 버그 수정
+
+- 배경: 사용자가 SEO 개선 작업 zip(`seo-task-payload.zip`)을 automation 폴더에 넣고 `apply-seo-task.command`를 실행했으나 "unzip: cannot find or open seo-task-payload.zip" 및 "패키지 안에 commit-message.txt가 없습니다 — 손상된 패키지일 수 있습니다" 오류로 중단되는 문제 보고(터미널 스크린샷 첨부)
+- 원인 확인: 스크립트가 2단계에서 `cd "$SCRIPT_DIR"`(automation 폴더)로 이동해 zip을 정상적으로 찾은 뒤, 2.5단계(안전장치 A, 워킹트리 점검)에서 `cd "$REPO"`(저장소 최상위)로 다시 이동함. 이후 4단계 `unzip` 명령이 PAYLOAD_ZIP 변수(상대경로 "seo-task-payload.zip")를 그대로 사용해, 실제로는 저장소 최상위 폴더에서 같은 이름의 파일을 찾다가 실패 — zip 파일 자체는 손상되지 않았고(`unzip -l`로 16개 파일, commit-message.txt 포함 정상 확인) 스크립트의 디렉터리 이동 버그였음
+- 수정: `automation/apply-seo-task.command` — PAYLOAD_ZIP을 찾는 즉시 `PAYLOAD_ZIP_PATH="$SCRIPT_DIR/$PAYLOAD_ZIP"`로 절대경로 고정, 이후 unzip 단계에서 이 절대경로를 사용하도록 변경. unzip 실패 시에도 "손상된 패키지"로 오인하지 않도록 별도의 명확한 오류 메시지 추가
+- 작업 전 `_backups/backup_20260908_221850/`로 백업 생성, 수정된 스크립트 문법 검사(`bash -n`) 통과, 실행 권한/격리 속성 재적용 확인
+- 커밋: `847a7cd` ("fix(automation): apply-seo-task.command의 unzip 경로 버그 수정")
+- 참고: 기존에 전달받은 `seo-task-payload.zip`은 automation 폴더에 그대로 남아 있으므로, 이 수정 커밋을 push한 뒤 `apply-seo-task.command`를 다시 실행하면 정상적으로 이어서 적용됨
+
 ## 2026-09-08 — SEO 자동화 스크립트 git add -A 위험 제거 (FlyDroneMap 사례 예방 적용)
 
 - 배경: FlyDroneMap 프로젝트에서 `automation/apply-seo-task.command`의 `git add -A`(전체 스테이징) 방식이 실제로 다른 미커밋 변경사항을 함께 커밋시켜 기능 코드 일부가 유실된 사고가 있었음(2026-09-07). firelic의 동일 스크립트도 아직 이 위험한 방식을 그대로 쓰고 있었고, 실제로 SEO 작업 payload zip(`automation/seo-task-payload.zip`) 자체가 이 방식 때문에 실수로 git에 커밋되어 있던 것이 발견됨.
