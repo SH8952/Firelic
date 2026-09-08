@@ -5,6 +5,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { compileGuide, getGuideMeta, getGuideSlugs } from "@/lib/guides";
 import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
+import { GuideToolCta } from "@/components/GuideToolCta";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
@@ -92,6 +93,8 @@ export default async function GuideDetailPage({
       <h1 className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">{meta.title}</h1>
       <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{meta.publishedAt}</p>
 
+      <GuideToolCta locale={locale} />
+
       {meta.image ? (
         <figure className="mt-6 flex flex-col gap-1.5">
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
@@ -132,6 +135,8 @@ export default async function GuideDetailPage({
       <div className="prose prose-neutral dark:prose-invert mt-6 max-w-none text-sm leading-relaxed text-[var(--color-text-primary)]">
         <Content />
       </div>
+
+      <GuideToolCta locale={locale} />
 
       {process.env.NODE_ENV === "development" ? (
         <GuideImageDevPanel

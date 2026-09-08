@@ -1,11 +1,11 @@
-## 2026-09-08 (추가37) — apply-seo-task.command unzip 경로 버그 수정
+## 2026-09-09 (SEO 자동화 4일차) — 가이드 상세 페이지에 메인 계산기 CTA 배너 추가
 
-- 배경: 사용자가 SEO 개선 작업 zip(`seo-task-payload.zip`)을 automation 폴더에 넣고 `apply-seo-task.command`를 실행했으나 "unzip: cannot find or open seo-task-payload.zip" 및 "패키지 안에 commit-message.txt가 없습니다 — 손상된 패키지일 수 있습니다" 오류로 중단되는 문제 보고(터미널 스크린샷 첨부)
-- 원인 확인: 스크립트가 2단계에서 `cd "$SCRIPT_DIR"`(automation 폴더)로 이동해 zip을 정상적으로 찾은 뒤, 2.5단계(안전장치 A, 워킹트리 점검)에서 `cd "$REPO"`(저장소 최상위)로 다시 이동함. 이후 4단계 `unzip` 명령이 PAYLOAD_ZIP 변수(상대경로 "seo-task-payload.zip")를 그대로 사용해, 실제로는 저장소 최상위 폴더에서 같은 이름의 파일을 찾다가 실패 — zip 파일 자체는 손상되지 않았고(`unzip -l`로 16개 파일, commit-message.txt 포함 정상 확인) 스크립트의 디렉터리 이동 버그였음
-- 수정: `automation/apply-seo-task.command` — PAYLOAD_ZIP을 찾는 즉시 `PAYLOAD_ZIP_PATH="$SCRIPT_DIR/$PAYLOAD_ZIP"`로 절대경로 고정, 이후 unzip 단계에서 이 절대경로를 사용하도록 변경. unzip 실패 시에도 "손상된 패키지"로 오인하지 않도록 별도의 명확한 오류 메시지 추가
-- 작업 전 `_backups/backup_20260908_221850/`로 백업 생성, 수정된 스크립트 문법 검사(`bash -n`) 통과, 실행 권한/격리 속성 재적용 확인
-- 커밋: `847a7cd` ("fix(automation): apply-seo-task.command의 unzip 경로 버그 수정")
-- 참고: 기존에 전달받은 `seo-task-payload.zip`은 automation 폴더에 그대로 남아 있으므로, 이 수정 커밋을 push한 뒤 `apply-seo-task.command`를 다시 실행하면 정상적으로 이어서 적용됨
+- 배경: SEO 개선 예약 작업(SEO_TASKS.md) 4일차 항목. 가이드 상세 페이지에 홈(FIRE 계산기)으로 유도하는 CTA가 전혀 없어, 유입된 방문자가 본문만 읽고 이탈할 가능성이 높았음(직접 확인, 2026-09-06). firelic은 shadcn `Button`이 없으므로 기존 `AffiliateBanner.tsx`와 동일한 `var(--color-*)` CSS 변수 + 순수 Tailwind 클래스 패턴으로 신규 컴포넌트를 작성함.
+- 추가: `src/components/GuideToolCta.tsx` — async 서버 컴포넌트, `next-intl/server`의 `getTranslations`로 `guides` 네임스페이스(소문자) 번역을 읽고 `@/i18n/navigation`의 `Link`로 홈(`/`)으로 연결.
+- 수정: `messages/{en,ko,ja,es}.json`의 `guides` 네임스페이스에 `ctaBannerText`, `ctaBannerButton` 키 추가(재무 조언처럼 읽히는 단정적 문구 없이 중립적인 질문형 문구로 작성).
+- 수정: `src/app/[locale]/guides/[slug]/page.tsx` — 본문 상단(제목 바로 아래)과 하단(가이드 콘텐츠 끝, dev 패널 위) 두 군데에 `GuideToolCta`를 배치.
+- 광고 코드(GA4/AdSense, ads.txt 등)는 건드리지 않음.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build`(전체 빌드, 기존 SSG 유지 확인) 모두 통과. `npm run start` + Playwright(헤드리스 크로미움, 모바일 뷰포트)로 en/ko/ja 3개 로케일의 가이드 상세 페이지를 실제 렌더링해 상단·하단 CTA 배너가 모두 정상 표시되고 한국어/일본어 줄바꿈도 문제없음을 확인.
 
 ## 2026-09-08 — SEO 자동화 스크립트 git add -A 위험 제거 (FlyDroneMap 사례 예방 적용)
 

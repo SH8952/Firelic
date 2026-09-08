@@ -61,7 +61,9 @@
   "guides": {
     "title": "Guides",
     "empty": "Guides are currently available in English only. More languages coming soon.",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "ctaBannerText": "Curious where you stand on the path to FIRE?",
+    "ctaBannerButton": "Try the FIRE Calculator"
   },
   "Faq": {
     "title": "Frequently Asked Questions",

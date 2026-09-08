@@ -61,7 +61,9 @@
   "guides": {
     "title": "가이드",
     "empty": "가이드는 현재 영어로만 제공됩니다. 다국어 지원은 추후 추가될 예정입니다.",
-    "readMore": "더 읽기"
+    "readMore": "더 읽기",
+    "ctaBannerText": "나의 FIRE 목표까지 얼마나 남았는지 확인해보세요",
+    "ctaBannerButton": "FIRE 계산기 바로가기"
   },
   "Faq": {
     "title": "자주 묻는 질문",
