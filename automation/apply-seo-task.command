@@ -16,6 +16,13 @@
 # 워킹트리가 깨끗하지 않으면 즉시 중단, (B) git add -A 대신 이번 SEO 작업
 # payload에 실제 포함된 파일만 정확히 골라서 add(payload zip 자체는 대상에서
 # 자동으로 제외됨).
+#
+# [2026-09-09 버그 수정] 안전장치 A 단계에서 작업 디렉터리를 저장소 최상위로
+# 옮긴("cd $REPO") 뒤에도 PAYLOAD_ZIP 변수를 automation 폴더 기준 상대경로("seo-task-
+# payload.zip")로만 갖고 있어, 정작 unzip 실행 시점에는 엉뚱한(저장소 최상위) 위치에서
+# 같은 이름의 파일을 찾다가 "cannot find or open" 오류로 매번 실패하던 문제를 수정.
+# PAYLOAD_ZIP을 찾는 즉시 절대경로(PAYLOAD_ZIP_PATH)로 고정해 이후 모든 단계에서
+# 디렉터리 이동과 무관하게 항상 같은 파일을 가리키도록 변경.
 
 REPO="$HOME/Desktop/애드센스 제휴 마케팅/firelic"
 SCRIPT_NAME="apply-seo-task.command"
@@ -97,6 +104,10 @@ if [ -z "$PAYLOAD_ZIP" ]; then
   exit 0
 fi
 
+# zip을 찾은 즉시 절대경로로 고정 — 이후 어떤 단계에서 cd로 위치를 옮기더라도
+# 항상 같은 파일을 정확히 가리키도록 함 (2026-09-09 버그 수정의 핵심)
+PAYLOAD_ZIP_PATH="$SCRIPT_DIR/$PAYLOAD_ZIP"
+
 echo "=== FIRE Calculator SEO 작업 적용: $PAYLOAD_ZIP ==="
 
 # --- 2.5. [안전장치 A] 워킹트리에 이미 다른 미커밋 변경사항이 있으면 즉시 중단 ---
@@ -129,7 +140,12 @@ fi
 
 # --- 4. payload 압축 해제 (zip 안 상대경로 그대로 저장소 루트에 반영) 및 커밋 메시지 확인 ---
 WORK_DIR=$(mktemp -d)
-unzip -o -q "$PAYLOAD_ZIP" -d "$WORK_DIR"
+if ! unzip -o -q "$PAYLOAD_ZIP_PATH" -d "$WORK_DIR"; then
+  echo "오류: $PAYLOAD_ZIP_PATH 압축 해제 실패."
+  rm -rf "$WORK_DIR"
+  read -p "Enter를 누르면 창이 닫힙니다..."
+  exit 1
+fi
 
 if [ ! -f "$WORK_DIR/commit-message.txt" ]; then
   echo "패키지 안에 commit-message.txt가 없습니다 — 손상된 패키지일 수 있습니다. 중단합니다."
@@ -171,7 +187,7 @@ else
 fi
 
 rm -rf "$WORK_DIR"
-rm -f "$SCRIPT_DIR/$PAYLOAD_ZIP"
+rm -f "$PAYLOAD_ZIP_PATH"
 
 echo ""
 echo "SEO 작업 적용 완료"
