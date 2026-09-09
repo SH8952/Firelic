@@ -1,3 +1,13 @@
+## 2026-09-10 (SEO 자동화 5일차) — 대표 가이드 2개 타이틀/메타 디스크립션 개선 (영어)
+
+- 배경: SEO 개선 예약 작업(SEO_TASKS.md) 5일차 항목. 이 클라우드 세션은 구글 서치 콘솔에 접근할 수 없어 "노출 상위 글"을 실시간으로 알 수 없으므로, SEO_TASKS.md에 명시된 객관적 대체 기준(category별 글 수 + publishedAt)을 그대로 적용함.
+- 대상 선정: 영문 가이드 20개를 category별로 집계한 결과 "FIRE Basics & Concepts"와 "Saving & Investing Strategy"가 각각 6개로 동률이었음. 별도의 주관적 기준을 새로 만들지 않고 카테고리명 알파벳 순(F < S)이라는 결정적(deterministic) 2차 기준만 적용해 "FIRE Basics & Concepts"를 선택. 그 안에서 `publishedAt`이 가장 오래된 2개를 선정: `what-is-fire.mdx`(2026-08-21), `coast-lean-fat-fire-explained.mdx`(2026-08-23).
+- 수정: `content/guides/en/what-is-fire.mdx` frontmatter — title/description을 본문 내용(4% 룰·25배 공식·저축률/지출/투자수익률 3가지 레버·실제 계산 예시)에 맞춰 구체화. 재무 조언처럼 읽히는 단정적 문구는 사용하지 않음.
+- 수정: `content/guides/en/coast-lean-fat-fire-explained.mdx` frontmatter — title/description을 본문 내용(Coast/Lean/Fat FIRE 3가지 변형 비교, 실제 달러 예시)에 맞춰 구체화. 동일하게 단정적 재무 조언 문구는 사용하지 않음.
+- `generateMetadata`가 frontmatter를 그대로 `<title>`/`<meta description>`에 반영하는 구조라 별도 코드 수정은 불필요함.
+- 광고 코드(GA4/AdSense, ads.txt 등)는 건드리지 않음.
+- 검증: `npx tsc --noEmit` 통과, `npx eslint`(변경 파일, mdx 콘텐츠 파일이라 별도 대상 경고만 있고 에러 없음), `npm run build`(전체 빌드, 기존 SSG 유지 확인) 통과. 빌드 산출물(`.next/server/app/en/guides/*.html`)에서 두 페이지의 `<title>`/`<meta name="description">`이 의도대로 렌더링됨을 직접 확인.
+
 ## 2026-09-09 (SEO 자동화 4일차) — 가이드 상세 페이지에 메인 계산기 CTA 배너 추가
 
 - 배경: SEO 개선 예약 작업(SEO_TASKS.md) 4일차 항목. 가이드 상세 페이지에 홈(FIRE 계산기)으로 유도하는 CTA가 전혀 없어, 유입된 방문자가 본문만 읽고 이탈할 가능성이 높았음(직접 확인, 2026-09-06). firelic은 shadcn `Button`이 없으므로 기존 `AffiliateBanner.tsx`와 동일한 `var(--color-*)` CSS 변수 + 순수 Tailwind 클래스 패턴으로 신규 컴포넌트를 작성함.

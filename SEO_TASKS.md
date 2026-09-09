@@ -191,7 +191,13 @@ Calculator의 "가이드 자동 발행" 예약 작업과 동일한 패턴입니�
 
 ## 5일차 — 대표 가이드 2개의 타이틀/메타 디스크립션 개선 (영어)
 
-- [ ] 미완료
+- [x] 완료 (2026-09-10)
+
+**대상 선정 결과**: category별 글 수 집계 결과 "FIRE Basics & Concepts"와 "Saving & Investing
+Strategy"가 각각 6개로 동률이었음. 임의 기준을 새로 만들지 않고 카테고리명 알파벳 순(F < S)이라는
+결정적 2차 기준만 적용해 "FIRE Basics & Concepts"를 선택. 그 안에서 `publishedAt`이 가장 오래된
+2개인 `what-is-fire.mdx`(2026-08-21)와 `coast-lean-fat-fire-explained.mdx`(2026-08-23)를 대상으로
+title/description을 개선함. 상세 내역은 CHANGELOG.md 2026-09-10 항목 참고.
 
 **배경**: 이 클라우드 세션은 구글 서치 콘솔에 접근할 수 없으므로, "노출 상위 글"을 실시간으로 알 수
 없다. 대신 객관적 기준으로 대상을 선정한다: 14개 영문 가이드의 `category`(4가지: FIRE Basics &

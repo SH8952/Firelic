@@ -1,9 +1,5 @@
-messages/ja.json
-messages/en.json
-messages/ko.json
-messages/es.json
 SEO_TASKS.md
 CHANGELOG.md
+content/guides/en/coast-lean-fat-fire-explained.mdx
+content/guides/en/what-is-fire.mdx
 __filelist.txt
-src/app/[locale]/guides/[slug]/page.tsx
-src/components/GuideToolCta.tsx
