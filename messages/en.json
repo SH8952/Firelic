@@ -102,5 +102,10 @@
         "answer": "Yes, it's completely free with no limits on how many scenarios you can run."
       }
     ]
+  },
+  "home": {
+    "guideHighlightsTitle": "Explore the Guides",
+    "guideHighlightsSubtitle": "Practical guides on FIRE savings, withdrawal strategy, and country-specific retirement accounts.",
+    "guideHighlightsCta": "Browse all guides →"
   }
 }

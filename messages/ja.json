@@ -102,5 +102,10 @@
         "answer": "はい、完全に無料で、シナリオの試算回数に制限はありません。"
       }
     ]
+  },
+  "home": {
+    "guideHighlightsTitle": "ガイドを見る",
+    "guideHighlightsSubtitle": "早期リタイア(FIRE)の貯蓄・投資戦略に役立つ実践ガイドをご覧ください。",
+    "guideHighlightsCta": "すべてのガイドを見る →"
   }
 }

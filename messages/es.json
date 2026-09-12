@@ -102,5 +102,10 @@
         "answer": "Sí, es completamente gratuita y sin límite en la cantidad de escenarios que puedes calcular."
       }
     ]
+  },
+  "home": {
+    "guideHighlightsTitle": "Explora las guías",
+    "guideHighlightsSubtitle": "Guías prácticas sobre ahorro, estrategias de retiro FIRE y cuentas de jubilación por país.",
+    "guideHighlightsCta": "Ver todas las guías →"
   }
 }
