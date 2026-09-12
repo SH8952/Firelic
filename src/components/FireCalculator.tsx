@@ -7,7 +7,6 @@ import { Slider } from "@/components/Slider";
 import { ResultCards } from "@/components/ResultCards";
 import type { ChartDataset } from "@/components/FireChart";
 import { CurrencySelector, currencySymbolFor } from "@/components/CurrencySelector";
-import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { AdSlot } from "@/components/AdSlot";
@@ -252,12 +251,6 @@ export function FireCalculator() {
       <div className="mt-10">
         <UsageGuideSection />
       </div>
-
-      <div className="mt-6">
-        <AdSlot variant="display" label={t("adDisplay")} />
-      </div>
-
-      <DisclaimerFooter text={t("disclaimer")} />
     </div>
   );
 }
