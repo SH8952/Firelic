@@ -1,3 +1,11 @@
+## 2026-09-13 (추가) — 투자 자문 경고 문구 + 하단 광고를 페이지 맨 아래로 재배치
+
+- 배경: 홈페이지에 가이드 하이라이트 섹션을 추가한 뒤 사용자가 실제 배포된 화면을 확인, 투자 자문 경고 문구(DisclaimerFooter)와 하단 display 광고가 가이드 섹션보다 위에 있어 다른 2개 사이트와 레이아웃 순서가 다르다고 지적. [가이드 살펴보기 → 경고 문구 → 광고] 순으로(광고가 최종 맨 아래) 재배치 요청.
+- 수정: `src/components/FireCalculator.tsx` 끝부분의 AdSlot(display)+DisclaimerFooter 렌더링 제거(계산기 자체 로직/입력은 변경 없음).
+- 수정: `src/app/[locale]/page.tsx`에서 HomeGuideHighlights 다음에 DisclaimerFooter, AdSlot(display) 순서로 재배치.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build` 통과. 빌드된 정적 HTML에서 실제 순서(가이드 위치 < 경고 문구 위치 < 광고 위치) 확인.
+
+
 ## 2026-09-13 — 홈페이지에 가이드 하이라이트 섹션 추가 (AdSense 재심사 대응)
 
 - 배경: exifnd.com/flydronemap.com 애드센스 승인 거절에 이어, firelic.com은 아직 "Getting Ready"(초기 심사 대기) 상태에서 제미나이 진단 문서 2건을 검토. 문서는 firelic에 대해 "심사 중 대규모 구조 변경 지양"을 명시적으로 권고.
