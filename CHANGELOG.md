@@ -1,3 +1,15 @@
+## 2026-09-13 — 홈페이지에 가이드 하이라이트 섹션 추가 (AdSense 재심사 대응)
+
+- 배경: exifnd.com/flydronemap.com 애드센스 승인 거절에 이어, firelic.com은 아직 "Getting Ready"(초기 심사 대기) 상태에서 제미나이 진단 문서 2건을 검토. 문서는 firelic에 대해 "심사 중 대규모 구조 변경 지양"을 명시적으로 권고.
+- 검증 결과: 헤더 `/guides` 링크, 푸터 법적 페이지 링크(개인정보처리방침/이용약관/제휴공시/문의), 가이드 상세 페이지의 alt 태그 커버 이미지 및 "툴로 돌아가기" CTA는 모두 이미 구현되어 있었음. 반면 홈페이지는 계산기 위젯 외 텍스트가 전혀 없어 3개 사이트 중 가장 심각한 상태였음.
+- 조치 방식: firelic의 "심사 중 대규모 구조 변경 지양" 권고에 따라, 기존 계산기 UI/구조는 전혀 건드리지 않고 신규 섹션 하나만 하단에 추가하는 최소 침습적 방식으로 진행.
+- 수정: 신규 `src/components/home-guide-highlights.tsx` — 최신 가이드 3개를 제목+요약+커버 이미지+링크 카드로 계산기 아래에 노출. `/guides` 전체 목록 링크 포함.
+- 수정: `src/app/[locale]/page.tsx`에 위 섹션 연결.
+- 수정: `messages/{ko,en,ja,es}.json`에 신규 `home` 네임스페이스 추가(`guideHighlightsTitle`/`guideHighlightsSubtitle`/`guideHighlightsCta`).
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build`(전체 빌드, 홈페이지 정적 HTML에 신규 문구 실제 렌더링 확인) 모두 통과.
+- 작업 전 `_backup_20260912_*` 폴더로 저장소 전체 백업 완료(node_modules/.next/.git/백업폴더 제외).
+
+
 ## 2026-09-10 (SEO 자동화 5일차) — 대표 가이드 2개 타이틀/메타 디스크립션 개선 (영어)
 
 - 배경: SEO 개선 예약 작업(SEO_TASKS.md) 5일차 항목. 이 클라우드 세션은 구글 서치 콘솔에 접근할 수 없어 "노출 상위 글"을 실시간으로 알 수 없으므로, SEO_TASKS.md에 명시된 객관적 대체 기준(category별 글 수 + publishedAt)을 그대로 적용함.
