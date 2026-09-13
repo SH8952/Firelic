@@ -1,3 +1,14 @@
+## 2026-09-13 (추가) — RSS 피드 + 메타 태그 + 푸터 아이콘 추가 (네이버 크롤링 유도)
+
+- 배경: exifnd.com 네이버 색인 정체 문제 원인 파악 과정에서 RSS 피드가 신규/갱신 콘텐츠를 크롤러에게 더 빠르게 알리는 수단으로 확인되어 ExifLens → FlyDroneMap 순으로 적용/검증 후, 마지막으로 firelic.com에도 동일 패턴 적용.
+- 수정1: 신규 `src/app/rss.xml/route.ts` — `getGuides()` 재사용, 4개 언어(en/ko/ja/es) 가이드를 최신순으로 모아 RSS 2.0 XML 직접 생성(최근 50건 제한, 별도 패키지 의존성 없음). SITE_URL은 이 프로젝트의 기존 `sitemap.ts`/`robots.ts`와 동일하게 로컬에서 `process.env.NEXT_PUBLIC_SITE_URL` 참조(다른 두 사이트와 달리 `lib/seo.ts`가 SITE_URL을 export하지 않아 그대로 따름).
+- 수정2(SEO용, 비노출): `src/app/[locale]/layout.tsx`의 alternates에 `types: { "application/rss+xml": ... }` 추가 → `<head>`에 `<link rel="alternate">` 자동 생성.
+- 수정3(시각적 확인용): `src/components/SiteFooter.tsx` 네비게이션 링크 목록 끝에 `lucide-react`의 `Rss` 아이콘 링크 추가.
+- 검증: `npx tsc --noEmit`, `npx eslint`(변경 파일), `npm run build` 통과. `next start` 로컬 서버 구동 후 `<head>` RSS 링크 태그·푸터 아이콘·`/rss.xml` 응답 모두 확인, `xmllint --noout`으로 XML 유효성 검증 완료(아이템 50개, 정상).
+- 작업 전 `_backups/firelic_backup_*_RSS추가전`으로 백업 완료.
+
+
+
 ## 2026-09-13 (추가) — AdSense 승인 전까지 광고 placeholder 박스 임시 숨김
 
 - 배경: 애드센스 재신청 전 정밀 진단 요청 결과, 빈 광고 자리표시자 박스가 그대로 노출되면 "준비되지 않은 사이트"로 판단되어 승인 거절 위험이 있다는 지적을 받음(exifnd.com/flydronemap.com/firelic.com 3개 사이트 공통 요청).
@@ -479,4 +490,3 @@
 - **네트워크 제약 확인**: 이 클라우드 세션(device_bash 브릿지 및 클라우드 컨테이너 모두)은 조직 이그레스 허용목록에 `api.unsplash.com`이 없어 `blocked-by-allowlist`로 직접 호출이 불가능함을 확인(`npm`/`github` 등은 정상 접속됨). 따라서 14개 기존 가이드에 대한 실제 이미지 백필은 이 세션에서 실행하지 못했고, 사용자가 실제 맥에서 `firelic-backfill-images.command`를 더블클릭해 직접 실행해야 함. **같은 이유로, 매일 자동 발행되는 신규 가이드의 이미지 자동 첨부도 발행 파이프라인이 실행되는 환경에 따라 실패(이미지 없이 발행)할 수 있음** — 실패해도 발행 자체는 막히지 않도록 설계되어 있으므로 이 경우 개발자 도구나 백필 스크립트로 나중에 보완 가능.
 - **검증**: 작업 전 `_backups/backup_20260903_193820/`로 백업 생성. `npx tsc --noEmit`, `npx eslint src` 모두 통과. `npm run build`(Turbopack) 97/97 페이지 정상 생성 확인(마지막 `.next` 캐시 정리 단계의 `EPERM`은 기존에도 확인된 무해한 브릿지 오류). 프로덕션 빌드 산출물(`.next/server/app/**/guides/*.html` 등)에 개발자 패널 문자열("이미지 관리")이 전혀 포함되지 않음을 직접 확인해 `NODE_ENV` 조건부 렌더링이 실제로 동작함을 검증.
 - **남은 절차(사용자 진행)**: (1) `firelic-backfill-images.command` 더블클릭 → 기존 14개 가이드 이미지 백필 + 커밋/push, (2) `firelic-push.command`로 이번 코드 변경사항 커밋/push, (3) 로컬 `npm run dev`로 개발 서버를 띄워 가이드 상세 페이지 우측 하단에 "🛠 이미지 관리 (DEV)" 패널이 뜨는지, 검색·적용·업로드가 정상 동작하는지 확인 권장.
-

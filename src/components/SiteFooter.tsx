@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Rss } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { VisitorCounter } from "@/components/VisitorCounter";
 
@@ -21,12 +22,20 @@ export function SiteFooter() {
           © {year} FIRE Calculator. {t("rights")}
         </p>
         <VisitorCounter />
-        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-[var(--color-primary)]">
               {l.label}
             </Link>
           ))}
+          <a
+            href="/rss.xml"
+            aria-label="RSS feed"
+            title="RSS feed"
+            className="hover:text-[var(--color-primary)]"
+          >
+            <Rss className="size-4" />
+          </a>
         </nav>
       </div>
     </footer>

@@ -38,6 +38,9 @@ export async function generateMetadata({
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
       languages,
+      types: {
+        "application/rss+xml": `${SITE_URL}/rss.xml`,
+      },
     },
     openGraph: {
       title: "FIRE Calculator",
