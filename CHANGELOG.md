@@ -1,3 +1,11 @@
+## 2026-09-13 (추가) — AdSense 승인 전까지 광고 placeholder 박스 임시 숨김
+
+- 배경: 애드센스 재신청 전 정밀 진단 요청 결과, 빈 광고 자리표시자 박스가 그대로 노출되면 "준비되지 않은 사이트"로 판단되어 승인 거절 위험이 있다는 지적을 받음(exifnd.com/flydronemap.com/firelic.com 3개 사이트 공통 요청).
+- 수정: `src/components/AdSlot.tsx`에 `ADSENSE_APPROVED`(현재 false) 상수 추가, false일 때 아무것도 렌더링하지 않도록 처리. 승인 후 상수만 true로 되돌리면 복원됨(FireCalculator.tsx/page.tsx 등 호출부 변경 불필요).
+- 검증: `npx tsc --noEmit`, `npx eslint`, `npm run build` 통과. 빌드된 정적 HTML에서 광고 박스(`data-ad-slot`) 마크업이 완전히 제거되고 가이드 섹션·투자 자문 경고 문구 등 다른 콘텐츠는 그대로 유지되는 것 확인.
+- 작업 전 `_backups/firelic_backup_*_광고박스숨김전`으로 백업 완료.
+
+
 ## 2026-09-13 (추가) — 투자 자문 경고 문구 + 하단 광고를 페이지 맨 아래로 재배치
 
 - 배경: 홈페이지에 가이드 하이라이트 섹션을 추가한 뒤 사용자가 실제 배포된 화면을 확인, 투자 자문 경고 문구(DisclaimerFooter)와 하단 display 광고가 가이드 섹션보다 위에 있어 다른 2개 사이트와 레이아웃 순서가 다르다고 지적. [가이드 살펴보기 → 경고 문구 → 광고] 순으로(광고가 최종 맨 아래) 재배치 요청.
