@@ -1,3 +1,11 @@
+## 2026-09-13 (추가) — Vercel 환경변수 도메인 통일 (www 없는 bare 도메인으로 표준화)
+
+- 배경: flydronemap.com과 마찬가지로 firelic.com도 네이버 서치어드바이저 RSS 제출 시 등록 도메인과 실제 서비스 도메인이 달라 오류 발생. 3개 사이트(exifnd/flydronemap/firelic) 모두 원래 www 없이 도메인을 구매했으므로, exifnd.com을 기준으로 firelic.com도 www 없는 bare 도메인으로 통일하기로 결정.
+- 확인 결과 Vercel Domains 설정 자체는 이미 정상(firelic.com = Production, www.firelic.com → firelic.com 307 리다이렉트)이었음. 실제 원인은 `NEXT_PUBLIC_SITE_URL` 환경변수 값이 `https://www.firelic.com`으로 남아있어 sitemap.xml/robots.txt/rss.xml/canonical 태그 등 앱이 생성하는 모든 URL이 www 붙은 형태로 출력되고 있었던 것.
+- 조치: 사용자가 Vercel 환경변수(`NEXT_PUBLIC_SITE_URL`)를 `https://firelic.com`(www 없이)으로 직접 수정, 이후 재확인 차원에서 Redeploy를 1회 추가 실행하여 최신 값이 반영된 배포가 Production에 올라간 것을 확인. 코드 변경은 없음(환경변수만 변경).
+- 검증: 재배포 후 `https://firelic.com/rss.xml` 응답의 `<channel><link>` 및 모든 `<item><link>`/`<guid>`가 www 없는 `https://firelic.com/...` 형태로 정상 출력되는 것을 확인. 이후 네이버 서치어드바이저에서 firelic.com(www 없이)으로 사이트 소유확인, 사이트맵/RSS 제출까지 모두 정상 완료됨(사용자 확인).
+
+
 ## 2026-09-13 (추가) — RSS 피드 + 메타 태그 + 푸터 아이콘 추가 (네이버 크롤링 유도)
 
 - 배경: exifnd.com 네이버 색인 정체 문제 원인 파악 과정에서 RSS 피드가 신규/갱신 콘텐츠를 크롤러에게 더 빠르게 알리는 수단으로 확인되어 ExifLens → FlyDroneMap 순으로 적용/검증 후, 마지막으로 firelic.com에도 동일 패턴 적용.
