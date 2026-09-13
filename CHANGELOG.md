@@ -1,3 +1,13 @@
+## 2026-09-14 (추가) — 홈 화면 가이드 썸네일 이미지 sizes 속성 보정 (PageSpeed 이미지 전송 개선)
+
+- 배경: PageSpeed Insights(모바일) 재측정 결과 firelic.com에서 "이미지 전송 개선" 항목(약 21KiB)이 `src/components/home-guide-highlights.tsx`의 가이드 썸네일 이미지 1건으로 전부 집계됨. Lighthouse가 실제 표시 크기(346×231)보다 훨씬 큰 750×422 이미지가 전송되고 있다고 지적.
+- 원인: `<Image sizes="(min-width: 640px) 33vw, 100vw" .../>`의 모바일 분기(`100vw`)가 카드에 중첩된 패딩(바깥 섹션 `px-4` 32px + 카드 `p-4` 32px, 합계 약 64px)을 반영하지 못해, Next.js가 실제 렌더링 폭(약 346px)보다 한 단계 큰 이미지 버킷(`w=750`)을 요청하고 있었음.
+- 수정: `src/components/home-guide-highlights.tsx`의 `sizes` 값을 `"(min-width: 640px) 33vw, 100vw"` → `"(min-width: 640px) 33vw, calc(100vw - 64px)"`로 변경. 데스크톱(640px 이상) 분기는 그대로 유지, 시각적/레이아웃 변경 없음(패딩을 뺀 실제 표시 폭만 정확하게 반영).
+- 검증: 작업 전 `_backups/firelic_backup_20260913_193207_미사용JS리플로우수정전.tar.gz`로 백업 생성(이번 investigation 시작 전, 코드 변경 없이 유지). `npx tsc --noEmit`, `npx eslint src/components/home-guide-highlights.tsx` 모두 통과. `npm run build` 정상 완료(전체 페이지 정상 생성). 로컬 `next start`(포트 4124)로 실행 후 `curl`로 `/en` 렌더링 HTML을 직접 확인해 새 `sizes="(min-width: 640px) 33vw, calc(100vw - 64px)"` 값이 실제 서버 응답에 정상 반영됨을 확인.
+- 참고(별도 처리, 이번 세션에서 미착수):
+  - "사용하지 않는 자바스크립트" 항목(296KiB) 중 약 217KB는 Google Ads/Doubleclick 및 Google Tag Manager(제3자 스크립트)로, 우리 코드로 제어 불가능한 영역. 나머지 약 80KB는 이름 없는 해시된 청크 3개(`1liy1inghkqkq.js` 등)에 분산되어 있어, 추측성 수정 대신 웹팩 번들 분석기(webpack-bundle-analyzer)를 이용한 별도의 정밀 조사가 필요하다고 판단해 이번 세션에서는 손대지 않음.
+  - "효율적인 캐시 수명 사용" 항목(16KiB)은 100% Google Ads 스크립트(제3자)로, 이미 14일 TTL이 설정되어 있어 우리 쪽에서 추가로 개선할 여지 없음.
+
 ## 2026-09-13 (추가) — Vercel 환경변수 도메인 통일 (www 없는 bare 도메인으로 표준화)
 
 - 배경: flydronemap.com과 마찬가지로 firelic.com도 네이버 서치어드바이저 RSS 제출 시 등록 도메인과 실제 서비스 도메인이 달라 오류 발생. 3개 사이트(exifnd/flydronemap/firelic) 모두 원래 www 없이 도메인을 구매했으므로, exifnd.com을 기준으로 firelic.com도 www 없는 bare 도메인으로 통일하기로 결정.
