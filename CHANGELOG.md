@@ -1,3 +1,12 @@
+## 2026-09-17 — 가이드 목록 페이지: 카테고리별 "더보기" 펼치기 기능 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
+
+- 배경: 가이드 게시글이 계속 늘어나면서 `/guides` 목록 페이지가 카테고리마다 전체 글을 다 나열해 세로 스크롤이 과도하게 길어짐. ExifLens/FlyDroneMap/firelic 3개 프로젝트에 동일하게 적용하기 위해 신설된 공통 대화방에서 작업 진행(FlyDroneMap → ExifLens 순으로 먼저 적용한 뒤 이식).
+- **작업 전 백업**: `_backups/backup_20260916_234523_guides_showmore/`에 `src/app/[locale]/guides/page.tsx`, `messages/{en,ko,ja,es}.json` 백업.
+- **수정**: 카테고리별 카드 목록을 신규 클라이언트 컴포넌트 `src/components/guides/guide-category-section.tsx`로 분리, 카테고리당 기본 4개(2행)만 노출하고 그 이상은 "더보기" 버튼으로 펼치도록 구현(shadcn 미사용 프로젝트라 기존 CSS 변수 스타일(`var(--color-border)` 등)을 그대로 따르는 순수 `<button>`으로 작성). 버튼은 카테고리별로 독립적으로 동작. `src/app/[locale]/guides/page.tsx`는 이 컴포넌트를 사용하도록 수정.
+- **i18n**: `messages/{en,ko,ja,es}.json`의 `guides` 네임스페이스에 `showMore`/`showLess` 키 추가(ko: 더보기/접기, en: Show more/Show less, ja: もっと見る/閉じる, es: Ver más/Ver menos).
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류/경고 0건), `npm run build`(오래된 `.next` 잔재를 `.next_old_*`로 옮긴 뒤 재시도 — Turbopack 컴파일 성공, TypeScript 통과, 154개 페이지 전부 정상 생성. middleware/edge runtime/metadataBase 경고는 기존부터 있던 무관한 경고. 마지막 "Finalizing" 단계의 `.next/export-detail.json` unlink EPERM은 이 브릿지 환경 고유의 무해한 현상).
+- **다음 단계**: 로컬 커밋 완료 후 사용자가 저장소 루트의 push용 `.command` 스크립트를 실행해 push, 실사이트에서 카테고리별 더보기 동작 최종 확인 필요. 이로써 3개 프로젝트 모두 동일 기능 적용 완료.
+
 ## 2026-09-14 (추가) — 홈 화면 가이드 썸네일 이미지 sizes 속성 보정 (PageSpeed 이미지 전송 개선)
 
 - 배경: PageSpeed Insights(모바일) 재측정 결과 firelic.com에서 "이미지 전송 개선" 항목(약 21KiB)이 `src/components/home-guide-highlights.tsx`의 가이드 썸네일 이미지 1건으로 전부 집계됨. Lighthouse가 실제 표시 크기(346×231)보다 훨씬 큰 750×422 이미지가 전송되고 있다고 지적.

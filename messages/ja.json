@@ -62,6 +62,8 @@
     "title": "ガイド",
     "empty": "ガイドは現在英語のみで提供されています。多言語対応は今後追加予定です。",
     "readMore": "続きを読む",
+    "showMore": "もっと見る",
+    "showLess": "閉じる",
     "ctaBannerText": "自分がFIREまでどのくらいの位置にいるか気になりませんか?",
     "ctaBannerButton": "FIRE計算機を試す"
   },

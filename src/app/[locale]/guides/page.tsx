@@ -1,5 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { GuideCategorySection } from "@/components/guides/guide-category-section";
 import { getGuidesByCategory } from "@/lib/guides";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -28,26 +28,19 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
       ) : (
         <div className="mt-8 flex flex-col gap-10">
           {categories.map(({ category, guides }) => (
-            <section key={category}>
-              <h2 className="text-lg font-semibold text-[var(--color-primary)]">{category}</h2>
-              <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                {guides.map((g) => (
-                  <li key={g.slug} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-                    <Link
-                      href={`/guides/${g.slug}`}
-                      className="text-base font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-primary)]"
-                    >
-                      {g.title}
-                    </Link>
-                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{g.publishedAt}</p>
-                    <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{g.description}</p>
-                    <Link href={`/guides/${g.slug}`} className="mt-3 inline-block text-sm font-medium text-[var(--color-primary)]">
-                      {t("readMore")} →
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <GuideCategorySection
+              key={category}
+              categoryLabel={category}
+              expandLabel={t("showMore")}
+              collapseLabel={t("showLess")}
+              readMoreLabel={t("readMore")}
+              items={guides.map((g) => ({
+                slug: g.slug,
+                title: g.title,
+                description: g.description,
+                publishedAt: g.publishedAt,
+              }))}
+            />
           ))}
         </div>
       )}
