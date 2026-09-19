@@ -1,3 +1,12 @@
+## 2026-09-19 — 홈 콘텐츠(빈 콘텐츠) 및 쿠키 동의 배너 공통 작업 — 항목 2: Google Consent Mode v2 쿠키 동의 배너 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
+
+- 배경: FlyDroneMap/ExifLens와 동일한 문제 — GA4와 애드센스가 모두 실제로 동작 중인데도 쿠키 동의 관리(CMP)가 전혀 없었음. 항목 1(홈 빈 콘텐츠)은 firelic의 `FireCalculator` 메인 콘텐츠가 이미 서버 렌더링되어 있어 대상에서 제외됐지만, 항목 2(쿠키 동의 배너)는 GA4/애드센스가 켜져 있는 3개 프로젝트 전부에 해당해 firelic에도 동일하게 적용.
+- **작업 전 백업**: `_backups/backup_20260919_114658_consent_banner/`에 수정 대상 파일 백업.
+- **수정**: 신규 `src/lib/consent.ts`(EEA+영국+스위스 국가 코드 목록 + `needsConsentBanner`). `src/components/GoogleAnalytics.tsx`의 inline script에 `gtag('consent','default',{...denied, region:[...]})`를 `gtag('config'/'js')` 호출보다 먼저 추가 — `AdSenseScript.tsx`는 gtag.js와 같은 페이지에서 동의 신호를 공유하므로 별도 수정 불필요. `src/app/[locale]/layout.tsx`에서 Vercel `x-vercel-ip-country` 헤더로 `needsConsent` 계산(firelic의 `middleware.ts`는 다른 두 저장소와 달리 이 값을 쿠키로 전달하지 않고 있었는데, 헤더를 직접 읽는 방식이라 쿠키 왕복 자체가 불필요해 영향 없음). 신규 `src/components/ConsentBanner.tsx`(이 저장소 컴포넌트 명명 규칙에 맞춰 PascalCase) — shadcn/ui가 없는 저장소라 순수 `<button>` + 기존 `var(--color-*)` CSS 변수 클래스로 작성(`guide-category-section.tsx`와 동일한 스타일링 패턴), 로직은 `useSyncExternalStore` 기반으로 다른 두 저장소와 100% 동일. `messages/{en,es,ja,ko}.json`에 `Consent` 네임스페이스 추가.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류/경고 0건), `npm run build`(Turbopack 컴파일 성공, TypeScript 통과, 162/162 페이지 전부 정상 생성 — `middleware` deprecated/`metadataBase` 미설정 경고는 이 저장소에 기존부터 있던 무관한 경고. `.next/export-detail.json` unlink EPERM은 브릿지 환경 고유의 무해한 현상).
+- **커밋**: `bba9b69`
+- **다음 단계**: push, 실사이트에서 배너 노출/미노출 조건 및 동의 후 GA4 반영 최종 확인. 이로써 공통 작업 계획서의 항목 1·2가 모두 3개 저장소(항목 1은 firelic 제외)에 반영 완료.
+
 ## 2026-09-17 — 가이드 목록 페이지: 카테고리별 "더보기" 펼치기 기능 추가 (애드센스 제휴 마케팅 공통 대화방에서 진행)
 
 - 배경: 가이드 게시글이 계속 늘어나면서 `/guides` 목록 페이지가 카테고리마다 전체 글을 다 나열해 세로 스크롤이 과도하게 길어짐. ExifLens/FlyDroneMap/firelic 3개 프로젝트에 동일하게 적용하기 위해 신설된 공통 대화방에서 작업 진행(FlyDroneMap → ExifLens 순으로 먼저 적용한 뒤 이식).
