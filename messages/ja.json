@@ -109,5 +109,10 @@
     "guideHighlightsTitle": "ガイドを見る",
     "guideHighlightsSubtitle": "早期リタイア(FIRE)の貯蓄・投資戦略に役立つ実践ガイドをご覧ください。",
     "guideHighlightsCta": "すべてのガイドを見る →"
+  },
+  "Consent": {
+    "message": "トラフィック分析と広告のパーソナライズのためにCookieを使用しています。任意のCookieの使用可否を選択できます。",
+    "accept": "同意する",
+    "reject": "拒否する"
   }
 }

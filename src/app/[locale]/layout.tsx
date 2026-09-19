@@ -4,6 +4,9 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { headers } from "next/headers";
+import { needsConsentBanner } from "@/lib/consent";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { AdSenseScript } from "@/components/AdSenseScript";
@@ -80,6 +83,11 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+
+  const headersList = await headers();
+  const geoCountry = headersList.get("x-vercel-ip-country");
+  const needsConsent = needsConsentBanner(geoCountry);
+
   const messages = await getMessages();
 
   return (
@@ -92,6 +100,7 @@ export default async function LocaleLayout({
             <SiteHeader />
             {children}
             <SiteFooter />
+            <ConsentBanner needsConsent={needsConsent} />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
