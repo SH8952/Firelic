@@ -12,13 +12,18 @@ const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
 /**
  * Categories are shown on the /guides index page in this fixed order,
- * matching the four CATEGORY_* buckets used when the guide topics queue
+ * matching the category strings used when the guide topics queue
  * (automation/guide-topics-queue.json) assigns a category to each topic.
+ * "Practical Wealth-Building Strategies" was added 2026-09-20 for concrete,
+ * income-tier/product-comparison guides (illustrative examples only, not
+ * personalized financial advice) as opposed to the more conceptual/
+ * explainer-style topics in the original four buckets.
  * Any category string that doesn't match one of these falls back to
  * appearing after them, ordered by its most recently published guide.
  */
 const CATEGORY_ORDER = [
   "FIRE Basics & Concepts",
+  "Practical Wealth-Building Strategies",
   "Saving & Investing Strategy",
   "Country & Tax Considerations",
   "Retirement Life & Withdrawal Strategy",

@@ -1,221 +1,446 @@
 {
-    "description": "FIRE Calculator(firelic) 가이드 아티클 자동 발행 대기열. order가 낮은 published:false 항목부터 순서대로 발행됩니다. category는 src/content/guides/en.ts의 CATEGORY_* 상수 문자열과 정확히 일치해야 합니다.",
-    "topics": [
-        {
-            "order": 1,
-            "slug": "fire-number-25x-rule-explained",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "FIRE 넘버 계산법: 25배 법칙이 나온 이유",
-            "titleEn": "How the FIRE Number Is Calculated: Where the 25x Rule Comes From",
-            "published": true,
-            "publishedDate": "2026-08-31"
-        },
-        {
-            "order": 2,
-            "slug": "increase-savings-rate-practical-tips",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "저축률을 높이는 실전 방법",
-            "titleEn": "Practical Ways to Increase Your Savings Rate",
-            "published": true,
-            "publishedDate": "2026-09-01"
-        },
-        {
-            "order": 3,
-            "slug": "korea-irp-pension-account-fire",
-            "category": "Country & Tax Considerations",
-            "titleKo": "한국 IRP·연금저축과 FIRE 전략",
-            "titleEn": "Korea's IRP and Pension Savings Accounts for FIRE",
-            "published": true,
-            "publishedDate": "2026-09-02"
-        },
-        {
-            "order": 4,
-            "slug": "healthcare-costs-in-early-retirement",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "조기 은퇴 후 의료비 관리하기",
-            "titleEn": "Managing Healthcare Costs in Early Retirement",
-            "published": true,
-            "publishedDate": "2026-09-03"
-        },
-        {
-            "order": 5,
-            "slug": "compound-interest-and-fire-timeline",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "복리와 FIRE 도달 시점: 저축률이 은퇴 나이를 바꾸는 이유",
-            "titleEn": "Compound Interest and Your FIRE Timeline: Why Savings Rate Changes Everything",
-            "published": true,
-            "publishedDate": "2026-09-04"
-        },
-        {
-            "order": 6,
-            "slug": "dollar-cost-averaging-for-fire",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "달러 코스트 애버리징(DCA)과 FIRE 전략",
-            "titleEn": "Dollar-Cost Averaging and the FIRE Strategy",
-            "published": true,
-            "publishedDate": "2026-09-05"
-        },
-        {
-            "order": 7,
-            "slug": "japan-nisa-ideco-fire-strategy",
-            "category": "Country & Tax Considerations",
-            "titleKo": "일본 NISA·iDeCo와 FIRE 전략",
-            "titleEn": "Japan's NISA and iDeCo Accounts for FIRE",
-            "published": true,
-            "publishedDate": "2026-09-06"
-        },
-        {
-            "order": 8,
-            "slug": "withdrawal-strategies-bucket-method",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "인출 전략: 버킷 전략(Bucket Strategy) 이해하기",
-            "titleEn": "Withdrawal Strategies: Understanding the Bucket Method",
-            "published": true,
-            "publishedDate": "2026-09-07"
-        },
-        {
-            "order": 9,
-            "slug": "fire-vs-traditional-retirement",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "FIRE vs 전통적 은퇴: 무엇이 다른가",
-            "titleEn": "FIRE vs Traditional Retirement: What's the Difference?",
-            "published": true,
-            "publishedDate": "2026-09-08"
-        },
-        {
-            "order": 10,
-            "slug": "asset-allocation-by-fire-stage",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "FIRE 단계별 자산배분 전략",
-            "titleEn": "Asset Allocation Strategy by FIRE Stage",
-            "published": true,
-            "publishedDate": "2026-09-09"
-        },
-        {
-            "order": 11,
-            "slug": "canada-rrsp-tfsa-fire-strategy",
-            "category": "Country & Tax Considerations",
-            "titleKo": "캐나다 RRSP·TFSA와 FIRE 전략",
-            "titleEn": "Canada's RRSP and TFSA for FIRE",
-            "published": true,
-            "publishedDate": "2026-09-10"
-        },
-        {
-            "order": 12,
-            "slug": "dealing-with-market-crashes-after-fire",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "FIRE 이후 시장 폭락에 대응하는 법",
-            "titleEn": "How to Handle a Market Crash After Reaching FIRE",
-            "published": true,
-            "publishedDate": "2026-09-11"
-        },
-        {
-            "order": 13,
-            "slug": "common-fire-mistakes-to-avoid",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "FIRE 준비 시 흔히 하는 실수 7가지",
-            "titleEn": "7 Common Mistakes People Make on the Way to FIRE",
-            "published": true,
-            "publishedDate": "2026-09-12"
-        },
-        {
-            "order": 14,
-            "slug": "side-hustles-to-accelerate-fire",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "FIRE를 앞당기는 부업 아이디어",
-            "titleEn": "Side Hustle Ideas to Reach FIRE Faster",
-            "published": true,
-            "publishedDate": "2026-09-13"
-        },
-        {
-            "order": 15,
-            "slug": "australia-superannuation-fire-strategy",
-            "category": "Country & Tax Considerations",
-            "titleKo": "호주 슈퍼애뉴에이션과 FIRE 전략",
-            "titleEn": "Australia's Superannuation System for FIRE",
-            "published": true,
-            "publishedDate": "2026-09-14"
-        },
-        {
-            "order": 16,
-            "slug": "purpose-and-mental-health-after-fire",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "FIRE 이후 삶의 목적과 정신 건강",
-            "titleEn": "Finding Purpose and Protecting Mental Health After FIRE",
-            "published": true,
-            "publishedDate": "2026-09-15"
-        },
-        {
-            "order": 17,
-            "slug": "how-inflation-affects-your-fire-number",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "인플레이션이 FIRE 넘버에 미치는 영향",
-            "titleEn": "How Inflation Affects Your FIRE Number",
-            "published": true,
-            "publishedDate": "2026-09-16"
-        },
-        {
-            "order": 18,
-            "slug": "avoiding-lifestyle-inflation",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "라이프스타일 인플레이션 피하는 법",
-            "titleEn": "How to Avoid Lifestyle Inflation on the Way to FIRE",
-            "published": true,
-            "publishedDate": "2026-09-17"
-        },
-        {
-            "order": 19,
-            "slug": "germany-etf-savings-plan-fire",
-            "category": "Country & Tax Considerations",
-            "titleKo": "독일 ETF 저축플랜과 FIRE 전략",
-            "titleEn": "Germany's ETF Savings Plans (Sparplan) for FIRE",
-            "published": true,
-            "publishedDate": "2026-09-18"
-        },
-        {
-            "order": 20,
-            "slug": "part-time-consulting-in-retirement",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "은퇴 후 파트타임·컨설팅으로 유연하게 일하기",
-            "titleEn": "Working Part-Time or Consulting After Early Retirement",
-            "published": true,
-            "publishedDate": "2026-09-19"
-        },
-        {
-            "order": 21,
-            "slug": "fire-movement-history-and-origins",
-            "category": "FIRE Basics & Concepts",
-            "titleKo": "FIRE 운동의 기원과 역사",
-            "titleEn": "The History and Origins of the FIRE Movement",
-            "published": true,
-            "publishedDate": "2026-09-20"
-        },
-        {
-            "order": 22,
-            "slug": "real-estate-vs-index-funds-for-fire",
-            "category": "Saving & Investing Strategy",
-            "titleKo": "부동산 vs 인덱스펀드: FIRE 투자 비교",
-            "titleEn": "Real Estate vs Index Funds: Comparing FIRE Investment Approaches",
-            "published": true,
-            "publishedDate": "2026-09-21"
-        },
-        {
-            "order": 23,
-            "slug": "capital-gains-tax-comparison-countries",
-            "category": "Country & Tax Considerations",
-            "titleKo": "국가별 양도소득세 비교와 FIRE에 미치는 영향",
-            "titleEn": "Comparing Capital Gains Tax Across Countries and What It Means for FIRE",
-            "published": false,
-            "publishedDate": null
-        },
-        {
-            "order": 24,
-            "slug": "estate-planning-basics-for-fire",
-            "category": "Retirement Life & Withdrawal Strategy",
-            "titleKo": "FIRE 은퇴자를 위한 상속·자산 설계 기초",
-            "titleEn": "Estate Planning Basics for Early Retirees",
-            "published": false,
-            "publishedDate": null
-        }
-    ]
+  "description": "FIRE Calculator(firelic) 가이드 아티클 자동 발행 대기열. order가 낮은 published:false 항목부터 순서대로 발행됩니다. category는 src/lib/guides.ts의 CATEGORY_ORDER 배열 문자열과 정확히 일치해야 합니다(2026-09-20 기준: FIRE Basics & Concepts / Practical Wealth-Building Strategies / Saving & Investing Strategy / Country & Tax Considerations / Retirement Life & Withdrawal Strategy). 2026-09-20부터 'Practical Wealth-Building Strategies' 카테고리가 추가되었고, 앞으로 새로 추가되는 모든 주제는 개념 설명보다 소득 구간별·금융상품별 실전 조언(예시·비교 형식, 투자 자문 아님) 위주로 작성하는 것을 우선으로 함.",
+  "topics": [
+    {
+      "order": 1,
+      "slug": "fire-number-25x-rule-explained",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "FIRE 넘버 계산법: 25배 법칙이 나온 이유",
+      "titleEn": "How the FIRE Number Is Calculated: Where the 25x Rule Comes From",
+      "published": true,
+      "publishedDate": "2026-08-31"
+    },
+    {
+      "order": 2,
+      "slug": "increase-savings-rate-practical-tips",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "저축률을 높이는 실전 방법",
+      "titleEn": "Practical Ways to Increase Your Savings Rate",
+      "published": true,
+      "publishedDate": "2026-09-01"
+    },
+    {
+      "order": 3,
+      "slug": "korea-irp-pension-account-fire",
+      "category": "Country & Tax Considerations",
+      "titleKo": "한국 IRP·연금저축과 FIRE 전략",
+      "titleEn": "Korea's IRP and Pension Savings Accounts for FIRE",
+      "published": true,
+      "publishedDate": "2026-09-02"
+    },
+    {
+      "order": 4,
+      "slug": "healthcare-costs-in-early-retirement",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "조기 은퇴 후 의료비 관리하기",
+      "titleEn": "Managing Healthcare Costs in Early Retirement",
+      "published": true,
+      "publishedDate": "2026-09-03"
+    },
+    {
+      "order": 5,
+      "slug": "compound-interest-and-fire-timeline",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "복리와 FIRE 도달 시점: 저축률이 은퇴 나이를 바꾸는 이유",
+      "titleEn": "Compound Interest and Your FIRE Timeline: Why Savings Rate Changes Everything",
+      "published": true,
+      "publishedDate": "2026-09-04"
+    },
+    {
+      "order": 6,
+      "slug": "dollar-cost-averaging-for-fire",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "달러 코스트 애버리징(DCA)과 FIRE 전략",
+      "titleEn": "Dollar-Cost Averaging and the FIRE Strategy",
+      "published": true,
+      "publishedDate": "2026-09-05"
+    },
+    {
+      "order": 7,
+      "slug": "japan-nisa-ideco-fire-strategy",
+      "category": "Country & Tax Considerations",
+      "titleKo": "일본 NISA·iDeCo와 FIRE 전략",
+      "titleEn": "Japan's NISA and iDeCo Accounts for FIRE",
+      "published": true,
+      "publishedDate": "2026-09-06"
+    },
+    {
+      "order": 8,
+      "slug": "withdrawal-strategies-bucket-method",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "인출 전략: 버킷 전략(Bucket Strategy) 이해하기",
+      "titleEn": "Withdrawal Strategies: Understanding the Bucket Method",
+      "published": true,
+      "publishedDate": "2026-09-07"
+    },
+    {
+      "order": 9,
+      "slug": "fire-vs-traditional-retirement",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "FIRE vs 전통적 은퇴: 무엇이 다른가",
+      "titleEn": "FIRE vs Traditional Retirement: What's the Difference?",
+      "published": true,
+      "publishedDate": "2026-09-08"
+    },
+    {
+      "order": 10,
+      "slug": "asset-allocation-by-fire-stage",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "FIRE 단계별 자산배분 전략",
+      "titleEn": "Asset Allocation Strategy by FIRE Stage",
+      "published": true,
+      "publishedDate": "2026-09-09"
+    },
+    {
+      "order": 11,
+      "slug": "canada-rrsp-tfsa-fire-strategy",
+      "category": "Country & Tax Considerations",
+      "titleKo": "캐나다 RRSP·TFSA와 FIRE 전략",
+      "titleEn": "Canada's RRSP and TFSA for FIRE",
+      "published": true,
+      "publishedDate": "2026-09-10"
+    },
+    {
+      "order": 12,
+      "slug": "dealing-with-market-crashes-after-fire",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "FIRE 이후 시장 폭락에 대응하는 법",
+      "titleEn": "How to Handle a Market Crash After Reaching FIRE",
+      "published": true,
+      "publishedDate": "2026-09-11"
+    },
+    {
+      "order": 13,
+      "slug": "common-fire-mistakes-to-avoid",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "FIRE 준비 시 흔히 하는 실수 7가지",
+      "titleEn": "7 Common Mistakes People Make on the Way to FIRE",
+      "published": true,
+      "publishedDate": "2026-09-12"
+    },
+    {
+      "order": 14,
+      "slug": "side-hustles-to-accelerate-fire",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "FIRE를 앞당기는 부업 아이디어",
+      "titleEn": "Side Hustle Ideas to Reach FIRE Faster",
+      "published": true,
+      "publishedDate": "2026-09-13"
+    },
+    {
+      "order": 15,
+      "slug": "australia-superannuation-fire-strategy",
+      "category": "Country & Tax Considerations",
+      "titleKo": "호주 슈퍼애뉴에이션과 FIRE 전략",
+      "titleEn": "Australia's Superannuation System for FIRE",
+      "published": true,
+      "publishedDate": "2026-09-14"
+    },
+    {
+      "order": 16,
+      "slug": "purpose-and-mental-health-after-fire",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "FIRE 이후 삶의 목적과 정신 건강",
+      "titleEn": "Finding Purpose and Protecting Mental Health After FIRE",
+      "published": true,
+      "publishedDate": "2026-09-15"
+    },
+    {
+      "order": 17,
+      "slug": "how-inflation-affects-your-fire-number",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "인플레이션이 FIRE 넘버에 미치는 영향",
+      "titleEn": "How Inflation Affects Your FIRE Number",
+      "published": true,
+      "publishedDate": "2026-09-16"
+    },
+    {
+      "order": 18,
+      "slug": "avoiding-lifestyle-inflation",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "라이프스타일 인플레이션 피하는 법",
+      "titleEn": "How to Avoid Lifestyle Inflation on the Way to FIRE",
+      "published": true,
+      "publishedDate": "2026-09-17"
+    },
+    {
+      "order": 19,
+      "slug": "germany-etf-savings-plan-fire",
+      "category": "Country & Tax Considerations",
+      "titleKo": "독일 ETF 저축플랜과 FIRE 전략",
+      "titleEn": "Germany's ETF Savings Plans (Sparplan) for FIRE",
+      "published": true,
+      "publishedDate": "2026-09-18"
+    },
+    {
+      "order": 20,
+      "slug": "part-time-consulting-in-retirement",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "은퇴 후 파트타임·컨설팅으로 유연하게 일하기",
+      "titleEn": "Working Part-Time or Consulting After Early Retirement",
+      "published": true,
+      "publishedDate": "2026-09-19"
+    },
+    {
+      "order": 21,
+      "slug": "fire-movement-history-and-origins",
+      "category": "FIRE Basics & Concepts",
+      "titleKo": "FIRE 운동의 기원과 역사",
+      "titleEn": "The History and Origins of the FIRE Movement",
+      "published": true,
+      "publishedDate": "2026-09-20"
+    },
+    {
+      "order": 22,
+      "slug": "real-estate-vs-index-funds-for-fire",
+      "category": "Saving & Investing Strategy",
+      "titleKo": "부동산 vs 인덱스펀드: FIRE 투자 비교",
+      "titleEn": "Real Estate vs Index Funds: Comparing FIRE Investment Approaches",
+      "published": true,
+      "publishedDate": "2026-09-21"
+    },
+    {
+      "order": 23,
+      "slug": "capital-gains-tax-comparison-countries",
+      "category": "Country & Tax Considerations",
+      "titleKo": "국가별 양도소득세 비교와 FIRE에 미치는 영향",
+      "titleEn": "Comparing Capital Gains Tax Across Countries and What It Means for FIRE",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 24,
+      "slug": "estate-planning-basics-for-fire",
+      "category": "Retirement Life & Withdrawal Strategy",
+      "titleKo": "FIRE 은퇴자를 위한 상속·자산 설계 기초",
+      "titleEn": "Estate Planning Basics for Early Retirees",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 25,
+      "slug": "minimum-wage-job-fast-wealth-building",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "시급 1만원 직업으로도 빠르게 자산을 늘리는 현실적인 방법",
+      "titleEn": "How to Build Wealth Fast Even on a Minimum-Wage Job",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 26,
+      "slug": "diversified-investing-on-average-salary",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "월급 300만원·400만원으로 분산투자 포트폴리오 짜는 법",
+      "titleEn": "Building a Diversified Portfolio on an Average Salary",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 27,
+      "slug": "how-to-invest-your-first-big-savings",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "처음 모은 100만원, 어떻게 굴려야 효율적일까",
+      "titleEn": "What to Do With Your First Big Chunk of Savings",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 28,
+      "slug": "stocks-vs-savings-vs-crypto-vs-insurance-comparison",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "주식·예적금·코인·보험, FIRE를 위한 금융상품 비교",
+      "titleEn": "Stocks vs Savings vs Crypto vs Insurance: Comparing the Building Blocks",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 29,
+      "slug": "small-amount-investing-getting-started",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "매달 10만원으로 시작하는 소액 투자 습관 만들기",
+      "titleEn": "Starting an Investing Habit With a Small Monthly Amount",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 30,
+      "slug": "debt-payoff-vs-investing-priority",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "빚부터 갚을까 투자부터 할까: 우선순위 정하는 법",
+      "titleEn": "Should You Pay Off Debt or Invest First?",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 31,
+      "slug": "emergency-fund-then-what-money-waterfall",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "비상금 다음엔 어디에: 여윳돈 배분 순서(머니 워터폴)",
+      "titleEn": "The Money Waterfall: Where Extra Cash Should Go After Your Emergency Fund",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 32,
+      "slug": "employer-retirement-match-optimization",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "회사 퇴직연금 매칭, 놓치지 않고 최대한 활용하는 법",
+      "titleEn": "Getting the Most Out of Your Employer's Retirement Match",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 33,
+      "slug": "insurance-products-savings-vs-protection",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "저축성 보험 vs 보장성 보험, FIRE 관점에서 무엇을 골라야 할까",
+      "titleEn": "Savings Insurance vs Protection Insurance: Which Fits a FIRE Plan",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 34,
+      "slug": "crypto-allocation-risk-management-for-fire",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "코인 투자, FIRE 포트폴리오에 얼마나 넣어도 될까",
+      "titleEn": "How Much Crypto (If Any) Belongs in a FIRE Portfolio",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 35,
+      "slug": "index-funds-vs-individual-stocks-beginners",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "초보자를 위한 인덱스펀드 vs 개별주 선택 가이드",
+      "titleEn": "Index Funds vs Individual Stocks: A Beginner's Guide",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 36,
+      "slug": "robo-advisors-vs-diy-investing",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "로보어드바이저 vs 직접 투자, 무엇이 나에게 맞을까",
+      "titleEn": "Robo-Advisors vs DIY Investing: Which Fits Your Situation",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 37,
+      "slug": "high-yield-savings-vs-time-deposits",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "파킹통장 vs 정기예금, 단기 목돈 어디에 둘까",
+      "titleEn": "High-Yield Savings vs Time Deposits for Short-Term Cash",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 38,
+      "slug": "using-bonus-and-tax-refund-effectively",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "상여금·환급금, FIRE를 앞당기는 데 쓰는 법",
+      "titleEn": "Putting Your Bonus or Tax Refund to Work for FIRE",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 39,
+      "slug": "negotiating-raise-to-speed-up-fire",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "연봉 협상으로 FIRE 시점을 앞당기는 현실적인 전략",
+      "titleEn": "How Negotiating a Raise Can Move Up Your FIRE Date",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 40,
+      "slug": "first-big-savings-milestone",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "첫 1000만원 모으기: 종잣돈 만들기의 현실적인 로드맵",
+      "titleEn": "Reaching Your First Big Savings Milestone",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 41,
+      "slug": "dividend-investing-for-passive-income",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "배당주 투자로 현금흐름 만드는 법",
+      "titleEn": "Building Passive Income Through Dividend Investing",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 42,
+      "slug": "real-estate-crowdfunding-small-entry",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "소액으로 시작하는 부동산 조각투자(크라우드펀딩)",
+      "titleEn": "Getting Into Real Estate With Small Amounts via Crowdfunding",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 43,
+      "slug": "choosing-a-brokerage-platform",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "증권사·플랫폼 고르는 법: 수수료와 기능 비교하기",
+      "titleEn": "How to Choose a Brokerage Platform for Long-Term Investing",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 44,
+      "slug": "side-income-vs-cutting-expenses-tradeoff",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "부수입 늘리기 vs 지출 줄이기, 무엇이 더 효율적일까",
+      "titleEn": "Earning More vs Spending Less: Which Moves the Needle Faster",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 45,
+      "slug": "freelance-income-fire-strategy",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "프리랜서·N잡러를 위한 불규칙한 소득 관리와 FIRE 전략",
+      "titleEn": "A FIRE Strategy for Freelancers and Irregular Income",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 46,
+      "slug": "credit-score-and-loans-for-fire",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "신용점수 관리와 대출 활용이 FIRE에 미치는 영향",
+      "titleEn": "How Credit Scores and Smart Borrowing Affect Your FIRE Plan",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 47,
+      "slug": "automating-your-savings-and-investing",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "자동이체로 저축·투자를 습관화하는 법",
+      "titleEn": "Automating Your Savings and Investments So You Can't Skip It",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 48,
+      "slug": "comparing-etf-types-for-beginners",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "국내 ETF vs 해외 ETF, 초보자가 알아야 할 차이점",
+      "titleEn": "Domestic vs International ETFs: What Beginners Should Know",
+      "published": false,
+      "publishedDate": null
+    },
+    {
+      "order": 49,
+      "slug": "rebalancing-your-portfolio-in-practice",
+      "category": "Practical Wealth-Building Strategies",
+      "titleKo": "실전 포트폴리오 리밸런싱: 언제 어떻게 해야 할까",
+      "titleEn": "Rebalancing Your Portfolio in Practice: When and How",
+      "published": false,
+      "publishedDate": null
+    }
+  ]
 }
