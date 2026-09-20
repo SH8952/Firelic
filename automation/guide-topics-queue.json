@@ -187,8 +187,8 @@
             "category": "FIRE Basics & Concepts",
             "titleKo": "FIRE 운동의 기원과 역사",
             "titleEn": "The History and Origins of the FIRE Movement",
-            "published": false,
-            "publishedDate": null
+            "published": true,
+            "publishedDate": "2026-09-20"
         },
         {
             "order": 22,
