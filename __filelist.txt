@@ -1,5 +1,0 @@
-SEO_TASKS.md
-CHANGELOG.md
-content/guides/en/coast-lean-fat-fire-explained.mdx
-content/guides/en/what-is-fire.mdx
-__filelist.txt
