@@ -1,3 +1,13 @@
+## 2026-09-22 (추가39) — 애드센스 재검토 전 정책/안내 페이지 canonical·title 버그 수정
+
+- 배경: 애드센스가 "가치가 별로 없는 콘텐츠"(thin/duplicate content) 사유로 반려 이메일을 보냄. 즉시 재검토를 요청하기 전에 Google Search Console 데이터를 함께 확인 — 3개월간 노출 118회 대비 클릭 0회(평균 게재순위 60위)로 아직 실사용자 유입이 거의 없는 상태였고, "페이지 색인 생성 > 크롤링됨 - 현재 색인이 생성되지 않음" 목록 16개 URL 중 `/en/contact`, `/en/affiliate-disclosure`, `/es/guides` 등 정책/안내 페이지가 다수 포함되어 있어 원인을 직접 코드에서 확인함.
+- **원인 확인**: `about`, `privacy-policy`, `terms`, `affiliate-disclosure`, `contact`, `faq`, `guides`(목록) 총 7개 페이지가 각자의 `generateMetadata`를 갖고 있지 않아, 상위 레이아웃(`src/app/[locale]/layout.tsx`)의 기본 메타데이터를 그대로 물려받고 있었음 — title은 항상 "FIRE Calculator — Retire Early Planner"(홈페이지와 동일), canonical은 항상 해당 로케일의 홈페이지 URL. 실제로 `https://www.firelic.com/en/affiliate-disclosure`를 직접 열어 확인한 결과 본문은 정상 콘텐츠인데 canonical 태그가 홈페이지(`https://firelic.com/en`)를 가리키고 있어, 구글이 이 페이지들을 홈페이지의 중복으로 판단하고 별도 색인을 보류했을 가능성이 높음. (참고: `/guides/what-is-fire`처럼 언어 접두사 없는 URL도 같은 목록에 있었지만, 이는 `localePrefix: "always"` 설정에 따라 `/en/guides/what-is-fire`로 정상 리다이렉트·canonical 처리되고 있어 문제 아님으로 확인.)
+- **작업 전 백업**: `_backups/backup_20260922_003621/`
+- **수정**: 위 7개 페이지에 가이드 상세 페이지(`src/app/[locale]/guides/[slug]/page.tsx`)와 동일한 패턴으로 `generateMetadata`를 추가 — 각 페이지가 자신의 title/description(정책 페이지는 `content/policies/*.ts`의 첫 문단, FAQ/가이드 목록은 next-intl 번역 텍스트)과 자기 자신을 가리키는 canonical URL을 갖도록 수정.
+- **검증**: `npx tsc --noEmit`(오류 0건), `npx eslint src`(오류 0건). (로컬 `npm run build`는 브릿지 환경의 `.next` 폴더 삭제 권한 제약으로 EPERM 발생 — 기존에도 확인된 무관한 현상. 실제 빌드 검증은 Vercel 배포 시 수행됨.)
+- **커밋**: `8db0338` ("fix(seo): 정책/안내 6개 페이지 + 가이드 목록 페이지에 개별 generateMetadata 추가")
+- **다음 단계**: push 후 배포되면 Search Console에서 해당 URL들에 대해 색인 생성 요청 → 1~2주 재인덱싱/실유입 여부 관찰 → 애드센스 재검토 요청 여부 결정. 클릭 0회 문제 자체는 이 수정만으로 즉시 해결되지 않으므로, 재검토는 이 관찰 기간을 거친 뒤 진행하기로 함(즉시 재검토 요청은 보류).
+
 ## 2026-09-20 (추가38) — "실전 자산증식 전략" 카테고리 신설 + 콘텐츠 방향 전면 전환
 
 - 배경: 사용자가 현재까지 발행된 가이드들(특히 "FIRE 운동의 기원과 역사" 같은 개념 설명 위주 글)이 겉도는 느낌이라 운영자인 본인조차 보고 싶지 않다는 강한 피드백을 줌. 방문자가 사이트를 찾는 진짜 이유는 "내 소득/자산 상황에서 실제로 어떻게 자산을 굴려야 빠르게 은퇴할 수 있는지"이므로, 시급 1만원 직업이나 월급 300/400만원처럼 구체적인 소득 구간, 주식·예적금·코인·보험 등 실제 금융상품 비교 같은 실전적인 내용으로 방향을 바꾸고, 발행 대기열을 사용자가 중단을 요청하기 전까지 계속 채워나가길 원함
