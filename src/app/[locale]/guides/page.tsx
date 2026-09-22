@@ -1,9 +1,26 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
 import { getGuidesByCategory } from "@/lib/guides";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "guides" });
+  const url = `${SITE_URL}/${locale}/guides`;
+
+  return {
+    title: t("title"),
+    alternates: { canonical: url },
+    openGraph: { title: t("title"), url, type: "website" },
+  };
+}
 
 export default async function GuidesIndexPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

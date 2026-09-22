@@ -1,10 +1,30 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 
 type FaqItem = { question: string; answer: string };
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Faq" });
+  const url = `${SITE_URL}/${locale}/faq`;
+
+  return {
+    title: t("title"),
+    description: t("subtitle"),
+    alternates: { canonical: url },
+    openGraph: { title: t("title"), description: t("subtitle"), url, type: "website" },
+  };
 }
 
 export default async function FaqPage({
