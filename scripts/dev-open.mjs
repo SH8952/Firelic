@@ -19,11 +19,11 @@
 import { spawn, execFile, execFileSync } from "node:child_process";
 
 const URL_REGEX = /(https?:\/\/localhost:\d+)/;
-const FALLBACK_URL = "http://localhost:3000";
+const FALLBACK_URL = "http://localhost:3030";
 const FALLBACK_DELAY_MS = 8000;
 const TAB_POLL_INTERVAL_MS = 4000;
 
-const child = spawn("next", ["dev"], {
+const child = spawn("next", ["dev", "-p", "3030"], {
   stdio: ["inherit", "pipe", "inherit"],
   shell: process.platform === "win32",
 });
