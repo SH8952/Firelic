@@ -24,7 +24,7 @@
 # PAYLOAD_ZIP을 찾는 즉시 절대경로(PAYLOAD_ZIP_PATH)로 고정해 이후 모든 단계에서
 # 디렉터리 이동과 무관하게 항상 같은 파일을 가리키도록 변경.
 
-REPO="$HOME/Desktop/애드센스 제휴 마케팅/firelic"
+REPO="$HOME/Desktop/AdSense Affiliate Marketing/firelic"
 SCRIPT_NAME="apply-seo-task.command"
 SCRIPT_PATH="$REPO/automation/$SCRIPT_NAME"
 
