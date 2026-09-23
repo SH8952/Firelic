@@ -1,3 +1,11 @@
+## 2026-09-23 — 로컬 dev 서버 포트 3030으로 고정 (3개 프로젝트 공통 포트 충돌 방지)
+
+- 배경: exiflens/flydronemap/firelic 3개 형제 프로젝트가 모두 `next dev` 기본 포트(3000)를 그대로 사용해, 동시에 여러 프로젝트의 dev 서버를 띄우면 나중에 실행한 쪽이 자동으로 3001/3002 등으로 밀려나 "어느 터미널이 어느 프로젝트인지" 혼동되는 문제가 반복 확인됨(flydronemap 2026-09-23 "사이트 전체 점검" 항목에서도 이 문제로 확인이 꼬인 사례 발생). "💼 프로젝트 공통 작업" 대화방에서 3개 프로젝트에 동일 패턴으로 일괄 적용.
+- **수정**: `package.json`의 `dev:plain`(`next dev`)에 `-p 3030` 추가, `scripts/dev-open.mjs`가 실제 spawn하는 `next dev` 호출과 Chrome 자동 오픈 실패 시 폴백 URL(`FALLBACK_URL`)도 3030으로 동기화(firelic README.md에는 관련 안내가 없어 별도 수정 불필요). 포트 배정(서로 겹치지 않음): exiflens=3010, flydronemap=3020, firelic=3030.
+- **검증**: `package.json` JSON 유효성, `node --check scripts/dev-open.mjs` 구문 검증 통과. 3개 저장소의 dev 서버를 동시에 기동해 각각 지정 포트에서 정상 응답하는 것을 스모크 테스트로 확인(서로 포트 충돌 없음을 직접 검증).
+- **커밋**: `0bfe6a1` "fix(dev): firelic 로컬 dev 서버 포트를 3030으로 고정 (형제 프로젝트 포트 충돌 방지)"
+- **다음 단계**: push → 이후 `npm run dev`로 이 프로젝트를 실행하면 항상 3030번 포트로 뜸(exiflens/flydronemap과 동시에 띄워도 더 이상 충돌 없음).
+
 ## 2026-09-22 (추가39) — 애드센스 재검토 전 정책/안내 페이지 canonical·title 버그 수정
 
 - 배경: 애드센스가 "가치가 별로 없는 콘텐츠"(thin/duplicate content) 사유로 반려 이메일을 보냄. 즉시 재검토를 요청하기 전에 Google Search Console 데이터를 함께 확인 — 3개월간 노출 118회 대비 클릭 0회(평균 게재순위 60위)로 아직 실사용자 유입이 거의 없는 상태였고, "페이지 색인 생성 > 크롤링됨 - 현재 색인이 생성되지 않음" 목록 16개 URL 중 `/en/contact`, `/en/affiliate-disclosure`, `/es/guides` 등 정책/안내 페이지가 다수 포함되어 있어 원인을 직접 코드에서 확인함.
