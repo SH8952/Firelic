@@ -1,3 +1,15 @@
+## 2026-09-27 (추가41) — 홈페이지 가이드/FAQ 하이라이트 무작위 노출로 개선
+
+- 배경: `claude/guide-highlights-and-faq-highlights-rollout-guide.md` 문서 참고 — 형제 프로젝트 ExifLens에 이미 적용된 두 가지 홈페이지 개선(가이드 하이라이트 3→6개 무작위 노출, FAQ 하이라이트 섹션 신규 추가)을 firelic에도 적용 요청받음. firelic은 아직 조사되지 않은 상태였으므로 문서의 ExifLens 코드는 참고 패턴으로만 삼고 실제 코드 구조(단일 FAQ 네임스페이스 `Faq.items`, CSS 변수 기반 스타일)를 먼저 조사한 뒤 진행. 무작위 노출 개수는 사용자에게 직접 확인(가이드 6개, FAQ 5개).
+- **가이드 하이라이트 개선**: `src/components/home-guide-highlights.tsx`에 Fisher-Yates 셔플 헬퍼(`pickRandomGuides`) 추가, 고정 `.slice(0, 3)` → 무작위 6개 노출로 변경.
+- **FAQ 하이라이트 섹션 신규 추가**: `src/components/home-faq-highlights.tsx` 신규 생성 — `/faq` 페이지와 동일한 `Faq.items`(현재 8개, 영어 기준) 중 5개를 무작위로 뽑아 홈페이지에도 노출(`pickRandomFaqs`). 노출된 5개 항목으로만 범위를 한정한 `FAQPage` JSON-LD 포함(전체 8개를 넣지 않음 — 구글 가이드라인 준수). ExifLens는 다중 소스(도구별 FAQ)를 취합하는 구조였으나 firelic은 단일 네임스페이스라 취합 로직 없이 바로 구현.
+- `messages/{en,ko,ja,es}.json`의 `home` 네임스페이스에 `faqHighlightsTitle`/`faqHighlightsSubtitle`/`faqHighlightsCta` 번역 키 추가.
+- `src/app/[locale]/page.tsx`에 `<HomeFaqHighlights locale={locale} />`를 `<HomeGuideHighlights>` 바로 아래에 추가.
+- **작업 전 백업**: `_backups/backup_20260927_141738_guide_faq_highlights/`
+- **검증**: `npx tsc --noEmit`(0 errors), `npx eslint src`(0 errors). 로컬 dev 서버(포트 3030)를 직접 띄워 en/ko/ja/es 4개 로케일 전부에서 가이드 링크 6개, `FAQPage` JSON-LD의 `mainEntity` 정확히 5개인 것을 curl + 파싱으로 확인. 같은 페이지를 재요청했을 때 노출되는 가이드 조합이 달라지는 것도 직접 확인(무작위 동작 검증).
+- **커밋**: `5c17c16`. push 스크립트 전달함.
+- **남은 절차(사용자 진행)**: 전달된 push 스크립트 실행 → Vercel 배포 확인 → 홈페이지 하단에서 가이드 하이라이트/FAQ 하이라이트 섹션이 새로고침마다 다른 조합으로 잘 보이는지 육안으로도 확인 권장.
+
 ## 2026-09-27 (추가40) — 구글 크롤링/색인 정밀 점검 + hreflang(언어별 대체 URL) 유실 버그 수정
 
 - 배경: 구글(제미나이)이 작성한 firelic.com SEO 진단 보고서를 사용자가 공유. 다만 사용자 요청은 "그 보고서대로 진행"이 아니라 "구글봇이 실제로 잘 크롤링·색인할 수 있도록 필요하면 직접 진단해서 조치"하는 것이었음. 받은 보고서는 실제 코드 구조(`app/[lang]`, 2개 언어 가정 등)와 맞지 않는 일반적인 템플릿성 진단으로 판단, 그대로 적용하지 않고 실제 배포본/로컬 dev 서버를 직접 점검.
