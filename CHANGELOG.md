@@ -1,3 +1,14 @@
+## 2026-09-27 (추가40) — 구글 크롤링/색인 정밀 점검 + hreflang(언어별 대체 URL) 유실 버그 수정
+
+- 배경: 구글(제미나이)이 작성한 firelic.com SEO 진단 보고서를 사용자가 공유. 다만 사용자 요청은 "그 보고서대로 진행"이 아니라 "구글봇이 실제로 잘 크롤링·색인할 수 있도록 필요하면 직접 진단해서 조치"하는 것이었음. 받은 보고서는 실제 코드 구조(`app/[lang]`, 2개 언어 가정 등)와 맞지 않는 일반적인 템플릿성 진단으로 판단, 그대로 적용하지 않고 실제 배포본/로컬 dev 서버를 직접 점검.
+- **점검 결과 (문제 없음 확인)**: robots.txt(`Allow: /`, 정상), sitemap.xml(4개 언어 × 80개 = 320개 URL 정상 생성), JSON-LD(WebApplication) 이미 구현됨 — 이 세 가지는 지난 보고서가 지적한 대로 손댈 필요 없었음.
+- **새로 발견한 실제 버그**: `src/app/[locale]/layout.tsx`는 `alternates.languages`(hreflang)를 4개 로케일 전부에 대해 설정하지만, Next.js는 layout과 page의 `metadata.alternates`를 깊은 병합하지 않고 page 쪽이 정의하면 통째로 덮어씀. `about`/`privacy-policy`/`terms`/`affiliate-disclosure`/`contact`/`faq`/`guides`(목록) 7개 페이지(지난주 canonical 버그를 고치며 각자 `generateMetadata`를 추가했던 페이지들)와 가이드 상세 페이지(`[slug]`)가 전부 `alternates: { canonical }`만 반환하고 있어 hreflang이 전부 유실된 상태였음. 로컬 dev 서버(localhost:3030) 실제 렌더링으로 확인: `/en`(홈)은 hreflang 4개 정상, `/en/about`·`/en/guides/what-is-fire`는 canonical만 있고 hreflang 0개. 사이트맵 320개 URL 중 약 176개(정책 7종 + 가이드 37개, 각 4개 언어)가 영향을 받는 규모였음 — 지난주 발견한 canonical 오류보다 범위가 넓음.
+- **수정**: `src/lib/seo.ts`에 `languageAlternates(path)` 공용 함수 추가(4개 로케일에 대한 hreflang 맵 생성). 위 8개 페이지의 `generateMetadata`에서 canonical과 함께 `languages`도 채우도록 수정 — 가이드 상세 페이지는 매일 자동 발행되는 신규 글에도 공용 함수를 통해 자동 적용됨.
+- **작업 전 백업**: `_backups/backup_20260927_090211/`
+- **검증**: `npx tsc --noEmit`(0 errors), `npx eslint src`(0 errors). 로컬 dev 서버(포트 3030)를 직접 띄워 about/faq/guides 목록/가이드 상세 페이지 전부에서 hreflang 4개(en/ko/ja/es)가 정상 출력되는 것을 curl + grep으로 직접 확인.
+- **커밋**: `d5b38fd`. push 스크립트 전달함.
+- **남은 절차(사용자 진행)**: 전달된 push 스크립트 실행 → 배포 확인 → 며칠 뒤 Search Console에서 색인 현황 변화 재확인.
+
 ## 2026-09-23 — 로컬 dev 서버 포트 3030으로 고정 (3개 프로젝트 공통 포트 충돌 방지)
 
 - 배경: exiflens/flydronemap/firelic 3개 형제 프로젝트가 모두 `next dev` 기본 포트(3000)를 그대로 사용해, 동시에 여러 프로젝트의 dev 서버를 띄우면 나중에 실행한 쪽이 자동으로 3001/3002 등으로 밀려나 "어느 터미널이 어느 프로젝트인지" 혼동되는 문제가 반복 확인됨(flydronemap 2026-09-23 "사이트 전체 점검" 항목에서도 이 문제로 확인이 꼬인 사례 발생). "💼 프로젝트 공통 작업" 대화방에서 3개 프로젝트에 동일 패턴으로 일괄 적용.
