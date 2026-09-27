@@ -108,7 +108,10 @@
   "home": {
     "guideHighlightsTitle": "Explora las guías",
     "guideHighlightsSubtitle": "Guías prácticas sobre ahorro, estrategias de retiro FIRE y cuentas de jubilación por país.",
-    "guideHighlightsCta": "Ver todas las guías →"
+    "guideHighlightsCta": "Ver todas las guías →",
+    "faqHighlightsTitle": "Preguntas Frecuentes",
+    "faqHighlightsSubtitle": "Algunas preguntas comunes sobre la FIRE Calculator.",
+    "faqHighlightsCta": "Ver todas las preguntas →"
   },
   "Consent": {
     "message": "Utilizamos cookies para analizar el tráfico y personalizar los anuncios. Puede aceptar o rechazar las cookies no esenciales.",

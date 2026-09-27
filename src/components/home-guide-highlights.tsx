@@ -9,10 +9,23 @@ import { getAllGuidesMeta } from "@/lib/guides";
  *
  * firelic은 AdSense 심사가 아직 "Getting Ready" 상태이므로, 기존 계산기 UI나
  * 구조는 건드리지 않고 이 섹션 하나만 하단에 추가한다(대규모 구조 변경 지양).
+ *
+ * [2026-09-27] 3개 고정 노출 → 6개 무작위 노출로 변경(Fisher-Yates 셔플).
+ * 홈페이지를 새로고침/재방문할 때마다 다른 가이드가 보이도록 하여 특정 글에만
+ * 트래픽이 쏠리지 않고 전체 가이드가 고르게 크롤링/노출되도록 함.
  */
+function pickRandomGuides<T>(items: T[], count: number): T[] {
+  const pool = [...items];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, count);
+}
+
 export async function HomeGuideHighlights({ locale }: { locale: string }) {
   const t = await getTranslations("home");
-  const guides = getAllGuidesMeta(locale).slice(0, 3);
+  const guides = pickRandomGuides(getAllGuidesMeta(locale), 6);
 
   if (guides.length === 0) return null;
 
