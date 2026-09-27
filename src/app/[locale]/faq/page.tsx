@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { languageAlternates } from "@/lib/seo";
 
 type FaqItem = { question: string; answer: string };
 
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("subtitle"),
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages: languageAlternates("/faq") },
     openGraph: { title: t("title"), description: t("subtitle"), url, type: "website" },
   };
 }

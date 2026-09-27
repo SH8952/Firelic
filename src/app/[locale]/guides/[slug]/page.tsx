@@ -6,7 +6,7 @@ import { compileGuide, getGuideMeta, getGuideSlugs } from "@/lib/guides";
 import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/GuideToolCta";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -29,6 +29,7 @@ export async function generateMetadata({
     description: meta.description,
     alternates: {
       canonical: `${SITE_URL}/${locale}/guides/${slug}`,
+      languages: languageAlternates(`/guides/${slug}`),
     },
     openGraph: {
       type: "article",

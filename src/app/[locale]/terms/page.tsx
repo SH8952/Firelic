@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getPolicyContent } from "@/content/policies";
 import { PolicyPageView } from "@/components/PolicyPageView";
+import { languageAlternates } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -18,7 +19,7 @@ export async function generateMetadata({
   return {
     title: page.title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages: languageAlternates("/terms") },
     openGraph: { title: page.title, description, url, type: "website" },
   };
 }
