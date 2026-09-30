@@ -43,6 +43,7 @@ export function SiteFooter() {
               text={calcT("subtitle")}
               url={`${SITE_URL}/${locale}`}
               variant="ghost"
+              menuPlacement="top"
             />
           ) : null}
           <a

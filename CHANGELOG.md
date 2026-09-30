@@ -1,3 +1,10 @@
+## 2026-09-30 (추가44) — 푸터 공유 메뉴를 위로 열기 + 가이드 "더보기" 펼침 상태 뒤로가기 유지
+
+- 배경: 푸터의 공유하기 메뉴가 버튼 아래로 열려 페이지 하단이 늘어남 / 가이드 목록에서 "더보기"로 펼친 뒤 글을 보고 뒤로가기를 하면 닫힘 상태로 초기화됨(펼침 여부가 컴포넌트 내부 `useState`에만 있었음).
+- `src/components/share-button.tsx`: `menuPlacement`("bottom"|"top", 기본 "bottom") 옵션 추가. `SiteFooter.tsx`의 홈 푸터 공유 버튼에만 `"top"` 적용(다른 위치는 변화 없음).
+- `src/components/guides/guide-category-section.tsx`: 카테고리별 펼침 상태를 `sessionStorage`(`guides-expanded:<카테고리명>`)에 저장하고 화면이 그려지기 전(`useLayoutEffect`)에 복원. URL 변화 없음(SEO 영향 없음), 탭을 닫으면 초기화, 저장소 오류는 무시.
+- 검증: `npx tsc --noEmit`, `npx eslint` 통과. 실제 Chromium(Next 16.3.2 최소 재현 앱)으로 뒤로가기 후 펼침 유지·스크롤 복원·새로고침 유지·새 세션 닫힘 시작 확인, 대조군(기존 코드)은 닫힘으로 재현됨. 로컬 dev 서버(3031)에서 `/ko`, `/ko/guides`, `/en/guides` 200 확인.
+
 ## 2026-09-30 (추가43) — 로컬(개발 환경) 접속은 방문자 수·GA4에서 항상 제외
 
 - 배경: 운영자 본인의 접속이 방문자 수·GA4에 잡히면 실제 사용자 유입을 정확히 볼 수 없음. 로컬 `.env.local`이 실서버와 같은 Upstash Redis를 가리켜 `?dev=` 없이 여는 로컬 접속도 집계에 반영될 수 있었음.

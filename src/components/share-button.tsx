@@ -74,6 +74,10 @@ type ShareButtonProps = {
   image?: string;
   className?: string;
   variant?: "outline" | "ghost";
+  /** Which side of the button the dropdown opens on. Use "top" for buttons
+   *  near the bottom edge of the page (e.g. the footer) so the menu doesn't
+   *  extend the page downward. Defaults to "bottom". */
+  menuPlacement?: "bottom" | "top";
 };
 
 export function ShareButton({
@@ -83,6 +87,7 @@ export function ShareButton({
   image,
   className,
   variant = "outline",
+  menuPlacement = "bottom",
 }: ShareButtonProps) {
   const t = useTranslations("Share");
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -209,7 +214,7 @@ export function ShareButton({
       {menuOpen ? (
         <div
           role="menu"
-          className="absolute right-0 z-20 mt-2 flex w-48 flex-col gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 text-[var(--color-text-primary)] shadow-md"
+          className={`absolute right-0 z-20 ${menuPlacement === "top" ? "bottom-full mb-2" : "mt-2"} flex w-48 flex-col gap-0.5 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-1.5 text-[var(--color-text-primary)] shadow-md`}
         >
           {canNativeShare ? (
             <button
