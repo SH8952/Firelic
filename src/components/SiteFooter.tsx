@@ -1,10 +1,19 @@
-import { useTranslations } from "next-intl";
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { Rss } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { VisitorCounter } from "@/components/VisitorCounter";
+import { ShareButton } from "@/components/share-button";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
 export function SiteFooter() {
   const t = useTranslations("nav");
+  const calcT = useTranslations("calculator");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const year = new Date().getFullYear();
   // "About"/"Guides" moved to SiteHeader (top nav) on 2026-09-01; the
   // footer now only carries the legal/policy links.
@@ -28,6 +37,14 @@ export function SiteFooter() {
               {l.label}
             </Link>
           ))}
+          {isHomePage ? (
+            <ShareButton
+              title={calcT("title")}
+              text={calcT("subtitle")}
+              url={`${SITE_URL}/${locale}`}
+              variant="ghost"
+            />
+          ) : null}
           <a
             href="/rss.xml"
             aria-label="RSS feed"

@@ -1,3 +1,15 @@
+## 2026-09-30 (추가42) — 공유하기 기능 추가 (exifnd.com 파일럿을 이식)
+
+- 배경: 3개 사이트 공통 "공유하기" 기능(계획서 `claude/social-share-feature-plan.md`)을 exifnd.com에서 먼저 적용·검증·배포한 뒤 이 사이트에 이식. 사용자가 이식 범위(홈·가이드, 계산기 결과 공유는 제외)를 확인해 승인.
+- `src/components/share-button.tsx` 신설: exifnd.com의 공용 컴포넌트를 이 사이트에 맞게 이식(shadcn 버튼 대신 이 사이트의 색상 변수 `--color-*` 체계로 스타일링). 기능은 동일 — 기기 공유(지원 시)·링크 복사·X·Facebook·카카오톡. 카카오 SDK는 방문자가 공유 메뉴를 열 때만 지연 로드하며, 이미지가 없는 페이지는 카카오 텍스트형 메시지로 자동 대체.
+- 가이드 상세 페이지: 발행일 줄 오른쪽에 공유 버튼(대표 이미지가 있으면 카카오 미리보기 이미지로 사용).
+- 홈페이지: `SiteFooter.tsx`를 클라이언트 컴포넌트로 전환해 홈(`/`)에서만 "문의하기"와 RSS 아이콘 사이에 공유 버튼(ghost 스타일) 노출. 다른 페이지 푸터는 기존과 동일. 공유 제목/설명은 `calculator.title`/`calculator.subtitle`을 재사용.
+- 4개 언어(en/ko/ja/es) 메시지에 `Share` 네임스페이스 신규 추가.
+- 실제 카카오 키와 로컬 `NEXT_PUBLIC_SITE_URL=http://localhost:3030`은 git에 올라가지 않는 `.env.local`에만 설정. (`.env.example`은 이 저장소에서 `.gitignore`의 `.env*` 규칙에 걸려 추적되지 않는 파일이라 안내 문구만 로컬에 추가하고 커밋에는 포함하지 않음.)
+- 계산기 결과를 링크에 담아 공유하는 기능(URL 상태 동기화)은 사용자 결정으로 이번에는 제외 — 추후 별도 작업.
+- 검증: `npx tsc --noEmit`, `npx eslint` 통과. 로컬 dev 서버(port 3030) curl 스모크 테스트에서 `/ko`·`/en`(홈), 가이드 상세(ko/ja)는 공유 버튼 노출 + 200, `/ko/faq`·`/es/about`은 버튼 없음 + 200, 홈 푸터에서 버튼이 "문의하기"와 RSS 사이에 있는 것을 응답 HTML로 확인.
+- 참고: 검증 중 `.next`를 옮겨둔 임시 폴더 이름이 `.gitignore` 패턴(`.next_stale*`)에 맞지 않으면 Tailwind가 그 안의 캐시 파일을 읽다 CSS 파싱 오류(500)가 난다는 것을 확인 — 반드시 `.next_stale_*` 이름으로 옮길 것.
+
 ## 2026-09-27 (추가41) — 홈페이지 가이드/FAQ 하이라이트 무작위 노출로 개선
 
 - 배경: `claude/guide-highlights-and-faq-highlights-rollout-guide.md` 문서 참고 — 형제 프로젝트 ExifLens에 이미 적용된 두 가지 홈페이지 개선(가이드 하이라이트 3→6개 무작위 노출, FAQ 하이라이트 섹션 신규 추가)을 firelic에도 적용 요청받음. firelic은 아직 조사되지 않은 상태였으므로 문서의 ExifLens 코드는 참고 패턴으로만 삼고 실제 코드 구조(단일 FAQ 네임스페이스 `Faq.items`, CSS 변수 기반 스타일)를 먼저 조사한 뒤 진행. 무작위 노출 개수는 사용자에게 직접 확인(가이드 6개, FAQ 5개).

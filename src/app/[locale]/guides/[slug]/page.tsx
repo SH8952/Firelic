@@ -6,6 +6,7 @@ import { compileGuide, getGuideMeta, getGuideSlugs } from "@/lib/guides";
 import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/GuideToolCta";
+import { ShareButton } from "@/components/share-button";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
@@ -92,7 +93,15 @@ export default async function GuideDetailPage({
       <GuideViewTracker slug={slug} locale={locale} />
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
       <h1 className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">{meta.title}</h1>
-      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{meta.publishedAt}</p>
+      <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-xs text-[var(--color-text-secondary)]">{meta.publishedAt}</p>
+        <ShareButton
+          title={meta.title}
+          text={meta.description}
+          url={`${SITE_URL}/${locale}/guides/${slug}`}
+          image={meta.image ? `${SITE_URL}${meta.image}` : undefined}
+        />
+      </div>
 
       <GuideToolCta locale={locale} />
 
