@@ -1,3 +1,11 @@
+## 2026-09-30 (추가43) — 로컬(개발 환경) 접속은 방문자 수·GA4에서 항상 제외
+
+- 배경: 운영자 본인의 접속이 방문자 수·GA4에 잡히면 실제 사용자 유입을 정확히 볼 수 없음. 로컬 `.env.local`이 실서버와 같은 Upstash Redis를 가리켜 `?dev=` 없이 여는 로컬 접속도 집계에 반영될 수 있었음.
+- `src/app/api/visitor-count/route.ts`: `NODE_ENV === "development"`이거나 호스트가 `localhost`/`127.0.0.1`/`[::1]`이면 쿠키와 관계없이 증가 없이 읽기만 수행(기존 `dev_exclude` 쿠키 제외 유지).
+- `src/components/GoogleAnalytics.tsx`: `gtag('config')`를 `dev_exclude` 쿠키가 없고 호스트가 로컬이 아닐 때만 실행. (로컬 `.env.local`에는 GA 측정 ID가 없어 로컬에서는 원래 GA가 로드되지 않음 — 측정 ID를 넣어도 안전하도록 한 것.)
+- 실서버 동작 변경 없음. 실서버 제외는 기존대로 각 도메인에서 `?dev=토큰` 접속으로 쿠키 발급(브라우저·기기별 1회, 유효 1년). Vercel 확인(값 미열람): `DEV_EXCLUDE_TOKEN`이 Production·Preview에 등록됨.
+- 검증: `npx tsc --noEmit`, `npx eslint` 통과. 로컬 dev 서버 + 가짜 KV 서버로 localhost·127.0.0.1 요청 모두 `get`만 발생, `incr`/`expire` 0건.
+
 ## 2026-09-30 (추가42) — 공유하기 기능 추가 (exifnd.com 파일럿을 이식)
 
 - 배경: 3개 사이트 공통 "공유하기" 기능(계획서 `claude/social-share-feature-plan.md`)을 exifnd.com에서 먼저 적용·검증·배포한 뒤 이 사이트에 이식. 사용자가 이식 범위(홈·가이드, 계산기 결과 공유는 제외)를 확인해 승인.

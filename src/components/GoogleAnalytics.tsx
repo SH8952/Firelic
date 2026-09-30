@@ -24,7 +24,8 @@ export function GoogleAnalytics() {
             wait_for_update: 500
           });
           gtag('js', new Date());
-          if (!/(?:^|; )dev_exclude=1(?:;|$)/.test(document.cookie)) {
+          if (!/(?:^|; )dev_exclude=1(?:;|$)/.test(document.cookie) &&
+            ['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) === -1) {
             gtag('config', '${GA_MEASUREMENT_ID}');
           }
         `}
