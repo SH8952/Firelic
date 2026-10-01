@@ -1,3 +1,10 @@
+## 2026-10-02 (추가46) — 가이드 글 취소선 오표시 버그 수정 (물결표 `~` 범위 표기)
+
+- 배경: exifnd.com에서 발견된 가이드 글 취소선 오표시 문제를 3개 사이트 공통으로 점검. 원인은 `src/lib/guides.ts`의 `remark-gfm` 기본값(`singleTilde: true`)이 `~` 하나만 있어도 취소선으로 해석해, "10~15%"처럼 범위 표기를 쓴 문단에서 두 `~` 사이가 통째로 취소선이 되고 `~` 문자도 사라지는 것. 원문 단어는 삭제된 적 없음.
+- 점검 결과(firelic): 18개 글(ko 17, ja 1) 25곳 영향. `~~` 취소선을 의도적으로 쓴 글 0건. 상세는 `claude/guide-strikethrough-tilde-bug-audit-2026-10-02.md`.
+- `src/lib/guides.ts`: `remarkPlugins: [remarkGfm]` → `[[remarkGfm, { singleTilde: false }]]` (`~~`만 취소선). 콘텐츠 파일은 수정하지 않음. 앞으로 발행되는 글에서도 재발하지 않음.
+- 검증: `npx tsc --noEmit`, `npx eslint src/lib/guides.ts` 통과. 실제 MDX→HTML 렌더링으로 전체 172개 가이드 파일 확인 — `<del>` 0건, `~` 개수 원문과 일치, 렌더 오류 0건. 브라우저 화면 확인은 못 했으므로 배포 후 `/ko/guides/asset-allocation-by-fire-stage`에서 취소선이 사라졌는지 확인 필요.
+
 ## 2026-10-02 (추가45) — 방문자 카운터에 봇 전용 집계 추가 (exiflens 이식) + 누락 봇 보강
 
 - 배경: 검색엔진·AI 크롤러가 페이지 스크립트를 실행하면서 방문자 카운터를 올려 실제 사용자 수와 GA4 수치가 어긋날 수 있음. exiflens에서 먼저 적용·배포한 봇 전용 집계(`385dcd1`)를 이 사이트에도 적용.
