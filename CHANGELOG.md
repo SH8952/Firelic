@@ -1,3 +1,12 @@
+## 2026-10-02 (추가45) — 방문자 카운터에 봇 전용 집계 추가 (exiflens 이식) + 누락 봇 보강
+
+- 배경: 검색엔진·AI 크롤러가 페이지 스크립트를 실행하면서 방문자 카운터를 올려 실제 사용자 수와 GA4 수치가 어긋날 수 있음. exiflens에서 먼저 적용·배포한 봇 전용 집계(`385dcd1`)를 이 사이트에도 적용.
+- `src/lib/visitor-counter.ts`: 봇 전용 Redis 키(`firelic:bot_count`, `firelic:bot_count:daily:<KST날짜>`)와 `getBotCounts`/`incrementBotCounts` 추가(일별 키 2일 TTL).
+- `src/app/api/visitor-count/route.ts`: 봇 접속 정보면 봇 카운터만 증가, 방문자 수는 증가시키지 않음. 개발자 쿠키·로컬 접속은 기존대로 읽기만 수행. `botDaily`/`botTotal`은 `dev_exclude` 쿠키가 있을 때만 응답에 포함.
+- `src/components/VisitorCounter.tsx`: 응답에 봇 수치가 있을 때만 "(Bots today N · Total M)" 표시(일반 방문자에게는 안 보임).
+- 봇 판별 목록: exiflens의 기존 목록에 `Mediapartners-Google`(애드센스 크롤러), `Google-InspectionTool`(서치콘솔 URL 검사), `HeadlessChrome`, `Lighthouse`(PageSpeed), 다음 검색 로봇 `Daumoa`(및 `daum/숫자` 형식)를 추가. 다음 앱 안에서 열린 페이지의 접속 정보에는 `DaumApps/<버전>`이 들어 있어 실제 사용자이므로, `daum` 단독 패턴은 넣지 않음(시험으로 DaumApps는 사람, Daumoa는 봇으로 분류됨을 확인).
+- 검증: `npx tsc --noEmit`, `npx eslint` 통과. 사람 8종·봇 9종 접속 정보 단위 시험 통과. 로컬 접속은 읽기 전용 분기가 먼저라 증가 경로는 로컬 시험 불가(exiflens 배포 코드와 동일). 이전 집계 값은 소급 분리되지 않음. 배포 후 `?dev=<토큰>` 접속 시 푸터에 봇 수치 표시.
+
 ## 2026-09-30 (추가44) — 푸터 공유 메뉴를 위로 열기 + 가이드 "더보기" 펼침 상태 뒤로가기 유지
 
 - 배경: 푸터의 공유하기 메뉴가 버튼 아래로 열려 페이지 하단이 늘어남 / 가이드 목록에서 "더보기"로 펼친 뒤 글을 보고 뒤로가기를 하면 닫힘 상태로 초기화됨(펼침 여부가 컴포넌트 내부 `useState`에만 있었음).
