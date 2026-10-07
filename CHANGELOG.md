@@ -1,3 +1,12 @@
+## 2026-10-07 (추가49) — favicon.ico를 firelic 로고로 교체
+
+- 배경: 키 파일(txt)·`ads.txt`처럼 HTML이 아닌 파일을 주소창에 직접 열면 브라우저가 사이트 루트의 `/favicon.ico`를 찾는데, `src/app/favicon.ico`가 프로젝트 생성 당시의 Next.js 기본 템플릿 아이콘 그대로여서 해당 아이콘이 표시됨. 일반 페이지는 `src/app/icon.svg`(firelic 로고)가 지정돼 있어 정상이었음.
+- 수정: `src/app/icon.svg`와 동일한 로고(초록 원 + 상승 화살표 + 주황 점)로 `src/app/favicon.ico`를 새로 생성해 교체(16·32·48px 3종 포함, 5.6KB). `icon.svg` 및 아이콘 지정 코드는 변경 없음.
+- 확인: 각 크기를 이미지로 렌더링해 로고 형태가 유지되는지 확인. 코드·빌드 영향 없음(정적 파일 1개 교체).
+- 백업: `_backups/favicon_20261007/`(기존 favicon.ico 포함).
+- 참고: 브라우저가 파비콘을 오래 캐시하므로 배포 후에도 한동안 이전 아이콘이 보일 수 있음(새로고침·시크릿 창으로 확인).
+- 대상: firelic만(ExifLens·FlyDroneMap은 이미 자체 파비콘이 정상 표시됨).
+
 ## 2026-10-07 (추가48) — IndexNow 기준 주소를 www 없는 주소로 통일·보강
 
 - 배경: 세 사이트 모두 www 없는 주소(apex)로 통일됨. firelic의 `automation/indexnow-submit.py` 기준 주소(`SITE_BASE`)와 `.env.example`이 이전 www 주소로 남아 있어 보정.
