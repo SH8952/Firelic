@@ -8,6 +8,7 @@ import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/GuideToolCta";
 import { ShareButton } from "@/components/share-button";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
+import { ReadingProgress } from "@/components/guides/reading-progress";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -62,6 +63,9 @@ export default async function GuideDetailPage({
   }
   const { Content, meta } = compiled;
   const t = await getTranslations({ locale, namespace: "guides" });
+  // 한국어: 제목·본문 단어 중간 줄바꿈 방지(ExifLens와 동일 범위 — ja 제외).
+  const koWrap =
+    locale === "ko" ? " [word-break:keep-all] [overflow-wrap:break-word]" : "";
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: `${SITE_URL}/${locale}` },
     { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
@@ -82,6 +86,7 @@ export default async function GuideDetailPage({
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-12">
+      <ReadingProgress targetId="guide-article" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
@@ -92,7 +97,7 @@ export default async function GuideDetailPage({
       />
       <GuideViewTracker slug={slug} locale={locale} />
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
-      <h1 className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">{meta.title}</h1>
+      <h1 className={`mt-2 text-2xl font-bold text-[var(--color-text-primary)]${koWrap}`}>{meta.title}</h1>
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs text-[var(--color-text-secondary)]">
           {meta.publishedAt}
@@ -149,7 +154,10 @@ export default async function GuideDetailPage({
         </figure>
       ) : null}
 
-      <div className="prose prose-neutral dark:prose-invert mt-6 max-w-none text-sm leading-relaxed text-[var(--color-text-primary)]">
+      <div
+        id="guide-article"
+        className={`prose prose-neutral dark:prose-invert mt-6 max-w-none text-sm leading-relaxed text-[var(--color-text-primary)] prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-[var(--color-primary)] prose-p:leading-8 prose-li:leading-7 prose-h2:mt-12 prose-h2:border-b prose-h2:border-[var(--color-border)] prose-h2:pb-2 prose-h3:mt-8 prose-blockquote:border-[var(--color-primary)]/60 prose-blockquote:not-italic prose-img:rounded-lg${koWrap}`}
+      >
         <Content />
       </div>
 
