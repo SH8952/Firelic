@@ -66,13 +66,13 @@
     "showLess": "Show less",
     "ctaBannerText": "Curious where you stand on the path to FIRE?",
     "ctaBannerButton": "Try the FIRE Calculator",
-      "updatedLabel": "Updated",
-      "journeyTitle": "New here? Follow the FIRE journey in order",
-      "journeyIntro": "FIRE comes down to three stages — understand it, save more, then invest what you save. These four guides walk through them in order:",
-      "journeyStep1": "1. What is FIRE?",
-      "journeyStep2": "2. Raise your savings rate",
-      "journeyStep3": "3. Invest it (index funds)",
-      "journeyStep4": "4. Plan the withdrawal"
+    "updatedLabel": "Updated",
+    "journeyTitle": "New here? Follow the FIRE journey in order",
+    "journeyIntro": "FIRE comes down to three stages — understand it, save more, then invest what you save. These four guides walk through them in order:",
+    "journeyStep1": "1. What is FIRE?",
+    "journeyStep2": "2. Raise your savings rate",
+    "journeyStep3": "3. Invest it (index funds)",
+    "journeyStep4": "4. Plan the withdrawal"
   },
   "Faq": {
     "title": "Frequently Asked Questions",
@@ -131,5 +131,18 @@
     "copyLink": "Copy link",
     "copied": "Copied",
     "viewOnWeb": "View on web"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or may have been moved.",
+    "home": "Go to homepage",
+    "guides": "Browse guides",
+    "faq": "View FAQ"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again, or return to the homepage.",
+    "retry": "Try again",
+    "home": "Go to homepage"
   }
 }

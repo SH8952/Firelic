@@ -66,13 +66,13 @@
     "showLess": "閉じる",
     "ctaBannerText": "自分がFIREまでどのくらいの位置にいるか気になりませんか?",
     "ctaBannerButton": "FIRE計算機を試す",
-      "updatedLabel": "更新日",
-      "journeyTitle": "はじめての方へ — この順番でFIREの旅をたどりましょう",
-      "journeyIntro": "FIREは結局3つの段階です — 考え方を理解し、貯蓄率を上げ、貯めたお金を投資で増やすこと。以下の4つのガイドを順番に読んでみてください。",
-      "journeyStep1": "1. FIREとは何か",
-      "journeyStep2": "2. 貯蓄率を上げる",
-      "journeyStep3": "3. 投資で増やす",
-      "journeyStep4": "4. 取り崩し方を計画する"
+    "updatedLabel": "更新日",
+    "journeyTitle": "はじめての方へ — この順番でFIREの旅をたどりましょう",
+    "journeyIntro": "FIREは結局3つの段階です — 考え方を理解し、貯蓄率を上げ、貯めたお金を投資で増やすこと。以下の4つのガイドを順番に読んでみてください。",
+    "journeyStep1": "1. FIREとは何か",
+    "journeyStep2": "2. 貯蓄率を上げる",
+    "journeyStep3": "3. 投資で増やす",
+    "journeyStep4": "4. 取り崩し方を計画する"
   },
   "Faq": {
     "title": "よくある質問",
@@ -131,5 +131,18 @@
     "copyLink": "リンクをコピー",
     "copied": "コピーしました",
     "viewOnWeb": "ウェブで見る"
+  },
+  "NotFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しないか、移動した可能性があります。",
+    "home": "ホームへ戻る",
+    "guides": "ガイドを見る",
+    "faq": "FAQを見る"
+  },
+  "ErrorPage": {
+    "title": "問題が発生しました",
+    "description": "予期しないエラーが発生しました。もう一度お試しいただくか、ホームへお戻りください。",
+    "retry": "再試行",
+    "home": "ホームへ戻る"
   }
 }

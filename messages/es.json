@@ -66,13 +66,13 @@
     "showLess": "Ver menos",
     "ctaBannerText": "¿Quieres saber en qué punto estás en tu camino hacia el FIRE?",
     "ctaBannerButton": "Probar la Calculadora FIRE",
-      "updatedLabel": "Actualizado",
-      "journeyTitle": "¿Nuevo aquí? Sigue el camino FIRE en este orden",
-      "journeyIntro": "FIRE se reduce a tres etapas — entenderlo, ahorrar más y luego invertir lo que ahorras. Estas cuatro guías te llevan por ellas en orden:",
-      "journeyStep1": "1. ¿Qué es FIRE?",
-      "journeyStep2": "2. Aumenta tu tasa de ahorro",
-      "journeyStep3": "3. Invierte (fondos indexados)",
-      "journeyStep4": "4. Planifica el retiro"
+    "updatedLabel": "Actualizado",
+    "journeyTitle": "¿Nuevo aquí? Sigue el camino FIRE en este orden",
+    "journeyIntro": "FIRE se reduce a tres etapas — entenderlo, ahorrar más y luego invertir lo que ahorras. Estas cuatro guías te llevan por ellas en orden:",
+    "journeyStep1": "1. ¿Qué es FIRE?",
+    "journeyStep2": "2. Aumenta tu tasa de ahorro",
+    "journeyStep3": "3. Invierte (fondos indexados)",
+    "journeyStep4": "4. Planifica el retiro"
   },
   "Faq": {
     "title": "Preguntas Frecuentes",
@@ -131,5 +131,18 @@
     "copyLink": "Copiar enlace",
     "copied": "Copiado",
     "viewOnWeb": "Ver en la web"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe o puede haberse movido.",
+    "home": "Ir al inicio",
+    "guides": "Ver guías",
+    "faq": "Ver preguntas frecuentes"
+  },
+  "ErrorPage": {
+    "title": "Algo salió mal",
+    "description": "Se produjo un error inesperado. Inténtalo de nuevo o vuelve al inicio.",
+    "retry": "Reintentar",
+    "home": "Ir al inicio"
   }
 }
