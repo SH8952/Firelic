@@ -39,10 +39,10 @@
     "affiliateDisclosure": "Affiliate links — we may earn a commission at no extra cost to you. Links will activate once partner programs are approved.",
     "usageTitle": "How to Use FIRE Calculator",
     "usageSteps": [
-      "Adjust the sliders on the left to enter your age, savings, contributions, expenses, and expected return. You can switch the currency to any of the five supported units.",
-      "Your FIRE number, FIRE age, and years remaining update instantly in the result cards and chart on the right.",
-      "Turn on \"Scenario A / B Compare\" to line up two different savings strategies side by side and see how each path changes your FIRE date.",
-      "Every calculation runs entirely in your browser — nothing you enter is saved or sent to a server."
+      "Use the sliders on the left to set your current age (18-80) and target retirement age, your current investment portfolio, how much you save and invest each month, and your expected annual expenses in retirement. You can also fine-tune your expected real annual return (0-15%), safe withdrawal rate (2-6%), and effective tax rate in retirement (0-40%) to match your own investing style and tax situation. Choose from 5 currencies ($, €, £, ₩, ¥) to run the numbers in whichever unit makes sense for you.",
+      "As soon as you change an input, the result cards on the right instantly recalculate your FIRE number, the age you'll reach it, and the years remaining. The chart below separates the accumulation phase, while you're still saving, from the withdrawal phase, after you retire, using different colors, so you can see at a glance how your portfolio grows and then gets drawn down.",
+      "Turn on \"Scenario A/B comparison\" to enter two different saving strategies at once, for example a higher monthly contribution or a different target age, and see both paths plotted side by side on the chart and result cards. This makes it easy to see exactly how much sooner a small increase in savings could get you to FIRE, or how much a later target age would ease your monthly savings burden.",
+      "All calculations run instantly in your own browser, and nothing you enter, your age, assets, or income, is ever stored or sent to a server. Your FIRE number also isn't just annual expenses divided by the withdrawal rate: it's grossed up for the effective tax rate you set, so with the tax rate at 0% you'll see the classic \"25x rule,\" and with a higher rate you'll see the larger target you'd actually need."
     ],
     "trustBadges": [
       "Free",

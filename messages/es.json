@@ -39,10 +39,10 @@
     "affiliateDisclosure": "Enlaces de afiliados: podemos ganar una comisión sin costo adicional para ti. Los enlaces se activarán cuando se aprueben los programas de socios.",
     "usageTitle": "Cómo usar la FIRE Calculator",
     "usageSteps": [
-      "Ajusta los controles deslizantes de la izquierda para introducir tu edad, ahorros, aportaciones, gastos y rendimiento esperado. Puedes cambiar la moneda entre las cinco unidades disponibles.",
-      "Tu número FIRE, tu edad FIRE y los años restantes se actualizan al instante en las tarjetas de resultados y el gráfico de la derecha.",
-      "Activa el modo \"Comparar Escenario A/B\" para poner en paralelo dos estrategias de ahorro distintas y ver cómo cada camino cambia tu fecha FIRE.",
-      "Todos los cálculos se realizan enteramente en tu navegador: nada de lo que introduzcas se guarda ni se envía a un servidor."
+      "Usa los controles deslizantes de la izquierda para indicar tu edad actual (18-80), la edad objetivo de jubilación, tu patrimonio invertido actual, cuánto ahorras e inviertes cada mes y tu gasto anual estimado en la jubilación. También puedes ajustar la rentabilidad real anual esperada (0-15%), la tasa de retiro segura (2-6%) y la tasa impositiva efectiva en la jubilación (0-40%) para adaptarlo a tu estilo de inversión y tu situación fiscal. Elige entre 5 monedas ($, €, £, ₩, ¥) para calcular en la unidad que prefieras.",
+      "En cuanto cambias un valor, las tarjetas de resultado de la derecha recalculan al instante tu número FIRE, la edad a la que lo alcanzarás y los años que te quedan. El gráfico de abajo distingue, con colores diferentes, la fase de acumulación (mientras ahorras) de la fase de retiro (una vez jubilado), para que veas de un vistazo cómo crece tu patrimonio y cómo se va utilizando después.",
+      "Activa la comparación de \"Escenario A/B\" para introducir dos estrategias de ahorro distintas a la vez, por ejemplo una aportación mensual mayor o una edad objetivo diferente, y ver ambos caminos uno junto al otro en el gráfico y las tarjetas de resultado. Así puedes comprobar exactamente cuánto antes podrías alcanzar el FIRE con un pequeño aumento del ahorro, o cuánto se reduciría tu esfuerzo mensual si retrasas el objetivo.",
+      "Todos los cálculos se hacen al instante en tu propio navegador, y nada de lo que introduces (edad, patrimonio o ingresos) se guarda ni se envía a ningún servidor. Además, tu número FIRE no es simplemente el gasto anual dividido entre la tasa de retiro: se ajusta (gross-up) según la tasa impositiva efectiva que indiques, de modo que con una tasa del 0% verás la clásica \"regla del 25x\", y con una tasa más alta verás el objetivo mayor que realmente necesitarías."
     ],
     "trustBadges": [
       "Gratis",
