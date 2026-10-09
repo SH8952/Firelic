@@ -65,7 +65,14 @@
     "showMore": "더보기",
     "showLess": "접기",
     "ctaBannerText": "나의 FIRE 목표까지 얼마나 남았는지 확인해보세요",
-    "ctaBannerButton": "FIRE 계산기 바로가기"
+    "ctaBannerButton": "FIRE 계산기 바로가기",
+      "updatedLabel": "최종 수정",
+      "journeyTitle": "처음이신가요? 이 순서로 FIRE 여정을 따라가보세요",
+      "journeyIntro": "FIRE는 결국 세 단계입니다 — 개념을 이해하고, 저축률을 높이고, 모은 돈을 투자로 불려나가는 것. 아래 4개 가이드를 순서대로 읽어보세요.",
+      "journeyStep1": "1. FIRE란 무엇인가",
+      "journeyStep2": "2. 저축률 높이기",
+      "journeyStep3": "3. 투자로 불려나가기",
+      "journeyStep4": "4. 인출 전략 계획하기"
   },
   "Faq": {
     "title": "자주 묻는 질문",

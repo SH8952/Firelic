@@ -40,6 +40,45 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
       />
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
 
+      <div className="mt-6 rounded-xl border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/5 p-5">
+        <p className="text-sm font-semibold text-[var(--color-text-primary)]">{t("journeyTitle")}</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{t("journeyIntro")}</p>
+        <ol className="mt-3 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-3">
+          <li>
+            <a
+              href={`/${locale}/guides/what-is-fire`}
+              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+            >
+              {t("journeyStep1")}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`/${locale}/guides/how-to-calculate-your-savings-rate`}
+              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+            >
+              {t("journeyStep2")}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`/${locale}/guides/index-fund-investing-for-fire`}
+              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+            >
+              {t("journeyStep3")}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`/${locale}/guides/4-percent-rule-safe-withdrawal-rate`}
+              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+            >
+              {t("journeyStep4")}
+            </a>
+          </li>
+        </ol>
+      </div>
+
       {categories.length === 0 ? (
         <p className="mt-6 text-sm text-[var(--color-text-secondary)]">{t("empty")}</p>
       ) : (

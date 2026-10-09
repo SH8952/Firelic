@@ -65,7 +65,14 @@
     "showMore": "もっと見る",
     "showLess": "閉じる",
     "ctaBannerText": "自分がFIREまでどのくらいの位置にいるか気になりませんか?",
-    "ctaBannerButton": "FIRE計算機を試す"
+    "ctaBannerButton": "FIRE計算機を試す",
+      "updatedLabel": "更新日",
+      "journeyTitle": "はじめての方へ — この順番でFIREの旅をたどりましょう",
+      "journeyIntro": "FIREは結局3つの段階です — 考え方を理解し、貯蓄率を上げ、貯めたお金を投資で増やすこと。以下の4つのガイドを順番に読んでみてください。",
+      "journeyStep1": "1. FIREとは何か",
+      "journeyStep2": "2. 貯蓄率を上げる",
+      "journeyStep3": "3. 投資で増やす",
+      "journeyStep4": "4. 取り崩し方を計画する"
   },
   "Faq": {
     "title": "よくある質問",

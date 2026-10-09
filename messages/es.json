@@ -65,7 +65,14 @@
     "showMore": "Ver más",
     "showLess": "Ver menos",
     "ctaBannerText": "¿Quieres saber en qué punto estás en tu camino hacia el FIRE?",
-    "ctaBannerButton": "Probar la Calculadora FIRE"
+    "ctaBannerButton": "Probar la Calculadora FIRE",
+      "updatedLabel": "Actualizado",
+      "journeyTitle": "¿Nuevo aquí? Sigue el camino FIRE en este orden",
+      "journeyIntro": "FIRE se reduce a tres etapas — entenderlo, ahorrar más y luego invertir lo que ahorras. Estas cuatro guías te llevan por ellas en orden:",
+      "journeyStep1": "1. ¿Qué es FIRE?",
+      "journeyStep2": "2. Aumenta tu tasa de ahorro",
+      "journeyStep3": "3. Invierte (fondos indexados)",
+      "journeyStep4": "4. Planifica el retiro"
   },
   "Faq": {
     "title": "Preguntas Frecuentes",

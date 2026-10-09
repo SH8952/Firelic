@@ -94,7 +94,14 @@ export default async function GuideDetailPage({
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
       <h1 className="mt-2 text-2xl font-bold text-[var(--color-text-primary)]">{meta.title}</h1>
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs text-[var(--color-text-secondary)]">{meta.publishedAt}</p>
+        <p className="text-xs text-[var(--color-text-secondary)]">
+          {meta.publishedAt}
+          {meta.updatedAt && meta.updatedAt !== meta.publishedAt ? (
+            <span className="ml-2 text-[var(--color-text-secondary)]/80">
+              · {t("updatedLabel")} {meta.updatedAt}
+            </span>
+          ) : null}
+        </p>
         <ShareButton
           title={meta.title}
           text={meta.description}

@@ -65,7 +65,14 @@
     "showMore": "Show more",
     "showLess": "Show less",
     "ctaBannerText": "Curious where you stand on the path to FIRE?",
-    "ctaBannerButton": "Try the FIRE Calculator"
+    "ctaBannerButton": "Try the FIRE Calculator",
+      "updatedLabel": "Updated",
+      "journeyTitle": "New here? Follow the FIRE journey in order",
+      "journeyIntro": "FIRE comes down to three stages — understand it, save more, then invest what you save. These four guides walk through them in order:",
+      "journeyStep1": "1. What is FIRE?",
+      "journeyStep2": "2. Raise your savings rate",
+      "journeyStep3": "3. Invest it (index funds)",
+      "journeyStep4": "4. Plan the withdrawal"
   },
   "Faq": {
     "title": "Frequently Asked Questions",
