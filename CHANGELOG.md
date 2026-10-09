@@ -1,3 +1,10 @@
+## 2026-10-09 (추가58) — 홈 하단 가이드/FAQ 섹션 좌우 폭을 계산기와 통일
+
+- 배경: 사용자가 실제 화면 스크린샷으로 지적 — 계산기(FireCalculator)/맨 아래 광고 영역은 max-w-6xl인데, "가이드 살펴보기"/"자주 묻는 질문" 섹션은 max-w-5xl로 더 좁아 아래로 내려갈수록 좌우 여백이 넓어 보이던 문제.
+- 수정: `home-guide-highlights.tsx`, `home-faq-highlights.tsx`의 컨테이너를 max-w-5xl → max-w-6xl로 변경. 면책 문구(DisclaimerFooter)는 가독성 목적의 의도적인 좁은 폭(max-w-3xl)이라 대상에서 제외.
+- 검증: `tsc --noEmit`, `eslint`, `next build`(214페이지 정적 생성) 통과.
+- 백업: `_backups/firelic_backup_20261009_125148_홈섹션폭통일전/`.
+
 ## 2026-10-09 (추가57) — 가이드 상세 읽기 진행률 바 + 타이포그래피 정리
 
 - 배경: exifnd.com이 먼저 적용한 "가벼운 작업 5건" 중 마지막 — 글 내용은 그대로, 화면 표현만 개선.
