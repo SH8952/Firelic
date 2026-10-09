@@ -19,8 +19,15 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "calculator" });
+  // 한국어: 단어 중간에서 줄바꿈되지 않도록 어절 단위로 줄바꿈(모바일에서 보던 문제).
+  // display:contents라 레이아웃에는 영향 없음 — word-break/overflow-wrap은 상속 속성이라
+  // 하위의 FireCalculator·가이드/FAQ 하이라이트 전체에 자동으로 적용됨.
+  // ExifLens가 먼저 적용한 패턴(claude/exiflens-home-blog-cta-polish-2026-10-08.md)과 동일.
+  const koWrap =
+    locale === "ko" ? " [word-break:keep-all] [overflow-wrap:break-word]" : "";
+
   return (
-    <>
+    <div className={`contents${koWrap}`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -41,6 +48,6 @@ export default async function HomePage({
       <div className="mx-auto max-w-6xl px-4 pb-10">
         <AdSlot variant="display" label={t("adDisplay")} />
       </div>
-    </>
+    </div>
   );
 }
