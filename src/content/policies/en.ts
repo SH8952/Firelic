@@ -12,11 +12,11 @@ export const en: PolicyContent = {
   },
   privacy: {
     title: "Privacy Policy",
-    updated: "2026-08-30",
+    updated: "2026-10-09",
     paragraphs: [
       "We respect your privacy. The financial figures you enter into the calculator (age, savings, income, etc.) are processed entirely in your browser and are never transmitted to or stored on our servers.",
-      "We may use privacy-respecting analytics (such as Google Analytics) to understand aggregate usage patterns — for example, which pages are visited and which browser or country a visit came from. This data is anonymized and does not include the personal financial figures you enter into the calculator.",
-      "We may display advertising served by third parties (such as Google AdSense), which may use cookies to serve relevant ads. You can control cookie preferences through your browser settings.",
+      "We use privacy-respecting analytics (Google Analytics) to understand aggregate usage patterns — for example, which pages are visited and which browser or country a visit came from. This data is anonymized and does not include the personal financial figures you enter into the calculator.",
+      "This site is not yet displaying third-party advertising; once an advertising partner (such as Google AdSense) is approved, ads may use cookies to serve relevant ads. You can control cookie preferences through your browser settings.",
       "If you have questions about this policy, please contact us through the information provided on the About page.",
     ],
   },

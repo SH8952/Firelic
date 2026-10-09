@@ -12,11 +12,11 @@ export const es: PolicyContent = {
   },
   privacy: {
     title: "Política de Privacidad",
-    updated: "2026-08-30",
+    updated: "2026-10-09",
     paragraphs: [
       "Respetamos tu privacidad. Las cifras financieras que introduces en la calculadora (edad, ahorros, ingresos, etc.) se procesan íntegramente en tu navegador y nunca se transmiten ni almacenan en nuestros servidores.",
-      "Podemos utilizar herramientas de análisis que respetan la privacidad (como Google Analytics) para comprender patrones de uso agregados — por ejemplo, qué páginas se visitan y desde qué navegador o país. Estos datos están anonimizados y no incluyen las cifras financieras personales que introduces en la calculadora.",
-      "Podemos mostrar publicidad servida por terceros (como Google AdSense), que puede utilizar cookies para mostrar anuncios relevantes. Puedes controlar las preferencias de cookies desde la configuración de tu navegador.",
+      "Utilizamos herramientas de análisis que respetan la privacidad (Google Analytics) para comprender patrones de uso agregados — por ejemplo, qué páginas se visitan y desde qué navegador o país. Estos datos están anonimizados y no incluyen las cifras financieras personales que introduces en la calculadora.",
+      "Actualmente este sitio no muestra publicidad de terceros; una vez que un socio publicitario (como Google AdSense) sea aprobado, los anuncios podrán utilizar cookies para mostrar anuncios relevantes. Puedes controlar las preferencias de cookies desde la configuración de tu navegador.",
       "Si tienes preguntas sobre esta política, contáctanos a través de la información indicada en la página Acerca de.",
     ],
   },
