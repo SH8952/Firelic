@@ -85,7 +85,7 @@ export default async function GuideDetailPage({
   };
 
   return (
-    <article className="mx-auto max-w-2xl px-4 py-12">
+    <article className="mx-auto max-w-3xl px-4 py-12">
       <ReadingProgress targetId="guide-article" />
       <script
         type="application/ld+json"
