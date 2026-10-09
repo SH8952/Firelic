@@ -46,7 +46,7 @@ export async function HomeFaqHighlights({ locale }: { locale: string }) {
   };
 
   return (
-    <section className="mx-auto mt-12 flex w-full max-w-5xl flex-col gap-4 border-t border-[var(--color-border)] px-4 pt-10">
+    <section className="mx-auto mt-12 flex w-full max-w-6xl flex-col gap-4 border-t border-[var(--color-border)] px-4 pt-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

@@ -30,7 +30,7 @@ export async function HomeGuideHighlights({ locale }: { locale: string }) {
   if (guides.length === 0) return null;
 
   return (
-    <section className="mx-auto mt-12 flex w-full max-w-5xl flex-col gap-4 border-t border-[var(--color-border)] px-4 pt-10">
+    <section className="mx-auto mt-12 flex w-full max-w-6xl flex-col gap-4 border-t border-[var(--color-border)] px-4 pt-10">
       <div className="flex flex-col gap-1">
         <h2 className="text-xl font-semibold text-[var(--color-text-primary)]">
           {t("guideHighlightsTitle")}
