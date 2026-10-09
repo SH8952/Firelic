@@ -1,3 +1,43 @@
+## 2026-10-09 (추가57) — 가이드 상세 읽기 진행률 바 + 타이포그래피 정리
+
+- 배경: exifnd.com이 먼저 적용한 "가벼운 작업 5건" 중 마지막 — 글 내용은 그대로, 화면 표현만 개선.
+- 신규 `src/components/guides/reading-progress.tsx`: 화면 맨 위 3px 진행 막대(본문 id=guide-article 기준 scaleX, requestAnimationFrame, 장식용이라 스크린리더에는 숨김).
+- `src/app/[locale]/guides/[slug]/page.tsx`: ReadingProgress 추가, 본문 div에 id 부여, prose에 prose-p:leading-8/prose-li:leading-7, H2 상단 여백+하단 구분선, H3 상단 여백, 인용문 강조선, 이미지 둥근 모서리 적용. 제목·본문에는 ko에만 word-break:keep-all + overflow-wrap:break-word(ja 제외, ExifLens와 동일 범위).
+- 검증: `tsc --noEmit`, `eslint`, `next build`(214페이지 정적 생성) 통과.
+- 백업: `_backups/firelic_backup_20261009_121513_가벼운작업5건전/`.
+
+## 2026-10-09 (추가56) — 홈 한국어 모바일 단어 중간 줄바꿈 방지
+
+- 배경: "가벼운 작업 5건" 4번 — 홈 섹션 버튼 스타일 통일 + 모바일 줄바꿈 수정.
+- 사전 점검 결과 "전체보기" 버튼(가이드/FAQ 하이라이트 CTA)은 이미 두 곳 모두 동일한 클래스를 쓰고 있어 스타일 불일치가 없었음 — 통일 작업은 불필요로 확인.
+- 수정: `src/app/[locale]/page.tsx`에서 locale === "ko"일 때만 홈 전체 컨테이너(`display:contents`, 레이아웃 영향 없음)에 word-break:keep-all + overflow-wrap:break-word 적용 — 상속 속성이라 FireCalculator·가이드/FAQ 하이라이트 전체에 자동 적용됨. ExifLens와 동일 패턴.
+- 검증: `tsc --noEmit`, `eslint`, `next build`(214페이지 정적 생성) 통과.
+- 백업: `_backups/firelic_backup_20261009_121513_가벼운작업5건전/`.
+
+## 2026-10-09 (추가55) — 목록·약관류 페이지에 "← 홈으로" 뒤로가기 링크 추가
+
+- 배경: "가벼운 작업 5건" 3번 — firelic에는 목록/정책 페이지 전반에 일관된 뒤로가기 링크가 없었음(ExifLens는 이미 적용).
+- 신규 `src/components/back-link.tsx` 공용 컴포넌트. 소개/문의/개인정보/약관/제휴공시(`PolicyPageView` 공유), FAQ, 가이드 목록 페이지 상단에 적용. 홈 화면과 가이드 상세 글(SiteHeader 내비게이션 존재)은 제외.
+- 문구는 4개 언어 messages의 `BackNav` 네임스페이스(`home` 키).
+- 검증: `tsc --noEmit`, `eslint`, `next build`(214페이지 정적 생성) 통과.
+- 백업: `_backups/firelic_backup_20261009_121513_가벼운작업5건전/`.
+
+## 2026-10-09 (추가54) — 전용 404·오류 화면 신설 (4개 언어)
+
+- 배경: "가벼운 작업 5건" 2번 — firelic에 전용 404/오류 화면이 없어, 없는 주소 접속 시 Next.js 기본(영어) 404가 그대로 노출되던 문제.
+- 신규 `src/app/[locale]/not-found.tsx`, `src/app/[locale]/error.tsx`. 헤더/푸터는 유지한 채 본문 영역만 사이트 톤(CSS 변수 색상)에 맞춘 안내 화면으로 교체. 404는 홈/가이드/FAQ로, 오류 화면은 다시 시도/홈으로 이동 가능.
+- `messages/{en,ko,ja,es}.json`에 `NotFound`·`ErrorPage` 네임스페이스 추가.
+- 검증: `tsc --noEmit`, `eslint`, `next build`(214페이지 정적 생성, `/_not-found` 포함) 통과.
+- 백업: `_backups/firelic_backup_20261009_121513_가벼운작업5건전/`.
+
+## 2026-10-09 (추가53) — 가이드 목록 "더보기" 숨김 카드 DOM 노출 버그 수정
+
+- 배경: GPT 진단서 검토 중 발견한 exifnd.com의 동일 버그(claude/exiflens-guide-list-showmore-dom-2026-10-09.md)를 firelic `src/components/guides/guide-category-section.tsx`에서도 코드 대조로 확인 — 접힌 상태에서 `.slice()`로 배열 자체를 잘라내 숨겨진 가이드 카드가 HTML에 전혀 존재하지 않아, 검색 로봇이 "더보기" 버튼을 누르지 않는 한 해당 가이드들이 색인에서 빠지고 있었음.
+- 수정: 모든 카드를 항상 렌더링하고, 접힌 상태의 초과 카드만 Tailwind `hidden` 클래스로 시각적으로만 숨김. 화면 동작(표시 개수, 더보기/접기)은 기존과 동일.
+- 검증: `tsc --noEmit`, `eslint` 통과.
+- 백업: `_backups/firelic_backup_20261009_121513_가벼운작업5건전/`.
+- 참고: 이 5건은 GPT 애드센스 재신청 진단서(2026-10-09) 검토 후 exifnd.com 개편 문서를 참고해 뽑은 "가벼운 작업" 묶음(추가53~57)으로, 사용자 승인("그대로 진행해줘") 후 순서대로 진행함.
+
 ## 2026-10-09 (추가52) — 개인정보처리방침 문구를 실제 상태와 일치시킴
 
 - 배경: GPT 기반 애드센스 재신청 진단서(2026-10-09) 지적 — "정책 문구와 실제 구현이 일치하는지 확인" 필요.
