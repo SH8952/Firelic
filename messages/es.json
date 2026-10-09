@@ -77,7 +77,7 @@
       },
       {
         "question": "¿Cómo se calcula mi número FIRE?",
-        "answer": "Tu número FIRE es tu gasto anual dividido entre la tasa de retiro elegida (habitualmente 4%, es decir, multiplicado por 25). La calculadora proyecta el crecimiento de tus ahorros año a año hasta alcanzar esa cifra."
+        "answer": "Tu número FIRE es tu gasto anual dividido entre la tasa de retiro elegida (habitualmente 4%, es decir, multiplicado por 25), y luego ajustado al alza según la tasa impositiva efectiva que hayas configurado — una tasa impositiva más alta aumenta el objetivo, porque necesitas retirar más para mantener el mismo poder de gasto después de impuestos. Con la tasa impositiva en 0%, esto es simplemente \"gasto anual × 25\". La calculadora proyecta el crecimiento de tus ahorros año a año hasta alcanzar esa cifra."
       },
       {
         "question": "¿La tasa de retiro del 4% es siempre segura?",

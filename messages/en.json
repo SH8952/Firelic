@@ -77,7 +77,7 @@
       },
       {
         "question": "How is my FIRE number calculated?",
-        "answer": "Your FIRE number is your annual expenses divided by your chosen withdrawal rate (commonly 4%, i.e. multiplied by 25). The calculator projects your savings growth year by year until that number is reached."
+        "answer": "Your FIRE number is your annual expenses divided by your chosen withdrawal rate (commonly 4%, i.e. multiplied by 25), then grossed up for the effective tax rate you set on withdrawals — a higher tax rate raises the target, since you need to withdraw more to keep the same after-tax spending power. With the tax rate set to 0%, this is simply expenses × 25. The calculator projects your savings growth year by year until that number is reached."
       },
       {
         "question": "Is the 4% withdrawal rate always safe?",
