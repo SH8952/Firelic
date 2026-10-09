@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { languageAlternates } from "@/lib/seo";
+import { BackLink } from "@/components/back-link";
 
 type FaqItem = { question: string; answer: string };
 
@@ -36,6 +37,7 @@ export default async function FaqPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Faq");
+  const tBack = await getTranslations("BackNav");
   const faqs: FaqItem[] = t.raw("items");
 
   const faqJsonLd = {
@@ -57,6 +59,8 @@ export default async function FaqPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
+      <BackLink href={`/${locale}`} label={tBack("home")} />
 
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">

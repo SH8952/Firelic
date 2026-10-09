@@ -144,5 +144,8 @@
     "description": "An unexpected error occurred. Please try again, or return to the homepage.",
     "retry": "Try again",
     "home": "Go to homepage"
+  },
+  "BackNav": {
+    "home": "← Home"
   }
 }

@@ -27,5 +27,5 @@ export async function generateMetadata({
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <PolicyPageView page={getPolicyContent(locale).terms} />;
+  return <PolicyPageView page={getPolicyContent(locale).terms} locale={locale} />;
 }

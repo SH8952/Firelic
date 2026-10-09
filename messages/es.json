@@ -144,5 +144,8 @@
     "description": "Se produjo un error inesperado. Inténtalo de nuevo o vuelve al inicio.",
     "retry": "Reintentar",
     "home": "Ir al inicio"
+  },
+  "BackNav": {
+    "home": "← Inicio"
   }
 }

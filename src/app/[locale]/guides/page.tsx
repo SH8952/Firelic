@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
 import { getGuidesByCategory } from "@/lib/guides";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
+import { BackLink } from "@/components/back-link";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -26,6 +27,7 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("guides");
+  const tBack = await getTranslations("BackNav");
   const categories = getGuidesByCategory(locale);
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: `${SITE_URL}/${locale}` },
@@ -38,6 +40,7 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
+      <BackLink href={`/${locale}`} label={tBack("home")} />
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
 
       <div className="mt-6 rounded-xl border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/5 p-5">
