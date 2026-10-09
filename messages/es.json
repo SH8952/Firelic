@@ -43,6 +43,12 @@
       "Tu número FIRE, tu edad FIRE y los años restantes se actualizan al instante en las tarjetas de resultados y el gráfico de la derecha.",
       "Activa el modo \"Comparar Escenario A/B\" para poner en paralelo dos estrategias de ahorro distintas y ver cómo cada camino cambia tu fecha FIRE.",
       "Todos los cálculos se realizan enteramente en tu navegador: nada de lo que introduzcas se guarda ni se envía a un servidor."
+    ],
+    "trustBadges": [
+      "Gratis",
+      "Sin registro",
+      "Nada se guarda en un servidor",
+      "Disponible en 4 idiomas"
     ]
   },
   "nav": {
