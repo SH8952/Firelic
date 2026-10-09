@@ -65,14 +65,21 @@ export function GuideCategorySection({
     }
   };
   const hasMore = items.length > initialVisibleCount;
-  const visibleItems = expanded ? items : items.slice(0, initialVisibleCount);
-
+  // 모든 카드를 항상 렌더링하고, 접힌 상태에서는 초과 카드만 CSS로 숨긴다(이전에는
+  // .slice()로 배열 자체를 잘라내 숨겨진 카드가 HTML에 전혀 존재하지 않았음 — 검색
+  // 로봇은 "더보기" 버튼을 누르지 않으므로 해당 가이드들이 실질적으로 색인 대상에서
+  // 빠지는 문제가 있었음. 2026-10-09, ExifLens와 동일한 수정).
   return (
     <section>
       <h2 className="text-lg font-semibold text-[var(--color-primary)]">{categoryLabel}</h2>
       <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {visibleItems.map((item) => (
-          <li key={item.slug} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+        {items.map((item, index) => (
+          <li
+            key={item.slug}
+            className={`rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 ${
+              !expanded && index >= initialVisibleCount ? "hidden" : ""
+            }`}
+          >
             <Link
               href={`/guides/${item.slug}`}
               className="text-base font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-primary)]"
