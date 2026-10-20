@@ -1,3 +1,11 @@
+## 2026-10-21 — 백업 폴더 단일화·1주일 초과 백업 삭제·백업 방식 수정 (사이트 동작 변경 없음)
+- 2026-10-14 이전(1주일 경과) 백업 폴더·압축 파일 삭제. 보존: 10-14 이후 백업, 날짜 없는 보조 자료.
+- `.backups`에 있던 `CPU다이어트전_20261018`을 `_backups`로 합치고 `.backups` 폴더 제거.
+- 백업 위치를 `_backups/` 한 곳으로 통일(CLAUDE.md 규칙 추가). 새 `automation/make-backup.sh [라벨]`: `_backups/`·`.next*`·`node_modules`·`.git` 제외 rsync 백업(중첩·용량 폭증 방지).
+- `automation/publish-guide.command`·`apply-seo-task.command`의 rsync 제외 목록에 `.next*`(.next_old·.next_stale 포함)와 모든 백업 폴더명 추가.
+- 불필요 파일 정리: `.DS_Store`·`automation/__pycache__` 삭제, 사용하지 않는 구버전 `src/components/ThemeToggle.tsx.bak` 삭제(사본을 `_backups/삭제전보관_20261021`에 보관).
+- 백업: _backups/백업규칙정비전_20261021
+
 ## 2026-10-18 (추가62) — Vercel CPU 다이어트: 레이아웃의 요청 헤더 읽기 제거로 대부분의 페이지를 정적으로 제공 (동작 변경 없음)
 
 **배경**
