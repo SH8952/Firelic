@@ -1,3 +1,10 @@
+## 2026-10-23 (추가64) — 가이드 41편 공식 출처 섹션 + 최종수정일 추가 (4개 언어, 164개 파일)
+
+- 배경: SEO 점검(추가63 보고)의 8번 — 출처·최종수정일이 있는 가이드가 43편 중 2편뿐이었음. 파일럿 2편(what-is-fire, index-fund-investing-for-fire)을 제외한 41편에 확대.
+- 작업: 각 가이드 끝에 "참고 자료(Sources and further reading)" 섹션(주제에 맞는 공식·교육 자료 2~3개, 링크 설명은 4개 언어로 번역)과 최종 확인일을 추가하고 frontmatter에 `updatedAt: "2026-10-23"` 기재(화면에 "최종 수정" 표시). 글 본문은 수정하지 않음.
+- 출처 선정: 미국(IRS·SSA·CFPB·SEC Investor.gov·BLS·FDIC·HealthCare.gov·Medicare·DOL·NIA·NAIC), 영국(GOV.UK·MoneyHelper), 캐나다(CRA), 호주(ATO·Moneysmart), 일본(금융청 NISA·iDeCo 공식), 한국(국민연금공단·국세청·최저임금위원회), 독일(BZSt), 교육 자료(Bogleheads Wiki, Wikipedia). iDeCo 공식 사이트를 제외한 모든 링크는 WebFetch로 실제 열림을 확인(iDeCo 사이트는 robots 정책으로 자동 조회가 막혀 있어 공식 주소만 확인).
+- 검증: `npm run build` 214/214 페이지 생성(MDX 컴파일 포함).
+
 ## 2026-10-23 (추가63) — SEO·노출 개선 1차: 홈 메타·H1, 미리보기 이미지, 사이트맵, 제목 길이, 관련 가이드
 
 **배경**: 미구현 작업·SEO 점검 보고(`claude/firelic-unimplemented-and-seo-audit-2026-10-23.md`)의 항목을 가벼운 순서대로 진행.
