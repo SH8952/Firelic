@@ -32,6 +32,22 @@ export function languageAlternates(path: string): Record<string, string> {
   return languages;
 }
 
+/**
+ * 공유 미리보기(og:image) 목록. 페이지가 자체 openGraph를 정의하면 레이아웃의
+ * openGraph(와 파일 기반 opengraph-image)가 통째로 대체되어 이미지가 빠지므로,
+ * 정책·FAQ·가이드 목록·홈 등은 이 헬퍼로 이미지를 명시한다. (2026-10-23)
+ */
+export function ogImages(locale: string) {
+  return [
+    {
+      url: `${SITE_URL}/${locale}/opengraph-image`,
+      width: 1200,
+      height: 630,
+      alt: "FIRE Calculator — Early Retirement Simulator",
+    },
+  ];
+}
+
 export function webApplicationJsonLd(locale: string) {
   return {
     "@context": "https://schema.org",

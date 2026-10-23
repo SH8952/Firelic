@@ -78,7 +78,8 @@
     "journeyStep1": "1. FIREとは何か",
     "journeyStep2": "2. 貯蓄率を上げる",
     "journeyStep3": "3. 投資で増やす",
-    "journeyStep4": "4. 取り崩し方を計画する"
+    "journeyStep4": "4. 取り崩し方を計画する",
+    "relatedTitle": "あわせて読みたいガイド"
   },
   "Faq": {
     "title": "よくある質問",
@@ -153,5 +154,11 @@
   },
   "BackNav": {
     "home": "← ホームへ"
+  },
+  "Seo": {
+    "homeTitle": "FIREシミュレーター — 早期退職の計算ツール",
+    "homeDescription": "年齢・貯蓄・利回りを調整して、FIREに必要な資産と退職時期をグラフで確認できる無料ツール。",
+    "homeH1": "FIREシミュレーター:早期退職に必要な資産と時期を計算",
+    "guidesDescription": "FIREの貯蓄・投資戦略、取り崩し戦略、国別の退職口座まで、実践的なガイドをまとめました。"
   }
 }

@@ -78,7 +78,8 @@
     "journeyStep1": "1. What is FIRE?",
     "journeyStep2": "2. Raise your savings rate",
     "journeyStep3": "3. Invest it (index funds)",
-    "journeyStep4": "4. Plan the withdrawal"
+    "journeyStep4": "4. Plan the withdrawal",
+    "relatedTitle": "Related guides"
   },
   "Faq": {
     "title": "Frequently Asked Questions",
@@ -153,5 +154,11 @@
   },
   "BackNav": {
     "home": "← Home"
+  },
+  "Seo": {
+    "homeTitle": "FIRE Calculator — Retire Early Planner",
+    "homeDescription": "Free FIRE calculator: find your FIRE number and retirement age with a live chart.",
+    "homeH1": "FIRE Calculator: Plan Your Early Retirement",
+    "guidesDescription": "Practical guides on FIRE savings, investing, withdrawal strategy and country-specific retirement accounts."
   }
 }

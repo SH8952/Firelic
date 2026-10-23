@@ -78,7 +78,8 @@
     "journeyStep1": "1. FIRE란 무엇인가",
     "journeyStep2": "2. 저축률 높이기",
     "journeyStep3": "3. 투자로 불려나가기",
-    "journeyStep4": "4. 인출 전략 계획하기"
+    "journeyStep4": "4. 인출 전략 계획하기",
+    "relatedTitle": "함께 읽으면 좋은 가이드"
   },
   "Faq": {
     "title": "자주 묻는 질문",
@@ -153,5 +154,11 @@
   },
   "BackNav": {
     "home": "← 홈으로"
+  },
+  "Seo": {
+    "homeTitle": "FIRE 계산기 — 조기 은퇴 시뮬레이터",
+    "homeDescription": "나이·저축·수익률을 조정해 FIRE 목표 자산과 은퇴 나이를 차트로 확인하는 무료 계산기.",
+    "homeH1": "FIRE 계산기: 조기 은퇴 목표 자산과 시기 계산",
+    "guidesDescription": "FIRE 저축·투자 전략, 인출 전략, 국가별 은퇴 계좌까지 실전 가이드를 모았습니다."
   }
 }

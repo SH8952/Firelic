@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { GuideCategorySection } from "@/components/guides/guide-category-section";
 import { getGuidesByCategory } from "@/lib/guides";
-import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
+import { breadcrumbJsonLd, languageAlternates, ogImages } from "@/lib/seo";
 import { BackLink } from "@/components/back-link";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
@@ -14,12 +14,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guides" });
+  const tSeo = await getTranslations({ locale, namespace: "Seo" });
   const url = `${SITE_URL}/${locale}/guides`;
+  const description = tSeo("guidesDescription");
 
   return {
     title: t("title"),
+    description,
     alternates: { canonical: url, languages: languageAlternates("/guides") },
-    openGraph: { title: t("title"), url, type: "website" },
+    openGraph: { title: t("title"), description, url, type: "website", images: ogImages(locale) },
   };
 }
 

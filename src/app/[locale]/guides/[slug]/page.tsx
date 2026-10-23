@@ -9,6 +9,7 @@ import { GuideToolCta } from "@/components/GuideToolCta";
 import { ShareButton } from "@/components/share-button";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
 import { ReadingProgress } from "@/components/guides/reading-progress";
+import { RelatedGuides } from "@/components/guides/related-guides";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -124,7 +125,7 @@ export default async function GuideDetailPage({
               src={meta.image}
               alt={meta.title}
               fill
-              sizes="(min-width: 768px) 672px, 100vw"
+              sizes="(min-width: 768px) 768px, 100vw"
               className="object-cover"
               priority
             />
@@ -160,6 +161,8 @@ export default async function GuideDetailPage({
       >
         <Content />
       </div>
+
+      <RelatedGuides locale={locale} slug={slug} category={meta.category} />
 
       <GuideToolCta locale={locale} />
 

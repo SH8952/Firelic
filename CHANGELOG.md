@@ -1,3 +1,18 @@
+## 2026-10-23 (추가63) — SEO·노출 개선 1차: 홈 메타·H1, 미리보기 이미지, 사이트맵, 제목 길이, 관련 가이드
+
+**배경**: 미구현 작업·SEO 점검 보고(`claude/firelic-unimplemented-and-seo-audit-2026-10-23.md`)의 항목을 가벼운 순서대로 진행.
+
+**변경**
+- 홈 `generateMetadata` 신설 + `messages/*.json`에 `Seo` 네임스페이스 추가: 홈 제목·설명을 en/ko/ja/es 언어별로 제공(기존엔 레이아웃의 영어 고정 문구가 전 언어에 노출). 홈에 화면에는 보이지 않는 H1(`sr-only`) 추가.
+- `/guides` 목록 페이지 description을 언어별로 추가(기존엔 영어 기본값).
+- `src/lib/seo.ts`에 `ogImages(locale)` 추가, 홈·가이드 목록·FAQ·정책 5종에 og:image 명시(페이지가 openGraph를 재정의하면 레이아웃/파일 기반 이미지가 빠지던 문제).
+- `src/app/sitemap.ts`: lastmod를 빌드 시각이 아니라 글의 updatedAt/publishedAt으로(고정 페이지는 생략, 홈·가이드 목록은 최신 가이드 날짜), 언어별 대체 주소(hreflang) 추가.
+- 가이드 제목 70자 이상 23건 정리(en 7, es 16) — 모두 70자 미만으로.
+- `src/components/guides/related-guides.tsx` 신규: 가이드 상세 하단에 같은 카테고리 가이드 3개를 순환 방식으로 연결(43편×4개 언어 일괄, 본문 수정 없음). `guides.relatedTitle` 4개 언어 추가. 대표 이미지 `sizes`를 768px로 갱신.
+
+**검증**: `tsc --noEmit`, `eslint src`, 로컬 dev 렌더링 확인(4개 언어 홈 제목·설명·H1, og:image, 관련 가이드 링크, 사이트맵 204 URL·xhtml 816), `npm run build` 214/214 페이지 생성(마지막 캐시 정리 EPERM은 기존의 무해한 브릿지 오류).
+**백업**: `_backups/firelic_backup_20261023_064226_SEO개선1to8전`
+
 ## 2026-10-21 — 백업 폴더 단일화·1주일 초과 백업 삭제·백업 방식 수정 (사이트 동작 변경 없음)
 - 2026-10-14 이전(1주일 경과) 백업 폴더·압축 파일 삭제. 보존: 10-14 이후 백업, 날짜 없는 보조 자료.
 - `.backups`에 있던 `CPU다이어트전_20261018`을 `_backups`로 합치고 `.backups` 폴더 제거.

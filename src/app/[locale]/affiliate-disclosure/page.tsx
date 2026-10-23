@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getPolicyContent } from "@/content/policies";
 import { PolicyPageView } from "@/components/PolicyPageView";
-import { languageAlternates } from "@/lib/seo";
+import { languageAlternates, ogImages } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({
     title: page.title,
     description,
     alternates: { canonical: url, languages: languageAlternates("/affiliate-disclosure") },
-    openGraph: { title: page.title, description, url, type: "website" },
+    openGraph: { title: page.title, description, url, type: "website", images: ogImages(locale) },
   };
 }
 

@@ -78,7 +78,8 @@
     "journeyStep1": "1. ¿Qué es FIRE?",
     "journeyStep2": "2. Aumenta tu tasa de ahorro",
     "journeyStep3": "3. Invierte (fondos indexados)",
-    "journeyStep4": "4. Planifica el retiro"
+    "journeyStep4": "4. Planifica el retiro",
+    "relatedTitle": "Guías relacionadas"
   },
   "Faq": {
     "title": "Preguntas Frecuentes",
@@ -153,5 +154,11 @@
   },
   "BackNav": {
     "home": "← Inicio"
+  },
+  "Seo": {
+    "homeTitle": "Calculadora FIRE — Jubilación anticipada",
+    "homeDescription": "Calcula tu número FIRE y la edad de retiro con un gráfico en vivo. Gratis y sin registro.",
+    "homeH1": "Calculadora FIRE: planifica tu jubilación anticipada",
+    "guidesDescription": "Guías prácticas sobre ahorro e inversión para FIRE, retiros y cuentas de jubilación por país."
   }
 }
