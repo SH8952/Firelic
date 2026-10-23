@@ -1,3 +1,15 @@
+## 2026-10-23 (추가65) — 노출 상위 3편 제목·설명 보강, 한국어 홈 키워드, www→루트 308 리다이렉트
+
+**배경**: Search Console(8/29~10/20) 노출 상위 페이지 3편(real-estate-vs-index-funds 49회, how-inflation 20회, us-401k 16회)과 검색어(real estate investing vs index funds, roth ira vs traditional ira for early retirement, 파이어족 계산기 등)에 맞춰 제목·설명을 다듬음.
+
+**변경**
+- 3편 × 4개 언어(12개 파일) 제목·설명 재작성(모두 70자 미만, 검색어 포함): 예) "Real Estate vs Index Funds for FIRE: A Worked $100K Comparison", "401(k) vs Roth IRA for Early Retirees: Access Before 59½".
+- `messages/ko.json` `Seo` 홈 제목·설명·H1에 "파이어족" 키워드 반영.
+- Vercel(외부 설정): www.firelic.com → firelic.com 리다이렉트를 307(임시)에서 308(영구)로 변경 완료.
+
+**검증**: 프론트매터 gray-matter 검증, `tsc --noEmit`, `npm run build` 214/214 페이지 생성.
+**백업**: `_backups/firelic_backup_20261023_065817_노출상위3편메타전`
+
 ## 2026-10-23 (추가64) — 가이드 41편 공식 출처 섹션 + 최종수정일 추가 (4개 언어, 164개 파일)
 
 - 배경: SEO 점검(추가63 보고)의 8번 — 출처·최종수정일이 있는 가이드가 43편 중 2편뿐이었음. 파일럿 2편(what-is-fire, index-fund-investing-for-fire)을 제외한 41편에 확대.
