@@ -150,8 +150,9 @@ function NumberField({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <fieldset className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-      <legend className="px-1 text-sm font-semibold text-[var(--color-primary)]">{title}</legend>
-      <div className="mt-2 grid gap-4 sm:grid-cols-2">{children}</div>
+      <legend className="sr-only">{title}</legend>
+      <p aria-hidden="true" className="text-sm font-semibold text-[var(--color-primary)]">{title}</p>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">{children}</div>
     </fieldset>
   );
 }
@@ -383,12 +384,13 @@ export function YearEndTaxCalculator() {
           <NumberField label="의료비 (그 밖의 부양가족)" hint="연 700만 원까지 인정" value={form.medicalLimited} onChange={(v) => set("medicalLimited", v ?? 0)} />
           <NumberField label="본인 교육비" value={form.educationSelf} onChange={(v) => set("educationSelf", v ?? 0)} />
           <NumberField label="자녀 교육비 (미취학~고교)" hint="자녀 1인당 300만 원 한도" value={form.educationChildren} onChange={(v) => set("educationChildren", v ?? 0)} />
-          <NumberField label="월세 (연간 총액)" hint="총급여 8천만 원 이하 무주택 세대주 등 요건 충족 시" value={form.rent} onChange={(v) => set("rent", v ?? 0)} />
+          <NumberField label="월세 (연간 총액)" hint="총급여 8천만 원 이하 무주택 세대주 등" value={form.rent} onChange={(v) => set("rent", v ?? 0)} />
         </Section>
 
         <fieldset className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
-          <legend className="px-1 text-sm font-semibold text-[var(--color-primary)]">맞벌이 부부 비교 (선택)</legend>
-          <label className="mt-2 flex items-center gap-2 text-sm text-[var(--color-text-primary)]">
+          <legend className="sr-only">맞벌이 부부 비교 (선택)</legend>
+          <p aria-hidden="true" className="text-sm font-semibold text-[var(--color-primary)]">맞벌이 부부 비교 (선택)</p>
+          <label className="mt-4 flex items-center gap-2 text-sm text-[var(--color-text-primary)]">
             <input type="checkbox" checked={couple} onChange={(e) => setCouple(e.target.checked)} />
             배우자 정보를 넣고 가족 공제·의료비를 누구 앞으로 올릴지 비교하기
           </label>
