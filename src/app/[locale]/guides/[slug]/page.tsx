@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { compileGuide, getGuideMeta, getGuideSlugs } from "@/lib/guides";
+import { compileGuide, getGuideMeta, getGuideSlugs, YEAR_END_CATEGORY } from "@/lib/guides";
 import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/GuideToolCta";
@@ -73,9 +73,12 @@ export default async function GuideDetailPage({
   // 한국어: 제목·본문 단어 중간 줄바꿈 방지(ExifLens와 동일 범위 — ja 제외).
   const koWrap =
     locale === "ko" ? " [word-break:keep-all] [overflow-wrap:break-word]" : "";
+  const isYearEnd = meta.category === YEAR_END_CATEGORY;
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: `${SITE_URL}/${locale}` },
-    { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
+    isYearEnd
+      ? { name: YEAR_END_CATEGORY, url: `${SITE_URL}/${locale}/year-end-tax` }
+      : { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
     { name: meta.title, url: `${SITE_URL}/${locale}/guides/${slug}` },
   ]);
   const articleJsonLd = {
@@ -103,7 +106,16 @@ export default async function GuideDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <GuideViewTracker slug={slug} locale={locale} />
-      <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
+      {isYearEnd ? (
+        <a
+          href={`/${locale}/year-end-tax`}
+          className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)] hover:underline"
+        >
+          {meta.category} →
+        </a>
+      ) : (
+        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-primary)]">{meta.category}</p>
+      )}
       <h1 className={`mt-2 text-2xl font-bold text-[var(--color-text-primary)]${koWrap}`}>{meta.title}</h1>
       <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs text-[var(--color-text-secondary)]">

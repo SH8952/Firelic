@@ -1,3 +1,13 @@
+## 2026-10-24 (추가90) — 연말정산 전용 섹션(/ko/year-end-tax) 신설 + 롱테일 키워드 글 6편
+
+- 배경: 한국 연말정산 시즌(12월~1월) 검색 증가에 앞서, 사용자 요청으로 일반 가이드 목록과 분리된 별도 연말정산 섹션을 만들고 상황별 롱테일 키워드 글을 추가.
+- 구조: 신규 글은 `category: "연말정산"`으로 지정 → `getGuidesByCategory`에서 제외되어 `/guides` 목록에는 나타나지 않고, 허브 `/[locale]/year-end-tax`(한국어 전용, 다른 언어는 404)에만 모음. 허브 첫 칸에는 기존 입문 글 `year-end-tax-settlement-basics`(카테고리 유지)를 함께 노출. 본문 URL은 기존 방식 `/ko/guides/{slug}` 유지.
+- 코드: `src/lib/guides.ts`(YEAR_END_CATEGORY, getYearEndGuides), 허브 페이지 신규, `SiteHeader`(ko 전용 메뉴 "연말정산", 데스크톱·모바일), 가이드 상세(연말정산 글은 빵부스러기·상단 카테고리 링크를 허브로), `/guides` 상단 배너(ko), 사이트맵(ko 허브 1건, hreflang은 ko만), `messages/ko.json`(nav.yearEndTax, yearEnd 블록).
+- 신규 글 6편(ko 전용): `credit-vs-debit-card-year-end-tax-split`(카드 공제, 연봉 5천만 원 신용·체크 비율), `pension-savings-irp-december-deposit-refund`(연금저축·IRP 12월 납입 환급표), `monthly-rent-tax-credit-requirements-refund`(월세 세액공제), `medical-education-donation-year-end-tax-checklist`(의료비 3% 문턱·안경·산후조리원·난임·교육비), `dual-income-dependents-year-end-tax-allocation`(맞벌이·부양가족 배분, 부모님 소득 100만 원), `why-year-end-tax-refund-is-small-checklist`(환급이 적은 이유 7가지).
+- 기존 글: `year-end-tax-settlement-basics`에 6편 링크 섹션 추가(updatedAt 10-24).
+- 사실 확인: 2026년 귀속 현행 기준(카드 25% 문턱·15/30/40% 공제율·한도 300/250만 원, 연금계좌 600/900만 원·16.5%/13.2%, 월세 17%/15%·한도 1,000만 원, 의료비 3% 문턱 등). 국세청·법령 페이지 본문이 조회되지 않아 복수의 보도·금융사 자료로 대조. 2026 세제개편안(2027년 사용분부터 대중교통 우대 폐지 등)은 국회 확정 전이라 현행과 구분해 서술. 확정 전 항목은 수치 기재 보류.
+- 발행일: 6편 모두 2026-10-24. 빌드 270/270(신규 7페이지), 백업 `_backups/pre-yearend-*`.
+
 ## 2026-10-24 (추가89) — 신규 한국어 가이드 18편 lastmod를 발행일로 통일
 
 - 배경: 유입이 적고 색인 전인 지금 시점에 사이트맵 lastmod를 발행일(10-03~10-23)과 맞추기로 결정.

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -25,6 +25,9 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 export function SiteHeader() {
   const t = useTranslations("nav");
   const tCalc = useTranslations("calculator");
+  const locale = useLocale();
+  // 연말정산 섹션은 한국어 전용(해당 문구가 있는 언어에서만 메뉴 노출).
+  const showYearEnd = locale === "ko" && t.has("yearEndTax");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass =
@@ -56,6 +59,11 @@ export function SiteHeader() {
           <Link href="/guides" className={navLinkClass}>
             {t("guides")}
           </Link>
+          {showYearEnd ? (
+            <Link href="/year-end-tax" className={navLinkClass}>
+              {t("yearEndTax")}
+            </Link>
+          ) : null}
           <Link href="/faq" className={navLinkClass}>
             {t("faq")}
           </Link>
@@ -104,6 +112,15 @@ export function SiteHeader() {
           >
             {t("guides")}
           </Link>
+          {showYearEnd ? (
+            <Link
+              href="/year-end-tax"
+              className={`${navLinkClass} py-2.5`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {t("yearEndTax")}
+            </Link>
+          ) : null}
           <Link
             href="/faq"
             className={`${navLinkClass} py-2.5`}

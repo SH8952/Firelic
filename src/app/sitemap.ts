@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { getGuides, getGuideSlugs } from "@/lib/guides";
+import { getGuides, getGuideSlugs, getYearEndGuides } from "@/lib/guides";
 import { FIRE_TYPES } from "@/lib/fireTypes";
 import { REFERENCE_TABLES } from "@/lib/referenceTables";
 
@@ -47,6 +47,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: languageMap(`/guides/${guide.slug}`, available) },
       });
     }
+  }
+
+  // 연말정산 섹션(한국어 전용): 언어 대체 주소 없이 ko만 등록한다.
+  const yearEnd = getYearEndGuides("ko");
+  if (yearEnd.length > 0) {
+    const newestYearEnd = yearEnd.map((g) => g.updatedAt ?? g.publishedAt).sort().pop();
+    entries.push({
+      url: `${SITE_URL}/ko/year-end-tax`,
+      ...(newestYearEnd ? { lastModified: new Date(newestYearEnd) } : {}),
+      changeFrequency: "weekly",
+      priority: 0.8,
+      alternates: { languages: { ko: `${SITE_URL}/ko/year-end-tax` } },
+    });
   }
 
   return entries;

@@ -34,6 +34,11 @@ const CATEGORY_ORDER_BY_LOCALE: Record<string, string[]> = {
   ko: ["돈 관리 기초", "보험·세금·연금", "재테크·투자", "소득 키우기", "조기 은퇴 실현", "은퇴 이후", "해외 제도 참고"],
 };
 
+/** 연말정산 전용 섹션(/year-end-tax)에 속하는 가이드의 category 값. 일반 가이드 목록(/guides)에서는 제외한다. */
+export const YEAR_END_CATEGORY = "연말정산";
+/** 연말정산 섹션 맨 앞에 함께 보여줄 기존 입문 가이드(카테고리는 그대로 유지). */
+export const YEAR_END_INTRO_SLUG = "year-end-tax-settlement-basics";
+
 export type GuideFrontmatter = {
   title: string;
   description: string;
@@ -120,7 +125,7 @@ export function getGuideBySlug(locale: string, slug: string): GuideMeta | null {
 export function getGuidesByCategory(
   locale: string,
 ): Array<{ category: string; guides: GuideMeta[] }> {
-  const guides = getAllGuidesMeta(locale);
+  const guides = getAllGuidesMeta(locale).filter((g) => g.category?.trim() !== YEAR_END_CATEGORY);
   const groups = new Map<string, GuideMeta[]>();
 
   for (const guide of guides) {
@@ -147,6 +152,16 @@ export function getGuidesByCategory(
     category,
     guides: [...categoryGuides].sort((a, b) => (a.publishedAt > b.publishedAt ? 1 : -1)),
   }));
+}
+
+/** 연말정산 섹션에 보여줄 가이드: 입문 글을 맨 앞에, 나머지는 발행일 오름차순. */
+export function getYearEndGuides(locale: string): GuideMeta[] {
+  const all = getAllGuidesMeta(locale);
+  const intro = all.filter((g) => g.slug === YEAR_END_INTRO_SLUG);
+  const rest = all
+    .filter((g) => g.category?.trim() === YEAR_END_CATEGORY)
+    .sort((a, b) => (a.publishedAt > b.publishedAt ? 1 : -1));
+  return [...intro, ...rest];
 }
 
 /**

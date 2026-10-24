@@ -31,6 +31,7 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
   setRequestLocale(locale);
   const t = await getTranslations("guides");
   const tBack = await getTranslations("BackNav");
+  const tYearEnd = locale === "ko" ? await getTranslations("yearEnd") : null;
   const categories = getGuidesByCategory(locale);
   const journeySteps: { label: string; slug: string }[] = t.has("journeySteps")
     ? (t.raw("journeySteps") as { label: string; slug: string }[])
@@ -70,6 +71,16 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
           ))}
         </ol>
       </div>
+
+      {locale === "ko" && tYearEnd ? (
+        <div className="mt-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <p className="text-sm font-semibold text-[var(--color-text-primary)]">{tYearEnd("bannerTitle")}</p>
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{tYearEnd("bannerText")}</p>
+          <a href={`/${locale}/year-end-tax`} className="mt-3 inline-block text-sm font-medium text-[var(--color-primary)]">
+            {tYearEnd("bannerLink")} →
+          </a>
+        </div>
+      ) : null}
 
       {categories.length === 0 ? (
         <p className="mt-6 text-sm text-[var(--color-text-secondary)]">{t("empty")}</p>
