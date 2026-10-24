@@ -17,7 +17,7 @@ type ScenarioTabsProps = {
 export function ScenarioTabs({ active, onChange, compareMode, onToggleCompare, badges, labels }: ScenarioTabsProps) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2 sm:gap-3">
+      <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2 lg:w-[380px]">
       <div role="tablist" aria-label="scenario" className="flex gap-1 rounded-lg border border-[var(--color-border)] p-1">
         {(["A", "B"] as const).map((key) => (
           <button
@@ -37,11 +37,11 @@ export function ScenarioTabs({ active, onChange, compareMode, onToggleCompare, b
         ))}
       </div>
       {badges && (
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {([[badges.coastFire, badges.isCoastFire], [badges.leanFire, badges.isLeanFire]] as const).map(([text, on]) => (
             <span
               key={text}
-              className={`rounded-full px-2.5 py-1 text-xs sm:px-3 sm:text-sm ${
+              className={`rounded-full px-2.5 py-1 text-xs ${
                 on
                   ? "bg-[var(--color-accent)] text-[#12271C]"
                   : "bg-[var(--color-border)] text-[var(--color-text-secondary)]"
