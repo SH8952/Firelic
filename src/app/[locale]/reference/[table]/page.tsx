@@ -7,6 +7,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { getGuideMeta } from "@/lib/guides";
+import { formatNum } from "@/lib/formatNum";
 import { breadcrumbJsonLd, languageAlternates, ogImages } from "@/lib/seo";
 import {
   LOCALE_MONEY,
@@ -117,7 +118,7 @@ export default async function ReferenceTablePage({ params }: { params: Promise<{
                 <tr>
                   <th scope="col" className={`${th} text-left`}>{t("spending.rowHead")}</th>
                   {WITHDRAWAL_RATES.map((r) => (
-                    <th key={r} scope="col" className={th}>{t("spending.colHead", { rate: r })}</th>
+                    <th key={r} scope="col" className={th}>{t("spending.colHead", { rate: formatNum(r, locale) })}</th>
                   ))}
                 </tr>
               </thead>
@@ -141,7 +142,7 @@ export default async function ReferenceTablePage({ params }: { params: Promise<{
                 <tr>
                   <th scope="col" className={`${th} text-left`}>{t("savings.rowHead")}</th>
                   {REAL_RETURNS.map((r) => (
-                    <th key={r} scope="col" className={th}>{t("savings.colHead", { rate: r })}</th>
+                    <th key={r} scope="col" className={th}>{t("savings.colHead", { rate: formatNum(r, locale) })}</th>
                   ))}
                 </tr>
               </thead>
@@ -151,7 +152,7 @@ export default async function ReferenceTablePage({ params }: { params: Promise<{
                     <th scope="row" className={`${th} text-left`}>{s}%</th>
                     {REAL_RETURNS.map((r) => (
                       <td key={r} className={`${td} ${r === 5 ? "bg-[var(--color-accent)]/20 font-semibold" : ""}`}>
-                        {t("savings.cell", { years: yearsToFire(s, r, SAVINGS_TABLE_SWR).toFixed(1) })}
+                        {t("savings.cell", { years: formatNum(yearsToFire(s, r, SAVINGS_TABLE_SWR), locale, 1, 1) })}
                       </td>
                     ))}
                   </tr>

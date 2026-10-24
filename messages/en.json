@@ -68,7 +68,8 @@
       "sensDesc": "FIRE age for different real returns (rows) and monthly savings (columns). The highlighted cell is your current setup.",
       "sensCorner": "Return \\ Monthly savings",
       "sensNote": "A dash means the FIRE number is not reached within 60 years. Real return is after inflation."
-    }
+    },
+    "yearsToFireUnitOne": "yr"
   },
   "nav": {
     "home": "Home",

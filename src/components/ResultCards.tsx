@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
+import { formatNum } from "@/lib/formatNum";
+
 type ResultCardsProps = {
   fireNumber: number;
   fireAge: number | null;
@@ -27,8 +30,8 @@ function withUnit(value: string | number, unit: string): string {
   return unit ? `${value} ${unit}` : String(value);
 }
 
-function formatCurrency(value: number, symbol: string, unit: string) {
-  return withUnit(`${symbol}${Math.round(value).toLocaleString()}`, unit);
+function formatCurrency(value: number, symbol: string, unit: string, locale: string) {
+  return withUnit(`${symbol}${Math.round(value).toLocaleString(locale)}`, unit);
 }
 
 export function ResultCards({
@@ -41,24 +44,25 @@ export function ResultCards({
   isLeanFire,
   labels,
 }: ResultCardsProps) {
+  const locale = useLocale();
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-[2fr_1fr_1fr]">
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
         <p className="text-sm text-[var(--color-text-secondary)]">{labels.fireNumber}</p>
         <p className="tabular-nums mt-1 text-center text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
-          {formatCurrency(fireNumber, currencySymbol, currencyUnit)}
+          {formatCurrency(fireNumber, currencySymbol, currencyUnit, locale)}
         </p>
       </div>
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
         <p className="text-sm text-[var(--color-text-secondary)]">{labels.fireAge}</p>
         <p className="tabular-nums mt-1 text-center text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
-          {fireAge !== null ? withUnit(fireAge, labels.ageUnit) : labels.notReached}
+          {fireAge !== null ? withUnit(formatNum(fireAge, locale), labels.ageUnit) : labels.notReached}
         </p>
       </div>
       <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
         <p className="text-sm text-[var(--color-text-secondary)]">{labels.yearsToFire}</p>
         <p className="tabular-nums mt-1 text-center text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
-          {yearsToFire !== null ? withUnit(yearsToFire, labels.yearsUnit) : labels.notReached}
+          {yearsToFire !== null ? withUnit(formatNum(yearsToFire, locale), labels.yearsUnit) : labels.notReached}
         </p>
       </div>
       <div className="flex gap-2 sm:col-span-3">

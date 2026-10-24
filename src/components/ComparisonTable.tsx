@@ -1,6 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import type { FireResult } from "@/lib/fireCalculations";
+import { formatNum } from "@/lib/formatNum";
 
 type ComparisonTableProps = {
   resultA: FireResult;
@@ -26,26 +28,27 @@ function withUnit(value: string | number, unit: string): string {
   return unit ? `${value} ${unit}` : String(value);
 }
 
-function fmt(v: number, symbol: string, unit: string) {
-  return withUnit(`${symbol}${Math.round(v).toLocaleString()}`, unit);
+function fmt(v: number, symbol: string, unit: string, locale: string) {
+  return withUnit(`${symbol}${Math.round(v).toLocaleString(locale)}`, unit);
 }
 
 export function ComparisonTable({ resultA, resultB, currencySymbol, currencyUnit, labels }: ComparisonTableProps) {
+  const locale = useLocale();
   const rows = [
     {
       label: labels.fireNumber,
-      a: fmt(resultA.fireNumber, currencySymbol, currencyUnit),
-      b: fmt(resultB.fireNumber, currencySymbol, currencyUnit),
+      a: fmt(resultA.fireNumber, currencySymbol, currencyUnit, locale),
+      b: fmt(resultB.fireNumber, currencySymbol, currencyUnit, locale),
     },
     {
       label: labels.fireAge,
-      a: resultA.fireAge !== null ? withUnit(resultA.fireAge, labels.ageUnit) : labels.notReached,
-      b: resultB.fireAge !== null ? withUnit(resultB.fireAge, labels.ageUnit) : labels.notReached,
+      a: resultA.fireAge !== null ? withUnit(formatNum(resultA.fireAge, locale), labels.ageUnit) : labels.notReached,
+      b: resultB.fireAge !== null ? withUnit(formatNum(resultB.fireAge, locale), labels.ageUnit) : labels.notReached,
     },
     {
       label: labels.yearsToFire,
-      a: resultA.yearsToFire !== null ? withUnit(resultA.yearsToFire, labels.yearsUnit) : labels.notReached,
-      b: resultB.yearsToFire !== null ? withUnit(resultB.yearsToFire, labels.yearsUnit) : labels.notReached,
+      a: resultA.yearsToFire !== null ? withUnit(formatNum(resultA.yearsToFire, locale), labels.yearsUnit) : labels.notReached,
+      b: resultB.yearsToFire !== null ? withUnit(formatNum(resultB.yearsToFire, locale), labels.yearsUnit) : labels.notReached,
     },
   ];
 

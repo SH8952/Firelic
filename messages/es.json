@@ -68,7 +68,8 @@
       "sensDesc": "Edad FIRE según la rentabilidad real (filas) y el ahorro mensual (columnas). La celda resaltada es tu configuración actual.",
       "sensCorner": "Rentabilidad \\ Ahorro mensual",
       "sensNote": "Un guion significa que no se alcanza el número FIRE en 60 años. La rentabilidad real es después de inflación."
-    }
+    },
+    "yearsToFireUnitOne": "año"
   },
   "nav": {
     "home": "Inicio",

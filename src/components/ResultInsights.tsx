@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { formatNum } from "@/lib/formatNum";
 import type { FireInputs, FireResult } from "@/lib/fireCalculations";
 import { buildLevers, buildSensitivity } from "@/lib/fireInsights";
 
@@ -19,15 +20,19 @@ function withUnit(value: string | number, unit: string): string {
 
 export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, currencyUnit }: Props) {
   const t = useTranslations("calculator");
+  const locale = useLocale();
   const ageUnit = t("fireAgeUnit");
   const yearsUnit = t("yearsToFireUnit");
+  const yearsUnitOne = t("yearsToFireUnitOne");
+  const n = (v: number) => formatNum(v, locale);
+  const yrs = (v: number) => withUnit(n(v), v === 1 ? yearsUnitOne : yearsUnit);
 
   const levers = useMemo(() => buildLevers(inputs, leanThreshold), [inputs, leanThreshold]);
   const grid = useMemo(() => buildSensitivity(inputs, leanThreshold), [inputs, leanThreshold]);
 
-  const money = (v: number) => withUnit(`${currencySymbol}${Math.round(v).toLocaleString()}`, currencyUnit);
+  const money = (v: number) => withUnit(`${currencySymbol}${Math.round(v).toLocaleString(locale)}`, currencyUnit);
   const pct = result.fireNumber > 0 ? Math.min(100, (inputs.currentPortfolio / result.fireNumber) * 100) : 0;
-  const pctText = pct >= 10 ? Math.round(pct).toString() : pct.toFixed(1);
+  const pctText = pct >= 10 ? formatNum(Math.round(pct), locale, 0) : formatNum(pct, locale, 1, 1);
 
   let summary: string;
   if (result.fireAge === null) {
@@ -36,10 +41,10 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
     const diff = Math.round(Math.abs(inputs.targetAge - result.fireAge) * 10) / 10;
     const key = result.fireAge <= inputs.targetAge ? "summaryAhead" : "summaryBehind";
     summary = t(`insights.${key}`, {
-      age: withUnit(result.fireAge, ageUnit),
+      age: withUnit(n(result.fireAge), ageUnit),
       amount: money(result.fireNumber),
-      target: withUnit(inputs.targetAge, ageUnit),
-      diff: withUnit(diff, yearsUnit),
+      target: withUnit(n(inputs.targetAge), ageUnit),
+      diff: yrs(diff),
     });
   }
 
@@ -84,10 +89,10 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
                   ? t("notReached")
                   : l.yearsSooner && l.yearsSooner > 0
                     ? t("insights.leverResult", {
-                        age: withUnit(l.fireAge, ageUnit),
-                        diff: withUnit(l.yearsSooner, yearsUnit),
+                        age: withUnit(n(l.fireAge), ageUnit),
+                        diff: yrs(l.yearsSooner),
                       })
-                    : t("insights.leverNoChange", { age: withUnit(l.fireAge, ageUnit) })}
+                    : t("insights.leverNoChange", { age: withUnit(n(l.fireAge), ageUnit) })}
               </span>
             </li>
           ))}
@@ -114,7 +119,7 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
                     }`}
                   >
                     {currencySymbol}
-                    {c.toLocaleString()}
+                    {c.toLocaleString(locale)}
                   </th>
                 ))}
               </tr>
@@ -128,7 +133,7 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
                       ri === grid.baseRow ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"
                     }`}
                   >
-                    {r}%
+                    {n(r)}%
                   </th>
                   {grid.cells[ri].map((age, ci) => {
                     const isBase = ri === grid.baseRow && ci === grid.baseCol;
@@ -141,7 +146,7 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
                             : "text-[var(--color-text-primary)]"
                         }`}
                       >
-                        {age === null ? "—" : withUnit(age, ageUnit)}
+                        {age === null ? "—" : withUnit(n(age), ageUnit)}
                       </td>
                     );
                   })}
