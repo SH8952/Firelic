@@ -6,6 +6,7 @@ import { languageAlternates, ogImages, webApplicationJsonLd } from "@/lib/seo";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 import { HomeFireTypes } from "@/components/home-fire-types";
+import { HomeYearEndBanner } from "@/components/home-year-end-banner";
 import { AdSlot } from "@/components/AdSlot";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 
@@ -68,6 +69,9 @@ export default async function HomePage({
       {/* 페이지 대표 제목(H1) — 화면에는 헤더가 제목 역할을 하므로 스크린리더/검색엔진용으로만 제공 */}
       <h1 className="sr-only">{tSeo("homeH1")}</h1>
       <FireCalculator />
+
+      {/* 연말정산 배너(한국어 전용, 2026-10-24 신설) */}
+      <HomeYearEndBanner locale={locale} />
 
       {/* FIRE 유형별 계산기 링크 카드(2026-10-24 신설) */}
       <HomeFireTypes locale={locale} />
