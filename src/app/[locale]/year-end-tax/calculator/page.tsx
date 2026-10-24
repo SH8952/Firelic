@@ -60,6 +60,23 @@ export default async function YearEndCalculatorPage({ params }: { params: Promis
       </div>
 
       <section className="mt-12">
+        <h2 className="text-lg font-semibold text-[var(--color-primary)]">총급여별 예시로 바로 계산해 보기</h2>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {[3000, 4000, 5000, 6000].map((n) => (
+            <li key={n}>
+              <a
+                href={`/${locale}/year-end-tax/calculator?preset=${n}`}
+                className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+              >
+                총급여 {n.toLocaleString("ko-KR")}만 원 예시
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 text-xs text-[var(--color-text-secondary)]">예시는 카드 사용액과 연금 납입액을 가정한 값이며, 내 값으로 바꾸면 결과가 바로 달라집니다.</p>
+      </section>
+
+      <section className="mt-12">
         <h2 className="text-lg font-semibold text-[var(--color-primary)]">계산 결과가 궁금할 때</h2>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {guides.map(([slug, label]) => (

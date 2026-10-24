@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { calcYearEnd, estimateInsurance, pensionTargetOf, type YearEndInput } from "@/lib/yearEndTax";
 
 const MAN = 10000;
@@ -51,6 +51,27 @@ const PRESETS: Array<{ label: string; form: Partial<Form> }> = [
   { label: "총급여 5천만 원", form: { salary: 5000, creditCard: 1000, debitAndCash: 1000, pensionSavings: 600, irp: 100 } },
   { label: "총급여 6천만 원", form: { salary: 6000, creditCard: 1300, debitAndCash: 1200, pensionSavings: 600, irp: 200 } },
 ];
+
+type Spouse = {
+  salary: number;
+  withheld: number | null;
+  creditCard: number;
+  debitAndCash: number;
+  marketAndTransit: number;
+  pensionSavings: number;
+  irp: number;
+};
+const SPOUSE_EMPTY: Spouse = {
+  salary: 3000,
+  withheld: null,
+  creditCard: 0,
+  debitAndCash: 0,
+  marketAndTransit: 0,
+  pensionSavings: 0,
+  irp: 0,
+};
+
+const FORM_KEYS = Object.keys(EMPTY) as Array<keyof Form>;
 
 function won(n: number): string {
   const v = Math.round(n);
@@ -143,6 +164,51 @@ export function YearEndTaxCalculator() {
   const [form, setForm] = useState<Form>(EMPTY);
   const [extraPension, setExtraPension] = useState(0); // 만원
   const [extraCard, setExtraCard] = useState(0); // 만원
+  const [couple, setCouple] = useState(false);
+  const [sp, setSp] = useState<Spouse>(SPOUSE_EMPTY);
+  const [copied, setCopied] = useState(false);
+
+  // 주소의 ?preset=3000~6000 또는 개별 값(?salary=4000&...)으로 입력을 미리 채운다.
+  useEffect(() => {
+    try {
+      const q = new URLSearchParams(window.location.search);
+      const preset = q.get("preset");
+      if (preset) {
+        const hit = PRESETS.find((x) => String(x.form.salary) === preset);
+        if (hit) {
+          setForm({ ...EMPTY, ...hit.form });
+          return;
+        }
+      }
+      const next: Partial<Form> = {};
+      for (const k of FORM_KEYS) {
+        const raw = q.get(k);
+        if (raw !== null && raw !== "" && Number.isFinite(Number(raw))) {
+          (next as Record<string, number>)[k] = Math.min(Math.max(Number(raw), 0), 100000000);
+        }
+      }
+      if (Object.keys(next).length > 0) setForm({ ...EMPTY, ...next });
+    } catch {
+      // 주소 해석 실패 시 기본값 유지
+    }
+  }, []);
+
+  function copyLink() {
+    try {
+      const q = new URLSearchParams();
+      for (const k of FORM_KEYS) {
+        const v = form[k];
+        if (v !== null && v !== EMPTY[k]) q.set(k, String(v));
+      }
+      const url = `${window.location.origin}${window.location.pathname}${q.toString() ? `?${q.toString()}` : ""}`;
+      void navigator.clipboard.writeText(url).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    } catch {
+      // 클립보드 사용 불가 시 무시
+    }
+  }
 
   const set = <K extends keyof Form>(key: K, v: Form[K]) => setForm((p) => ({ ...p, [key]: v }));
   const input = useMemo(() => toInput(form), [form]);
@@ -169,6 +235,77 @@ export function YearEndTaxCalculator() {
   const gainCardDebit = rDebit.diff - rCredit.diff;
   const investBase = Math.max(r.diff, 0);
 
+  const coupleRows = useMemo(() => {
+    if (!couple) return null;
+    const spouse: YearEndInput = {
+      salary: sp.salary * MAN,
+      withheld: sp.withheld === null ? null : sp.withheld * MAN,
+      headcount: 1,
+      childrenUnder20: 0,
+      childTaxCreditCount: 0,
+      insurance: null,
+      creditCard: sp.creditCard * MAN,
+      debitAndCash: sp.debitAndCash * MAN,
+      marketAndTransit: sp.marketAndTransit * MAN,
+      pensionSavings: sp.pensionSavings * MAN,
+      irp: sp.irp * MAN,
+      protectionInsurance: 0,
+      medicalNoLimit: 0,
+      medicalLimited: 0,
+      educationSelf: 0,
+      educationChildren: 0,
+      rent: 0,
+    };
+    const options: Array<{ label: string; family: "A" | "B"; medical: "A" | "B" }> = [
+      { label: "가족 공제·의료비 모두 본인", family: "A", medical: "A" },
+      { label: "가족 공제 본인 + 의료비 배우자", family: "A", medical: "B" },
+      { label: "가족 공제 배우자 + 의료비 본인", family: "B", medical: "A" },
+      { label: "가족 공제·의료비 모두 배우자", family: "B", medical: "B" },
+    ];
+    const rows = options.map((o) => {
+      const a: YearEndInput = { ...input };
+      const b: YearEndInput = { ...spouse };
+      if (o.family === "B") {
+        b.headcount = input.headcount;
+        b.childrenUnder20 = input.childrenUnder20;
+        b.childTaxCreditCount = input.childTaxCreditCount;
+        b.educationChildren = input.educationChildren;
+        a.headcount = 1;
+        a.childrenUnder20 = 0;
+        a.childTaxCreditCount = 0;
+        a.educationChildren = 0;
+      }
+      if (o.medical === "B") {
+        b.medicalNoLimit = input.medicalNoLimit;
+        b.medicalLimited = input.medicalLimited;
+        a.medicalNoLimit = 0;
+        a.medicalLimited = 0;
+      }
+      const ra = calcYearEnd(a);
+      const rb = calcYearEnd(b);
+      return { ...o, tax: ra.finalTax + rb.finalTax, diff: ra.diff + rb.diff, estimated: ra.withheldEstimated || rb.withheldEstimated };
+    });
+    const baseline = rows[0].tax;
+    const best = rows.reduce((m, x) => (x.tax < m.tax ? x : m), rows[0]);
+    return { rows, baseline, best };
+  }, [couple, sp, input]);
+
+  const recs = useMemo(() => {
+    const list: Array<[string, string]> = [];
+    const cardUsed = input.creditCard + input.debitAndCash + input.marketAndTransit;
+    if (cardUsed < r.cardThreshold * 1.15 || r.cardDeduction < 3000000) {
+      list.push(["credit-vs-debit-card-year-end-tax-split", "카드 공제: 신용카드·체크카드 비율"]);
+    }
+    if (remainPension > 0) list.push(["pension-savings-irp-december-deposit-refund", "연금저축·IRP 12월 납입 환급표"]);
+    if (form.rent === 0 || r.creditRent > 0) list.push(["monthly-rent-tax-credit-requirements-refund", "월세 세액공제 조건과 환급액"]);
+    if (form.medicalNoLimit + form.medicalLimited > 0 || form.educationSelf + form.educationChildren > 0) {
+      list.push(["medical-education-donation-year-end-tax-checklist", "의료비·교육비 공제 체크리스트"]);
+    }
+    if (couple || form.headcount > 1) list.push(["dual-income-dependents-year-end-tax-allocation", "맞벌이·부양가족 공제 배분"]);
+    if (r.diff < 300000) list.push(["why-year-end-tax-refund-is-small-checklist", "환급이 적게 나온 이유 진단"]);
+    return list.slice(0, 4);
+  }, [input, r, remainPension, form, couple]);
+
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
       <div className="flex flex-col gap-5">
@@ -190,6 +327,13 @@ export function YearEndTaxCalculator() {
             className="rounded-full border border-[var(--color-border)] px-3 py-1 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
           >
             초기화
+          </button>
+          <button
+            type="button"
+            onClick={copyLink}
+            className="rounded-full border border-[var(--color-border)] px-3 py-1 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
+          >
+            {copied ? "링크 복사됨" : "입력값 링크 복사"}
           </button>
         </div>
 
@@ -241,6 +385,30 @@ export function YearEndTaxCalculator() {
           <NumberField label="자녀 교육비 (미취학~고교)" hint="자녀 1인당 300만 원 한도" value={form.educationChildren} onChange={(v) => set("educationChildren", v ?? 0)} />
           <NumberField label="월세 (연간 총액)" hint="총급여 8천만 원 이하 무주택 세대주 등 요건 충족 시" value={form.rent} onChange={(v) => set("rent", v ?? 0)} />
         </Section>
+
+        <fieldset className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <legend className="px-1 text-sm font-semibold text-[var(--color-primary)]">맞벌이 부부 비교 (선택)</legend>
+          <label className="mt-2 flex items-center gap-2 text-sm text-[var(--color-text-primary)]">
+            <input type="checkbox" checked={couple} onChange={(e) => setCouple(e.target.checked)} />
+            배우자 정보를 넣고 가족 공제·의료비를 누구 앞으로 올릴지 비교하기
+          </label>
+          {couple ? (
+            <>
+              <p className="mt-2 text-xs text-[var(--color-text-secondary)]">
+                위 &lsquo;기본공제 인원&rsquo;은 배우자를 제외한 인원(본인 포함)으로 입력하세요. 연금저축·카드·월세 등은 각자 본인 앞으로 계산하고, 가족 공제(기본공제·자녀세액공제·자녀 교육비)와 의료비만 배분을 바꿔 봅니다.
+              </p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                <NumberField label="배우자 총급여 (연)" value={sp.salary} onChange={(v) => setSp((p) => ({ ...p, salary: v ?? 0 }))} />
+                <NumberField label="배우자 이미 낸 소득세" value={sp.withheld} allowEmpty emptyPlaceholder="추정" onChange={(v) => setSp((p) => ({ ...p, withheld: v }))} />
+                <NumberField label="배우자 신용카드" value={sp.creditCard} onChange={(v) => setSp((p) => ({ ...p, creditCard: v ?? 0 }))} />
+                <NumberField label="배우자 체크카드·현금영수증" value={sp.debitAndCash} onChange={(v) => setSp((p) => ({ ...p, debitAndCash: v ?? 0 }))} />
+                <NumberField label="배우자 전통시장·대중교통" value={sp.marketAndTransit} onChange={(v) => setSp((p) => ({ ...p, marketAndTransit: v ?? 0 }))} />
+                <NumberField label="배우자 연금저축" value={sp.pensionSavings} onChange={(v) => setSp((p) => ({ ...p, pensionSavings: v ?? 0 }))} />
+                <NumberField label="배우자 IRP" value={sp.irp} onChange={(v) => setSp((p) => ({ ...p, irp: v ?? 0 }))} />
+              </div>
+            </>
+          ) : null}
+        </fieldset>
       </div>
 
       <div className="flex flex-col gap-5 lg:sticky lg:top-4 lg:self-start">
@@ -329,6 +497,49 @@ export function YearEndTaxCalculator() {
             ) : null}
           </div>
         </div>
+
+        {coupleRows ? (
+          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]">부부 배분 비교 (두 사람 결정세액 합계)</p>
+            <table className="mt-3 w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs text-[var(--color-text-secondary)]">
+                  <th className="py-1 pr-2 font-normal">배분 방식</th>
+                  <th className="py-1 text-right font-normal">결정세액 합계</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--color-border)]">
+                {coupleRows.rows.map((row) => (
+                  <tr key={row.label} className={row === coupleRows.best ? "font-semibold text-[var(--color-primary)]" : ""}>
+                    <td className="py-1.5 pr-2">{row.label}{row === coupleRows.best ? " (가장 유리)" : ""}</td>
+                    <td className="tabular-nums py-1.5 text-right">{won(row.tax)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-3 text-sm text-[var(--color-text-primary)]">
+              {coupleRows.baseline - coupleRows.best.tax > 1000
+                ? `'${coupleRows.best.label}'로 올리면 '모두 본인' 대비 세금이 약 ${won(coupleRows.baseline - coupleRows.best.tax)} 줄어듭니다.`
+                : "배분 방식에 따른 세금 차이가 거의 없습니다."}
+            </p>
+            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">세액공제는 본인이 낸 세금까지만 받을 수 있어, 소득이 낮은 배우자에게 몰아도 낸 세금이 적으면 효과가 제한됩니다. 같은 가족을 두 사람이 중복 공제할 수는 없습니다.</p>
+          </div>
+        ) : null}
+
+        {recs.length > 0 ? (
+          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]">내 입력에 맞는 가이드</p>
+            <ul className="mt-2 flex flex-col gap-1.5">
+              {recs.map(([slug, label]) => (
+                <li key={slug}>
+                  <a href={`/ko/guides/${slug}`} className="text-sm text-[var(--color-text-primary)] hover:text-[var(--color-primary)]">
+                    {label} →
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
         <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
           <p className="text-sm font-semibold text-[var(--color-text-primary)]">환급금을 투자하면?</p>
