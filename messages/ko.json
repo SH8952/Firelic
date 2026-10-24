@@ -49,7 +49,26 @@
       "회원가입 불필요",
       "서버 저장 없음",
       "4개 언어 지원"
-    ]
+    ],
+    "insights": {
+      "title": "결과 해설",
+      "summaryAhead": "현재 입력값 기준으로 {age}에 FIRE 목표 자산 {amount}에 도달하며, 목표 은퇴 나이 {target}보다 {diff} 앞섭니다.",
+      "summaryBehind": "현재 입력값 기준으로 {age}에 FIRE 목표 자산 {amount}에 도달하며, 목표 은퇴 나이 {target}보다 {diff} 늦습니다. 아래 항목에서 어떤 조정이 시점을 가장 크게 당기는지 확인해 보세요.",
+      "summaryUnreachable": "현재 입력값으로는 60년 안에 FIRE 목표 자산 {amount}에 도달하지 못합니다. 월 저축액을 늘리거나 은퇴 후 생활비를 낮추면 가장 빠르게 달라집니다.",
+      "progressLabel": "FIRE 목표 대비 진행률",
+      "progressDetail": "필요 자산 {goal} 중 현재 {current}",
+      "leversTitle": "어떤 조정이 시점을 가장 당길까",
+      "leversDesc": "현재 설정에서 한 가지 값만 바꿨을 때의 FIRE 달성 나이를 보여 드립니다.",
+      "saveMore": "월 저축액 10% 늘리기",
+      "spendLess": "은퇴 후 연간 생활비 10% 줄이기",
+      "returnUp": "실질 수익률 1%p 높게 가정하기",
+      "leverResult": "{age}에 달성 ({diff} 단축)",
+      "leverNoChange": "{age}에 달성 (변화 작음)",
+      "sensTitle": "민감도 표: FIRE 달성 나이",
+      "sensDesc": "실질 수익률(행)과 월 저축액(열)을 바꿨을 때의 FIRE 달성 나이입니다. 강조된 칸이 현재 설정입니다.",
+      "sensCorner": "수익률 \\ 월 저축액",
+      "sensNote": "—는 60년 안에 목표에 도달하지 못한다는 뜻입니다. 실질 수익률은 물가 반영 후 기준입니다."
+    }
   },
   "nav": {
     "home": "홈",

@@ -49,7 +49,26 @@
       "No sign-up",
       "Nothing stored on a server",
       "Available in 4 languages"
-    ]
+    ],
+    "insights": {
+      "title": "What your result means",
+      "summaryAhead": "At your current inputs you reach your FIRE number of {amount} at {age}, which is {diff} ahead of your target retirement age of {target}.",
+      "summaryBehind": "At your current inputs you reach your FIRE number of {amount} at {age}, which is {diff} later than your target retirement age of {target}. The levers below show what moves that date most.",
+      "summaryUnreachable": "At your current inputs the portfolio does not reach the FIRE number of {amount} within 60 years. Raising monthly savings, lowering planned spending, or both usually changes this fastest.",
+      "progressLabel": "Progress toward your FIRE number",
+      "progressDetail": "{current} saved of {goal} needed",
+      "leversTitle": "What moves your date most",
+      "leversDesc": "Each line changes one input from your current setup and shows the new FIRE age.",
+      "saveMore": "Save 10% more each month",
+      "spendLess": "Plan for 10% lower yearly spending",
+      "returnUp": "Assume 1 percentage point higher real return",
+      "leverResult": "FIRE at {age} ({diff} sooner)",
+      "leverNoChange": "FIRE at {age} (little change)",
+      "sensTitle": "Sensitivity table: FIRE age",
+      "sensDesc": "FIRE age for different real returns (rows) and monthly savings (columns). The highlighted cell is your current setup.",
+      "sensCorner": "Return \\ Monthly savings",
+      "sensNote": "A dash means the FIRE number is not reached within 60 years. Real return is after inflation."
+    }
   },
   "nav": {
     "home": "Home",

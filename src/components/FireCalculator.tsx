@@ -9,6 +9,7 @@ import type { ChartDataset } from "@/components/FireChart";
 import { CurrencySelector, currencySymbolFor } from "@/components/CurrencySelector";
 import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
+import { ResultInsights } from "@/components/ResultInsights";
 import { AdSlot } from "@/components/AdSlot";
 import { AffiliateBanner } from "@/components/AffiliateBanner";
 import { UsageGuideSection } from "@/components/UsageGuideSection";
@@ -237,6 +238,16 @@ export function FireCalculator() {
           )}
 
           <FireChart datasets={chartDatasets} currencySymbol={currencySymbol} showLegend={compareMode} />
+
+          {!compareMode && (
+            <ResultInsights
+              inputs={inputs}
+              result={activeResult}
+              leanThreshold={range.leanFireThreshold}
+              currencySymbol={currencySymbol}
+              currencyUnit={currencyUnit}
+            />
+          )}
 
           <AdSlot variant="native" label={t("adNative")} />
 

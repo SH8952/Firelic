@@ -49,7 +49,26 @@
       "会員登録不要",
       "サーバーに保存されません",
       "4言語対応"
-    ]
+    ],
+    "insights": {
+      "title": "結果の読み方",
+      "summaryAhead": "現在の入力では、{age}でFIRE目標額{amount}に到達し、目標退職年齢{target}より{diff}早まります。",
+      "summaryBehind": "現在の入力では、{age}でFIRE目標額{amount}に到達し、目標退職年齢{target}より{diff}遅れます。下の項目で、どの調整が時期を最も動かすか確認できます。",
+      "summaryUnreachable": "現在の入力では、60年以内にFIRE目標額{amount}に届きません。毎月の積立を増やすか、退職後の生活費を下げると、最も早く変わります。",
+      "progressLabel": "FIRE目標額に対する進捗",
+      "progressDetail": "必要額{goal}のうち現在{current}",
+      "leversTitle": "どの調整が時期を最も動かすか",
+      "leversDesc": "現在の設定から1つの値だけを変えたときのFIRE達成年齢を示します。",
+      "saveMore": "毎月の積立を10%増やす",
+      "spendLess": "退職後の年間支出を10%減らす",
+      "returnUp": "実質リターンを1ポイント高く想定する",
+      "leverResult": "{age}で達成（{diff}短縮）",
+      "leverNoChange": "{age}で達成（変化は小さい）",
+      "sensTitle": "感度表：FIRE達成年齢",
+      "sensDesc": "実質リターン（行）と毎月の積立額（列）を変えたときのFIRE達成年齢です。強調されたマスが現在の設定です。",
+      "sensCorner": "リターン \\ 毎月の積立",
+      "sensNote": "—は60年以内に目標へ届かないことを示します。実質リターンはインフレ調整後です。"
+    }
   },
   "nav": {
     "home": "ホーム",

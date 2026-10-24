@@ -49,7 +49,26 @@
       "Sin registro",
       "Nada se guarda en un servidor",
       "Disponible en 4 idiomas"
-    ]
+    ],
+    "insights": {
+      "title": "Qué significa tu resultado",
+      "summaryAhead": "Con tus datos actuales alcanzas tu número FIRE de {amount} a los {age}, {diff} antes de tu edad objetivo de retiro ({target}).",
+      "summaryBehind": "Con tus datos actuales alcanzas tu número FIRE de {amount} a los {age}, {diff} después de tu edad objetivo de retiro ({target}). Las palancas de abajo muestran qué ajuste mueve más esa fecha.",
+      "summaryUnreachable": "Con tus datos actuales la cartera no llega al número FIRE de {amount} en 60 años. Subir el ahorro mensual, bajar el gasto previsto o ambas cosas suele cambiarlo más rápido.",
+      "progressLabel": "Avance hacia tu número FIRE",
+      "progressDetail": "{current} ahorrados de {goal} necesarios",
+      "leversTitle": "Qué mueve más tu fecha",
+      "leversDesc": "Cada línea cambia un solo dato de tu configuración actual y muestra la nueva edad FIRE.",
+      "saveMore": "Ahorrar un 10% más cada mes",
+      "spendLess": "Planificar un 10% menos de gasto anual",
+      "returnUp": "Suponer 1 punto porcentual más de rentabilidad real",
+      "leverResult": "FIRE a los {age} ({diff} antes)",
+      "leverNoChange": "FIRE a los {age} (cambio pequeño)",
+      "sensTitle": "Tabla de sensibilidad: edad FIRE",
+      "sensDesc": "Edad FIRE según la rentabilidad real (filas) y el ahorro mensual (columnas). La celda resaltada es tu configuración actual.",
+      "sensCorner": "Rentabilidad \\ Ahorro mensual",
+      "sensNote": "Un guion significa que no se alcanza el número FIRE en 60 años. La rentabilidad real es después de inflación."
+    }
   },
   "nav": {
     "home": "Inicio",
