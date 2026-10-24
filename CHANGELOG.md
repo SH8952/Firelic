@@ -1,3 +1,11 @@
+## 2026-10-24 (추가82) — 기존 ko 가이드 12편 보강 (6차, 해외 제도 7편·국민연금·건강보험 글 제외 전부 완료)
+
+앞부분 "한눈에 보기" 추가(본문·주소 유지).
+- 조기 은퇴 실현: `coast-lean-fat-fire-explained`(유형별 목표 6/9/15억, 코스트 금액 20/25/30년 약 3.39/2.66/2.08억), `barista-fire-part-time-work`(파트타임 월 0/50/100/150만 → 목표 9/7.5/6/4.5억), `fire-vs-traditional-retirement`(목표 15/20/25/30/40년 → 필요 저축률 53.7/43.1/34.4/27.3/17.1%), `fire-movement-history-and-origins`(연표).
+- 소득: `side-hustles-to-accelerate-fire`(부수입 월 30/50/100만 전액 저축 → 24.3/22.4/18.7년).
+- 은퇴 이후: `sequence-of-returns-risk`(−20/−30/−40% → 인출률 5.0/5.7/6.7%, 회복 +25/+43/+67%), `healthcare-costs-in-early-retirement`(월 10/20/30만 → 목표 +3,000/6,000/9,000만), `withdrawal-strategies-bucket-method`(버킷 예시), `dealing-with-market-crashes-after-fire`(생활비 10% 절감 시 인출률), `purpose-and-mental-health-after-fire`(연 2,000시간 점검표), `part-time-consulting-in-retirement`(월수입별 목표), `estate-planning-basics-for-fire`(점검표).
+- 코드 변경 없음. 수치는 직접 계산한 설명용 가정.
+
 ## 2026-10-24 (추가81) — 기존 ko 가이드 5편 보강 (5차)
 
 앞부분 "한눈에 보기" 추가(본문·주소 유지).
