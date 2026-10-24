@@ -1,3 +1,18 @@
+## 2026-10-24 (추가66) — FIRE 유형별 전용 계산기 4종 + 목록 페이지 (콘텐츠 풍부화 1단계)
+
+**배경**: 노출·방문이 가장 적은 사이트라서 콘텐츠를 풍부하게 하기로 함. 서치콘솔에 "barista fire calculator", "firecalc", "파이어족 계산기" 검색이 잡혀 있어, 검색 진입점을 늘리는 방향으로 진행(권장 순서 1→4→2→3→5 중 1단계).
+
+**변경**
+- 새 경로 `/{locale}/calculators`(목록)와 `/{locale}/calculators/{coast-fire|barista-fire|lean-fire|fat-fire}`(4종) — 4개 언어 × 5 = 20페이지 신설.
+- `src/lib/fireTypes.ts`: 유형 정의, 통화별 시작값(기존 슬라이더 범위의 배수로 환산), Coast FIRE 계산(코스트 목표 금액·달성률·도달 나이·은퇴 시점 자산).
+- `src/components/FireTypeCalculator.tsx`: 유형별 계산기(기존 `simulateFire`·`calcFireNumber` 재사용). Coast: 코스트 기준선 vs 내 자산 차트, Barista: 파트타임 소득 반영 목표 금액·일반 FIRE와의 기간 차이, Lean/Fat: 지출 구간 표시.
+- 페이지마다 소개·계산 방식·공식·적합한 사람·유의할 점·FAQ 3개(FAQPage JSON-LD)·다른 유형/가이드 링크 포함. `messages/*.json`에 `FireTypes` 네임스페이스 추가(en/ko/ja/es), `nav.calculators`, `home.fireTypesTitle/Subtitle` 추가.
+- 상단 메뉴(데스크톱·모바일)에 "계산기" 추가, 홈 하단에 유형 카드 4개 섹션(`home-fire-types.tsx`), 사이트맵에 20페이지 추가(hreflang 포함).
+- 기존 메인 계산기·가이드 코드는 수정하지 않음.
+
+**검증**: `tsc --noEmit`, `eslint src` 오류 없음. 로컬 dev에서 4개 언어 렌더링과 수치 직접 확인(코스트 $153,065, 바리스타·린 $735,294, 팻 $2,941,176 — 손계산과 일치), 잘못된 유형은 404. `npm run build` 234/234 페이지 생성.
+**백업**: `_backups/firelic_backup_20261024_061612_FIRE유형페이지전`
+
 ## 2026-10-23 (추가65) — 노출 상위 3편 제목·설명 보강, 한국어 홈 키워드, www→루트 308 리다이렉트
 
 **배경**: Search Console(8/29~10/20) 노출 상위 페이지 3편(real-estate-vs-index-funds 49회, how-inflation 20회, us-401k 16회)과 검색어(real estate investing vs index funds, roth ira vs traditional ira for early retirement, 파이어족 계산기 등)에 맞춰 제목·설명을 다듬음.

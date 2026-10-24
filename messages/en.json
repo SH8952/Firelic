@@ -62,7 +62,8 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "contact": "Contact",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "calculators": "Calculators"
   },
   "guides": {
     "title": "Guides",
@@ -125,7 +126,9 @@
     "guideHighlightsCta": "Browse all guides →",
     "faqHighlightsTitle": "Frequently Asked Questions",
     "faqHighlightsSubtitle": "A few common questions about the FIRE Calculator.",
-    "faqHighlightsCta": "See all FAQs →"
+    "faqHighlightsCta": "See all FAQs →",
+    "fireTypesTitle": "Pick your kind of FIRE",
+    "fireTypesSubtitle": "Coast, Barista, Lean and Fat FIRE each have their own target. Open the calculator that matches your plan."
   },
   "Consent": {
     "message": "We use cookies to analyze traffic and personalize ads. You can accept or decline non-essential cookies.",
@@ -160,5 +163,163 @@
     "homeDescription": "Free FIRE calculator: find your FIRE number and retirement age with a live chart.",
     "homeH1": "FIRE Calculator: Plan Your Early Retirement",
     "guidesDescription": "Practical guides on FIRE savings, investing, withdrawal strategy and country-specific retirement accounts."
+  },
+  "FireTypes": {
+    "indexTitle": "FIRE Calculators by Type",
+    "indexDescription": "Free calculators for Coast FIRE, Barista FIRE, Lean FIRE and Fat FIRE. Pick the version of early retirement that fits your life.",
+    "indexLead": "FIRE is not a single number. Depending on how much you want to spend and whether you plan to keep working a little, the target changes a lot. Choose the type that fits you, or start from the main calculator.",
+    "openCalculator": "Open calculator",
+    "mainCalculator": "Main FIRE calculator",
+    "sectionHow": "How it works",
+    "sectionFormula": "The formula",
+    "sectionFit": "Who it suits",
+    "sectionWatch": "What to watch out for",
+    "sectionFaq": "Frequently asked questions",
+    "sectionRelated": "Related calculators and guides",
+    "sectionGuides": "Guides to read next",
+    "calc": {
+      "retirementAge": "Retirement Age",
+      "partTimeIncome": "Part-time Income (after tax, per year)",
+      "baristaNumber": "Barista FIRE Number",
+      "baristaNumberSub": "Covers net expenses of {net} a year",
+      "fullNumber": "Full FIRE Number",
+      "fullNumberSub": "{diff} more than the Barista number",
+      "baristaAge": "Barista FIRE Age",
+      "yearsEarlier": "Years Earlier Than Full FIRE",
+      "yearsEarlierSub": "Full FIRE age: {age}",
+      "monthlySpend": "Monthly spending in retirement: {amount}",
+      "spendBand": "Your spending range: {band}",
+      "bandLean": "Lean",
+      "bandFat": "Fat",
+      "bandMiddle": "Between Lean and Fat",
+      "coastNumber": "Coast FIRE Number",
+      "coastNumberSub": "Needed today to reach {fire} by age {age}",
+      "coastProgress": "Progress to Coast",
+      "coastReached": "You have reached Coast FIRE",
+      "coastNotYet": "Not yet at the Coast number",
+      "coastAge": "Coast Age",
+      "coastAgeNone": "Not reached before retirement age",
+      "projectedAtRetirement": "Portfolio at Retirement (no new savings)",
+      "projectedSub": "Current portfolio grown at the real return",
+      "lineYourPortfolio": "Your portfolio (with contributions)",
+      "lineCoastThreshold": "Coast threshold",
+      "lineFullPath": "Full FIRE path"
+    },
+    "coast-fire": {
+      "name": "Coast FIRE",
+      "short": "Find how much you need today to stop saving and still reach FIRE by retirement age.",
+      "title": "Coast FIRE Calculator: When Can You Stop Saving?",
+      "description": "Free Coast FIRE calculator: see how much you need invested today to stop saving and still reach your FIRE number by retirement age.",
+      "h1": "Coast FIRE Calculator",
+      "lead": "Coast FIRE means you already have enough invested that, left alone, it will grow to your full FIRE number by a traditional retirement age. From that point you only need to earn enough to cover today's living costs. Enter your numbers to find your Coast number, your progress, and the age you could start coasting.",
+      "how": [
+        "Your Coast number is the amount you would need today so that compound growth alone, with no further contributions, reaches your FIRE number at your chosen retirement age. The longer the runway and the higher the real return you assume, the smaller that number is.",
+        "The chart compares your portfolio, growing with your monthly contributions, against the Coast threshold, which rises each year as retirement gets closer. The first age where your line crosses the dashed line is the age you could stop contributing."
+      ],
+      "formula": "Coast number = FIRE number ÷ (1 + real return) ^ years until retirement. FIRE number = annual expenses ÷ (1 − tax rate) ÷ withdrawal rate.",
+      "bestFor": "Coast FIRE suits people who started investing early and want the freedom to take a lower-paying or more meaningful job now, knowing the long-term plan is already on track.",
+      "watchOut": "The result depends heavily on the real return you assume and on markets cooperating. Trying a conservative return such as 4% to 5% shows how sensitive the plan is, and your expenses at retirement may differ from today's.",
+      "faq": [
+        {
+          "question": "What is the difference between Coast FIRE and regular FIRE?",
+          "answer": "Regular FIRE means you can stop working now because your portfolio covers your spending. Coast FIRE means you can stop saving now because growth alone will get you to FIRE by a later retirement age, but you still need income to pay for living costs until then."
+        },
+        {
+          "question": "Which retirement age should I use?",
+          "answer": "Use the age at which you would like to start living off the portfolio, such as 55, 60, or 65. A later age gives compounding more time, so the Coast number is lower, while an earlier age raises it."
+        },
+        {
+          "question": "Does Coast FIRE include Social Security or pensions?",
+          "answer": "No. The calculator leaves out state and employer pensions to stay conservative. If you expect them, lower your annual expenses input by the amount they would cover to see a smaller target."
+        }
+      ]
+    },
+    "barista-fire": {
+      "name": "Barista FIRE",
+      "short": "See how part-time income shrinks the portfolio you need and how much sooner you can leave full-time work.",
+      "title": "Barista FIRE Calculator: Part-Time Income + Portfolio",
+      "description": "Free Barista FIRE calculator: see how part-time income lowers the portfolio you need and how many years earlier you can leave full-time work.",
+      "h1": "Barista FIRE Calculator",
+      "lead": "Barista FIRE is a semi-retirement path: you leave full-time work earlier, and part-time or low-stress income covers part of your expenses while your portfolio covers the rest. Enter your spending and expected part-time income to see the smaller portfolio you need and how much sooner you can get there.",
+      "how": [
+        "A Barista FIRE number only has to fund the gap between your annual expenses and your part-time income. Every unit of expenses covered by work is a unit your portfolio no longer has to produce, which at a 4% withdrawal rate means you need about 25 times that amount less in savings.",
+        "The chart shows your path to the Barista number with a dashed line for the full FIRE path, so you can see the years saved. Many people also choose part-time work for benefits such as health insurance, which is worth pricing separately."
+      ],
+      "formula": "Barista number = (annual expenses − part-time income) ÷ (1 − tax rate) ÷ withdrawal rate.",
+      "bestFor": "It suits people who would rather work fewer or more enjoyable hours than reach full retirement as fast as possible, and who are confident they can find steady part-time income.",
+      "watchOut": "Part-time income is never guaranteed, health insurance can be a large cost in some countries, and the portfolio still has to survive market downturns. Treat the part-time income as a range, not a certainty.",
+      "faq": [
+        {
+          "question": "How much part-time income should I assume?",
+          "answer": "Use a conservative figure you could realistically earn after tax in a role you would not mind doing for years. Try a few amounts to see how sensitive the result is."
+        },
+        {
+          "question": "Is the part-time income taxed in this calculator?",
+          "answer": "Enter it after tax. The tax rate field applies to withdrawals from the portfolio, not to the part-time income."
+        },
+        {
+          "question": "What if I stop working part-time later?",
+          "answer": "Then your portfolio must cover the full expenses from that point. Compare the Barista number with the full FIRE number shown in the results to see how much more you would need, and keep growing the portfolio meanwhile."
+        }
+      ]
+    },
+    "lean-fire": {
+      "name": "Lean FIRE",
+      "short": "Retire on a minimalist budget with a much smaller target.",
+      "title": "Lean FIRE Calculator: Retire on a Minimalist Budget",
+      "description": "Free Lean FIRE calculator: see the smaller portfolio you need when you keep spending low, and how soon a frugal budget gets you there.",
+      "h1": "Lean FIRE Calculator",
+      "lead": "Lean FIRE means retiring early on a deliberately small budget. Because your spending is low, your FIRE number is low too, so you can often get there years sooner than a typical plan. This calculator starts from a lean budget and shows what it takes.",
+      "how": [
+        "Your FIRE number scales directly with spending: every extra 1,000 of annual expenses adds about 25,000 to the target at a 4% withdrawal rate. Lean FIRE works by keeping the expense side small through housing, transport and lifestyle choices.",
+        "This tool treats annual spending of roughly 25,000 US dollars or less as a lean budget, and scales that line for other currencies. Definitions vary by country and household size, so use the label as a guide, not a rule."
+      ],
+      "formula": "FIRE number = annual expenses ÷ (1 − tax rate) ÷ withdrawal rate.",
+      "bestFor": "It suits people who are happy with a simple lifestyle, can live in a lower-cost place, or have a partner or household that shares costs.",
+      "watchOut": "A small budget leaves less room for surprises such as medical bills, home repairs, or inflation in your own spending. Many lean retirees keep a cash buffer or a flexible part-time option.",
+      "faq": [
+        {
+          "question": "What counts as Lean FIRE?",
+          "answer": "There is no official line. Many sources describe it as living on a modest budget, and this tool uses about 25,000 US dollars a year as its guide. A single person in a low-cost area and a family in an expensive city will draw the line differently."
+        },
+        {
+          "question": "Is the 4% rule safe for a long lean retirement?",
+          "answer": "The 4% rule comes from historical studies of 30-year retirements. Early retirees face a longer horizon, so many people test lower rates such as 3.5% in this calculator to see the effect."
+        },
+        {
+          "question": "How can I reach Lean FIRE faster?",
+          "answer": "Lowering expenses helps twice: it raises the amount you can save each month and it shrinks the target. Try reducing annual expenses by 10% and compare the years to FIRE."
+        }
+      ]
+    },
+    "fat-fire": {
+      "name": "Fat FIRE",
+      "short": "Keep a comfortable lifestyle in early retirement and see the larger target.",
+      "title": "Fat FIRE Calculator: Retire Early Without Cutting Back",
+      "description": "Free Fat FIRE calculator: see the portfolio and monthly savings needed to retire early while keeping a comfortable lifestyle.",
+      "h1": "Fat FIRE Calculator",
+      "lead": "Fat FIRE is early retirement without major lifestyle cuts, with a larger budget for travel, housing and discretionary spending. The target is bigger, so the plan depends on high savings and long investing. This calculator starts from a high-spending budget and shows the number you are aiming for.",
+      "how": [
+        "Fat FIRE numbers grow quickly. With the defaults here (100,000 US dollars of annual spending, a 4% withdrawal rate and a 15% effective tax rate), the target is about 2.9 million US dollars.",
+        "This tool treats annual spending of roughly 100,000 US dollars or more as a fat budget and scales that line for other currencies. The chart shows how long accumulation takes at your monthly contribution, which is the lever that matters most."
+      ],
+      "formula": "FIRE number = annual expenses ÷ (1 − tax rate) ÷ withdrawal rate.",
+      "bestFor": "It suits high earners who can save a large share of their income for many years and who want a retirement lifestyle close to their working one.",
+      "watchOut": "A larger portfolio means larger absolute swings in a downturn and often a higher tax bill. Planning for lower withdrawal rates, tax-efficient accounts and flexible spending is common at this level.",
+      "faq": [
+        {
+          "question": "How much do I need for Fat FIRE?",
+          "answer": "It depends on your spending. With the defaults here the target is about 2.9 million US dollars, and the calculator recalculates for your own expenses, tax rate and withdrawal rate."
+        },
+        {
+          "question": "Does Fat FIRE need a higher return?",
+          "answer": "Not necessarily. A higher monthly contribution is usually more reliable than assuming higher returns. Try both to see which changes your timeline more."
+        },
+        {
+          "question": "Is Fat FIRE realistic on a normal income?",
+          "answer": "It usually requires a high income, a high savings rate, or a long time horizon. Compare it with Lean and Barista FIRE to find the version that fits your situation."
+        }
+      ]
+    }
   }
 }

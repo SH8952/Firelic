@@ -62,7 +62,8 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "contact": "Contacto",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "calculators": "Calculadoras"
   },
   "guides": {
     "title": "Guías",
@@ -125,7 +126,9 @@
     "guideHighlightsCta": "Ver todas las guías →",
     "faqHighlightsTitle": "Preguntas Frecuentes",
     "faqHighlightsSubtitle": "Algunas preguntas comunes sobre la FIRE Calculator.",
-    "faqHighlightsCta": "Ver todas las preguntas →"
+    "faqHighlightsCta": "Ver todas las preguntas →",
+    "fireTypesTitle": "Elige tu tipo de FIRE",
+    "fireTypesSubtitle": "Coast, Barista, Lean y Fat FIRE tienen cada uno su propio objetivo. Abre la calculadora que encaje con tu plan."
   },
   "Consent": {
     "message": "Utilizamos cookies para analizar el tráfico y personalizar los anuncios. Puede aceptar o rechazar las cookies no esenciales.",
@@ -160,5 +163,163 @@
     "homeDescription": "Calcula tu número FIRE y la edad de retiro con un gráfico en vivo. Gratis y sin registro.",
     "homeH1": "Calculadora FIRE: planifica tu jubilación anticipada",
     "guidesDescription": "Guías prácticas sobre ahorro e inversión para FIRE, retiros y cuentas de jubilación por país."
+  },
+  "FireTypes": {
+    "indexTitle": "Calculadoras FIRE por tipo",
+    "indexDescription": "Calculadoras gratuitas de Coast FIRE, Barista FIRE, Lean FIRE y Fat FIRE. Elige la forma de jubilación anticipada que encaje con tu vida.",
+    "indexLead": "FIRE no es un único número. Según cuánto quieras gastar y si piensas seguir trabajando un poco, el objetivo cambia mucho. Elige el tipo que te encaje o empieza por la calculadora principal.",
+    "openCalculator": "Abrir calculadora",
+    "mainCalculator": "Calculadora FIRE principal",
+    "sectionHow": "Cómo funciona",
+    "sectionFormula": "La fórmula",
+    "sectionFit": "A quién le encaja",
+    "sectionWatch": "Qué tener en cuenta",
+    "sectionFaq": "Preguntas frecuentes",
+    "sectionRelated": "Calculadoras y guías relacionadas",
+    "sectionGuides": "Guías para seguir leyendo",
+    "calc": {
+      "retirementAge": "Edad de jubilación",
+      "partTimeIncome": "Ingreso parcial (anual, después de impuestos)",
+      "baristaNumber": "Número Barista FIRE",
+      "baristaNumberSub": "Cubre unos gastos netos de {net} al año",
+      "fullNumber": "Número FIRE completo",
+      "fullNumberSub": "{diff} más que el número Barista",
+      "baristaAge": "Edad Barista FIRE",
+      "yearsEarlier": "Años antes que el FIRE completo",
+      "yearsEarlierSub": "Edad FIRE completo: {age}",
+      "monthlySpend": "Gasto mensual en la jubilación: {amount}",
+      "spendBand": "Tu rango de gasto: {band}",
+      "bandLean": "Lean",
+      "bandFat": "Fat",
+      "bandMiddle": "Entre Lean y Fat",
+      "coastNumber": "Número Coast FIRE",
+      "coastNumberSub": "Necesario hoy para llegar a {fire} a los {age} años",
+      "coastProgress": "Progreso hacia Coast",
+      "coastReached": "Has alcanzado Coast FIRE",
+      "coastNotYet": "Todavía no llegas al número Coast",
+      "coastAge": "Edad Coast",
+      "coastAgeNone": "No se alcanza antes de la edad de jubilación",
+      "projectedAtRetirement": "Cartera a la jubilación (sin nuevos ahorros)",
+      "projectedSub": "Cartera actual crecida al rendimiento real",
+      "lineYourPortfolio": "Tu cartera (con aportaciones)",
+      "lineCoastThreshold": "Umbral Coast",
+      "lineFullPath": "Camino FIRE completo"
+    },
+    "coast-fire": {
+      "name": "Coast FIRE",
+      "short": "Descubre cuánto necesitas hoy para dejar de ahorrar y aun así llegar al FIRE a la edad de jubilación.",
+      "title": "Calculadora Coast FIRE: cuándo puedes dejar de ahorrar",
+      "description": "Calculadora Coast FIRE gratuita: descubre cuánto necesitas invertido hoy para llegar a tu número FIRE a la edad de jubilación sin ahorrar más.",
+      "h1": "Calculadora Coast FIRE",
+      "lead": "Coast FIRE significa que ya tienes invertido lo suficiente para que, sin nuevas aportaciones, el interés compuesto lleve tu cartera hasta tu número FIRE a una edad de jubilación tradicional. Desde ese punto solo necesitas ganar lo suficiente para cubrir tus gastos actuales. Introduce tus datos para ver tu número Coast, tu avance y la edad a la que podrías dejar de aportar.",
+      "how": [
+        "Tu número Coast es la cantidad que necesitas hoy para que el crecimiento compuesto, sin más aportaciones, alcance tu número FIRE a la edad de jubilación elegida. Cuanto más largo es el plazo y mayor el rendimiento real que supones, menor es esa cifra.",
+        "El gráfico compara tu cartera, que crece con tus aportaciones mensuales, con el umbral Coast, que sube cada año a medida que se acerca la jubilación. La primera edad en que tu línea cruza la línea discontinua es la edad en que podrías dejar de aportar."
+      ],
+      "formula": "Número Coast = número FIRE ÷ (1 + rendimiento real) ^ años hasta la jubilación. Número FIRE = gastos anuales ÷ (1 − tasa de impuestos) ÷ tasa de retirada.",
+      "bestFor": "Encaja con quienes empezaron a invertir pronto y quieren la libertad de elegir un trabajo peor pagado o con más sentido, sabiendo que el plan a largo plazo ya va por buen camino.",
+      "watchOut": "El resultado depende mucho del rendimiento real que supongas y de que los mercados acompañen. Probar un rendimiento prudente, como entre el 4 % y el 5 %, muestra lo sensible que es el plan; además, tus gastos en la jubilación pueden ser distintos de los de hoy.",
+      "faq": [
+        {
+          "question": "¿En qué se diferencia Coast FIRE del FIRE normal?",
+          "answer": "FIRE normal significa que puedes dejar de trabajar ya porque tu cartera cubre tus gastos. Coast FIRE significa que puedes dejar de ahorrar ya porque el crecimiento llevará tu cartera al FIRE a una edad posterior, aunque necesitas ingresos para vivir hasta entonces."
+        },
+        {
+          "question": "¿Qué edad de jubilación debo usar?",
+          "answer": "Usa la edad a la que querrías empezar a vivir de la cartera, como 55, 60 o 65 años. Una edad mayor da más tiempo al interés compuesto y baja el número Coast; una edad menor lo sube."
+        },
+        {
+          "question": "¿Incluye pensiones públicas o de empresa?",
+          "answer": "No. La calculadora las deja fuera para ser prudente. Si esperas cobrarlas, resta de tus gastos anuales lo que cubrirían para ver un objetivo menor."
+        }
+      ]
+    },
+    "barista-fire": {
+      "name": "Barista FIRE",
+      "short": "Mira cuánto reduce tu cartera necesaria un ingreso parcial y cuánto antes puedes dejar el empleo completo.",
+      "title": "Calculadora Barista FIRE: trabajo parcial y cartera",
+      "description": "Calculadora Barista FIRE gratuita: mira cuánto reduce tu cartera necesaria un ingreso a tiempo parcial y cuántos años antes puedes dejar el empleo completo.",
+      "h1": "Calculadora Barista FIRE",
+      "lead": "Barista FIRE es una semijubilación: dejas antes el trabajo a tiempo completo y un ingreso a tiempo parcial o de bajo estrés cubre parte de tus gastos, mientras la cartera cubre el resto. Introduce tus gastos y el ingreso parcial previsto para ver cuánta cartera necesitas y cuánto antes llegas.",
+      "how": [
+        "Tu número Barista solo tiene que financiar la diferencia entre tus gastos anuales y tu ingreso a tiempo parcial. Cada unidad de gasto que cubre el trabajo es una unidad que la cartera no tiene que producir; con una tasa de retirada del 4 %, eso reduce unas 25 veces esa cantidad en ahorros necesarios.",
+        "El gráfico muestra tu camino hacia el número Barista junto con una línea discontinua del camino FIRE completo, para ver los años ahorrados. Muchas personas eligen el trabajo parcial por beneficios como el seguro médico, que conviene calcular aparte."
+      ],
+      "formula": "Número Barista = (gastos anuales − ingreso parcial) ÷ (1 − tasa de impuestos) ÷ tasa de retirada.",
+      "bestFor": "Encaja con quienes prefieren trabajar menos horas o en algo que disfrutan antes que llegar a la jubilación total lo más rápido posible, y confían en conseguir un ingreso parcial estable.",
+      "watchOut": "El ingreso parcial nunca está garantizado, el seguro médico puede ser un coste importante según el país y la cartera debe resistir las caídas del mercado. Piensa en ese ingreso como un rango, no como una certeza.",
+      "faq": [
+        {
+          "question": "¿Cuánto ingreso parcial debo suponer?",
+          "answer": "Usa una cifra prudente que podrías ganar realmente, después de impuestos, en un puesto que no te importe hacer durante años. Prueba varias cantidades para ver la sensibilidad del resultado."
+        },
+        {
+          "question": "¿Se aplican impuestos al ingreso parcial en esta calculadora?",
+          "answer": "Introdúcelo ya después de impuestos. El campo de tasa de impuestos se aplica a lo que retiras de la cartera, no al ingreso parcial."
+        },
+        {
+          "question": "¿Y si dejo el trabajo parcial más adelante?",
+          "answer": "Desde ese momento la cartera tiene que cubrir todos los gastos. Compara el número Barista con el número FIRE completo que aparece en los resultados para ver cuánto más necesitarías, y sigue haciendo crecer la cartera mientras tanto."
+        }
+      ]
+    },
+    "lean-fire": {
+      "name": "Lean FIRE",
+      "short": "Jubílate con un presupuesto mínimo y un objetivo mucho más pequeño.",
+      "title": "Calculadora Lean FIRE: jubílate con un presupuesto mínimo",
+      "description": "Calculadora Lean FIRE gratuita: mira la cartera más pequeña que necesitas si mantienes los gastos bajos y lo pronto que llegas con un presupuesto austero.",
+      "h1": "Calculadora Lean FIRE",
+      "lead": "Lean FIRE consiste en jubilarse pronto con un presupuesto deliberadamente pequeño. Como gastas poco, tu número FIRE también es bajo y a menudo se llega años antes que con un plan típico. Esta calculadora parte de un presupuesto austero y te muestra lo que hace falta.",
+      "how": [
+        "Tu número FIRE crece en proporción directa a los gastos: con una tasa de retirada del 4 %, cada 1.000 más de gasto anual añade unos 25.000 al objetivo. Lean FIRE funciona manteniendo bajo el gasto mediante decisiones de vivienda, transporte y estilo de vida.",
+        "Esta herramienta considera presupuesto austero un gasto anual de unos 25.000 dólares estadounidenses o menos, y escala esa línea para otras monedas. Las definiciones varían según el país y el tamaño del hogar, así que toma la etiqueta como una guía, no como una regla."
+      ],
+      "formula": "Número FIRE = gastos anuales ÷ (1 − tasa de impuestos) ÷ tasa de retirada.",
+      "bestFor": "Encaja con quienes disfrutan de un estilo de vida sencillo, pueden vivir en un lugar de coste bajo o comparten gastos con su pareja o familia.",
+      "watchOut": "Un presupuesto pequeño deja menos margen para imprevistos, como gastos médicos, reparaciones de la vivienda o inflación en tus propios gastos. Muchos jubilados Lean mantienen un colchón en efectivo o una opción flexible de trabajo parcial.",
+      "faq": [
+        {
+          "question": "¿Qué se considera Lean FIRE?",
+          "answer": "No hay una línea oficial. Se describe como vivir con un presupuesto modesto, y esta herramienta usa unos 25.000 dólares al año como guía. Una persona sola en una zona barata y una familia en una ciudad cara trazarán la línea de forma distinta."
+        },
+        {
+          "question": "¿Es segura la regla del 4 % para una jubilación larga y austera?",
+          "answer": "La regla del 4 % procede de estudios históricos sobre jubilaciones de 30 años. Quien se jubila pronto tiene un horizonte más largo, por lo que muchas personas prueban tasas menores, como el 3,5 %, en esta calculadora."
+        },
+        {
+          "question": "¿Cómo llegar antes a Lean FIRE?",
+          "answer": "Reducir gastos ayuda dos veces: aumenta lo que puedes ahorrar cada mes y reduce el objetivo. Prueba a bajar los gastos anuales un 10 % y compara los años hasta el FIRE."
+        }
+      ]
+    },
+    "fat-fire": {
+      "name": "Fat FIRE",
+      "short": "Mantén un estilo de vida cómodo en la jubilación anticipada y mira el objetivo mayor.",
+      "title": "Calculadora Fat FIRE: jubílate pronto sin recortar tu vida",
+      "description": "Calculadora Fat FIRE gratuita: mira la cartera y el ahorro mensual necesarios para jubilarte pronto manteniendo un estilo de vida cómodo.",
+      "h1": "Calculadora Fat FIRE",
+      "lead": "Fat FIRE es la jubilación anticipada sin grandes recortes en el estilo de vida, con un presupuesto mayor para viajes, vivienda y gastos discrecionales. El objetivo es más grande, así que el plan depende de ahorrar mucho y de invertir durante mucho tiempo. Esta calculadora parte de un presupuesto alto y te muestra la cifra a la que apuntas.",
+      "how": [
+        "Los números Fat FIRE crecen rápido: con los valores por defecto (gasto anual de 100.000 dólares, retirada del 4 % y un 15 % de impuestos efectivos), el objetivo es de unos 2,9 millones.",
+        "Esta herramienta considera presupuesto Fat un gasto anual de unos 100.000 dólares estadounidenses o más, y escala la línea para otras monedas. El gráfico muestra cuánto tarda la acumulación con tu aportación mensual, que es la palanca que más pesa."
+      ],
+      "formula": "Número FIRE = gastos anuales ÷ (1 − tasa de impuestos) ÷ tasa de retirada.",
+      "bestFor": "Encaja con personas de ingresos altos que pueden ahorrar una gran parte de sus ingresos durante muchos años y quieren una jubilación parecida a su vida laboral.",
+      "watchOut": "Una cartera mayor implica oscilaciones absolutas mayores en una caída del mercado y, a menudo, más impuestos. A este nivel es habitual planificar tasas de retirada más bajas, cuentas con ventajas fiscales y gastos flexibles.",
+      "faq": [
+        {
+          "question": "¿Cuánto necesito para Fat FIRE?",
+          "answer": "Depende de tu gasto. Con los valores por defecto el objetivo es de unos 2,9 millones, pero la calculadora recalcula con tus propios gastos, impuestos y tasa de retirada."
+        },
+        {
+          "question": "¿Fat FIRE requiere un rendimiento mayor?",
+          "answer": "No necesariamente. Aportar más cada mes suele ser más fiable que suponer rendimientos más altos. Prueba ambas cosas para ver cuál cambia más tu plazo."
+        },
+        {
+          "question": "¿Es realista Fat FIRE con unos ingresos normales?",
+          "answer": "Normalmente exige ingresos altos, una tasa de ahorro alta o un horizonte largo. Compáralo con Lean y Barista FIRE para encontrar la versión que encaja con tu situación."
+        }
+      ]
+    }
   }
 }

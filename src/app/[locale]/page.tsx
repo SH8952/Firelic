@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { languageAlternates, ogImages, webApplicationJsonLd } from "@/lib/seo";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
+import { HomeFireTypes } from "@/components/home-fire-types";
 import { AdSlot } from "@/components/AdSlot";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 
@@ -67,6 +68,9 @@ export default async function HomePage({
       {/* 페이지 대표 제목(H1) — 화면에는 헤더가 제목 역할을 하므로 스크린리더/검색엔진용으로만 제공 */}
       <h1 className="sr-only">{tSeo("homeH1")}</h1>
       <FireCalculator />
+
+      {/* FIRE 유형별 계산기 링크 카드(2026-10-24 신설) */}
+      <HomeFireTypes locale={locale} />
 
       {/* 가이드 아티클 하이라이트 — 홈페이지 텍스트/링크 풍부화 (AdSense 재심사 대응, 계산기 구조는 변경 없음) */}
       <HomeGuideHighlights locale={locale} />
