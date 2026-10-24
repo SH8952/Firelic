@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BackLink } from "@/components/back-link";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 import { Link } from "@/i18n/navigation";
+import { REFERENCE_TABLES, TABLE_KEY } from "@/lib/referenceTables";
 import { breadcrumbJsonLd, languageAlternates, ogImages } from "@/lib/seo";
 import { FIRE_TYPES } from "@/lib/fireTypes";
 
@@ -28,6 +29,7 @@ export default async function CalculatorsIndexPage({ params }: { params: Promise
   const t = await getTranslations({ locale, namespace: "FireTypes" });
   const tCalc = await getTranslations({ locale, namespace: "calculator" });
   const tBack = await getTranslations({ locale, namespace: "BackNav" });
+  const tRef = await getTranslations({ locale, namespace: "Reference" });
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: `${SITE_URL}/${locale}` },
     { name: t("indexTitle"), url: `${SITE_URL}/${locale}/calculators` },
@@ -51,6 +53,19 @@ export default async function CalculatorsIndexPage({ params }: { params: Promise
               <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">{t(`${type}.name`)}</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">{t(`${type}.short`)}</p>
               <span className="text-sm font-medium text-[var(--color-primary)]">{t("openCalculator")} →</span>
+            </Link>
+          ))}
+        </div>
+        <h2 className="mt-10 text-lg font-semibold text-[var(--color-text-primary)]">{tRef("sectionRelated")}</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {REFERENCE_TABLES.map((table) => (
+            <Link
+              key={table}
+              href={`/reference/${table}`}
+              className="flex flex-col gap-2 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 transition hover:border-[var(--color-primary)]"
+            >
+              <span className="font-semibold text-[var(--color-text-primary)]">{tRef(`${TABLE_KEY[table]}.h1`)}</span>
+              <span className="text-sm text-[var(--color-text-secondary)]">{tRef(`${TABLE_KEY[table]}.short`)}</span>
             </Link>
           ))}
         </div>

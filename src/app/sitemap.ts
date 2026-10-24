@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getGuides, getGuideSlugs } from "@/lib/guides";
 import { FIRE_TYPES } from "@/lib/fireTypes";
+import { REFERENCE_TABLES } from "@/lib/referenceTables";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
-const STATIC_PATHS = ["", "/about", "/privacy-policy", "/terms", "/affiliate-disclosure", "/contact", "/guides", "/faq", "/calculators", ...FIRE_TYPES.map((t) => `/calculators/${t}`)];
+const STATIC_PATHS = ["", "/about", "/privacy-policy", "/terms", "/affiliate-disclosure", "/contact", "/guides", "/faq", "/calculators", ...FIRE_TYPES.map((t) => `/calculators/${t}`), ...REFERENCE_TABLES.map((t) => `/reference/${t}`)];
 
 // 언어별 대체 주소(hreflang)를 사이트맵에도 함께 제공한다(페이지 <head>의 hreflang과 동일한 내용).
 function languageMap(path: string, locales: readonly string[]): Record<string, string> {

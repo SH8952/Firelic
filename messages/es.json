@@ -395,5 +395,80 @@
       "tie": "Ambos quedan casi igual.",
       "hint": "Con el mismo rendimiento en ambos casos, solo importan los dos tipos impositivos: si el tipo futuro es menor conviene la tradicional; si el actual es menor, la Roth. Quien se jubila pronto suele tener pocos ingresos imponibles en los años previos a los 59½, lo que puede bajar el tipo futuro."
     }
+  },
+  "Reference": {
+    "sectionHow": "Cómo leer esta tabla",
+    "sectionFormula": "Fórmula y supuestos",
+    "sectionFaq": "Preguntas frecuentes",
+    "sectionRelated": "Tablas y herramientas relacionadas",
+    "sectionGuides": "Guías para seguir leyendo",
+    "openCalculator": "Abrir la calculadora FIRE",
+    "typeCalculators": "Calculadoras FIRE por tipo",
+    "typeCalculatorsShort": "Calculadoras Coast, Barista, Lean y Fat FIRE con tus propias cifras.",
+    "spending": {
+      "title": "Número FIRE según el gasto mensual (retiro del 3% al 4,5%)",
+      "description": "Cuánto necesitas para jubilarte antes con cada nivel de gasto mensual, de 1.500 € a 10.000 €, con tasas de retiro entre el 3% y el 4,5%.",
+      "h1": "Número FIRE según el gasto mensual",
+      "short": "Encuentra tu cartera objetivo a partir de tu gasto mensual.",
+      "lead": "Elige la fila más cercana a lo que esperas gastar cada mes en la jubilación y lee hacia la derecha para ver la cartera necesaria con distintas tasas de retiro seguras.",
+      "caption": "Cartera necesaria (EUR) para cada gasto mensual y tasa de retiro",
+      "rowHead": "Gasto mensual",
+      "colHead": "Retiro del {rate}%",
+      "note": "La columna del 4% está resaltada porque es el punto de partida más habitual. Las cifras son antes de impuestos y en dinero de hoy; para incluir impuestos usa la calculadora.",
+      "how": [
+        "Cada celda responde una pregunta: si gastas esta cantidad al mes, ¿qué tamaño debe tener la cartera para que la tasa de retiro elegida cubra un año?",
+        "Una tasa más baja exige una cartera mayor pero da más margen de seguridad, algo clave en jubilaciones de 40 años o más. Una tasa más alta reduce el objetivo, pero deja menos margen ante una mala racha del mercado.",
+        "Usa la fila de tu gasto real previsto, con vivienda, seguro médico y viajes, no tu sueldo actual. Lo que fija el objetivo es el gasto."
+      ],
+      "formula": "Número FIRE = gasto mensual × 12 ÷ tasa de retiro",
+      "assumptions": "El gasto se mantiene constante en términos reales, no se incluyen impuestos y la tasa se aplica a la cartera inicial. La calculadora principal añade el ajuste de impuestos y estima la fecha en que alcanzas el objetivo.",
+      "faq": [
+        {
+          "question": "¿Por qué está resaltada la columna del 4%?",
+          "answer": "La regla del 4% sale de datos históricos de EE. UU. para jubilaciones de 30 años y es el punto de partida habitual. Quien se retira antes suele probar también el 3% o el 3,5%."
+        },
+        {
+          "question": "¿La tabla incluye impuestos?",
+          "answer": "No. Muestra la cartera necesaria para financiar el gasto en sí. Si parte de tus retiros tributa, divide el gasto entre uno menos tu tasa de impuestos esperada o usa el campo de impuestos de la calculadora."
+        },
+        {
+          "question": "¿Y si mi gasto está entre dos filas?",
+          "answer": "La relación es lineal, así que puedes interpolar. Si el gasto mensual se duplica, el objetivo se duplica con cualquier tasa de retiro."
+        }
+      ]
+    },
+    "savings": {
+      "title": "Años hasta FIRE según la tasa de ahorro (rentabilidad 3%–7%)",
+      "description": "Cuántos años se necesitan para alcanzar la independencia financiera con tasas de ahorro del 10% al 70% y rentabilidades reales entre el 3% y el 7%.",
+      "h1": "Años hasta FIRE según la tasa de ahorro",
+      "short": "Mira cómo tu tasa de ahorro cambia los años de trabajo.",
+      "lead": "Tu tasa de ahorro importa más que tus ingresos. Busca tu tasa en la columna izquierda y una rentabilidad real esperada arriba para ver cuántos años de ahorro hacen falta partiendo de cero.",
+      "caption": "Años de ahorro necesarios desde un saldo inicial de cero, con retiro del 4%",
+      "rowHead": "Tasa de ahorro",
+      "colHead": "Rentabilidad real {rate}%",
+      "cell": "{years} años",
+      "note": "La columna del 5% está resaltada como caso intermedio. Rentabilidad real significa descontada la inflación. Los resultados son para quien parte sin ahorros.",
+      "how": [
+        "Una tasa de ahorro más alta acorta el camino de dos formas: inviertes más cada año y necesitas una cartera menor porque vives con menos.",
+        "Pasar del 10% al 30% de ahorro quita décadas al plazo, mientras que pasar del 60% al 70% ahorra solo unos pocos años porque las primeras mejoras ya son enormes.",
+        "Si ya tienes ahorros, tu plazo real es más corto que el de la tabla. Usa la calculadora principal para incluir tu cartera actual."
+      ],
+      "formula": "Años = ln(1 + (1 − s) × r ÷ (s × w)) ÷ ln(1 + r), con s la tasa de ahorro, r la rentabilidad real y w la tasa de retiro",
+      "assumptions": "Los ingresos son constantes en términos reales, el ahorro se invierte al final de cada año, la tasa de retiro es del 4%, se ignoran los impuestos y el saldo inicial es cero.",
+      "faq": [
+        {
+          "question": "¿Por qué no aparecen los ingresos en la tabla?",
+          "answer": "Porque solo importa la proporción entre lo que ahorras y lo que gastas. Una tasa de ahorro del 50% requiere los mismos años con cualquier nivel de ingresos."
+        },
+        {
+          "question": "¿Es realista ahorrar el 50%?",
+          "answer": "Es exigente, pero habitual entre quienes buscan jubilarse antes. La tabla muestra el equilibrio para que elijas una tasa y un plazo acordes con tu vida."
+        },
+        {
+          "question": "¿Qué rentabilidad real debería elegir?",
+          "answer": "Las carteras diversificadas con mucha renta variable han rendido históricamente entre un 5% y un 7% real, con grandes oscilaciones. Mirar las columnas del 3% al 4% es una forma prudente de planificar."
+        }
+      ]
+    }
   }
 }

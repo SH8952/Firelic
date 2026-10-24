@@ -395,5 +395,80 @@
       "tie": "They come out about equal.",
       "hint": "With the same return on both sides, only the two tax rates matter: a lower rate later favors traditional, a lower rate now favors Roth. Early retirees often have low taxable income in the years before 59½, which can make a lower future rate realistic."
     }
+  },
+  "Reference": {
+    "sectionHow": "How to read this table",
+    "sectionFormula": "Formula and assumptions",
+    "sectionFaq": "Frequently asked questions",
+    "sectionRelated": "Related tables and tools",
+    "sectionGuides": "Guides to read next",
+    "openCalculator": "Open the FIRE calculator",
+    "typeCalculators": "FIRE calculators by type",
+    "typeCalculatorsShort": "Coast, Barista, Lean and Fat FIRE calculators with your own numbers.",
+    "spending": {
+      "title": "FIRE Number by Monthly Spending: 3% to 4.5% Withdrawal",
+      "description": "How much you need to retire early at each monthly spending level from $1,500 to $10,000, shown for withdrawal rates from 3% to 4.5%.",
+      "h1": "FIRE number by monthly spending",
+      "short": "Find your target portfolio from your monthly spending in seconds.",
+      "lead": "Pick the row closest to what you expect to spend each month in retirement, then read across to see the portfolio that supports it at different safe withdrawal rates.",
+      "caption": "Portfolio needed (USD) for each monthly spending level and withdrawal rate",
+      "rowHead": "Monthly spending",
+      "colHead": "{rate}% withdrawal",
+      "note": "The 4% column is highlighted because it is the most common starting point. Figures are before taxes and use today's money; add a tax allowance in the calculator for a gross-up.",
+      "how": [
+        "Each cell answers one question: if you spend this much per month, how large must the portfolio be so that the chosen withdrawal rate covers it for a year?",
+        "A lower withdrawal rate means a bigger portfolio but a larger safety cushion, which matters most for retirements that may last 40 years or more. A higher rate shrinks the target but leaves less room for a bad market stretch.",
+        "Use the row for your real planned spending, including housing, health insurance and travel, not your current salary. Spending is the number that sets the target."
+      ],
+      "formula": "FIRE number = monthly spending × 12 ÷ withdrawal rate",
+      "assumptions": "Spending stays flat in real terms, taxes are not included, and the withdrawal rate is applied to the starting portfolio. The main calculator adds a tax gross-up and projects the date you reach the target.",
+      "faq": [
+        {
+          "question": "Why is the 4% column highlighted?",
+          "answer": "The 4% rule comes from historical US data for 30-year retirements and is the usual starting point. Early retirees often test 3% to 3.5% for longer horizons."
+        },
+        {
+          "question": "Does the table include taxes?",
+          "answer": "No. It shows the portfolio needed to fund the spending itself. If part of your withdrawals will be taxed, divide the spending by one minus your expected tax rate first, or use the calculator's tax field."
+        },
+        {
+          "question": "What if my spending is between two rows?",
+          "answer": "The relationship is linear, so you can interpolate. Doubling the monthly spending doubles the target at every withdrawal rate."
+        }
+      ]
+    },
+    "savings": {
+      "title": "Years to FIRE by Savings Rate: Table for 3% to 7% Returns",
+      "description": "How many years it takes to reach financial independence at savings rates from 10% to 70%, for real investment returns between 3% and 7%.",
+      "h1": "Years to FIRE by savings rate",
+      "short": "See how your savings rate sets the number of working years.",
+      "lead": "Your savings rate matters more than your income. Find your rate in the left column and an expected real return across the top to see roughly how many years of saving it takes to start from zero.",
+      "caption": "Years of saving needed from a zero starting balance, assuming a 4% withdrawal rate",
+      "rowHead": "Savings rate",
+      "colHead": "{rate}% real return",
+      "cell": "{years} yrs",
+      "note": "The 5% column is highlighted as a middle case. Real return means after inflation. Results are for a person who starts with no savings.",
+      "how": [
+        "A higher savings rate shortens the path in two ways: you invest more each year and you need a smaller portfolio because you live on less.",
+        "Going from a 10% to a 30% savings rate removes decades from the timeline, while moving from 60% to 70% saves only a few years because the early gains are already large.",
+        "If you already have savings, your real timeline is shorter than the table shows. Use the main calculator to include your current portfolio."
+      ],
+      "formula": "Years = ln(1 + (1 − s) × r ÷ (s × w)) ÷ ln(1 + r), with s the savings rate, r the real return and w the withdrawal rate",
+      "assumptions": "Income is constant in real terms, savings are invested at the end of each year, the withdrawal rate is 4%, taxes are ignored, and the starting balance is zero.",
+      "faq": [
+        {
+          "question": "Why does income not appear in the table?",
+          "answer": "Because only the ratio between what you save and what you spend matters. A 50% savings rate takes the same number of years at any income level."
+        },
+        {
+          "question": "Is a 50% savings rate realistic?",
+          "answer": "It is demanding but common among people pursuing early retirement. The table shows the trade-off so you can choose a rate and a timeline that fit your life."
+        },
+        {
+          "question": "What real return should I pick?",
+          "answer": "Broad stock-heavy portfolios have historically returned roughly 5% to 7% after inflation, with large swings along the way. Looking at the 3% to 4% columns is a cautious way to plan."
+        }
+      ]
+    }
   }
 }
