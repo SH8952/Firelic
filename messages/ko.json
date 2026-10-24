@@ -1,7 +1,7 @@
 {
   "calculator": {
     "title": "FIRE 계산기",
-    "subtitle": "조기 은퇴(FIRE)까지의 경로를 시뮬레이션해보세요.",
+    "subtitle": "월급 관리부터 조기 은퇴까지, 내 숫자로 계산하는 돈 길라잡이",
     "currency": "통화",
     "currentAge": "현재 나이",
     "targetAge": "목표 은퇴 나이",
@@ -164,7 +164,7 @@
   },
   "home": {
     "guideHighlightsTitle": "가이드 살펴보기",
-    "guideHighlightsSubtitle": "조기 은퇴(FIRE) 저축·투자 전략에 도움이 되는 실전 가이드를 확인해보세요.",
+    "guideHighlightsSubtitle": "통장 정리, 보험·세금 점검, 투자 시작, 은퇴 계산까지 — 숫자로 보는 실전 가이드입니다.",
     "guideHighlightsCta": "가이드 전체 보기 →",
     "faqHighlightsTitle": "자주 묻는 질문",
     "faqHighlightsSubtitle": "FIRE Calculator 이용에 대해 자주 묻는 질문 몇 가지를 모아봤습니다.",
@@ -204,7 +204,7 @@
     "homeTitle": "파이어족 FIRE 계산기 — 조기 은퇴 시뮬레이터",
     "homeDescription": "파이어족을 위한 무료 계산기. 나이·저축·수익률을 조정해 FIRE 목표 자산과 은퇴 나이를 차트로 확인하세요.",
     "homeH1": "파이어족 FIRE 계산기: 조기 은퇴 목표 자산과 시기 계산",
-    "guidesDescription": "FIRE 저축·투자 전략, 인출 전략, 국가별 은퇴 계좌까지 실전 가이드를 모았습니다."
+    "guidesDescription": "월급 통장 정리, 보험·연말정산, 투자 시작, 조기 은퇴 계산과 인출 전략까지 숫자로 보는 실전 가이드를 모았습니다."
   },
   "FireTypes": {
     "indexTitle": "FIRE 유형별 계산기",
