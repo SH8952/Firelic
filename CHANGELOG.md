@@ -1,3 +1,22 @@
+## 2026-10-24 (추가68) — 인기 가이드 3편에 글 속 미니 계산기 + 섹션 보강 (콘텐츠 풍부화 3단계)
+
+**배경**: 노출이 가장 많은 가이드 3편(부동산 vs 인덱스, 물가와 FIRE 목표, 401(k) vs Roth)의 체류 시간과 활용도를 높이기 위해, 본문에 바로 숫자를 넣어볼 수 있는 계산기와 보강 섹션을 추가.
+
+**신규 컴포넌트** (`src/components/guides/tools/`, 클라이언트)
+- `RealEstateVsIndexTool`: 매입가·대출·임대수익·보유 기간 등을 넣어 부동산 총자산과 인덱스 투자 평가액 비교(기본값 기준 부동산 합계 $313,676).
+- `InflationTool`: 연 지출·물가율·기간·인출률로 물가 반영 FIRE 목표 금액과 물가율 2~5% 민감도 표(기본값 기준 $1,557,967).
+- `RothVsTraditionalTool`: 지금/나중 세율·기간·수익률로 전통형 vs Roth 비교(기본값 기준 전통형 $34,053, Roth $29,410).
+- `tool-parts.tsx`(공통 UI), `index.ts`(`guideTools` 맵).
+
+**연결 방식**
+- `src/lib/guides.ts`: MDX 컴파일 결과 `Content`가 `components` prop을 받도록 타입 확장.
+- `guides/[slug]/page.tsx`: `<Content components={guideTools} />`로 MDX 안에서 도구 사용.
+- `messages/{en,ko,ja,es}.json`: `GuideTools` 네임스페이스 추가.
+
+**콘텐츠**: 3편 × 4개 언어 = 12개 파일의 출처 섹션 앞에 보강 섹션과 도구 삽입, `updatedAt`을 2026-10-24로 갱신.
+
+**검증**: tsc·eslint 오류 0, 빌드 237/237. 개발 서버에서 en/ko/ja/es 렌더 값이 손계산과 일치함을 확인.
+
 ## 2026-10-24 (추가67) — 한국 시장 전용 가이드 3편 + 한국어 전용 글의 hreflang 수정 (콘텐츠 풍부화 2단계)
 
 **배경**: 서치콘솔에 "파이어족 계산기" 등 한국어 검색이 잡혀 있어 번역이 아닌 한국 현실 기준 글을 추가. 기존 `korea-irp-pension-account-fire`와 겹치지 않게 주제를 나눔.

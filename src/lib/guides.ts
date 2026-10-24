@@ -152,7 +152,7 @@ export function getGuidesByCategory(
 export async function compileGuide(
   locale: string,
   slug: string,
-): Promise<{ Content: ComponentType; meta: GuideMeta } | null> {
+): Promise<{ Content: ComponentType<{ components?: Record<string, ComponentType> }>; meta: GuideMeta } | null> {
   const filePath = path.join(guideDir(locale), `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
@@ -172,7 +172,7 @@ export async function compileGuide(
   });
 
   return {
-    Content: Content as ComponentType,
+    Content: Content as ComponentType<{ components?: Record<string, ComponentType> }>,
     meta: {
       ...fm,
       slug,

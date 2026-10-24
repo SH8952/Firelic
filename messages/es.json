@@ -321,5 +321,60 @@
         }
       ]
     }
+  },
+  "GuideTools": {
+    "note": "Estimación educativa. No incluye impuestos, costes de cierre, subida de alquileres ni reinversión, y no es asesoramiento financiero.",
+    "re": {
+      "title": "Inmueble o fondo indexado: con tus números",
+      "cash": "Efectivo que inviertes ($)",
+      "downPct": "Entrada (% del precio)",
+      "appreciation": "Variación anual del precio del inmueble (%)",
+      "rate": "Tipo de interés de la hipoteca (%)",
+      "rentYield": "Alquiler bruto anual (% del precio)",
+      "expenseRatio": "Gastos y vacíos (% del alquiler)",
+      "indexReturn": "Rendimiento anual del fondo indexado (%)",
+      "years": "Años de tenencia",
+      "sellCost": "Costes de venta (%)",
+      "price": "Precio del inmueble",
+      "annualCf": "Flujo de caja anual tras la hipoteca",
+      "propertyValue": "Valor del inmueble al final",
+      "loanLeft": "Hipoteca pendiente",
+      "proceeds": "Patrimonio tras costes de venta",
+      "cashFlowTotal": "Flujo de caja cobrado (total)",
+      "reTotal": "Total inmueble",
+      "indexValue": "Valor del fondo indexado",
+      "reAhead": "En este escenario el inmueble gana por {diff}.",
+      "indexAhead": "En este escenario el fondo indexado gana por {diff}.",
+      "tie": "Ambas opciones terminan casi igual.",
+      "hint": "Prueba con una variación de precio negativa para ver cómo el apalancamiento también amplifica las pérdidas."
+    },
+    "infl": {
+      "title": "Inflación y tu número FIRE",
+      "expenses": "Gastos anuales actuales ($)",
+      "inflation": "Inflación anual (%)",
+      "years": "Años hasta la jubilación",
+      "swr": "Tasa de retirada (%)",
+      "fireToday": "Número FIRE en dólares de hoy",
+      "costFuture": "Coste del mismo estilo de vida en {years} años",
+      "fireFuture": "Número FIRE en dólares futuros",
+      "extra": "Extra necesario respecto al número de hoy",
+      "tableTitle": "Número FIRE con distintas inflaciones",
+      "tableRow": "Inflación del {rate} %",
+      "hint": "Planificar en dólares de hoy con un rendimiento real, como hace la calculadora principal, evita inflar el objetivo a mano. Esta herramienta muestra cómo se ve el mismo plan en dólares futuros."
+    },
+    "roth": {
+      "title": "Roth o tradicional: valor después de impuestos",
+      "amount": "Importe antes de impuestos ($)",
+      "taxNow": "Tipo impositivo actual (%)",
+      "taxLater": "Tipo impositivo en la jubilación (%)",
+      "years": "Años hasta retirar",
+      "ret": "Rendimiento anual (%)",
+      "tradValue": "Tradicional, tras impuestos al retirar",
+      "rothValue": "Roth, sin impuestos",
+      "rothAhead": "Roth gana por {diff}.",
+      "tradAhead": "Tradicional gana por {diff}.",
+      "tie": "Ambos quedan casi igual.",
+      "hint": "Con el mismo rendimiento en ambos casos, solo importan los dos tipos impositivos: si el tipo futuro es menor conviene la tradicional; si el actual es menor, la Roth. Quien se jubila pronto suele tener pocos ingresos imponibles en los años previos a los 59½, lo que puede bajar el tipo futuro."
+    }
   }
 }

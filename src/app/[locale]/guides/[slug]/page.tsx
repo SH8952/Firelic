@@ -11,6 +11,7 @@ import { routing } from "@/i18n/routing";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
 import { ReadingProgress } from "@/components/guides/reading-progress";
 import { RelatedGuides } from "@/components/guides/related-guides";
+import { guideTools } from "@/components/guides/tools";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -164,7 +165,7 @@ export default async function GuideDetailPage({
         id="guide-article"
         className={`prose prose-neutral dark:prose-invert mt-6 max-w-none text-sm leading-relaxed text-[var(--color-text-primary)] prose-headings:tracking-tight prose-headings:scroll-mt-6 prose-a:text-[var(--color-primary)] prose-p:leading-8 prose-li:leading-7 prose-h2:mt-12 prose-h2:border-b prose-h2:border-[var(--color-border)] prose-h2:pb-2 prose-h3:mt-8 prose-blockquote:border-[var(--color-primary)]/60 prose-blockquote:not-italic prose-img:rounded-lg${koWrap}`}
       >
-        <Content />
+        <Content components={guideTools} />
       </div>
 
       <RelatedGuides locale={locale} slug={slug} category={meta.category} />

@@ -321,5 +321,60 @@
         }
       ]
     }
+  },
+  "GuideTools": {
+    "note": "Educational estimate only. It ignores taxes, closing costs, rent growth and reinvestment, and is not financial advice.",
+    "re": {
+      "title": "Real estate vs index fund: your numbers",
+      "cash": "Cash you invest ($)",
+      "downPct": "Down payment (% of price)",
+      "appreciation": "Property price change per year (%)",
+      "rate": "Mortgage rate (%)",
+      "rentYield": "Gross rent per year (% of price)",
+      "expenseRatio": "Expenses and vacancy (% of rent)",
+      "indexReturn": "Index fund return per year (%)",
+      "years": "Years held",
+      "sellCost": "Selling costs (%)",
+      "price": "Property price",
+      "annualCf": "Yearly cash flow after mortgage",
+      "propertyValue": "Property value at the end",
+      "loanLeft": "Mortgage balance left",
+      "proceeds": "Equity after selling costs",
+      "cashFlowTotal": "Cash flow collected (total)",
+      "reTotal": "Real estate total",
+      "indexValue": "Index fund value",
+      "reAhead": "Real estate comes out {diff} ahead in this scenario.",
+      "indexAhead": "The index fund comes out {diff} ahead in this scenario.",
+      "tie": "Both paths end up about equal.",
+      "hint": "Try a negative price change to see how leverage also amplifies losses."
+    },
+    "infl": {
+      "title": "Inflation and your FIRE number",
+      "expenses": "Annual expenses today ($)",
+      "inflation": "Inflation per year (%)",
+      "years": "Years until you retire",
+      "swr": "Withdrawal rate (%)",
+      "fireToday": "FIRE number in today's dollars",
+      "costFuture": "Same lifestyle costs in {years} years",
+      "fireFuture": "FIRE number in future dollars",
+      "extra": "Extra needed vs today's number",
+      "tableTitle": "FIRE number at different inflation rates",
+      "tableRow": "{rate}% inflation",
+      "hint": "Planning in today's dollars with a real return, as the main calculator does, avoids inflating the target by hand. This tool shows what the same plan looks like in future dollars."
+    },
+    "roth": {
+      "title": "Roth vs traditional: after-tax value",
+      "amount": "Pre-tax amount set aside ($)",
+      "taxNow": "Tax rate now (%)",
+      "taxLater": "Tax rate in retirement (%)",
+      "years": "Years until withdrawal",
+      "ret": "Return per year (%)",
+      "tradValue": "Traditional, after tax at withdrawal",
+      "rothValue": "Roth, tax-free",
+      "rothAhead": "Roth comes out {diff} ahead.",
+      "tradAhead": "Traditional comes out {diff} ahead.",
+      "tie": "They come out about equal.",
+      "hint": "With the same return on both sides, only the two tax rates matter: a lower rate later favors traditional, a lower rate now favors Roth. Early retirees often have low taxable income in the years before 59½, which can make a lower future rate realistic."
+    }
   }
 }
