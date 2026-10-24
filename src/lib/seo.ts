@@ -24,9 +24,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
  * `/en/about` and `/en/guides/what-is-fire` rendered 0. This helper lets every
  * page rebuild its own hreflang map alongside its own canonical.
  */
-export function languageAlternates(path: string): Record<string, string> {
+export function languageAlternates(path: string, locales: readonly string[] = routing.locales): Record<string, string> {
   const languages: Record<string, string> = {};
-  for (const locale of routing.locales) {
+  for (const locale of locales) {
     languages[locale] = `${SITE_URL}/${locale}${path}`;
   }
   return languages;

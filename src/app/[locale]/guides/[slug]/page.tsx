@@ -7,6 +7,7 @@ import { GuideViewTracker } from "./GuideViewTracker";
 import { GuideImageDevPanel } from "@/components/dev/guide-image-dev-panel";
 import { GuideToolCta } from "@/components/GuideToolCta";
 import { ShareButton } from "@/components/share-button";
+import { routing } from "@/i18n/routing";
 import { breadcrumbJsonLd, languageAlternates } from "@/lib/seo";
 import { ReadingProgress } from "@/components/guides/reading-progress";
 import { RelatedGuides } from "@/components/guides/related-guides";
@@ -32,7 +33,11 @@ export async function generateMetadata({
     description: meta.description,
     alternates: {
       canonical: `${SITE_URL}/${locale}/guides/${slug}`,
-      languages: languageAlternates(`/guides/${slug}`),
+      // 일부 언어에만 있는 글(예: 한국 전용 가이드)은 실제로 존재하는 언어만 hreflang에 넣는다.
+      languages: languageAlternates(
+        `/guides/${slug}`,
+        routing.locales.filter((l) => getGuideSlugs(l).includes(slug)),
+      ),
     },
     openGraph: {
       type: "article",
