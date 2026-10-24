@@ -1,3 +1,13 @@
+## 2026-10-24 (추가81) — 기존 ko 가이드 5편 보강 (5차)
+
+앞부분 "한눈에 보기" 추가(본문·주소 유지).
+- `emergency-fund-then-what-money-waterfall`: 여윳돈 순서 표, 연 23% 카드 300만 원 → 연 이자 약 69만 원.
+- `small-amount-investing-getting-started`: 월 5/10/30만 원 × 10/20/30년(연 5%) 평가액.
+- `avoiding-lifestyle-inflation`: 실수령 350→420만 원 시나리오(전부 소비 25.0%·31.9년, 절반 저축 33.3%·25.7년, 전액 저축 41.7%·20.7년).
+- `fire-number-25x-rule-explained`: 월 300만 원 기준 20/25/30/33배 목표 자산.
+- `common-fire-mistakes-to-avoid`: 실수 점검표와 내부 링크.
+- 남은 보강 12편(조기 은퇴 실현 5, 은퇴 이후 7). 코드 변경 없음.
+
 ## 2026-10-24 (추가80) — 사이트 방향 전환 5단계: 한국어 사이트 부제·홈/가이드 소개 문구 변경 (이름 유지, A안)
 
 - `messages/ko.json` 3곳만 변경: `calculator.subtitle`(헤더·푸터·계산기 페이지 공통 부제) → "월급 관리부터 조기 은퇴까지, 내 숫자로 계산하는 돈 길라잡이", `home.guideHighlightsSubtitle` → "통장 정리, 보험·세금 점검, 투자 시작, 은퇴 계산까지 — 숫자로 보는 실전 가이드입니다.", `Seo.guidesDescription`(가이드 목록 메타 설명) → 돈 관리 전반 표현으로.
