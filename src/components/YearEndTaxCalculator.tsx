@@ -310,8 +310,9 @@ export function YearEndTaxCalculator() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
       <div className="flex flex-col gap-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-[var(--color-text-secondary)]">예시로 채우기</span>
+        <section className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold text-[var(--color-primary)]">총급여별 예시로 바로 계산해 보기</h2>
+          <div className="flex flex-wrap items-center gap-2">
           {PRESETS.map((p) => (
             <button
               key={p.label}
@@ -336,7 +337,9 @@ export function YearEndTaxCalculator() {
           >
             {copied ? "링크 복사됨" : "입력값 링크 복사"}
           </button>
-        </div>
+          </div>
+          <p className="text-xs text-[var(--color-text-secondary)]">예시는 카드 사용액과 연금 납입액을 가정한 값이며, 내 값으로 바꾸면 결과가 바로 달라집니다.</p>
+        </section>
 
         <Section title="기본 정보">
           <NumberField label="총급여 (연, 세전, 비과세 제외)" value={form.salary} onChange={(v) => set("salary", v ?? 0)} />
