@@ -94,13 +94,35 @@
     "ctaBannerText": "나의 FIRE 목표까지 얼마나 남았는지 확인해보세요",
     "ctaBannerButton": "FIRE 계산기 바로가기",
     "updatedLabel": "최종 수정",
-    "journeyTitle": "처음이신가요? 이 순서로 FIRE 여정을 따라가보세요",
-    "journeyIntro": "FIRE는 결국 세 단계입니다 — 개념을 이해하고, 저축률을 높이고, 모은 돈을 투자로 불려나가는 것. 아래 4개 가이드를 순서대로 읽어보세요.",
+    "journeyTitle": "돈 관리부터 조기 은퇴까지, 이 순서로 따라가 보세요",
+    "journeyIntro": "월급 관리와 보험·세금 정리로 새는 돈을 막고, 투자로 불린 뒤, 조기 은퇴 목표를 계산하는 흐름입니다. 아래 단계를 순서대로 읽어 보세요.",
     "journeyStep1": "1. FIRE란 무엇인가",
     "journeyStep2": "2. 저축률 높이기",
     "journeyStep3": "3. 투자로 불려나가기",
     "journeyStep4": "4. 인출 전략 계획하기",
-    "relatedTitle": "함께 읽으면 좋은 가이드"
+    "relatedTitle": "함께 읽으면 좋은 가이드",
+    "journeySteps": [
+      {
+        "label": "1. 월급 통장 쪼개기",
+        "slug": "salary-account-split-system"
+      },
+      {
+        "label": "2. 보험·연말정산 점검",
+        "slug": "insurance-checkup-five-steps"
+      },
+      {
+        "label": "3. 소액 투자 시작",
+        "slug": "small-amount-investing-getting-started"
+      },
+      {
+        "label": "4. FIRE 목표 금액 계산",
+        "slug": "fire-number-25x-rule-explained"
+      },
+      {
+        "label": "5. 은퇴 이후 인출 설계",
+        "slug": "withdrawal-strategies-bucket-method"
+      }
+    ]
   },
   "Faq": {
     "title": "자주 묻는 질문",

@@ -29,6 +29,11 @@ const CATEGORY_ORDER = [
   "Retirement Life & Withdrawal Strategy",
 ];
 
+// Korean guides follow the "money basics -> early retirement" journey order.
+const CATEGORY_ORDER_BY_LOCALE: Record<string, string[]> = {
+  ko: ["돈 관리 기초", "보험·세금·연금", "재테크·투자", "소득 키우기", "조기 은퇴 실현", "은퇴 이후", "해외 제도 참고"],
+};
+
 export type GuideFrontmatter = {
   title: string;
   description: string;
@@ -128,9 +133,10 @@ export function getGuidesByCategory(
     }
   }
 
+  const order = CATEGORY_ORDER_BY_LOCALE[locale] ?? CATEGORY_ORDER;
   const sortedEntries = Array.from(groups.entries()).sort(([aLabel, aGuides], [bLabel, bGuides]) => {
-    const aIndex = CATEGORY_ORDER.indexOf(aLabel);
-    const bIndex = CATEGORY_ORDER.indexOf(bLabel);
+    const aIndex = order.indexOf(aLabel);
+    const bIndex = order.indexOf(bLabel);
     if (aIndex !== -1 || bIndex !== -1) {
       return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
     }

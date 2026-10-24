@@ -32,6 +32,14 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
   const t = await getTranslations("guides");
   const tBack = await getTranslations("BackNav");
   const categories = getGuidesByCategory(locale);
+  const journeySteps: { label: string; slug: string }[] = t.has("journeySteps")
+    ? (t.raw("journeySteps") as { label: string; slug: string }[])
+    : [
+        { label: t("journeyStep1"), slug: "what-is-fire" },
+        { label: t("journeyStep2"), slug: "how-to-calculate-your-savings-rate" },
+        { label: t("journeyStep3"), slug: "index-fund-investing-for-fire" },
+        { label: t("journeyStep4"), slug: "4-percent-rule-safe-withdrawal-rate" },
+      ];
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: `${SITE_URL}/${locale}` },
     { name: t("title"), url: `${SITE_URL}/${locale}/guides` },
@@ -50,38 +58,16 @@ export default async function GuidesIndexPage({ params }: { params: Promise<{ lo
         <p className="text-sm font-semibold text-[var(--color-text-primary)]">{t("journeyTitle")}</p>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{t("journeyIntro")}</p>
         <ol className="mt-3 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-3">
-          <li>
-            <a
-              href={`/${locale}/guides/what-is-fire`}
-              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
-            >
-              {t("journeyStep1")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={`/${locale}/guides/how-to-calculate-your-savings-rate`}
-              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
-            >
-              {t("journeyStep2")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={`/${locale}/guides/index-fund-investing-for-fire`}
-              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
-            >
-              {t("journeyStep3")}
-            </a>
-          </li>
-          <li>
-            <a
-              href={`/${locale}/guides/4-percent-rule-safe-withdrawal-rate`}
-              className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
-            >
-              {t("journeyStep4")}
-            </a>
-          </li>
+          {journeySteps.map((step) => (
+            <li key={step.slug}>
+              <a
+                href={`/${locale}/guides/${step.slug}`}
+                className="inline-block rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-text-primary)] hover:border-[var(--color-primary)]"
+              >
+                {step.label}
+              </a>
+            </li>
+          ))}
         </ol>
       </div>
 
