@@ -60,6 +60,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       alternates: { languages: { ko: `${SITE_URL}/ko/year-end-tax` } },
     });
+    entries.push({
+      url: `${SITE_URL}/ko/year-end-tax/calculator`,
+      lastModified: new Date("2026-10-24"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: { languages: { ko: `${SITE_URL}/ko/year-end-tax/calculator` } },
+    });
   }
 
   return entries;

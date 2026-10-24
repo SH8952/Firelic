@@ -56,6 +56,16 @@ export default async function YearEndTaxHubPage({ params }: { params: Promise<{ 
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{t("title")}</h1>
       <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{t("intro")}</p>
 
+      <a
+        href={`/${locale}/year-end-tax/calculator`}
+        className="mt-6 flex flex-col gap-1 rounded-xl border border-[var(--color-primary)] bg-[var(--color-surface)] p-5 hover:bg-[var(--color-primary)]/5"
+      >
+        <span className="text-sm font-semibold text-[var(--color-primary)]">연말정산 환급 계산기</span>
+        <span className="text-sm text-[var(--color-text-secondary)]">
+          총급여와 카드·연금·월세를 넣으면 예상 환급액을 계산하고, 12월에 연금계좌를 더 넣거나 카드 결제 수단을 바꿨을 때 환급이 얼마나 늘어나는지 바로 비교합니다.
+        </span>
+      </a>
+
       <div className="mt-6 rounded-xl border border-[var(--color-primary)]/30 bg-[var(--color-primary)]/5 p-5">
         <p className="text-sm font-semibold text-[var(--color-text-primary)]">{t("timelineTitle")}</p>
         <ol className="mt-3 flex flex-col gap-3 text-sm">
