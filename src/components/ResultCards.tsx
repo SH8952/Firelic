@@ -9,15 +9,11 @@ type ResultCardsProps = {
   yearsToFire: number | null;
   currencySymbol: string;
   currencyUnit: string;
-  isCoastFire: boolean;
-  isLeanFire: boolean;
   labels: {
     fireNumber: string;
     fireAge: string;
     yearsToFire: string;
     notReached: string;
-    coastFire: string;
-    leanFire: string;
     ageUnit: string;
     yearsUnit: string;
   };
@@ -40,8 +36,6 @@ export function ResultCards({
   yearsToFire,
   currencySymbol,
   currencyUnit,
-  isCoastFire,
-  isLeanFire,
   labels,
 }: ResultCardsProps) {
   const locale = useLocale();
@@ -64,26 +58,6 @@ export function ResultCards({
         <p className="tabular-nums mt-1 text-center text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
           {yearsToFire !== null ? withUnit(formatNum(yearsToFire, locale), labels.yearsUnit) : labels.notReached}
         </p>
-      </div>
-      <div className="flex gap-2 sm:col-span-3">
-        <span
-          className={`rounded-full px-3 py-1 text-sm ${
-            isCoastFire
-              ? "bg-[var(--color-accent)] text-[#12271C]"
-              : "bg-[var(--color-border)] text-[var(--color-text-secondary)]"
-          }`}
-        >
-          {labels.coastFire}
-        </span>
-        <span
-          className={`rounded-full px-3 py-1 text-sm ${
-            isLeanFire
-              ? "bg-[var(--color-accent)] text-[#12271C]"
-              : "bg-[var(--color-border)] text-[var(--color-text-secondary)]"
-          }`}
-        >
-          {labels.leanFire}
-        </span>
       </div>
     </div>
   );

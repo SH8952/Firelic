@@ -147,6 +147,16 @@ export function FireCalculator() {
             trackEvent("scenario_compare_start", {});
           }}
           compareMode={compareMode}
+          badges={
+            compareMode
+              ? undefined
+              : {
+                  coastFire: t("coastFire"),
+                  leanFire: t("leanFire"),
+                  isCoastFire: activeResult.isCoastFire,
+                  isLeanFire: activeResult.isLeanFire,
+                }
+          }
           onToggleCompare={() => {
             setCompareMode((v) => !v);
             trackEvent("scenario_compare_start", {});
@@ -222,15 +232,11 @@ export function FireCalculator() {
               yearsToFire={activeResult.yearsToFire}
               currencySymbol={currencySymbol}
               currencyUnit={currencyUnit}
-              isCoastFire={activeResult.isCoastFire}
-              isLeanFire={activeResult.isLeanFire}
               labels={{
                 fireNumber: t("fireNumber"),
                 fireAge: t("fireAge"),
                 yearsToFire: t("yearsToFire"),
                 notReached: t("notReached"),
-                coastFire: t("coastFire"),
-                leanFire: t("leanFire"),
                 ageUnit: t("fireAgeUnit"),
                 yearsUnit: t("yearsToFireUnit"),
               }}
