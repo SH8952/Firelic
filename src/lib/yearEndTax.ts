@@ -203,14 +203,15 @@ export function calcYearEnd(input: YearEndInput): YearEndResult {
   const rentBase = s <= 8000 * MAN ? Math.min(Math.max(input.rent, 0), 1000 * MAN) : 0;
   const creditRent = rentBase * (s <= 5500 * MAN ? 0.17 : 0.15);
 
-  // 표준세액공제(13만 원): 특별세액공제 합계가 13만 원 미만이면 표준으로 대체.
-  // 월세 세액공제를 신청하는 경우 표준세액공제를 함께 적용하는지는 확인되지 않아,
-  // 환급을 과대 계산하지 않도록 월세 공제가 있으면 표준세액공제를 적용하지 않는다(보수적 추정).
+  // 표준세액공제(13만 원): 특별소득공제·특별세액공제·월세 세액공제를 신청하지 않은 근로자에게 적용되고,
+  // 이 항목들을 신청하면 받을 수 없다(둘 중 유리한 쪽 선택). 따라서 특별세액공제+월세 세액공제 합계가
+  // 13만 원 미만이면 표준세액공제만, 그 이상이면 항목별 공제(월세 포함)만 적용한다.
   const useStandard = special + creditRent < 13 * MAN;
   const creditStandard = useStandard ? 13 * MAN : 0;
   const specialApplied = useStandard ? 0 : special;
+  const rentApplied = useStandard ? 0 : creditRent;
 
-  const creditTotal = creditEarned + creditChild + creditPension + specialApplied + creditStandard + creditRent;
+  const creditTotal = creditEarned + creditChild + creditPension + specialApplied + creditStandard + rentApplied;
   const finalTax = Math.max(0, t.tax - creditTotal);
 
   let withheld: number;
@@ -243,7 +244,7 @@ export function calcYearEnd(input: YearEndInput): YearEndResult {
     creditMedical: useStandard ? 0 : creditMedical,
     creditEducation: useStandard ? 0 : creditEducation,
     creditStandard,
-    creditRent,
+    creditRent: rentApplied,
     creditTotal,
     finalTax,
     localTax,
