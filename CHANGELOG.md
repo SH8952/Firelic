@@ -1,3 +1,9 @@
+## 2026-10-30 (추가101) — 푸시할 때 IndexNow 자동 알림 + 연말정산 변경분 1회 일괄 알림
+
+- 배경: IndexNow 는 가이드 자동 발행 스크립트(`publish-guide.command`)에만 연결돼 있어, 수동 푸시한 연말정산 글·계산기·홈 변경은 알림이 나가지 않았음(Bing 웹마스터에서 사이트맵 261개 중 73개만 집계, 색인 20개).
+- 신규 `automation/indexnow-push-hook.py`: push 범위의 변경 파일을 공개 주소로 변환해(가이드·페이지) 배포 확인 후 200 인 주소만 전송, 24시간 내 중복 전송 방지(`~/Library/Logs/firelic-indexnow-sent.json`). 신규 `automation/push-and-notify.sh`: push 후 훅 호출(실패해도 push 결과 불변).
+- 기존 `indexnow-submit.py`·`publish-guide.command` 변경 없음. 같은 구조를 ExifLens·FlyDroneMap 에도 적용. 연말정산 변경분(추가89~) 40개 주소 1회 일괄 알림은 일회용 스크립트로 실행(실행 후 자동 삭제). 백업 `_backups/firelic_backup_20261030_063506_indexnow-hook`.
+
 ## 2026-10-24 (추가100) — 데스크톱에서 FIRE 배지가 입력 카드 오른쪽 끝을 넘던 문제 수정
 
 - 데스크톱에서는 입력 카드가 380px 고정 열이라 탭+배지 줄(전체 폭)이 카드 오른쪽 끝을 넘던 문제: 탭+배지 묶음을 lg 이상에서 카드와 같은 380px 폭으로 제한하고, 배지는 모든 화면에서 작은 글자(text-xs)로 통일. 공간이 모자라면 묶음 안에서 줄바꿈. 백업 `_backups/pre-badges-fit2-*`.
