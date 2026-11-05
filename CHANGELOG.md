@@ -1,3 +1,12 @@
+## 2026-11-06 (추가103) — 제휴 배너 숨김 + 푸터 사이트맵 링크 + 가이드 breadcrumb
+
+- 백업 `_backups/pre-trust-upgrade_*`, 롤백 지점 git 태그 `score100-baseline`(커밋 0f66bc9, adpass 100점 상태).
+- 1) 계산기 하단의 클릭되지 않는 제휴 파트너 배너(AffiliateBanner)를 화면에서 제거(제휴 승인 전까지). 컴포넌트 파일은 보존, FireCalculator에서 import·렌더·파트너 상수만 제거.
+- 2) 푸터에 소개·가이드·FAQ 링크 추가(기존 정책 링크 앞). 전 언어 공통.
+- 3) 가이드 상세 글 상단에 눈에 보이는 breadcrumb(홈 › 가이드/연말정산 › 글 제목) 추가. 기존 BreadcrumbList JSON-LD와 일치.
+- 로컬 확인: ko/en 홈에서 파트너명 0건, 푸터 링크 정상, 가이드 breadcrumb 1개, tsc 오류 없음.
+- 롤백: `git revert <이번 커밋>` 또는 `git reset --hard score100-baseline`(푸시 후에는 revert 권장).
+
 ## 2026-11-05 — 미완성 텍스트 진단 2차 대응: 추후 추가·자리표시자 문구 정리
 - 배경: 1차 수정이 아직 푸시되지 않은 상태였고, 추가로 ko/ja 가이드 안내의 "추후/今後 추가 예정"과 제휴 고지의 "placeholder·승인 대기" 표현이 남아 있었음.
 - 변경: `messages/{ja,ko}.json` Guides.empty 뒷 문장 제거, `src/content/policies/{en,es,ja,ko}.ts` 제휴 고지 3번째 문단을 "표시된 파트너명은 참고용이며 활성 링크가 아님, 추후 추가 시 명확히 표시" 취지로 재작성(고지 의미 유지).

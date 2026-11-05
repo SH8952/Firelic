@@ -11,7 +11,6 @@ import { ScenarioTabs } from "@/components/ScenarioTabs";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { ResultInsights } from "@/components/ResultInsights";
 import { AdSlot } from "@/components/AdSlot";
-import { AffiliateBanner } from "@/components/AffiliateBanner";
 import { UsageGuideSection } from "@/components/UsageGuideSection";
 import { simulateFire, type FireInputs } from "@/lib/fireCalculations";
 import { currencyRangeFor } from "@/lib/currencyRanges";
@@ -49,11 +48,6 @@ const DEFAULT_INPUTS_B: FireInputs = {
   monthlyContribution: 800,
 };
 
-const AFFILIATE_PARTNERS = [
-  { name: "Interactive Brokers", href: "#" },
-  { name: "eToro", href: "#" },
-  { name: "Wise", href: "#" },
-];
 
 export function FireCalculator() {
   const t = useTranslations("calculator");
@@ -257,11 +251,6 @@ export function FireCalculator() {
 
           <AdSlot variant="native" label={t("adNative")} />
 
-          <AffiliateBanner
-            title={t("affiliateTitle")}
-            disclosureLabel={t("affiliateDisclosure")}
-            partners={AFFILIATE_PARTNERS}
-          />
         </section>
       </div>
 

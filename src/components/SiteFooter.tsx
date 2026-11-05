@@ -15,9 +15,12 @@ export function SiteFooter() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const year = new Date().getFullYear();
-  // "About"/"Guides" moved to SiteHeader (top nav) on 2026-09-01; the
-  // footer now only carries the legal/policy links.
+  // About/Guides/FAQ are in SiteHeader; the footer repeats them (2026-11-06)
+  // next to the legal/policy links so every page exposes the full site map.
   const links: Array<{ href: string; label: string }> = [
+    { href: "/about", label: t("about") },
+    { href: "/guides", label: t("guides") },
+    { href: "/faq", label: t("faq") },
     { href: "/privacy-policy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
     { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },

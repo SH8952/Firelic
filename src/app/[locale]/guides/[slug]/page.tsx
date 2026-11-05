@@ -70,6 +70,7 @@ export default async function GuideDetailPage({
   }
   const { Content, meta } = compiled;
   const t = await getTranslations({ locale, namespace: "guides" });
+  const tNav = await getTranslations({ locale, namespace: "nav" });
   // 한국어: 제목·본문 단어 중간 줄바꿈 방지(ExifLens와 동일 범위 — ja 제외).
   const koWrap =
     locale === "ko" ? " [word-break:keep-all] [overflow-wrap:break-word]" : "";
@@ -106,6 +107,25 @@ export default async function GuideDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <GuideViewTracker slug={slug} locale={locale} />
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-4 flex flex-wrap items-center gap-1.5 text-xs text-[var(--color-text-secondary)]"
+      >
+        <a href={`/${locale}`} className="hover:text-[var(--color-primary)]">
+          {tNav("home")}
+        </a>
+        <span aria-hidden>›</span>
+        <a
+          href={isYearEnd ? `/${locale}/year-end-tax` : `/${locale}/guides`}
+          className="hover:text-[var(--color-primary)]"
+        >
+          {isYearEnd ? tNav("yearEndTax") : t("title")}
+        </a>
+        <span aria-hidden>›</span>
+        <span aria-current="page" className="line-clamp-1 max-w-[16rem] sm:max-w-md">
+          {meta.title}
+        </span>
+      </nav>
       {isYearEnd ? (
         <a
           href={`/${locale}/year-end-tax`}
