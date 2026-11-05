@@ -36,7 +36,7 @@ export const es: PolicyContent = {
     paragraphs: [
       "Algunos enlaces de este sitio pueden ser enlaces de afiliados. Si haces clic en uno y abres una cuenta o realizas una compra con un socio, podemos ganar una comisión sin costo adicional para ti.",
       "Solo pretendemos incluir socios relevantes para las finanzas personales y la inversión. Las relaciones de afiliados no influyen en los resultados de la calculadora, que se calculan de forma independiente a cualquier socio.",
-      "A la fecha, las asociaciones de afiliados están pendientes de aprobación; los nombres de socios mostrados en el sitio son marcadores de posición y aún no son enlaces activos.",
+      "Los nombres de socios mostrados en el sitio son solo informativos y no son enlaces activos. Cualquier enlace de afiliado que se añada en el futuro se indicará con claridad.",
     ],
   },
   contact: {

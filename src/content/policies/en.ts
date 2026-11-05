@@ -36,7 +36,7 @@ export const en: PolicyContent = {
     paragraphs: [
       "Some links on this site may be affiliate links. If you click one and open an account or make a purchase with a partner, we may earn a commission at no additional cost to you.",
       "We only intend to feature partners relevant to personal finance and investing. Affiliate relationships do not influence the calculator's results, which are computed independently of any partner.",
-      "As of this writing, affiliate partnerships are pending approval; placeholder partner names shown on the site are not yet active links.",
+      "Partner names shown on the site are for reference only and are not active links. Any affiliate link added in the future will be clearly disclosed.",
     ],
   },
   contact: {

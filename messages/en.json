@@ -87,7 +87,7 @@
   },
   "guides": {
     "title": "Guides",
-    "empty": "Guides are currently available in English only. More languages coming soon.",
+    "empty": "Guides are currently available in English only.",
     "readMore": "Read more",
     "showMore": "Show more",
     "showLess": "Show less",
