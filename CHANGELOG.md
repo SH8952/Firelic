@@ -5,8 +5,8 @@
 - 새 토큰 `--color-on-primary`(라이트 흰색 / 다크 어두운 초록): 다크 모드에서 밝은 초록 버튼 위 흰 글자가 안 보이던 문제 해결. `ScenarioTabs`·`CurrencySelector`·`ConsentBanner`·`GuideToolCta`·`error`·`not-found`·`reference` 페이지의 `text-white`(초록 배경 위)를 이 토큰으로 교체. `home-year-end-banner` 는 정의되지 않은 `--color-background` 를 쓰고 있어 같은 토큰으로 정정. `YearEndTaxCalculator` 의 `text-red-500` 은 `--color-danger` 로, 강조 칩의 어두운 글자색은 `#111827` 로 통일.
 - 그래프: `FireChart.tsx` 가 `var(--color-...)` 를 실제 색으로 풀어 쓰고(MutationObserver 로 `<html>` class 변화를 감지해 모드 전환 시 즉시 다시 그림), 축 글자·제목·격자·테두리·범례·툴팁을 모드 토큰에 맞춤. 면 채우기는 `rgba(…, 0.16)`. 계산 로직과 데이터는 변경 없음.
 - 모드 전환 버튼: 이모지(☀️/🌙) → 선 아이콘(해/달, lucide). 접근성 문구를 4개 언어(`nav.toLightMode`·`toDarkMode`)로 번역. 기본은 기존과 같이 기기 설정을 따르고 눌러서 바꾸면 저장됨.
-- 로고·공유 이미지: `Logo.tsx`(헤더 로고)의 초록 원을 `#047857` 로, 앰버 점을 `#F2C14E` 로. `opengraph-image.tsx` 의 배경 그라디언트·원·포인트 색 교체.
-- 파비콘(후속 수정): 형제 사이트(ExifLens 인디고+바이올렛, FlyDroneMap 네이비+스카이)와 같은 구성으로 — 어두운 에메랄드 둥근 사각형(`#064E3B`) 위에 시그니처 밝은 에메랄드(`#34D399`) 마크(추세 화살표·점, 단색). `icon.svg` 와 `favicon.ico`(16·32·48) 모두 같은 도형으로 재생성. 밝은/어두운 브라우저 탭 배경 모두에서 확인.
+- 로고·공유 이미지: `opengraph-image.tsx` 의 배경 그라디언트·원·포인트 색 교체. 헤더 로고(`Logo.tsx`)는 아래 파비콘과 같은 디자인으로 통일(후속 수정 참고).
+- 파비콘·헤더 로고(후속 수정): 형제 사이트(ExifLens 인디고+바이올렛, FlyDroneMap 네이비+스카이)와 같은 구성으로 — 어두운 에메랄드 둥근 사각형(`#064E3B`) 위에 시그니처 밝은 에메랄드(`#34D399`) 추세 화살표, 점은 화살표와 구분되도록 골드(`#F2C14E`). `icon.svg`·`favicon.ico`(16·32·48)·헤더 `Logo.tsx` 가 모두 같은 도형·색. 밝은/어두운 배경 모두에서 확인. 백업 `_backups/firelic_backup_20261107_113316_logo_dot_color`.
 - 헤더 순서(후속 수정): 모드 전환 버튼을 언어 선택 **오른쪽**으로 이동(데스크톱·모바일 모두). ExifLens·FlyDroneMap 과 같은 순서(언어 선택 → 모드 버튼 → 모바일은 햄버거). `SiteHeader.tsx` 한 파일만 변경.
 - 검증: tsc 0 오류. 변경 파일 eslint 통과(단 `YearEndTaxCalculator.tsx` 는 HEAD 에도 있던 기존 지적 3건 — 라인 180 effect 내 setState, 540·556 `<a>` 링크 — 이 그대로이며 이번 변경과 무관). 그래프 색 처리는 격리 환경에서 Chart.js 로 라이트·다크를 직접 그려 선·면·축·격자가 의도한 색으로 나오는 것을 확인. 이 작업 환경(리눅스 arm64)은 맥용 node_modules 의 SWC 가 없어 build·dev 실행 불가 → 로컬 `FIRE Calculator 실행.command` 확인 필요.
 - 백업: `_backups/firelic_backup_20261107_111952_theme_emerald_chart_fix`. 롤백: `git revert <이번 커밋>`.
