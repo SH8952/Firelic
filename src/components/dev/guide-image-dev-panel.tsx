@@ -199,7 +199,7 @@ export function GuideImageDevPanel({ slug, currentImage, currentImageCredit, tag
                 type="button"
                 onClick={handleSearch}
                 disabled={loading}
-                className="rounded-md bg-[var(--color-primary)] px-3 py-1 text-xs font-medium text-white disabled:opacity-50"
+                className="rounded-md bg-[var(--color-primary)] px-3 py-1 text-xs font-medium text-[var(--color-on-primary)] disabled:opacity-50"
               >
                 {loading ? "검색 중..." : lastQuery === query.trim() && candidates.length > 0 ? "다른 사진" : "검색"}
               </button>

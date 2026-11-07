@@ -1,32 +1,41 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/*
+ * 색상 체계 (2026-11-07 개편): 딥 에메랄드 + 중립 슬레이트.
+ * - 금융·자산 사이트에 맞게 신뢰감 있는 딥 에메랄드를 브랜드색으로, 배경·카드·테두리는 초록 기 없는 중립 슬레이트로 둔다.
+ * - 라이트는 진한 톤(흰 배경 대비 5.5:1), 다크는 밝은 톤(어두운 배경 대비 10:1)을 따로 쓴다.
+ * - 그래프(Chart.js 캔버스)는 CSS 변수를 직접 읽지 못하므로 FireChart.tsx 가 아래 --color-chart-*·표면 토큰을 실제 값으로 풀어 쓴다.
+ * - 다른 사이트와 겹치지 않는 배색: ExifLens 바이올렛 / FlyDroneMap 스카이 블루 / lifehub 앰버.
+ */
 :root {
-  --color-bg: #F7FAF8;
+  --color-bg: #F7F8FA;
   --color-surface: #FFFFFF;
-  --color-border: #E2E8E4;
-  --color-text-primary: #12271C;
-  --color-text-secondary: #5B6B62;
-  --color-primary: #1E8E5A;
-  --color-primary-hover: #166B44;
-  --color-accent: #F5A623;
-  --color-danger: #D64545;
-  --color-chart-accumulation: #1E8E5A;
-  --color-chart-withdrawal: #3A7CA5;
+  --color-border: #E3E7EC;
+  --color-text-primary: #111827;
+  --color-text-secondary: #5B6573;
+  --color-primary: #047857;
+  --color-primary-hover: #065F46;
+  --color-on-primary: #FFFFFF;
+  --color-accent: #E5A823;
+  --color-danger: #B91C1C;
+  --color-chart-accumulation: #047857;
+  --color-chart-withdrawal: #2563EB;
 }
 
 .dark {
-  --color-bg: #0F1712;
-  --color-surface: #182620;
-  --color-border: #2B3B32;
-  --color-text-primary: #EAF3EC;
-  --color-text-secondary: #9DB3A6;
-  --color-primary: #34C77E;
-  --color-primary-hover: #4FE096;
-  --color-accent: #FFC15E;
-  --color-danger: #F17878;
-  --color-chart-accumulation: #34C77E;
-  --color-chart-withdrawal: #6FB4DC;
+  --color-bg: #0D1117;
+  --color-surface: #151B23;
+  --color-border: #2A323C;
+  --color-text-primary: #E6EDF3;
+  --color-text-secondary: #9AA7B5;
+  --color-primary: #34D399;
+  --color-primary-hover: #6EE7B7;
+  --color-on-primary: #04261C;
+  --color-accent: #F2C14E;
+  --color-danger: #F87171;
+  --color-chart-accumulation: #34D399;
+  --color-chart-withdrawal: #60A5FA;
 }
 
 @theme inline {
@@ -37,6 +46,7 @@
   --color-text-secondary: var(--color-text-secondary);
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);
+  --color-on-primary: var(--color-on-primary);
   --color-accent: var(--color-accent);
   --color-danger: var(--color-danger);
   --font-sans: -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Noto Sans JP", Arial, sans-serif;

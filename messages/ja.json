@@ -81,6 +81,8 @@
     "faq": "FAQ",
     "openMenu": "メニューを開く",
     "closeMenu": "メニューを閉じる",
+    "toLightMode": "ライトモードに切り替え",
+    "toDarkMode": "ダークモードに切り替え",
     "contact": "お問い合わせ",
     "rights": "All rights reserved.",
     "calculators": "計算機"

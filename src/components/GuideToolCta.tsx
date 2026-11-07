@@ -8,7 +8,7 @@ export async function GuideToolCta({ locale }: { locale: string }) {
       <p className="text-sm text-[var(--color-text-primary)]">{t("ctaBannerText")}</p>
       <Link
         href="/"
-        className="shrink-0 rounded-md bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+        className="shrink-0 rounded-md bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-on-primary)] hover:opacity-90"
       >
         {t("ctaBannerButton")}
       </Link>

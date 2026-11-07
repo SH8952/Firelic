@@ -28,7 +28,7 @@ export function ScenarioTabs({ active, onChange, compareMode, onToggleCompare, b
             onClick={() => onChange(key)}
             className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               active === key
-                ? "bg-[var(--color-primary)] text-white"
+                ? "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
                 : "text-[var(--color-text-secondary)]"
             }`}
           >
@@ -43,7 +43,7 @@ export function ScenarioTabs({ active, onChange, compareMode, onToggleCompare, b
               key={text}
               className={`rounded-full px-2.5 py-1 text-xs ${
                 on
-                  ? "bg-[var(--color-accent)] text-[#12271C]"
+                  ? "bg-[var(--color-accent)] text-[#111827]"
                   : "bg-[var(--color-border)] text-[var(--color-text-secondary)]"
               }`}
             >

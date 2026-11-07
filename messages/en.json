@@ -81,6 +81,8 @@
     "faq": "FAQ",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "toLightMode": "Switch to light mode",
+    "toDarkMode": "Switch to dark mode",
     "contact": "Contact",
     "rights": "All rights reserved.",
     "calculators": "Calculators"

@@ -133,7 +133,7 @@ export function ConsentBanner() {
           <button
             type="button"
             onClick={() => saveChoice("accepted")}
-            className="rounded-md bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            className="rounded-md bg-[var(--color-primary)] px-4 py-2 text-sm font-medium text-[var(--color-on-primary)] transition-opacity hover:opacity-90"
           >
             {t("accept")}
           </button>

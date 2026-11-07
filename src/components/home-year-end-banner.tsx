@@ -16,7 +16,7 @@ export function HomeYearEndBanner({ locale }: { locale: string }) {
         <div className="flex flex-wrap gap-2">
           <Link
             href={"/year-end-tax/calculator" as never}
-            className="rounded-full bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-background)] hover:opacity-90"
+            className="rounded-full bg-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-on-primary)] hover:opacity-90"
           >
             환급 계산기 바로가기
           </Link>

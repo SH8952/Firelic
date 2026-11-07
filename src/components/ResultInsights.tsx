@@ -142,7 +142,7 @@ export function ResultInsights({ inputs, result, leanThreshold, currencySymbol, 
                         key={ci}
                         className={`tabular-nums border border-[var(--color-border)] p-2 ${
                           isBase
-                            ? "bg-[var(--color-accent)] font-bold text-[#12271C]"
+                            ? "bg-[var(--color-accent)] font-bold text-[#111827]"
                             : "text-[var(--color-text-primary)]"
                         }`}
                       >

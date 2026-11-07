@@ -419,7 +419,7 @@ export function YearEndTaxCalculator() {
       <div className="flex flex-col gap-5 lg:sticky lg:top-4 lg:self-start">
         <div className="rounded-xl border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/5 p-5" aria-live="polite">
           <p className="text-sm text-[var(--color-text-secondary)]">예상 결과 (소득세 기준)</p>
-          <p className={`tabular-nums mt-1 text-3xl font-bold ${refund ? "text-[var(--color-primary)]" : "text-red-500"}`}>
+          <p className={`tabular-nums mt-1 text-3xl font-bold ${refund ? "text-[var(--color-primary)]" : "text-[var(--color-danger)]"}`}>
             {refund ? "환급 " : "추가 납부 "}
             {won(Math.abs(r.diff))}
           </p>

@@ -81,6 +81,8 @@
     "faq": "FAQ",
     "openMenu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
+    "toLightMode": "라이트 모드로 전환",
+    "toDarkMode": "다크 모드로 전환",
     "contact": "문의하기",
     "rights": "All rights reserved.",
     "calculators": "계산기",

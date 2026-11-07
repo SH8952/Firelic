@@ -27,7 +27,7 @@ export function CurrencySelector({ value, onChange, label }: CurrencySelectorPro
             aria-pressed={value === c.code}
             className={`rounded-md border px-2.5 py-1 text-sm ${
               value === c.code
-                ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white"
+                ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-[var(--color-on-primary)]"
                 : "border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)]"
             }`}
           >

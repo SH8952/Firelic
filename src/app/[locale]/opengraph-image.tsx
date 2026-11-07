@@ -16,7 +16,7 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #0F1712 0%, #12271C 55%, #1E8E5A 130%)",
+          background: "linear-gradient(135deg, #0D1117 0%, #0F2A22 55%, #047857 130%)",
           fontFamily: "sans-serif",
         }}
       >
@@ -29,7 +29,7 @@ export default async function Image() {
               width: 88,
               height: 88,
               borderRadius: "50%",
-              backgroundColor: "#1E8E5A",
+              backgroundColor: "#047857",
               marginRight: 28,
               position: "relative",
             }}
@@ -40,7 +40,7 @@ export default async function Image() {
                 width: 20,
                 height: 20,
                 borderRadius: "50%",
-                backgroundColor: "#F5A623",
+                backgroundColor: "#F2C14E",
                 position: "absolute",
                 right: -2,
                 bottom: -2,
@@ -50,7 +50,7 @@ export default async function Image() {
               F
             </span>
           </div>
-          <span style={{ color: "#EAF3EC", fontSize: 34, fontWeight: 600, letterSpacing: -0.5 }}>
+          <span style={{ color: "#E6EDF3", fontSize: 34, fontWeight: 600, letterSpacing: -0.5 }}>
             firelic.com
           </span>
         </div>
@@ -71,7 +71,7 @@ export default async function Image() {
           <div
             style={{
               display: "flex",
-              color: "#B9D6C4",
+              color: "#B4C0CC",
               fontSize: 32,
               fontWeight: 500,
               marginTop: 20,
@@ -87,7 +87,7 @@ export default async function Image() {
               width: 120,
               height: 8,
               borderRadius: 4,
-              backgroundColor: "#F5A623",
+              backgroundColor: "#F2C14E",
             }}
           />
         </div>

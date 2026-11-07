@@ -17,10 +17,10 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher";
  * own local header on 2026-09-01, at ExifLens's header font sizes —
  * text-lg wordmark, text-xs tagline hidden below sm).
  *
- * Right (desktop, sm+): About / Guides / FAQ nav links, then the theme
- * toggle, then the language switcher. Below sm, the nav links collapse
+ * Right (desktop, sm+): About / Guides / FAQ nav links, then the language
+ * switcher, then the theme toggle (same order as ExifLens / FlyDroneMap). Below sm, the nav links collapse
  * behind a hamburger button (matching ExifLens's mobile header pattern)
- * so the theme toggle and language switcher always stay visible.
+ * so the language switcher and theme toggle always stay visible.
  */
 export function SiteHeader() {
   const t = useTranslations("nav");
@@ -67,16 +67,16 @@ export function SiteHeader() {
           <Link href="/faq" className={navLinkClass}>
             {t("faq")}
           </Link>
-          <ThemeToggle />
           <LocaleSwitcher />
+          <ThemeToggle />
         </nav>
 
         {/* Mobile: not enough width for 3 text links + theme/locale controls
             without wrapping, so the text links collapse into a hamburger
             menu; theme toggle and language switcher stay visible. */}
         <div className="flex items-center gap-2 sm:hidden">
-          <ThemeToggle />
           <LocaleSwitcher />
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
