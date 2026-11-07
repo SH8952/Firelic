@@ -1,3 +1,8 @@
+## 2026-11-07 (추가104) — 푸터의 소개·가이드·FAQ 중복 링크 제거
+
+- 상단 메뉴와 푸터에 소개·가이드·FAQ가 중복 노출되어, 추가103에서 넣은 푸터 3개 링크를 제거. 푸터는 정책 링크(개인정보·약관·제휴 고지·문의)와 RSS만 유지(ExifLens/FlyDroneMap과 동일 구조).
+- 백업 `_backups/pre-footer-dedupe_*`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-06 (추가103) — 제휴 배너 숨김 + 푸터 사이트맵 링크 + 가이드 breadcrumb
 
 - 백업 `_backups/pre-trust-upgrade_*`, 롤백 지점 git 태그 `score100-baseline`(커밋 0f66bc9, adpass 100점 상태).

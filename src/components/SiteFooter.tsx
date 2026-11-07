@@ -15,12 +15,9 @@ export function SiteFooter() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const year = new Date().getFullYear();
-  // About/Guides/FAQ are in SiteHeader; the footer repeats them (2026-11-06)
-  // next to the legal/policy links so every page exposes the full site map.
+  // About/Guides/FAQ live only in SiteHeader (top nav); the footer carries
+  // just the legal/policy links, matching ExifLens/FlyDroneMap (2026-11-07).
   const links: Array<{ href: string; label: string }> = [
-    { href: "/about", label: t("about") },
-    { href: "/guides", label: t("guides") },
-    { href: "/faq", label: t("faq") },
     { href: "/privacy-policy", label: t("privacy") },
     { href: "/terms", label: t("terms") },
     { href: "/affiliate-disclosure", label: t("affiliateDisclosure") },
