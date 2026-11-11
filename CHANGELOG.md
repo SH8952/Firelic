@@ -1,3 +1,12 @@
+## 2026-11-12 (추가107) — 사이트 아이콘 파일을 ExifLens·FlyDroneMap과 같은 위치·구성으로 정리 (`src/app/icon.png`·`apple-icon.png`)
+
+- 배경: 사용자 요청. 앞서 카카오 앱 아이콘용으로 만든 파일을 `_brand/` 가 아니라 다른 프로젝트와 같은 `src/app` 에 두고 싶다는 요청(추천안으로 진행).
+- 변경: `src/app/icon.png`(512×512, 둥근 모서리·투명 배경 — 기존 `icon.svg` 를 그대로 PNG로 변환, 카카오용 아이콘과 평균 색 차이 0.47) 신규, `src/app/apple-icon.png`(180×180, 모서리 채운 정사각형 — iOS 홈 화면 아이콘이 검은 모서리 없이 나오도록) 신규. `_brand/` 폴더(카카오용 128·512 아이콘)는 같은 그림이 `icon.png` 로 들어와 삭제(128 크기는 필요 시 `icon.png` 축소로 재생성 가능, 카카오 등록은 이미 완료).
+- 사이트 반영: Next.js 파일 규칙에 따라 PNG 탭 아이콘과 아이폰 홈 화면 아이콘(apple-icon, 기존에 없었음)이 추가됨. `icon.svg`·`favicon.ico` 는 그대로 유지. 코드·주소·색인 영향 없음.
+- 검증: 이 환경은 next dev 불가 → 푸시 전 사용자 localhost 에서 탭 아이콘 확인.
+- 상태: 코드 수정 완료, 커밋·푸시 전.
+- 백업: `_backups/firelic_backup_20261111_155112_아이콘정리_사전`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-11 (추가106) — 공유 강화 이식(ExifLens·FlyDroneMap 방식): GA4 share·UTM·언어별 채널·카카오 카드·계산기 결과 공유 링크
 
 - 배경: ExifLens 에서 완료·검증한 공유 강화 1~3단계를 형제 사이트에 순서대로 이식(FlyDroneMap 053464e 완료 → firelic). 카카오 앱 아이콘 등록용 파일 `_brand/firelic-kakao-app-icon-128.png`(128×128)·`-512.png` 도 함께 제작(저장소에는 올리지 않음).
