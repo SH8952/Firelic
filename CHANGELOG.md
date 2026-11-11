@@ -4,7 +4,7 @@
 - 변경: `src/app/icon.png`(512×512, 둥근 모서리·투명 배경 — 기존 `icon.svg` 를 그대로 PNG로 변환, 카카오용 아이콘과 평균 색 차이 0.47) 신규, `src/app/apple-icon.png`(180×180, 모서리 채운 정사각형 — iOS 홈 화면 아이콘이 검은 모서리 없이 나오도록) 신규. `_brand/` 폴더(카카오용 128·512 아이콘)는 같은 그림이 `icon.png` 로 들어와 삭제(128 크기는 필요 시 `icon.png` 축소로 재생성 가능, 카카오 등록은 이미 완료).
 - 사이트 반영: Next.js 파일 규칙에 따라 PNG 탭 아이콘과 아이폰 홈 화면 아이콘(apple-icon, 기존에 없었음)이 추가됨. `icon.svg`·`favicon.ico` 는 그대로 유지. 코드·주소·색인 영향 없음.
 - 검증: 이 환경은 next dev 불가 → 푸시 전 사용자 localhost 에서 탭 아이콘 확인.
-- 상태: 코드 수정 완료, 커밋·푸시 전.
+- 상태: 푸시·배포 완료(e96c7fb), 실사이트 확인 완료(favicon.ico·icon.png 512·icon.svg·apple-icon.png 180 모두 정상 응답, 탭 아이콘 선언 ExifLens·FlyDroneMap 과 동일 구성).
 - 백업: `_backups/firelic_backup_20261111_155112_아이콘정리_사전`. 롤백: `git revert <이번 커밋>`.
 
 ## 2026-11-11 (추가106) — 공유 강화 이식(ExifLens·FlyDroneMap 방식): GA4 share·UTM·언어별 채널·카카오 카드·계산기 결과 공유 링크
