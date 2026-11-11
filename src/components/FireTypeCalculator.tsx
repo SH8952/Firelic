@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Slider } from "@/components/Slider";
@@ -10,6 +10,9 @@ import { simulateFire, type YearPoint } from "@/lib/fireCalculations";
 import { currencyRangeFor } from "@/lib/currencyRanges";
 import { computeCoast, fatFireThreshold, presetFor, type FireType, type TypeInputs } from "@/lib/fireTypes";
 import { trackEvent } from "@/lib/analytics";
+import { ResultShare } from "@/components/result-share";
+import { useSharePublish } from "@/lib/use-share-publish";
+import { parseBoundedNumber, parseStringChoice, readSharedParams } from "@/lib/shared-params";
 
 const FireChart = dynamic(() => import("@/components/FireChart").then((m) => m.FireChart), {
   ssr: false,
@@ -21,6 +24,10 @@ const FireChart = dynamic(() => import("@/components/FireChart").then((m) => m.F
 function withUnit(value: string | number, unit: string): string {
   return unit ? `${value} ${unit}` : String(value);
 }
+
+// 결과 공유 링크의 통화 목록(CurrencySelector 와 동일)
+const SHARE_CURRENCIES = ["USD", "EUR", "GBP", "KRW", "JPY"] as const;
+const SHARE_KEYS = ["cur", "ca", "ra", "pf", "mc", "ex", "pt", "rr", "wr", "tx"];
 
 function Card({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
@@ -35,8 +42,44 @@ function Card({ label, value, sub }: { label: string; value: string; sub?: strin
 export function FireTypeCalculator({ type }: { type: FireType }) {
   const t = useTranslations("calculator");
   const c = useTranslations("FireTypes.calc");
+  const tt = useTranslations("FireTypes");
   const [currency, setCurrency] = useState("USD");
   const [inputs, setInputs] = useState<TypeInputs>(() => presetFor(type, "USD"));
+
+  // 공유 링크(?cur=KRW&ca=30&…)로 열었으면 입력값을 채운다. 잘못된 값은 무시하고 유형별 기본값을 유지한다.
+  useEffect(() => {
+    const p = readSharedParams();
+    if (!p || !SHARE_KEYS.some((k) => p.has(k))) return;
+    const code = parseStringChoice(p.get("cur"), SHARE_CURRENCIES) ?? "USD";
+    const r = currencyRangeFor(code);
+    const base = presetFor(type, code);
+    const int = (v: number | null, fallback: number) => (v === null ? fallback : Math.round(v));
+    const one = (v: number | null, fallback: number) => (v === null ? fallback : Math.round(v * 10) / 10);
+    // 화면의 슬라이더 제약과 같다: 코스트 FIRE 만 은퇴 나이를 직접 고르고, 나머지 유형은 은퇴 나이 65 고정(현재 나이는 그보다 아래).
+    const rawAge = int(parseBoundedNumber(p.get("ca"), 18, 80), base.currentAge);
+    const age = type === "coast-fire" ? rawAge : Math.min(rawAge, base.retirementAge - 1);
+    const retirementAge =
+      type === "coast-fire"
+        ? int(parseBoundedNumber(p.get("ra"), age + 1, 90), Math.min(90, Math.max(age + 1, base.retirementAge)))
+        : base.retirementAge;
+    const restored: TypeInputs = {
+      currentAge: age,
+      retirementAge,
+      currentPortfolio: int(parseBoundedNumber(p.get("pf"), r.currentPortfolio.min, r.currentPortfolio.max), base.currentPortfolio),
+      monthlyContribution: int(parseBoundedNumber(p.get("mc"), r.monthlyContribution.min, r.monthlyContribution.max), base.monthlyContribution),
+      annualExpenses: int(parseBoundedNumber(p.get("ex"), r.annualExpenses.min, r.annualExpenses.max), base.annualExpenses),
+      partTimeIncome:
+        type === "barista-fire"
+          ? int(parseBoundedNumber(p.get("pt"), 0, r.annualExpenses.max), base.partTimeIncome)
+          : base.partTimeIncome,
+      realReturnPct: one(parseBoundedNumber(p.get("rr"), 0, 15), base.realReturnPct),
+      withdrawalRatePct: one(parseBoundedNumber(p.get("wr"), 2, 6), base.withdrawalRatePct),
+      effectiveTaxRatePct: int(parseBoundedNumber(p.get("tx"), 0, 40), base.effectiveTaxRatePct),
+    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrency(code);
+    setInputs(restored);
+  }, [type]);
 
   const range = useMemo(() => currencyRangeFor(currency), [currency]);
   const symbol = currencySymbolFor(currency);
@@ -100,6 +143,29 @@ export function FireTypeCalculator({ type }: { type: FireType }) {
   const yearsEarlier =
     main.fireAge !== null && full.fireAge !== null ? Math.max(0, Math.round((full.fireAge - main.fireAge) * 10) / 10) : null;
 
+  // 공유 버튼에 현재 입력값(링크)과 결과 요약 문구를 올린다(유형별로 필요한 값만 링크에 담는다).
+  const sharePath = `/calculators/${type}`;
+  const shareQuery = useMemo(() => {
+    const q = new URLSearchParams();
+    q.set("cur", currency);
+    q.set("ca", String(inputs.currentAge));
+    if (type === "coast-fire") q.set("ra", String(inputs.retirementAge));
+    q.set("pf", String(inputs.currentPortfolio));
+    q.set("mc", String(inputs.monthlyContribution));
+    q.set("ex", String(inputs.annualExpenses));
+    if (type === "barista-fire") q.set("pt", String(inputs.partTimeIncome));
+    q.set("rr", String(inputs.realReturnPct));
+    q.set("wr", String(inputs.withdrawalRatePct));
+    q.set("tx", String(inputs.effectiveTaxRatePct));
+    return q.toString();
+  }, [currency, inputs, type]);
+  const shareName = tt(`${type}.name`);
+  const shareText =
+    type === "coast-fire"
+      ? c("shareTextCoast", { name: shareName, number: money(coast.coastNumber), progress: `${coast.progressPct.toFixed(1)}%` })
+      : c("shareText", { name: shareName, number: money(main.fireNumber), age: ageText(main.fireAge) });
+  useSharePublish(sharePath, shareQuery, shareText);
+
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[380px_1fr]">
       <section className="flex flex-col gap-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5 lg:sticky lg:top-6 lg:h-fit">
@@ -120,6 +186,9 @@ export function FireTypeCalculator({ type }: { type: FireType }) {
       </section>
 
       <section className="flex flex-col gap-6">
+        <div className="flex justify-end">
+          <ResultShare path={sharePath} title={tt(`${type}.h1`)} text={tt(`${type}.description`)} />
+        </div>
         {type === "coast-fire" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Card label={c("coastNumber")} value={money(coast.coastNumber)} sub={c("coastNumberSub", { fire: money(coast.fireNumber), age: inputs.retirementAge })} />

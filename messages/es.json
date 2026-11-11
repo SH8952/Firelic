@@ -1,5 +1,6 @@
 {
   "calculator": {
+    "shareText": "Mi estimación FIRE: número FIRE {fireNumber} · edad FIRE {fireAge} · años para FIRE {years}",
     "title": "Calculadora FIRE",
     "subtitle": "Simula tu camino hacia la Independencia Financiera y el Retiro Anticipado (FIRE).",
     "currency": "Moneda",
@@ -200,6 +201,8 @@
     "sectionRelated": "Calculadoras y guías relacionadas",
     "sectionGuides": "Guías para seguir leyendo",
     "calc": {
+      "shareText": "Mi estimación {name}: objetivo {number} · edad {age}",
+      "shareTextCoast": "Mi estimación {name}: umbral {number} · progreso {progress}",
       "retirementAge": "Edad de jubilación",
       "partTimeIncome": "Ingreso parcial (anual, después de impuestos)",
       "baristaNumber": "Número Barista FIRE",

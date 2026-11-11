@@ -1,5 +1,6 @@
 {
   "calculator": {
+    "shareText": "私のFIRE試算：目標資産 {fireNumber}・達成年齢 {fireAge}・達成までの年数 {years}",
     "title": "FIREシミュレーター",
     "subtitle": "経済的自立・早期リタイア（FIRE）への道をシミュレーションします。",
     "currency": "通貨",
@@ -200,6 +201,8 @@
     "sectionRelated": "あわせて使いたい計算機とガイド",
     "sectionGuides": "次に読みたいガイド",
     "calc": {
+      "shareText": "{name}の試算：目標額 {number}・達成年齢 {age}",
+      "shareTextCoast": "{name}の試算：基準額 {number}・達成率 {progress}",
       "retirementAge": "退職年齢",
       "partTimeIncome": "パートタイム収入(年・税引き後)",
       "baristaNumber": "バリスタFIRE目標額",

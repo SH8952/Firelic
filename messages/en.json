@@ -1,5 +1,6 @@
 {
   "calculator": {
+    "shareText": "My FIRE estimate: FIRE number {fireNumber} · FIRE age {fireAge} · years to FIRE {years}",
     "title": "FIRE Calculator",
     "subtitle": "Simulate your path to Financial Independence, Retire Early.",
     "currency": "Currency",
@@ -200,6 +201,8 @@
     "sectionRelated": "Related calculators and guides",
     "sectionGuides": "Guides to read next",
     "calc": {
+      "shareText": "My {name} estimate: target {number} · age {age}",
+      "shareTextCoast": "My {name} estimate: threshold {number} · progress {progress}",
       "retirementAge": "Retirement Age",
       "partTimeIncome": "Part-time Income (after tax, per year)",
       "baristaNumber": "Barista FIRE Number",

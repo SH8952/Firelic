@@ -1,5 +1,6 @@
 {
   "calculator": {
+    "shareText": "내 FIRE 계산 결과 — 목표 자산 {fireNumber}, 달성 나이 {fireAge}, 남은 기간 {years}",
     "title": "FIRE 계산기",
     "subtitle": "월급 관리부터 조기 은퇴까지, 내 숫자로 계산하는 돈 길라잡이",
     "currency": "통화",
@@ -223,6 +224,8 @@
     "sectionRelated": "함께 보면 좋은 계산기와 가이드",
     "sectionGuides": "이어서 읽을 가이드",
     "calc": {
+      "shareText": "{name} 계산 결과 — 목표 금액 {number}, 달성 나이 {age}",
+      "shareTextCoast": "{name} 계산 결과 — 기준 금액 {number}, 달성률 {progress}",
       "retirementAge": "은퇴 나이",
       "partTimeIncome": "파트타임 소득 (연, 세후)",
       "baristaNumber": "바리스타 FIRE 목표 금액",

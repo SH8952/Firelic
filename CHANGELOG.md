@@ -1,3 +1,17 @@
+## 2026-11-11 (추가106) — 공유 강화 이식(ExifLens·FlyDroneMap 방식): GA4 share·UTM·언어별 채널·카카오 카드·계산기 결과 공유 링크
+
+- 배경: ExifLens 에서 완료·검증한 공유 강화 1~3단계를 형제 사이트에 순서대로 이식(FlyDroneMap 053464e 완료 → firelic). 카카오 앱 아이콘 등록용 파일 `_brand/firelic-kakao-app-icon-128.png`(128×128)·`-512.png` 도 함께 제작(저장소에는 올리지 않음).
+- 1단계(공유 버튼): `src/components/share-button.tsx` 교체 — GA4 권장 이벤트 `share`(method·content_type·item_id), 공유 링크에 UTM(`utm_source=share&utm_medium=<채널>&utm_campaign=tool|guide|page`), 언어별 채널(ko: 카카오·밴드·X·페이스북 / en: X·페이스북·WhatsApp·텔레그램 / ja: LINE·X·페이스북 / es: WhatsApp·텔레그램·X·페이스북). firelic 은 shadcn 버튼이 없어 기존 자체 스타일(`var(--color-*)`)에 맞춰 이식. 신규 `src/lib/share-links.ts`(콘텐츠 종류: 홈·`/calculators/*`·`/year-end-tax` = tool, `/guides` = guide).
+- 2단계(카카오): 일반 공유는 `sendScrap`(페이지 OG 정보 카드: 큰 이미지·제목·설명), 결과 공유는 결과 문구 피드 카드(`scrapImage` 로 카카오 서버에 이미지 올림). OG 이미지는 기존 동적 `opengraph-image` 사용. 트위터 카드 메타는 이미 있어 변경 없음.
+- 3단계(결과 공유 링크): FIRE 계산기 본체(`FireCalculator.tsx`)와 유형별 계산기(`FireTypeCalculator.tsx`: 코스트·바리스타·린·팻)에 입력값 복원 링크 + 결과 요약 문구. 파라미터는 통화(`cur`)·나이(`ca`·`ta`/`ra`)·자산(`pf`)·월 저축(`mc`)·지출(`ex`)·파트타임 소득(`pt`, 바리스타만)·수익률(`rr`)·인출률(`wr`)·세율(`tx`). 모든 값은 통화별 허용 범위·목록으로 검증하고 맞지 않으면 기본값 유지. 통화 환산 로직(`rescaleInputsBetween`)은 기존 `handleCurrencyChange` 안의 코드를 그대로 모듈 함수로 분리해 복원에도 같은 규칙 적용(동작 동일). 결과 공유 버튼은 계산기 결과 영역(결과 카드 아래·유형별은 결과 영역 맨 위)에 배치, 푸터의 기존 공유 버튼은 페이지 공유로 유지. 공유 링크는 현재 보고 있던 시나리오의 입력값을 시나리오 A 로 복원(비교 모드는 공유하지 않음).
+- 제외: 연말정산 계산기(`YearEndTaxCalculator`)는 연봉·공제 등 소득 정보가 주소에 남게 되므로 결과 링크화하지 않음(기존 결과 복사 기능 유지).
+- 번역: `messages/{ko,en,ja,es}.json` 에 `calculator.shareText`, `FireTypes.calc.shareText`·`shareTextCoast` 추가.
+- 색인 영향 없음: 페이지 canonical 은 파라미터 없는 기본 주소 유지(신규 색인 주소 없음).
+- 검증: tsc 0 오류, 변경 파일 eslint 무경고, 4개 언어 ICU 문구 해석 통과, 5개 통화×2개 규모 입력값 링크 왕복(생성→파싱) 일치, 잘못된 값(미지원 통화·범위 초과·음수·문자) 거부 확인. 이 작업 환경은 맥용 SWC 가 없어 build·dev 실행 불가 → 푸시 후 실사이트에서 확인 예정.
+- 사용자 확인 필요: 카카오 개발자 콘솔에서 firelic 전용 앱 생성 → JavaScript 키를 Vercel(moneypick/firelic) 환경변수 `NEXT_PUBLIC_KAKAO_JS_KEY` 로 등록 + 웹 도메인 `https://firelic.com` 등록 → 재배포.
+- 상태: 코드 수정 완료, 커밋·푸시 전.
+- 백업: `_backups/firelic_backup_20261111_143433_공유강화이식_사전`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-07 (추가105) — 시그니처 색상 딥 에메랄드로 개편 + 그래프 색 버그 수정 + 모드 전환 버튼 개선
 
 - 배경: 금융·자산 사이트에 맞는 전문적이고 안정감 있는 색으로 바꾸고 싶다는 요청. 라이트·다크 모두 색이 어색하고 특히 그래프가 이상하다는 지적. 실제 사이트를 두 모드로 열어 확인한 결과, 그래프 선·면이 지정한 초록·파랑이 아니라 **검정**으로 그려지고 있었음(원인: Chart.js 가 그리는 canvas 는 CSS 변수 `var(--...)` 를 해석하지 못함). 축 글자·격자도 라이브러리 기본 회색이라 다크 모드와 어긋났음.
