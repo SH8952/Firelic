@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { pickMessages } from "@/i18n/client-messages";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ConsentBanner } from "@/components/ConsentBanner";
@@ -16,6 +17,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 // Naver Search Advisor (웹마스터 도구) site-ownership verification meta tag.
 // Optional — only rendered once the code is issued and set as an env var.
 const NAVER_SITE_VERIFICATION = process.env.NAVER_SITE_VERIFICATION;
+
+// 2026-11-13 Vercel 사용량 최적화: 모든 페이지가 공통으로 쓰는 클라이언트 번역만 브라우저로 전달한다.
+// (헤더·푸터·동의 배너·공유·오류 화면·계산기). 페이지별 번역은 각 폴더의 layout.tsx 에서 추가한다.
+const LAYOUT_NAMESPACES = ["Consent", "ErrorPage", "Share", "calculator", "nav"];
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -88,7 +93,7 @@ export default async function LocaleLayout({
   // 판정 자체(needsConsentBanner)는 그대로 두고, 입력값만 proxy/middleware가
   // 심어 두는 geo-country 쿠키를 브라우저에서 읽도록 ConsentBanner 안으로 옮겼다.
 
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -96,7 +101,7 @@ export default async function LocaleLayout({
         <GoogleAnalytics />
         <AdSenseScript />
         <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={pickMessages(messages, LAYOUT_NAMESPACES)}>
             <SiteHeader />
             {children}
             <SiteFooter />

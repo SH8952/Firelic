@@ -1,3 +1,14 @@
+## 2026-11-13 (추가108) — Vercel 사용량 최적화(번역 슬림화·rss 캐시)
+
+- 배경: Vercel Hobby 한도 초과(Fluid Active CPU 4h39m/4h, ISR 읽기 816K/1M, Fast Origin Transfer 7.84GB/10GB) 대응. 원인은 모든 페이지 HTML에 번역 전체(약 100KB)가 중복으로 실려 ISR 읽기·전송량이 커진 것과, 매 요청 실행되는 서버 코드(CPU). 사이트가 보여주는 내용·기능은 그대로 두고 전송량·CPU만 줄이는 방향.
+- 번역 슬림화: `src/i18n/client-messages.tsx` 신규. 루트 `layout.tsx` 는 공통 클라이언트 번역(`Consent·ErrorPage·Share·calculator·nav`)만 보내고, `calculators/[type]`·`guides/[slug]` 폴더에 `layout.tsx` 를 새로 두어 유형별 계산기(`FireTypes`)·가이드 미니 계산기(`GuideTools`) 번역만 추가 전달.
+- `rss.xml`(요청 시 생성) 에 CDN 캐시 헤더(`s-maxage=3600`).
+- 홈 무작위 가이드/FAQ 카드는 요청마다 달라지는 기존 동작을 그대로 두기 위해 `force-dynamic` 유지. `middleware.ts` 는 Edge 실행이라 Fluid CPU 와 무관해 변경하지 않음.
+- 검증(클라우드 `next build`, 변경 전/후 비교): MISSING_MESSAGE 0건, 프리렌더 HTML 259개 페이지 보이는 텍스트 전부 동일, 정적 HTML 용량 약 26% 감소(about 60.6KB→31.4KB), 4개 언어 홈·계산기·가이드(미니 계산기 3종 포함) Playwright 콘솔 오류·번역키 노출 0건.
+- 동작 차이: 새 클라이언트 컴포넌트에서 `useTranslations("X")` 를 쓰면 해당 폴더 `layout.tsx`(또는 루트 `LAYOUT_NAMESPACES`)에 "X" 를 추가해야 함.
+- 상태: 푸시·배포 완료(커밋 해시는 푸시 후 갱신).
+- 백업: `_backups/firelic_backup_20261113_062446_vercel-slim-before`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-12 (추가107) — 사이트 아이콘 파일을 ExifLens·FlyDroneMap과 같은 위치·구성으로 정리 (`src/app/icon.png`·`apple-icon.png`)
 
 - 배경: 사용자 요청. 앞서 카카오 앱 아이콘용으로 만든 파일을 `_brand/` 가 아니라 다른 프로젝트와 같은 `src/app` 에 두고 싶다는 요청(추천안으로 진행).
