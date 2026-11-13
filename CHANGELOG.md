@@ -6,7 +6,7 @@
 - 홈 무작위 가이드/FAQ 카드는 요청마다 달라지는 기존 동작을 그대로 두기 위해 `force-dynamic` 유지. `middleware.ts` 는 Edge 실행이라 Fluid CPU 와 무관해 변경하지 않음.
 - 검증(클라우드 `next build`, 변경 전/후 비교): MISSING_MESSAGE 0건, 프리렌더 HTML 259개 페이지 보이는 텍스트 전부 동일, 정적 HTML 용량 약 26% 감소(about 60.6KB→31.4KB), 4개 언어 홈·계산기·가이드(미니 계산기 3종 포함) Playwright 콘솔 오류·번역키 노출 0건.
 - 동작 차이: 새 클라이언트 컴포넌트에서 `useTranslations("X")` 를 쓰면 해당 폴더 `layout.tsx`(또는 루트 `LAYOUT_NAMESPACES`)에 "X" 를 추가해야 함.
-- 상태: 푸시·배포 완료(커밋 해시는 푸시 후 갱신).
+- 상태: 푸시·배포 완료(979f872). 실사이트 확인: `/ko/about` HTML 63KB→34KB, 가이드(미니 계산기 포함)·유형별 계산기·홈·`rss.xml` 정상 응답.
 - 백업: `_backups/firelic_backup_20261113_062446_vercel-slim-before`. 롤백: `git revert <이번 커밋>`.
 
 ## 2026-11-12 (추가107) — 사이트 아이콘 파일을 ExifLens·FlyDroneMap과 같은 위치·구성으로 정리 (`src/app/icon.png`·`apple-icon.png`)
