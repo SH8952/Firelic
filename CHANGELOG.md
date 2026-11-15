@@ -4,7 +4,7 @@
 - 변경: `src/app/[locale]/page.tsx` 1개 파일 — `export const dynamic = "force-dynamic"` → `export const revalidate = 300`(5분마다 새로 만들어 CDN 캐시에서 즉시 응답, 만료 후 첫 요청도 이전 캐시를 즉시 내주고 뒤에서 갱신). 무작위 가이드/FAQ 카드: "요청마다" → "5분마다" 바뀜(노출 FAQ 항목과 FAQPage 구조화 데이터는 항상 같은 묶음). 쇼핑 추천이 없어 다른 변경 불필요.
 - 검증(클라우드 `next build` 전/후 + `next start`): 홈 4개 언어가 정적(●)으로 생성, `Cache-Control: s-maxage=300, stale-while-revalidate`, geo-country 쿠키 정상, 만료 후 첫 요청 STALE→다음 요청에서 카드 묶음 교체 확인, 4개 언어 Playwright 콘솔 오류·번역키 노출 0건, 홈 섹션 구성 동일, tsc 0 오류.
 - 동작 차이: 홈의 무작위 가이드/FAQ 카드가 5분마다 바뀜.
-- 상태: 푸시·배포 완료(커밋 해시는 푸시 후 갱신).
+- 상태: 푸시·배포 완료(c0e8d52). 실사이트 확인: /ko 캐시 HIT(정적), 재접속 0.2~0.3초대.
 - 백업: `_backups/firelic_backup_20261115_064643_home-static-before`. 롤백: `git revert <이번 커밋>`.
 
 ## 2026-11-13 (추가108) — Vercel 사용량 최적화(번역 슬림화·rss 캐시)
