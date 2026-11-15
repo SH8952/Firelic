@@ -4,7 +4,7 @@
 - 변경: `src/lib/analytics.ts` — Vercel 환경변수(`NEXT_PUBLIC_GA_MEASUREMENT_ID`) 대신 ExifLens·FlyDroneMap 과 같이 코드에 ID 고정(production 빌드에서만 사용, 로컬 개발은 수집 안 함). Vercel 환경변수 값은 이제 쓰이지 않음(남겨 두어도 무해, 대시보드에서 삭제 가능). `.env.example` 안내 문구 정리.
 - 새 속성: `FIRE Calculator (firelic.com)` (시간대 대한민국, 통화 USD) / 웹 스트림 `FIRE Calculator` / 측정 ID `G-BJLE06QNMV` (이전 `G-TX5XJZ7QDJ`).
 - 동작 차이: 새 속성은 0부터 수집을 시작한다(이전 기록은 기존 속성에 그대로 남음, 이어지지 않음). 애드센스·서치 콘솔 연결은 새 속성에서 따로 설정해야 한다.
-- 상태: 푸시 대기(푸시·실사이트 수집 확인 후 갱신).
+- 상태: 푸시·배포 완료(9ad15a5). 실사이트 확인: 홈 HTML 의 측정 ID 가 새 ID 로 바뀜, GA 실시간 보고서에서 새 속성이 page_view·first_visit 수집 확인.
 - 백업: `_backups/firelic_backup_20261115_131253_ga분리_사전`. 롤백: `git revert <이번 커밋>`.
 
 ## 2026-11-15 (추가109) — 홈 정적화(ISR 5분): 첫 접속 지연(콜드 스타트) 해소
