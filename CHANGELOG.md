@@ -1,3 +1,11 @@
+## 2026-11-23 (추가120) — 한국어 가이드 70개 전체에 도식 1개씩 추가
+
+- 배경: 애드센스 "가치가 별로 없는 콘텐츠" 대응 — 번역본과 차별되는 한국어 전용 시각 자료로 본문을 풍부하게.
+- 신규: `src/components/guides/diagrams.tsx` — 가로 막대(DiagramBars)·흐름도(DiagramFlow)·비율 분할(DiagramSplit)·타임라인(DiagramTimeline)·비교(DiagramCompare)·계단(DiagramStairs) 6종. 서버 컴포넌트, CSS 변수 색상(라이트/다크 대응), 좁은 화면에서는 세로 배치, figure+aria-label.
+- 등록: `src/components/guides/tools/index.ts`의 `guideTools`에 합쳐 MDX에서 바로 사용(타입 캐스트 포함).
+- 적용: `content/guides/ko/` 70개 전부에 도식 1개씩. 숫자는 같은 글 본문의 표·문장과 동일한 값만 사용(새 수치 없음). 도식 종류와 위치를 글마다 달리함. `updatedAt` 2026-11-23. en/ja/es 번역본은 변경 없음.
+- 검증: localhost에서 ko 가이드 70개 모두 200 + figure 포함, `tsc --noEmit`·eslint 통과.
+
 ## 2026-11-23 (추가119) — 번역 가이드 반복 소제목 정리 + 한국어 가이드 16개 깊이 보강
 
 - 배경: 한국어 구조 정리(추가118) 후에도 en/ja/es 번역본에 같은 틀의 반복 소제목이 남아 있었고, 짧은 한국어 가이드는 본문 깊이가 부족.
