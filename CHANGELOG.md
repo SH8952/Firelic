@@ -1,3 +1,12 @@
+## 2026-11-23 (추가112) — 한국어 가이드 심화 1회차: 얇은 글 5개를 각각 다른 구성으로 재작성
+
+- 배경: 애드센스 11/22 거절(사유 동일: 가치가 별로 없는 콘텐츠). 한국어 가이드 70개 중 2,500자 미만 13개를 점검해 심화하기로 함. 같은 틀(표 2개 + 소제목 6개)의 반복을 피하기 위해 글마다 구성과 어조를 다르게 함.
+- 변경(`content/guides/ko/`, 주소·슬러그 불변, `updatedAt` 2026-11-23): `car-ownership-cost-vs-transit-fire-impact`(5년 타임라인 + km당 단가 + 월 약 330km 손익분기 + 가상 사례 2건), `three-month-spending-audit-without-budget-app`(60분 작업표 + 결제 패턴 6종 + 명세서 10줄 판독 연습 + 석 달 뒤 비교표), `couple-money-management-shared-vs-separate`(세 번의 대화 + 가상 부부 3쌍 + 말투 표), `bonus-and-tax-refund-allocation-plan`(네 개의 봉투 + 상황별 비율표 + 가상 직장인 3명), `jeonse-vs-monthly-rent-cost-comparison`(같은 집 세 가지 계약 + 기회비용 포함 월 총비용 + 계약 시점별 점검).
+- 분량: 공백 제외 약 1,900~2,300자 → 약 2,800~3,600자. 숫자는 모두 설명용 가정이며 FIRE 도달 기간은 기존 가이드와 같은 계산 방식(실질 5%, 인출률 4%, 연 단위 적립)으로 재계산. 새 외부 출처 링크 추가(자동차365·보험다모아·HUG·등기소 등).
+- 검증: 5개 글 localhost 200, 내부 링크 깨짐 0건, MDX 특수문자 오류 없음.
+- 백업: `_backups/firelic-guides-pre-deepen_20261123_140828`. 롤백: `git revert <이번 커밋>`.
+- 남은 얇은 글 8개는 다음 회차에서 진행.
+
 ## 2026-11-16 (추가111) — GA4 개발자 제외 강화: 제외 대상에서는 gtag.js 파일 자체를 로드하지 않음
 
 - 배경: 기존 코드는 `gtag('config')` 호출만 `dev_exclude=1` 쿠키로 막고 `gtag/js?id=...` 파일은 `<Script src>` 로 항상 로드했다. ExifLens 에서 이 파일이 로드되면 config 호출 없이도 page_view 가 자동 전송되는 것이 확인되어, 같은 구조인 firelic 에도 동일 수정을 적용.
