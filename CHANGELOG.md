@@ -1,3 +1,10 @@
+## 2026-11-23 (추가119) — 번역 가이드 반복 소제목 정리 + 한국어 가이드 16개 깊이 보강
+
+- 배경: 한국어 구조 정리(추가118) 후에도 en/ja/es 번역본에 같은 틀의 반복 소제목이 남아 있었고, 짧은 한국어 가이드는 본문 깊이가 부족.
+- 변경 ① en/ja/es 가이드 소제목 57개를 글마다 다른 표현으로 교체(주소·슬러그·본문 불변). 언어별 파일 내 소제목 중복 0건, 언어 전체에서 반복되는 소제목은 "참고 자료"류만 남음.
+- 변경 ② 한국어 가이드 16개에 글마다 형태가 다른 새 절 추가(약 500~630자): 비교표, 워크시트, 6개월 로드맵, 가드레일 규칙, 역산표, 시나리오 표 등. 숫자는 직접 검산(예: 6억 원·월 100만 원 파트타임 중단 시 인출률 6.0%, 9억 원·월 350만 원 생활비 시 약 4.7%). `updatedAt` 2026-11-23.
+- 대상: fire-milestones-roadmap-1eok-to-9eok, korea-national-pension-early-vs-delayed-claim, fire-number-25x-rule-explained, credit-score-and-loan-interest-basics, monthly-paycheck-from-portfolio-withdrawal-design, jeonse-vs-monthly-rent-cost-comparison, sequence-of-returns-risk, 4-percent-rule-safe-withdrawal-rate, how-to-calculate-your-savings-rate, barista-fire-part-time-work 외 batch1 6개.
+
 ## 2026-11-23 (추가118) — 한국어 가이드 41개 구성 틀 다양화("한눈에 보기" 공통 틀 해소)
 
 - 배경: 애드센스 거절 사유("가치가 별로 없는 콘텐츠")의 유력 원인으로 "같은 틀의 대량 생산" 의심. 점검 결과 한국어 가이드 70개 중 41개가 첫 소제목을 "한눈에 보기: …"(숫자 표)로 시작하고 "흔한 실수 → 계산기에 적용하기 → 참고 자료"로 끝나는 같은 틀이었음(11/23 앞서 고친 13개는 제외).
