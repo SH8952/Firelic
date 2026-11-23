@@ -6,6 +6,7 @@ import { languageAlternates, ogImages, webApplicationJsonLd } from "@/lib/seo";
 import { HomeGuideHighlights } from "@/components/home-guide-highlights";
 import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 import { HomeFireTypes } from "@/components/home-fire-types";
+import { HomeToolsCard } from "@/components/home-tools-card";
 import { HomeYearEndBanner } from "@/components/home-year-end-banner";
 import { AdSlot } from "@/components/AdSlot";
 
@@ -71,6 +72,7 @@ export default async function HomePage({
 
       {/* 연말정산 배너(한국어 전용, 2026-10-24 신설) */}
       <HomeYearEndBanner locale={locale} />
+      <HomeToolsCard locale={locale} />
 
       {/* FIRE 유형별 계산기 링크 카드(2026-10-24 신설) */}
       <HomeFireTypes locale={locale} />
