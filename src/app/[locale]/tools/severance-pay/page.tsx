@@ -32,7 +32,7 @@ export default async function SeverancePage({ params }: { params: Promise<{ loca
       path={PATH}
       title="퇴직금 계산기"
       lead="퇴직금은 '월급 × 근속 연수'가 아닙니다. 퇴직 직전 3개월의 임금으로 하루 평균임금을 구하고, 거기에 30일을 곱해 근속 기간만큼 쌓는 방식입니다. 아래 세 단계를 순서대로 채워 보세요."
-      backLabel="재무 도구 목록"
+      backLabel="계산기 목록"
       related={[
         { slug: "severance-pay-job-change-irp-guide", title: "이직할 때 퇴직금, IRP로 받아야 할까" },
         { slug: "korea-irp-pension-account-fire", title: "FIRE를 위한 IRP·연금계좌 활용" },

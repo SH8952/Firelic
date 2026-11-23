@@ -23,13 +23,13 @@ export function ToolShell({
 }) {
   const crumbs = [
     { name: "Home", url: `${SITE_URL}/ko` },
-    { name: "재무 계산 도구", url: `${SITE_URL}/ko/tools` },
+    { name: "계산기", url: `${SITE_URL}/ko/calculators` },
     { name: title, url: `${SITE_URL}/ko${path}` },
   ];
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 [word-break:keep-all] [overflow-wrap:break-word]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(crumbs)) }} />
-      <BackLink href="/ko/tools" label={backLabel} />
+      <BackLink href="/ko/calculators" label={backLabel} />
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{title}</h1>
       <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{lead}</p>
       <div className="mt-8">{children}</div>

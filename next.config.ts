@@ -11,6 +11,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // 도구 모음 허브는 계산기 목록으로 통합됨(2026-11-23).
+    return [{ source: "/ko/tools", destination: "/ko/calculators", permanent: true }];
+  },
   async headers() {
     return [
       {

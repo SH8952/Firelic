@@ -32,7 +32,7 @@ export default async function CompoundPage({ params }: { params: Promise<{ local
       path={PATH}
       title="복리 계산기"
       lead="복리는 설명을 들을 때보다 그림으로 볼 때 이해가 빠릅니다. 숫자를 넣으면 회색(내가 넣은 돈) 위로 초록색(수익)이 얼마나 두꺼워지는지 연도별로 확인할 수 있습니다."
-      backLabel="재무 도구 목록"
+      backLabel="계산기 목록"
       related={[
         { slug: "compound-interest-and-fire-timeline", title: "복리와 FIRE 도달 시점" },
         { slug: "dollar-cost-averaging-for-fire", title: "적립식 투자의 힘, 분할 매수" },

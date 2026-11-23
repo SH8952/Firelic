@@ -11,10 +11,10 @@ export function HomeToolsCard({ locale }: { locale: string }) {
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">비상금 목표 · 목표 금액 역산 · 복리 · 퇴직금 계산기</p>
         </div>
         <Link
-          href={"/tools" as never}
+          href={"/calculators" as never}
           className="shrink-0 rounded-full border border-[var(--color-primary)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10"
         >
-          도구 모음 보기
+          계산기 전체 보기
         </Link>
       </div>
     </section>

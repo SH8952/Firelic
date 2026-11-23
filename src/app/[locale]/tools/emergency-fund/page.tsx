@@ -32,7 +32,7 @@ export default async function EmergencyFundPage({ params }: { params: Promise<{ 
       path={PATH}
       title="비상금 목표 계산기"
       lead="’비상금은 월급의 3~6개월치’라는 말은 누구에게나 같은 숫자가 아닙니다. 월급이 끊기면 가장 먼저 타격을 받는 사람과 그렇지 않은 사람의 기준은 다릅니다. 아래에서 내 상황을 고르면 개월 수가 달라집니다."
-      backLabel="재무 도구 목록"
+      backLabel="계산기 목록"
       related={[
         { slug: "build-emergency-fund-before-fire", title: "FIRE 전에 먼저 만들어야 할 비상금" },
         { slug: "emergency-fund-then-what-money-waterfall", title: "비상금을 채운 다음 돈은 어디로 흘러가야 할까" },

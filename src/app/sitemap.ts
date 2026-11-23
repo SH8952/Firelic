@@ -69,13 +69,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // 재무 계산 도구(한국어 전용): 허브 + 도구 4종.
-  for (const path of ["/tools", "/tools/emergency-fund", "/tools/monthly-saving-goal", "/tools/compound-interest", "/tools/severance-pay"]) {
+  // 재무 계산 도구(한국어 전용): 도구 4종(목록은 /calculators).
+  for (const path of ["/tools/emergency-fund", "/tools/monthly-saving-goal", "/tools/compound-interest", "/tools/severance-pay"]) {
     entries.push({
       url: `${SITE_URL}/ko${path}`,
       lastModified: new Date("2026-11-23"),
       changeFrequency: "monthly",
-      priority: path === "/tools" ? 0.7 : 0.8,
+      priority: 0.8,
       alternates: { languages: { ko: `${SITE_URL}/ko${path}` } },
     });
   }

@@ -32,7 +32,7 @@ export default async function MonthlySavingGoalPage({ params }: { params: Promis
       path={PATH}
       title="목표 금액 역산 계산기"
       lead="보통은 ’매달 50만 원씩 넣으면 얼마가 될까’를 묻지만, 목표가 먼저 정해져 있다면 질문을 뒤집어야 합니다. 도착점을 먼저 놓고 매달 얼마를 보내야 하는지를 거꾸로 구합니다."
-      backLabel="재무 도구 목록"
+      backLabel="계산기 목록"
       related={[
         { slug: "savings-rate-target-table-by-income", title: "소득별 저축률 목표표" },
         { slug: "fire-milestones-roadmap-1eok-to-9eok", title: "1억에서 9억까지, FIRE 단계별 로드맵" },
