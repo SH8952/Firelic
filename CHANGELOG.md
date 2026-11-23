@@ -1,3 +1,10 @@
+## 2026-11-23 (추가115) — 홈 투자 자문 경고 문구를 도구 바로 아래로 이동
+
+- 배경: 경고 문구가 페이지 맨 아래(FAQ 뒤)에 있어 도구와 안내문이 멀리 떨어져 보인다는 지적.
+- 변경: `src/components/FireCalculator.tsx` — 도구 섹션 끝과 "이용 방법" 사이에 `t("disclaimer")` 문단 추가(작은 글씨·가운데 정렬). `src/app/[locale]/page.tsx` — 맨 아래 `DisclaimerFooter` 제거(하단 광고는 유지). 4개 언어 모두 같은 위치. 문구 내용·번역 키 변경 없음. `calculators/*`·`reference/*` 페이지의 하단 푸터 문구는 그대로.
+- 검증: tsc·eslint 통과, localhost 4개 언어 200, 문구는 화면에 1회(도구 아래, 이용 방법 앞)만 표시.
+- 백업: `_backups/firelic-disclaimer-move_20261123_143044`. 롤백: `git revert <이번 커밋>`.
+
 ## 2026-11-23 (추가114) — 한국어 가이드 심화 3회차(마무리): 얇은 글 3개 재작성
 
 - 변경(`content/guides/ko/`, 주소·슬러그 불변, `updatedAt` 2026-11-23): `salary-negotiation-job-change-income-growth`(협상 3막: 준비·대화 흐름·인상분 배분 + 가상 이직 제안 총보상 비교), `severance-pay-job-change-irp-guide`(퇴직금 문답 9개), `fire-milestones-roadmap-1eok-to-9eok`(등산 지도식 구간표 + 구간 길이 + 하락 충격 비교).

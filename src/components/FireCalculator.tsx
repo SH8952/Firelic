@@ -333,7 +333,12 @@ export function FireCalculator() {
         </section>
       </div>
 
-      <div className="mt-10">
+      {/* 투자 자문 경고 문구 — 도구 바로 아래(이용 방법 위)에 붙여 도구와 안내문이 떨어져 보이지 않게 함 (2026-11-23) */}
+      <p className="mx-auto mt-6 max-w-3xl px-4 text-center text-xs leading-relaxed text-[var(--color-text-secondary)]">
+        {t("disclaimer")}
+      </p>
+
+      <div className="mt-6">
         <UsageGuideSection />
       </div>
     </div>

@@ -8,7 +8,6 @@ import { HomeFaqHighlights } from "@/components/home-faq-highlights";
 import { HomeFireTypes } from "@/components/home-fire-types";
 import { HomeYearEndBanner } from "@/components/home-year-end-banner";
 import { AdSlot } from "@/components/AdSlot";
-import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 
 // 2026-11-15 홈 정적화(ISR): 홈이 요청마다 서버에서 만들어지면서 한동안 접속이 없을 때 첫 접속이 1~2초 느렸다(함수 콜드 스타트).
 // 이제 5분(300초)마다 새로 만들어 CDN 캐시에서 바로 응답한다. 무작위 가이드/FAQ 카드는 새로 만들 때마다 다시 뽑히므로
@@ -82,9 +81,7 @@ export default async function HomePage({
       {/* FAQ 하이라이트 — /faq 전체 목록 중 5개 무작위 노출 (2026-09-27 신규 추가) */}
       <HomeFaqHighlights locale={locale} />
 
-      {/* 투자 자문 경고 문구 + 하단 광고 — 사용자 요청으로 페이지 맨 아래로 이동 (다른 2개 사이트와 배치 통일) */}
-      <DisclaimerFooter text={t("disclaimer")} />
-
+      {/* 투자 자문 경고 문구는 2026-11-23 도구 바로 아래(FireCalculator 안)로 이동. 여기에는 하단 광고만 남김 */}
       <div className="mx-auto max-w-6xl px-4 pb-10">
         <AdSlot variant="display" label={t("adDisplay")} />
       </div>
