@@ -1,3 +1,13 @@
+## 2026-11-23 (추가113) — 한국어 가이드 심화 2회차: 얇은 글 5개를 각각 다른 구성으로 재작성
+
+- 배경: 추가112에 이어 한국어 가이드 심화. 글마다 구성·어조를 다르게 하는 원칙 유지.
+- 변경(`content/guides/ko/`, 주소·슬러그 불변, `updatedAt` 2026-11-23): `korea-health-insurance-after-early-retirement`(퇴직일 기준 달력 + 비교 템플릿 + 가상 사례 2건 + 보험료별 목표 자산표), `first-salary-first-year-plan`(월급일 당일 순서 + 주거 형태별 예산표 3종 + 석 달 3단계 + 자주 나오는 고민), `monthly-paycheck-from-portfolio-withdrawal-design`(포트폴리오 3칸 + 한 해 인출 달력 + 나쁜 해·좋은 해 시나리오 + 월 300만 원 분해), `cut-fixed-costs-checklist`(6주 프로젝트: 한 주에 한 곳), `savings-rate-target-table-by-income`(3문항 진단 + 줄이기 vs 벌기 비교 + 5%p 사다리 12개월).
+- 오류 정정: `cut-fixed-costs-checklist` 의 "월 30만 원 절감 시 목표 자산 7,500만 원 감소" → 9,000만 원(30만×12÷0.04)으로 수정. 건강보험 글의 출처·제도 설명은 기존 정책브리핑 기사 내용 그대로 유지(최종 확인일 변경 없음).
+- 분량: 공백 제외 약 2,100~2,500자 → 약 2,650~3,200자. FIRE 도달 기간은 기존과 같은 계산 방식(연 단위 적립, 실질 5%, 인출률 4%).
+- 검증: 5개 글 localhost 200, 내부 링크 깨짐 0건, MDX 특수문자 오류 없음.
+- 백업: `_backups/firelic-guides-pre-deepen2_20261123_141757`. 롤백: `git revert <이번 커밋>`.
+- 남은 얇은 글 3개: `salary-negotiation-job-change-income-growth`, `severance-pay-job-change-irp-guide`, `fire-milestones-roadmap-1eok-to-9eok`.
+
 ## 2026-11-23 (추가112) — 한국어 가이드 심화 1회차: 얇은 글 5개를 각각 다른 구성으로 재작성
 
 - 배경: 애드센스 11/22 거절(사유 동일: 가치가 별로 없는 콘텐츠). 한국어 가이드 70개 중 2,500자 미만 13개를 점검해 심화하기로 함. 같은 틀(표 2개 + 소제목 6개)의 반복을 피하기 위해 글마다 구성과 어조를 다르게 함.
