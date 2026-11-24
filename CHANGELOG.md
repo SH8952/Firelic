@@ -1,3 +1,11 @@
+## 2026-11-24 (추가126) — 한국어 가이드 새 절 위치·형태 분산(23편) + 남은 가이드 18편 보강
+
+- 기존 새 절 23편(2~4차): 모두 글 끝("참고 자료" 앞)에 몰려 있던 것을 각 글의 관련 절 바로 뒤로 이동. 표 위주였던 10편은 서술형·목록으로 바꿔 표 비중을 낮추고(표 15편 → 7편), 일부 소제목도 바꿈.
+- 남은 가이드 18편 보강: what-is-fire, build-emergency-fund-before-fire, compound-interest-and-fire-timeline, asset-allocation-by-fire-stage, debt-payoff-vs-investing-priority, how-inflation-affects-your-fire-number, real-estate-vs-index-funds-for-fire, withdrawal-strategies-bucket-method, emergency-fund-then-what-money-waterfall, side-hustles-to-accelerate-fire, minimum-wage-job-fast-wealth-building, diversified-investing-on-average-salary, dealing-with-market-crashes-after-fire, small-amount-investing-getting-started, canada-rrsp-tfsa-fire-strategy, japan-nisa-ideco-fire-strategy, germany-etf-savings-plan-fire, australia-superannuation-fire-strategy.
+- 형태·위치: 질문·답, 번호 달력, 글머리표 점검 질문, 단계 목록, 서술 사례, 숫자 환산 서술 등 18편 모두 표 없이 작성. 위치는 글마다 다른 절 앞(글 끝 아님). 숫자는 해당 글 본문의 수치와 단순 계산만 사용하고 새 외부 사실은 넣지 않음(해외 4편은 글 안 예시 수치를 환산).
+- 제외: 표·절이 이미 풍부한 연말정산·보험·부부·차량 계열 12편과 연표 중심의 fire-movement-history-and-origins, stocks-vs-savings 비교 글.
+- 검증: localhost 한국어 가이드 70편 전부 200 응답. 새 절을 가진 한국어 가이드 누적 53편.
+
 ## 2026-11-24 (추가125) — 한국어 가이드 12편 보강(새 절 추가) + 예시 금액 오류 수정
 
 - 대상(표 없이 서술 위주이던 글 중심): index-fund-investing-for-fire, insurance-products-savings-vs-protection, fire-vs-traditional-retirement, dollar-cost-averaging-for-fire, coast-lean-fat-fire-explained, korea-irp-pension-account-fire, capital-gains-tax-comparison-countries, purpose-and-mental-health-after-fire, estate-planning-basics-for-fire, employer-retirement-match-optimization, part-time-consulting-in-retirement, common-fire-mistakes-to-avoid.
