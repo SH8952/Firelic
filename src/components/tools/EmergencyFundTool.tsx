@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { readSharedParams, parseBoundedNumber, parseStringChoice } from "@/lib/shared-params";
 import { NumField } from "./NumField";
 import {
   EMERGENCY_PROFILES,
@@ -18,6 +19,26 @@ export function EmergencyFundTool() {
   const [essential, setEssential] = useState(200);
   const [current, setCurrent] = useState(100);
   const [monthly, setMonthly] = useState(30);
+
+  // 글 속 사례 링크(?pf=salaried&es=200&cu=100&ms=30&rk=1010)로 열면 입력값을 채운다.
+  useEffect(() => {
+    const p = readSharedParams();
+    if (!p) return;
+    const pf = parseStringChoice(p.get("pf"), PROFILE_KEYS);
+    const es = parseBoundedNumber(p.get("es"), 0, 100_000);
+    const cu = parseBoundedNumber(p.get("cu"), 0, 10_000_000);
+    const ms = parseBoundedNumber(p.get("ms"), 0, 100_000);
+    const rk = p.get("rk");
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (pf !== null) setProfile(pf);
+    if (es !== null) setEssential(es);
+    if (cu !== null) setCurrent(cu);
+    if (ms !== null) setMonthly(ms);
+    if (rk !== null && /^[01]+$/.test(rk) && rk.length === EMERGENCY_RISKS.length) {
+      setRisks(rk.split("").map((c) => c === "1"));
+    }
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   const riskCount = risks.filter(Boolean).length;
   const r = calcEmergency({ essential, profile, riskCount, current, monthlySave: monthly });

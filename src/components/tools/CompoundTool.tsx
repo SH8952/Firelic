@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { readSharedParams, parseBoundedNumber } from "@/lib/shared-params";
 import { NumField } from "./NumField";
 import { compoundSchedule, crossoverYear, doublingYears, fmtMan } from "@/lib/tools";
 
@@ -33,6 +34,22 @@ export function CompoundTool() {
   const [monthly, setMonthly] = useState(50);
   const [rate, setRate] = useState(5);
   const [years, setYears] = useState(30);
+
+  // 글 속 사례 링크(?i=1000&m=50&r=5&y=30)로 열면 입력값을 채운다. 범위를 벗어난 값은 무시한다.
+  useEffect(() => {
+    const p = readSharedParams();
+    if (!p) return;
+    const i = parseBoundedNumber(p.get("i"), 0, 1_000_000);
+    const m = parseBoundedNumber(p.get("m"), 0, 100_000);
+    const r = parseBoundedNumber(p.get("r"), 0, 30);
+    const y = parseBoundedNumber(p.get("y"), 1, 60);
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (i !== null) setInitial(i);
+    if (m !== null) setMonthly(m);
+    if (r !== null) setRate(r);
+    if (y !== null) setYears(y);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   const y = Math.max(1, Math.min(60, Math.round(years)));
   const rows = compoundSchedule(initial, monthly, y, rate);

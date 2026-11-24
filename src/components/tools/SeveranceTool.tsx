@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { readSharedParams, parseBoundedNumber } from "@/lib/shared-params";
 import { NumField } from "./NumField";
 import { calcSeverance, fmtWon, futureValue } from "@/lib/tools";
 
@@ -12,6 +13,29 @@ export function SeveranceTool() {
   const [leave, setLeave] = useState(0);
   const [rate, setRate] = useState(4);
   const [spendPct, setSpendPct] = useState(0);
+
+  // 글 속 사례 링크(?jn=2020-03-02&ls=2026-12-31&w3=9000000&rt=4)로 열면 입력값을 채운다.
+  useEffect(() => {
+    const p = readSharedParams();
+    if (!p) return;
+    const ymd = (raw: string | null) => (raw && /^\d{4}-\d{2}-\d{2}$/.test(raw) && !Number.isNaN(Date.parse(raw)) ? raw : null);
+    const jn = ymd(p.get("jn"));
+    const ls = ymd(p.get("ls"));
+    const w3 = parseBoundedNumber(p.get("w3"), 0, 1_000_000_000);
+    const bn = parseBoundedNumber(p.get("bn"), 0, 1_000_000_000);
+    const lv = parseBoundedNumber(p.get("lv"), 0, 1_000_000_000);
+    const rt = parseBoundedNumber(p.get("rt"), 0, 20);
+    const sp = parseBoundedNumber(p.get("sp"), 0, 100);
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (jn !== null) setJoin(jn);
+    if (ls !== null) setLast(ls);
+    if (w3 !== null) setWage3m(w3);
+    if (bn !== null) setBonus(bn);
+    if (lv !== null) setLeave(lv);
+    if (rt !== null) setRate(rt);
+    if (sp !== null) setSpendPct(sp);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   const r = calcSeverance({ joinYmd: join, lastYmd: last, wage3m, annualBonus: bonus, annualLeavePay: leave });
   const keep = r.ok ? r.severance * (1 - spendPct / 100) : 0;

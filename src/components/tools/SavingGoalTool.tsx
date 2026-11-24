@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { readSharedParams, parseBoundedNumber } from "@/lib/shared-params";
 import { NumField } from "./NumField";
 import { fmtMan, futureValue, requiredMonthly } from "@/lib/tools";
 
@@ -12,6 +13,24 @@ export function SavingGoalTool() {
   const [current, setCurrent] = useState(1000);
   const [rate, setRate] = useState(5);
   const [income, setIncome] = useState(350);
+
+  // 글 속 사례 링크(?t=10000&y=10&c=1000&r=5&inc=350)로 열면 입력값을 채운다.
+  useEffect(() => {
+    const p = readSharedParams();
+    if (!p) return;
+    const t = parseBoundedNumber(p.get("t"), 1, 10_000_000);
+    const y = parseBoundedNumber(p.get("y"), 1, 50);
+    const c = parseBoundedNumber(p.get("c"), 0, 10_000_000);
+    const r = parseBoundedNumber(p.get("r"), 0, 20);
+    const inc = parseBoundedNumber(p.get("inc"), 0, 100_000);
+    /* eslint-disable react-hooks/set-state-in-effect */
+    if (t !== null) setTarget(t);
+    if (y !== null) setYears(y);
+    if (c !== null) setCurrent(c);
+    if (r !== null) setRate(r);
+    if (inc !== null) setIncome(inc);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
 
   const y = Math.max(1, Math.min(50, Math.round(years)));
   const need = requiredMonthly(target, current, y, rate);
