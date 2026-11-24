@@ -1,3 +1,11 @@
+## 2026-11-24 (추가125) — 한국어 가이드 12편 보강(새 절 추가) + 예시 금액 오류 수정
+
+- 대상(표 없이 서술 위주이던 글 중심): index-fund-investing-for-fire, insurance-products-savings-vs-protection, fire-vs-traditional-retirement, dollar-cost-averaging-for-fire, coast-lean-fat-fire-explained, korea-irp-pension-account-fire, capital-gains-tax-comparison-countries, purpose-and-mental-health-after-fire, estate-planning-basics-for-fire, employer-retirement-match-optimization, part-time-consulting-in-retirement, common-fire-mistakes-to-avoid.
+- 내용: 글마다 형태와 위치를 다르게 한 새 절 1개씩. 서술형 6편(인덱스펀드 보수 20년 비교, 적립 vs 일시 투자, 월 저축별 유형 도달 시간, 환급 후 실제 부담, 월 100만 원에 필요한 시간, 생활비 10% 오차), 번호 목록 1편(설계사 질문 6가지), 글머리표 2편(시간 배분 예시, 생애 사건별 서류 점검), 표 3편(인출률별 목표 자산, 세율별 목표 자산, 매칭 공식별 금액). 위치는 글 끝이 아니라 관련 절 바로 뒤로 분산하고 소제목 말투도 질문형·명사형·상황 제시형으로 섞음. 숫자는 계산으로 검산한 설명용 가정이며 새 외부 사실은 넣지 않음.
+- 오류 수정: fire-vs-traditional-retirement 본문의 "연 지출 4,800만 원 → 1억 2천만 원 / 1억 3,700만 원"을 "약 12억 원 / 약 13억 7,000만 원"으로 정정(4,800만 ÷ 4% = 12억).
+- 검증: localhost 12편 모두 200, 표 렌더 확인. 새 절을 가진 한국어 가이드는 누적 35편.
+- 참고: 개발 서버 캐시가 삭제 불가여서 이전 `.next`를 `_backups/next_cache_old_*`로 옮겨 새로 빌드함(커밋 대상 아님).
+
 ## 2026-11-24 (추가124) — 짧은 페이지에서도 푸터를 화면 하단에 고정
 
 - 배경: 소개 등 내용이 짧은 페이지에서 푸터가 본문 바로 아래에 떠 있었음.
