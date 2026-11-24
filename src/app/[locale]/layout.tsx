@@ -97,13 +97,13 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="flex min-h-screen flex-col antialiased">
         <GoogleAnalytics />
         <AdSenseScript />
         <ThemeProvider>
           <NextIntlClientProvider messages={pickMessages(messages, LAYOUT_NAMESPACES)}>
             <SiteHeader />
-            {children}
+            <div className="flex-1">{children}</div>
             <SiteFooter />
             <ConsentBanner />
           </NextIntlClientProvider>

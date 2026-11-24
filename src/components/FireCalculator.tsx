@@ -81,6 +81,17 @@ function rescaleInputsBetween(
   };
 }
 
+// 첫 화면 기본값을 해당 통화 범위에 맞춰 만든다(시나리오 B 의 월 저축액은 슬라이더 단위에 맞춰 반올림).
+function initialScenariosFor(code: string): { A: FireInputs; B: FireInputs } {
+  const usd = currencyRangeFor("USD");
+  const r = currencyRangeFor(code);
+  const A = rescaleInputsBetween(DEFAULT_INPUTS, usd, r);
+  const B = rescaleInputsBetween(DEFAULT_INPUTS_B, usd, r);
+  const step = r.monthlyContribution.step;
+  B.monthlyContribution = Math.round(B.monthlyContribution / step) * step;
+  return { A, B };
+}
+
 // 결과 공유 링크의 통화 목록(CurrencySelector 와 동일)
 const SHARE_CURRENCIES = ["USD", "EUR", "GBP", "KRW", "JPY"] as const;
 const SHARE_KEYS = ["cur", "ca", "ta", "pf", "mc", "ex", "rr", "wr", "tx"];
@@ -92,13 +103,16 @@ function withUnit(value: string | number, unit: string): string {
 export function FireCalculator() {
   const t = useTranslations("calculator");
   const locale = useLocale();
-  const [scenarios, setScenarios] = useState<{ A: FireInputs; B: FireInputs }>({
-    A: DEFAULT_INPUTS,
-    B: DEFAULT_INPUTS_B,
-  });
+  // 한국어 화면은 원화 기본값(KRW)으로 시작하고, 그 외 언어는 기존 USD 기본값을 유지한다.
+  const initialCurrency = locale === "ko" ? "KRW" : "USD";
+  const [scenarios, setScenarios] = useState<{ A: FireInputs; B: FireInputs }>(() =>
+    initialCurrency === "USD"
+      ? { A: DEFAULT_INPUTS, B: DEFAULT_INPUTS_B }
+      : initialScenariosFor(initialCurrency),
+  );
   const [activeScenario, setActiveScenario] = useState<"A" | "B">("A");
   const [compareMode, setCompareMode] = useState(false);
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState(initialCurrency);
 
   const inputs = scenarios[activeScenario];
   const range = useMemo(() => currencyRangeFor(currency), [currency]);
@@ -126,7 +140,7 @@ export function FireCalculator() {
   useEffect(() => {
     const p = readSharedParams();
     if (!p || !SHARE_KEYS.some((k) => p.has(k))) return;
-    const code = parseStringChoice(p.get("cur"), SHARE_CURRENCIES) ?? "USD";
+    const code = parseStringChoice(p.get("cur"), SHARE_CURRENCIES) ?? initialCurrency;
     const usd = currencyRangeFor("USD");
     const r = currencyRangeFor(code);
     const baseA = rescaleInputsBetween(DEFAULT_INPUTS, usd, r);
@@ -152,6 +166,7 @@ export function FireCalculator() {
     setCurrency(code);
     setScenarios({ A: restored, B: baseB });
     setActiveScenario("A");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 공유 버튼에 현재 입력값(링크)과 결과 요약 문구를 올린다.
