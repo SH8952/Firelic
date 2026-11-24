@@ -9,12 +9,22 @@ export async function PolicyPageView({ page, locale }: { page: PolicyPage; local
     <div className="mx-auto max-w-2xl px-4 py-12">
       <BackLink href={`/${locale}`} label={t("home")} />
       <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{page.title}</h1>
-      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Last updated: {page.updated}</p>
+      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{page.updatedLabel ?? `Last updated: ${page.updated}`}</p>
       <div className="mt-6 flex flex-col gap-4 text-sm leading-relaxed text-[var(--color-text-primary)]">
         {page.paragraphs.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
       </div>
+      {page.sections?.map((sec) => (
+        <section key={sec.heading} className="mt-8">
+          <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">{sec.heading}</h2>
+          <div className="mt-3 flex flex-col gap-3 text-sm leading-relaxed text-[var(--color-text-primary)]">
+            {sec.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
