@@ -1,3 +1,13 @@
+## 2026-11-25 (추가131) — 블로그 예약 발행 10편 추가(12/08~12/29, 화·목·토)
+
+- 배경: 서치어드바이저 검색어 30개에서 남은 주제를 취합해 첫 5편 뒤로 이어지는 글 10편을 예약 등록. 파일만 추가했고 코드 변경은 없음(예약 공개 로직은 추가130 그대로).
+- 일정: 12/08(화) first-gen-silson-insurance-policy-reading-order · 12/10(목) later-gen-silson-reenrollment-year-calculator · 12/12(토) find-all-my-insurance-naebohum-chajajum-checklist · 12/15(화) insurance-premium-how-much-income-three-step-budget · 12/17(목) nisa-meaning-japan-account-korean-resident · 12/19(토) 500man-won-10-percent-30-percent-how-much-calculation-note · 12/22(화) barista-fire-two-paths-full-vs-part-time-years · 12/24(목) emergency-fund-first-then-small-investing-monthly-plan · 12/26(토) germany-sparplan-800-euro-broker-checklist · 12/29(화) monthly-400-saving-milestone-ladder-1eok-to-10eok.
+- 형식: 증권 읽는 순서 / 재가입 시점 계산표 / 체크리스트 / 3단계 예산 사다리 / 용어 풀이 / 계산 노트 / 시나리오 비교 / 메모 / 쪽지 / 이정표 사다리로 글마다 다르게 구성.
+- 조사: 실손보험(금융위원회 보도자료 2026.5.6·2025.4.1, 민간 글은 공식 자료와 맞는 부분만 사용, 세대별 자기부담률·재가입 기준 시점처럼 민간 글끼리 충돌한 항목은 쓰지 않음), 내보험찾아줌(정책브리핑 출처 복지로 뉴스 2024.6.21), 적정 보험료 비율(출처와 한계를 함께 서술), 일본 NISA(금융청 NISAを知る). 일본 iDeCo는 공식 페이지를 읽지 못해(robots 오류) 글에서 제외.
+- 숫자: 월 복리·FIRE 계산기 로직으로 계산(표 값 검산 후 독일 원금 합계, 비상금 개월 수, 400만 원 이정표 개월 수 수정). 링크의 가이드 slug와 글 간 링크는 존재 여부를 스크립트로 검증.
+- 메모: 기존 가이드 germany-etf-savings-plan-fire의 "20년 뒤 약 37만 유로"는 월 복리 계산(약 40.3만 유로)과 다름 — 별도 점검 필요.
+- 검증: 15편 전부 개발 서버에서 200, `BLOG_HIDE_FUTURE=1`에서 목록 정상. 백업: `_backups/firelic-blog2_20261125_105104`.
+
 ## 2026-11-25 (추가130) — 블로그 신설(한국어 전용, 가상 사례형, 예약 공개) + 첫 글 5편
 
 - 배경: 승인 보강을 위해 "검색어 기반 롱테일 제목 + 가상 인물의 상황으로 풀어 쓴 글" 섹션을 추가. 서치어드바이저 검색어 30개를 기존 가이드와 짝지어(빚 갚기 1,385회 노출 등) 주제를 정했다. 같은 틀·대량 생산 느낌을 피하려고 글마다 형식을 다르게(두 사람 비교표 / 가계부 기록 / 카톡 대화 / 질문과 답 / 하루 시간순 기록) 구성.
