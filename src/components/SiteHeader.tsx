@@ -28,6 +28,8 @@ export function SiteHeader() {
   const locale = useLocale();
   // 연말정산 섹션은 한국어 전용(해당 문구가 있는 언어에서만 메뉴 노출).
   const showYearEnd = locale === "ko" && t.has("yearEndTax");
+  // 블로그는 한국어 전용(메뉴 문구가 있는 언어에서만 노출).
+  const showBlog = locale === "ko" && t.has("blog");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass =
@@ -59,6 +61,11 @@ export function SiteHeader() {
           <Link href="/guides" className={navLinkClass}>
             {t("guides")}
           </Link>
+          {showBlog ? (
+            <Link href="/blog" className={navLinkClass}>
+              {t("blog")}
+            </Link>
+          ) : null}
           {showYearEnd ? (
             <Link href="/year-end-tax" className={navLinkClass}>
               {t("yearEndTax")}
@@ -112,6 +119,15 @@ export function SiteHeader() {
           >
             {t("guides")}
           </Link>
+          {showBlog ? (
+            <Link
+              href="/blog"
+              className={`${navLinkClass} py-2.5`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {t("blog")}
+            </Link>
+          ) : null}
           {showYearEnd ? (
             <Link
               href="/year-end-tax"

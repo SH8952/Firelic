@@ -1,3 +1,13 @@
+## 2026-11-25 (추가130) — 블로그 신설(한국어 전용, 가상 사례형, 예약 공개) + 첫 글 5편
+
+- 배경: 승인 보강을 위해 "검색어 기반 롱테일 제목 + 가상 인물의 상황으로 풀어 쓴 글" 섹션을 추가. 서치어드바이저 검색어 30개를 기존 가이드와 짝지어(빚 갚기 1,385회 노출 등) 주제를 정했다. 같은 틀·대량 생산 느낌을 피하려고 글마다 형식을 다르게(두 사람 비교표 / 가계부 기록 / 카톡 대화 / 질문과 답 / 하루 시간순 기록) 구성.
+- 코드: `src/lib/blog.ts`(글 읽기·예약 공개 판정, 한국 날짜 기준), `src/app/[locale]/blog/page.tsx`(목록), `src/app/[locale]/blog/[slug]/page.tsx`(상세, 구조화 데이터·이어 읽을 가이드), `SiteHeader.tsx`(가이드 ↔ 연말정산 사이 "블로그" 메뉴, ko에서만), `messages/ko.json`(nav.blog), `src/app/sitemap.ts`(공개된 글만 등록, revalidate 3600).
+- 예약 공개: 글 파일의 publishedAt(YYYY-MM-DD) 이후에만 목록·상세·사이트맵에 노출. 공개 전 상세 주소는 404. 페이지는 1시간마다 재생성(ISR). 개발 서버는 미리보기를 위해 모두 보이고, `BLOG_HIDE_FUTURE=1`을 주면 운영과 같은 동작을 확인할 수 있다.
+- 첫 글 5편(`content/blog/ko/`): 11/26(목) loan-3-9-percent-repay-or-invest-same-500-two-people, 11/28(토) monthly-500-saving-couple-ledger-5-10-years, 12/01(화) monthly-20man-won-investing-start-kakao-chat, 12/03(목) monthly-150-for-life-needed-principal-qna, 12/05(토) repayment-order-gift-2000-three-loans. 숫자는 모두 월 복리 계산(`futureValue`와 같은 방식)과 FIRE 계산기 로직으로 검증했고, 인물·대출 조건은 가상임을 글에 밝힘.
+- 검증: tsc·eslint 통과, 개발 서버에서 목록·상세 5편 200, `/en/blog` 404, `BLOG_HIDE_FUTURE=1`에서 목록 비어 있음·상세 404·사이트맵 미포함 확인. (운영 빌드는 이 VM에서 .next 삭제 권한/용량 문제로 실행하지 못해 Vercel 빌드 결과로 확인 필요)
+- 운영 규칙: 화·목·토 주 3편. 다음 글은 같은 방식으로 파일만 추가(publishedAt을 화/목/토로). 실손보험 1·2세대 만료 글은 제도 수치 확인 후 작성 예정.
+- 백업: `_backups/firelic-blog_20261125_102131`.
+
 ## 2026-11-25 (추가129) — Vercel CPU 다이어트: 미들웨어 적용 범위 축소
 - 배경: Observability 분석에서 ExifLens·FlyDroneMap은 11/13 슬림화 후 미들웨어 CPU가 하루 약 45초 → 10~12초로 줄었으나 firelic은 하루 약 11~24초로 줄지 않음(11/23·24 오히려 상승). firelic만 모든 페이지 요청에서 미들웨어가 실행되고 있었음.
 - 변경: `src/middleware.ts` matcher를 ExifLens/FlyDroneMap과 같은 방식으로 변경 — 언어 접두사 없는 주소는 항상 실행, 접두사 주소(/ko/…)는 geo-country 쿠키가 없고 봇 UA가 아닌 방문자에게만 실행, `?dev=` 주소는 항상 실행. 동작 로직(쿠키 심기)은 그대로.

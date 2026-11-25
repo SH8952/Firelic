@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getGuides, getGuideSlugs, getYearEndGuides } from "@/lib/guides";
+import { getPublishedBlogPosts } from "@/lib/blog";
 import { FIRE_TYPES } from "@/lib/fireTypes";
 import { REFERENCE_TABLES } from "@/lib/referenceTables";
 
@@ -14,6 +15,9 @@ function languageMap(path: string, locales: readonly string[]): Record<string, s
   for (const l of locales) languages[l] = `${SITE_URL}/${l}${path}`;
   return languages;
 }
+
+// 블로그 예약 공개 글이 날짜에 맞춰 사이트맵에 들어가도록 1시간마다 갱신한다.
+export const revalidate = 3600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -67,6 +71,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       alternates: { languages: { ko: `${SITE_URL}/ko/year-end-tax/calculator` } },
     });
+  }
+
+  // 블로그(한국어 전용): 공개된 글만 등록한다.
+  const blogPosts = getPublishedBlogPosts("ko");
+  if (blogPosts.length > 0) {
+    const newestBlog = blogPosts.map((p) => p.updatedAt ?? p.publishedAt).sort().pop();
+    entries.push({
+      url: `${SITE_URL}/ko/blog`,
+      ...(newestBlog ? { lastModified: new Date(newestBlog) } : {}),
+      changeFrequency: "weekly",
+      priority: 0.7,
+      alternates: { languages: { ko: `${SITE_URL}/ko/blog` } },
+    });
+    for (const post of blogPosts) {
+      entries.push({
+        url: `${SITE_URL}/ko/blog/${post.slug}`,
+        lastModified: new Date(post.updatedAt ?? post.publishedAt),
+        changeFrequency: "monthly",
+        priority: 0.6,
+        alternates: { languages: { ko: `${SITE_URL}/ko/blog/${post.slug}` } },
+      });
+    }
   }
 
   // 재무 계산 도구(한국어 전용): 도구 4종(목록은 /calculators).
