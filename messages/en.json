@@ -187,6 +187,86 @@
     "homeH1": "FIRE Calculator: Plan Your Early Retirement",
     "guidesDescription": "Practical guides on FIRE savings, investing, withdrawal strategy and country-specific retirement accounts."
   },
+  "FireTypesExtra": {
+    "coast-fire": {
+      "kind": "story",
+      "position": "mid",
+      "heading": "A worked example: the same plan at 35 and at 45",
+      "paragraphs": [
+        "Say you spend $40,000 a year, assume a 4% withdrawal rate, no tax drag and a 5% real return, and plan to start drawing from your portfolio at 60. Your FIRE number is $1,000,000. At 35, with 25 years of growth ahead, you would need about $295,000 invested today to coast: leave that alone and compounding does the rest.",
+        "Run the same plan at 45 and the picture changes. With 15 years left, the coast number is about $481,000, roughly 63% higher. Nothing about your spending changed; you simply gave compounding less time to work. That gap is why the calculator above is worth rerunning each year with your real balance."
+      ]
+    },
+    "barista-fire": {
+      "kind": "table",
+      "position": "late",
+      "heading": "How part-time income moves the target",
+      "intro": "Assuming $48,000 a year in spending, a 4% withdrawal rate and no tax on withdrawals, here is how the portfolio you need falls as after-tax part-time income rises.",
+      "columns": [
+        "After-tax part-time income",
+        "Spending left for the portfolio",
+        "Target portfolio"
+      ],
+      "rows": [
+        [
+          "$0",
+          "$48,000",
+          "$1,200,000"
+        ],
+        [
+          "$12,000",
+          "$36,000",
+          "$900,000"
+        ],
+        [
+          "$18,000",
+          "$30,000",
+          "$750,000"
+        ],
+        [
+          "$24,000",
+          "$24,000",
+          "$600,000"
+        ],
+        [
+          "$30,000",
+          "$18,000",
+          "$450,000"
+        ]
+      ],
+      "note": "Every extra $6,000 of reliable income takes $150,000 off the target (6,000 × 25). The catch is reliability: test the lower rows with a pessimistic income figure before you rely on them."
+    },
+    "lean-fire": {
+      "kind": "compare",
+      "position": "top",
+      "heading": "Lean vs. a typical budget, side by side",
+      "intro": "Using a 4% withdrawal rate and no tax on withdrawals, the target scales directly with what you spend.",
+      "cards": [
+        {
+          "label": "Lean budget",
+          "value": "$625,000",
+          "detail": "$25,000 a year ÷ 4%"
+        },
+        {
+          "label": "Typical budget",
+          "value": "$1,250,000",
+          "detail": "$50,000 a year ÷ 4%"
+        }
+      ],
+      "note": "Halve the spending and the target halves too, which is why Lean FIRE can arrive years earlier. The trade-off is a thin cushion for surprises, so many lean planners keep extra cash or flexible work in reserve."
+    },
+    "fat-fire": {
+      "kind": "steps",
+      "position": "col",
+      "heading": "A quick check before you commit to a Fat target",
+      "steps": [
+        "Write down the yearly spending you expect in retirement, line by line, and mark anything that would stop once you stop working, such as commuting, work clothes or retirement contributions.",
+        "Compute the target at two withdrawal rates. For $120,000 of spending and a 15% effective tax rate, 4% gives about $3.53 million and 3.5% gives about $4.03 million.",
+        "Divide the gap between your portfolio today and the target by what you can realistically save each year, then compare that with how many years you are willing to wait.",
+        "Rerun the numbers with a lower return and higher spending. If the plan only works in the optimistic case, adjust the spending or the timeline before you rely on it."
+      ]
+    }
+  },
   "FireTypes": {
     "indexTitle": "FIRE Calculators by Type",
     "indexDescription": "Free calculators for Coast FIRE, Barista FIRE, Lean FIRE and Fat FIRE. Pick the version of early retirement that fits your life.",
