@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { BackLink } from "@/components/back-link";
 import { DisclaimerFooter } from "@/components/DisclaimerFooter";
 import { FireTypeCalculator } from "@/components/FireTypeCalculator";
@@ -19,6 +19,22 @@ const RELATED_GUIDES: Record<FireType, string[]> = {
   "barista-fire": ["barista-fire-part-time-work", "coast-lean-fat-fire-explained", "4-percent-rule-safe-withdrawal-rate"],
   "lean-fire": ["coast-lean-fat-fire-explained", "4-percent-rule-safe-withdrawal-rate", "increase-savings-rate-practical-tips"],
   "fat-fire": ["coast-lean-fat-fire-explained", "4-percent-rule-safe-withdrawal-rate", "sequence-of-returns-risk"],
+};
+
+// 유형별 보강 블록(2026-11-26): 네 유형 페이지가 같은 틀로 보이지 않도록 형태(표·비교 카드·번호 목록·서술)와
+// 위치(계산기 바로 아래·두 칸 블록 뒤·왼쪽 칸 안·FAQ 뒤)를 유형마다 다르게 둔다.
+// 번역은 서버 전용 네임스페이스 FireTypesExtra(브라우저로 전달하지 않음)에 있고, 해당 언어에 없으면 아무것도 그리지 않는다.
+type ExtraBlock = {
+  kind: "table" | "compare" | "steps" | "story";
+  position: "top" | "mid" | "col" | "late";
+  heading: string;
+  intro?: string;
+  columns?: string[];
+  rows?: string[][];
+  cards?: { label: string; value: string; detail: string }[];
+  steps?: string[];
+  paragraphs?: string[];
+  note?: string;
 };
 
 export function generateStaticParams() {
@@ -53,6 +69,10 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
   const t = await getTranslations({ locale, namespace: "FireTypes" });
   const tCalc = await getTranslations({ locale, namespace: "calculator" });
   const tNav = await getTranslations({ locale, namespace: "nav" });
+
+  const allMessages = (await getMessages({ locale })) as Record<string, unknown>;
+  const extra =
+    ((allMessages.FireTypesExtra as Record<string, ExtraBlock> | undefined)?.[type] as ExtraBlock | undefined) ?? null;
 
   const how = t.raw(`${type}.how`) as string[];
   const faq = t.raw(`${type}.faq`) as { question: string; answer: string }[];
@@ -95,6 +115,69 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
   const h2 = "text-xl font-semibold text-[var(--color-text-primary)]";
   const body = "mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]";
 
+  const renderExtra = (e: ExtraBlock, asH3: boolean) => {
+    const Heading = asH3 ? "h3" : "h2";
+    const headingClass = asH3 ? "mt-5 text-base font-semibold text-[var(--color-text-primary)]" : h2;
+    return (
+      <>
+        <Heading className={headingClass}>{e.heading}</Heading>
+        {e.intro ? <p className={body}>{e.intro}</p> : null}
+        {e.kind === "table" && e.columns && e.rows ? (
+          <div className="mt-4 overflow-x-auto rounded-xl border border-[var(--color-border)]">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-[var(--color-surface)] text-[var(--color-text-primary)]">
+                <tr>
+                  {e.columns.map((c) => (
+                    <th key={c} scope="col" className="px-4 py-2 font-semibold">
+                      {c}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="text-[var(--color-text-secondary)]">
+                {e.rows.map((r) => (
+                  <tr key={r[0]} className="border-t border-[var(--color-border)]">
+                    {r.map((cell, ci) => (
+                      <td key={ci} className="px-4 py-2">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+        {e.kind === "compare" && e.cards ? (
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {e.cards.map((c) => (
+              <div key={c.label} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+                <span className="text-sm text-[var(--color-text-secondary)]">{c.label}</span>
+                <span className="mt-1 block text-2xl font-bold text-[var(--color-text-primary)]">{c.value}</span>
+                <span className="mt-1 block text-sm text-[var(--color-text-secondary)]">{c.detail}</span>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        {e.kind === "steps" && e.steps ? (
+          <ol className="mt-3 flex list-decimal flex-col gap-2 pl-5 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            {e.steps.map((st, i) => (
+              <li key={i}>{st}</li>
+            ))}
+          </ol>
+        ) : null}
+        {e.kind === "story" && e.paragraphs
+          ? e.paragraphs.map((p, i) => (
+              <p key={i} className={body}>
+                {p}
+              </p>
+            ))
+          : null}
+        {e.note ? <p className={body}>{e.note}</p> : null}
+      </>
+    );
+  };
+
   return (
     <div className={`contents${koWrap}`}>
       {jsonLd.map((data, i) => (
@@ -109,6 +192,8 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
 
         <FireTypeCalculator type={type} />
 
+        {extra?.position === "top" ? <section className="mt-10 max-w-3xl">{renderExtra(extra, false)}</section> : null}
+
         <div className="mt-12 grid gap-10 border-t border-[var(--color-border)] pt-10 lg:grid-cols-2">
           <section>
             <h2 className={h2}>{t("sectionHow")}</h2>
@@ -119,6 +204,7 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
             <p className="mt-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-sm text-[var(--color-text-primary)]">
               {t(`${type}.formula`)}
             </p>
+            {extra?.position === "col" ? renderExtra(extra, true) : null}
           </section>
           <section>
             <h2 className={h2}>{t("sectionFit")}</h2>
@@ -127,6 +213,8 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
             <p className={body}>{t(`${type}.watchOut`)}</p>
           </section>
         </div>
+
+        {extra?.position === "mid" ? <section className="mt-10 max-w-3xl">{renderExtra(extra, false)}</section> : null}
 
         <section className="mt-10 max-w-3xl">
           <h2 className={h2}>{t("sectionFaq")}</h2>
@@ -139,6 +227,8 @@ export default async function FireTypePage({ params }: { params: Promise<{ local
             ))}
           </dl>
         </section>
+
+        {extra?.position === "late" ? <section className="mt-10 max-w-3xl">{renderExtra(extra, false)}</section> : null}
 
         <section className="mt-10 border-t border-[var(--color-border)] pt-10">
           <h2 className={h2}>{t("sectionRelated")}</h2>
