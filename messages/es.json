@@ -187,6 +187,81 @@
     "homeH1": "Calculadora FIRE: planifica tu jubilación anticipada",
     "guidesDescription": "Guías prácticas sobre ahorro e inversión para FIRE, retiros y cuentas de jubilación por país."
   },
+  "FireTypesExtra": {
+    "coast-fire": {
+      "kind": "steps",
+      "position": "col",
+      "heading": "Calcula tu cifra Coast paso a paso",
+      "steps": [
+        "Fija tu gasto anual y la edad a la que empezarías a usar la cartera. Como ejemplo: 24.000 € al año y 60 años.",
+        "Calcula el número FIRE con una retirada del 4 %: 24.000 € ÷ 0,04 = 600.000 €.",
+        "Descuenta ese importe hasta hoy con una rentabilidad real del 5 %. Con 20 años por delante (tienes 40), necesitas unos 226.100 € invertidos hoy.",
+        "Compara con lo que ya tienes y repite el cálculo con un 4 %, por si la rentabilidad resulta menor."
+      ]
+    },
+    "barista-fire": {
+      "kind": "story",
+      "position": "top",
+      "heading": "Un ejemplo con y sin trabajo parcial",
+      "paragraphs": [
+        "Imagina un gasto anual de 30.000 € y una retirada del 4 % sin impuestos sobre lo retirado. Sin ningún ingreso extra, el objetivo es de 750.000 €. Si además cobras 9.000 € netos al año con un trabajo parcial, la cartera solo tiene que cubrir 21.000 €, y el objetivo baja a 525.000 €.",
+        "La diferencia, 225.000 €, es justo esos 9.000 € multiplicados por 25. Por eso conviene ser prudente con la cifra de ingresos: si baja, el objetivo sube con ella."
+      ]
+    },
+    "lean-fire": {
+      "kind": "table",
+      "heading": "Cuánto necesitas según tu gasto mensual",
+      "intro": "Con una retirada del 4 % y sin impuestos sobre lo retirado, el objetivo crece en proporción al gasto.",
+      "columns": [
+        "Gasto anual",
+        "Gasto mensual",
+        "Objetivo de cartera"
+      ],
+      "rows": [
+        [
+          "15.000 €",
+          "1.250 €",
+          "375.000 €"
+        ],
+        [
+          "18.000 €",
+          "1.500 €",
+          "450.000 €"
+        ],
+        [
+          "24.000 €",
+          "2.000 €",
+          "600.000 €"
+        ],
+        [
+          "30.000 €",
+          "2.500 €",
+          "750.000 €"
+        ]
+      ],
+      "note": "Cada 100 € menos de gasto al mes reducen el objetivo en 30.000 € (100 × 12 × 25). Un presupuesto ajustado deja poco margen para imprevistos, así que muchos planes lean mantienen un colchón de efectivo.",
+      "position": "mid"
+    },
+    "fat-fire": {
+      "kind": "compare",
+      "position": "late",
+      "heading": "El efecto de la tasa de retirada en un objetivo grande",
+      "intro": "Para un gasto anual de 60.000 € y un tipo impositivo efectivo del 15 %:",
+      "cards": [
+        {
+          "label": "Retirada del 4 %",
+          "value": "≈ 1.764.700 €",
+          "detail": "60.000 € ÷ 0,85 ÷ 0,04"
+        },
+        {
+          "label": "Retirada del 3,5 %",
+          "value": "≈ 2.016.800 €",
+          "detail": "60.000 € ÷ 0,85 ÷ 0,035"
+        }
+      ],
+      "note": "Medio punto menos de retirada añade unos 252.100 € al objetivo. En carteras grandes, probar varias tasas ayuda a ver cuánto margen de seguridad quieres."
+    }
+  },
   "FireTypes": {
     "indexTitle": "Calculadoras FIRE por tipo",
     "indexDescription": "Calculadoras gratuitas de Coast FIRE, Barista FIRE, Lean FIRE y Fat FIRE. Elige la forma de jubilación anticipada que encaje con tu vida.",
